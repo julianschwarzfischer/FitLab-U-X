@@ -1,5 +1,7 @@
-const CACHE='fitnesslab-experience-1-6-rc';
+const SCOPE_ID=encodeURIComponent(new URL(self.registration.scope).pathname);
+const CACHE_PREFIX='fitnesslab-experience-'+SCOPE_ID+'-';
+const CACHE=CACHE_PREFIX+'1-6-1';
 const FILES=['./','./index.html','./brand.js','./manifest.json','./icon-180.png','./icon-192.png','./icon-512.png'];
 self.addEventListener('install',e=>e.waitUntil((async()=>{const c=await caches.open(CACHE);await c.addAll(FILES.map(url=>new Request(url,{cache:'reload'})));await self.skipWaiting();})()));
-self.addEventListener('activate',e=>e.waitUntil((async()=>{await Promise.all((await caches.keys()).filter(k=>k.startsWith('fitnesslab-experience-')&&k!==CACHE).map(k=>caches.delete(k)));await self.clients.claim();})()));
+self.addEventListener('activate',e=>e.waitUntil((async()=>{await Promise.all((await caches.keys()).filter(k=>k.startsWith(CACHE_PREFIX)&&k!==CACHE).map(k=>caches.delete(k)));await self.clients.claim();})()));
 self.addEventListener('fetch',e=>{if(e.request.method!=='GET'||!e.request.url.startsWith(self.registration.scope))return;const u=new URL(e.request.url);const scope=new URL(self.registration.scope);const entry=u.pathname===scope.pathname||u.pathname===scope.pathname+'index.html';if(e.request.mode==='navigate'&&entry){e.respondWith((async()=>{const c=await caches.open(CACHE);try{const r=await fetch(e.request,{cache:'no-store'});if(!r.ok)throw Error('Navigation unavailable');await c.put(new URL('index.html',scope).href,r.clone());return r;}catch{return (await c.match(new URL('index.html',scope).href))||Response.error();}})());return;}e.respondWith(caches.open(CACHE).then(async c=>(await c.match(e.request))||fetch(e.request)));});
