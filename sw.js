@@ -1,4 +1,4 @@
-const CACHE='fitnesslab-experience-1-5';
+const CACHE='fitnesslab-experience-1-6-rc';
 const FILES=['./','./index.html','./brand.js','./manifest.json','./icon-180.png','./icon-192.png','./icon-512.png'];
 self.addEventListener('install',e=>e.waitUntil((async()=>{const c=await caches.open(CACHE);await c.addAll(FILES.map(url=>new Request(url,{cache:'reload'})));await self.skipWaiting();})()));
 self.addEventListener('activate',e=>e.waitUntil((async()=>{await Promise.all((await caches.keys()).filter(k=>k.startsWith('fitnesslab-experience-')&&k!==CACHE).map(k=>caches.delete(k)));await self.clients.claim();})()));
