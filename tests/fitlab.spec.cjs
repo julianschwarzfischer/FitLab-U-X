@@ -178,7 +178,7 @@ test('real QA5 application automatically migrates into current IndexedDB', async
   expect(legacy).toEqual(saved);
   await page.unroute(root,oldRoute);
   await page.reload();
-  await expect(page.locator('#appVersion')).toContainText('EVOLUTION 2.0');
+  await expect(page.locator('#appVersion')).toContainText('EVOLUTION 2.1');
   await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0,{timeout:20000});
   const migrated=await canonical(page);
   expect(migrated.p.age).toBe(41);
@@ -397,11 +397,11 @@ test('training prioritizes one set, retains timer and technique, and persists a 
   await finish.click();
   expect((await canonical(page)).trainingDraft).toBeTruthy();
   await duration.fill('19');
-  page.once('dialog',async dialog=>{
-    expect(dialog.type()).toBe('confirm');
-    await dialog.accept();
-  });
   await finish.click();
+  const confirmation=page.getByRole('dialog',{name:'Teilabschluss speichern'});
+  await expect(confirmation).toContainText('1 von 8 Sätzen');
+  await confirmation.getByRole('button',{name:'Teilabschluss speichern'}).click();
+  await expect(page.getByRole('dialog',{name:'Teilweise absolviert'})).toContainText('1/8 Sätze');
   await expect.poll(async () => (await canonical(page))?.trainingHistory?.[0]?.items[0]?.sets[0]?.reps).toBe(12);
   expect((await canonical(page)).trainingHistory[0].minutes).toBe(19);
   expect((await canonical(page)).trainingDraft).toBeFalsy();
@@ -592,9 +592,22 @@ for(const sets of [2,8]){
     const accept=async dialog=>{dialogs.push(dialog.message());await dialog.accept();};
     page.on('dialog',accept);
     await page.getByRole('button',{name:'Training speichern',exact:true}).click();
+    if(sets===2){
+      const confirmation=page.getByRole('dialog',{name:'Teilabschluss speichern'});
+      await expect(confirmation).toContainText('2 von 8 Sätzen');
+      expect((await canonical(page)).trainingHistory||[]).toHaveLength(0);
+      await confirmation.getByRole('button',{name:'Teilabschluss speichern'}).click();
+    }
+    const summary=page.getByRole('dialog',{name:sets===2?'Teilweise absolviert':'Vollständig abgeschlossen'});
+    await expect(summary).toContainText(`${sets}/8 Sätze`);
     await expect.poll(async()=>(await canonical(page)).trainingHistory?.length).toBe(1);
+    const summaryPath=testInfo.outputPath(`evo21-summary-${sets}-of-8.png`);
+    await page.screenshot({path:summaryPath,animations:'disabled'});
+    await testInfo.attach(`Gespeicherte Zusammenfassung ${sets}/8`,{path:summaryPath,contentType:'image/png'});
+    await summary.getByRole('button',{name:'Ergebnis ansehen'}).click();
+    await expect(page.locator('#xpTrainingHistory [data-training-index="0"]')).toBeFocused();
     page.off('dialog',accept);
-    expect(dialogs).toEqual(sets===2?['Teilweise absolviert: 2 von 8 Sätzen. Training als Teilabschluss speichern?']:[]);
+    expect(dialogs).toEqual([]);
 
     await page.reload();
     await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
@@ -663,3 +676,108 @@ for(const width of [320,375,390,430]){
     }
   });
 }
+
+test('Evolution 2.1 discard requires accessible confirmation and preserves earlier history',async({page},testInfo)=>{
+  await page.setViewportSize({width:390,height:844});
+  await openK1Plan(page);
+  await page.locator('#trainingout [data-plan-start]').click();
+  await checkK1Draft(page,5,'lower');
+  await recordK1Set(page);
+  await expect.poll(async()=>(await canonical(page)).trainingDraft?.items[0].sets[0].done).toBe(true);
+  const draft=(await canonical(page)).trainingDraft;
+  await page.getByRole('button',{name:'Zum Abschluss',exact:true}).first().click();
+  const discard=page.locator('.traincontrols').getByRole('button',{name:'Abbrechen',exact:true});
+  await discard.click();
+  const prompt=page.getByRole('dialog',{name:'Training verwerfen'});
+  await expect(prompt).toContainText('1 erfasste');
+  await expect(prompt.getByRole('button',{name:'Zur Einheit zurück'})).toBeFocused();
+  const path=testInfo.outputPath('evo21-verwerfen.png');
+  await page.screenshot({path,animations:'disabled'});
+  await testInfo.attach('Abbruch mit Schutzabfrage',{path,contentType:'image/png'});
+  await page.keyboard.press('Escape');
+  await expect(prompt).toBeHidden();
+  await expect(discard).toBeFocused();
+  expect((await canonical(page)).trainingDraft).toEqual(draft);
+
+  await discard.click();
+  await prompt.getByRole('button',{name:'Einheit verwerfen'}).click();
+  await expect(page.getByRole('dialog',{name:'Training verworfen'})).toContainText('kein Historieneintrag');
+  await page.reload();
+  await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
+  const saved=await canonical(page);
+  expect(saved.trainingDraft).toBeFalsy();
+  expect(saved.trainingHistory||[]).toHaveLength(0);
+});
+
+for(const width of [320,375,390,430]){
+  test(`Evolution 2.1 diary at ${width}px with reduced height, direct edit and water`,async({browser},testInfo)=>{
+    const context=await browser.newContext({viewport:{width,height:510},isMobile:true,hasTouch:true,locale:'de-DE',reducedMotion:'reduce'});
+    try {
+      const page=await context.newPage();
+      await ready(page);
+      await mobileNav(page,'Ernährung').click();
+      await page.getByRole('button',{name:'Lebensmittel suchen',exact:true}).tap();
+      const query=page.getByRole('searchbox');
+      await query.pressSequentially('Haferflocken');
+      const result=page.locator('#results').getByRole('button',{name:/Haferflocken/}).first();
+      expect(await result.evaluate(el=>el.getBoundingClientRect().bottom<document.querySelector('nav').getBoundingClientRect().top)).toBe(true);
+      await result.tap();
+      await expect(page.locator('#grams')).toBeFocused();
+      await expect(page.locator('#xp21Nutrients')).not.toHaveAttribute('open');
+      await expect(page.locator('#xp21FoodTitle')).toHaveText('Haferflocken, trocken');
+      expect(await page.locator('#add').evaluate(el=>el.getBoundingClientRect().bottom<document.querySelector('nav').getBoundingClientRect().top)).toBe(true);
+      const path=testInfo.outputPath(`evo21-menge-${width}.png`);
+      await page.screenshot({path,animations:'disabled'});
+      await testInfo.attach(`Portion · ${width}px bei 510px Höhe`,{path,contentType:'image/png'});
+      await page.locator('#grams').fill('75');
+      await page.locator('#add').tap();
+      const day=await page.evaluate(()=>dateKey());
+      await expect(page.locator('#xp21DiaryStatus')).toContainText('75 g · Gespeichert');
+      const panel=page.locator('#xpEvoDaily');
+      await panel.getByRole('button',{name:'Letzten Eintrag ändern'}).tap();
+      await expect(page.locator('#grams')).toHaveValue('75');
+      await page.locator('#grams').fill('60');
+      await page.getByRole('button',{name:'Änderung speichern'}).tap();
+      await expect(page.locator('#xp21DiaryStatus')).toContainText('60 g · Korrektur gespeichert');
+      await panel.getByRole('button',{name:'+250 ml',exact:true}).tap();
+      await expect(panel).toContainText('0,25 l');
+      await expect.poll(async()=>(await canonical(page)).water[day]).toBe(250);
+      await page.reload();
+      await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
+      const data=await canonical(page);
+      expect(data.log[day].map(entry=>[entry.n,entry.g])).toEqual([['Haferflocken, trocken',60]]);
+      expect(data.water[day]).toBe(250);
+      expect(await page.evaluate(()=>Math.round(totals(dateKey()).k))).toBe(222);
+      if(width===390){
+        await mobileNav(page,'Ernährung').click();
+        await panel.scrollIntoViewIfNeeded();
+        const daily=testInfo.outputPath('evo21-tagesbilanz.png');
+        await page.screenshot({path:daily,animations:'disabled'});
+        await testInfo.attach('Korrigierter Eintrag und Wasser',{path:daily,contentType:'image/png'});
+      }
+    }finally{await context.close();}
+  });
+}
+
+test('Evolution 2.1 personal display is immediate, retained and separate from the brand and fitness data',async({page},testInfo)=>{
+  await page.setViewportSize({width:390,height:844});
+  await ready(page);
+  const before=await canonical(page);
+  const brandBefore=await page.evaluate(()=>JSON.stringify(brand));
+  await mobileNav(page,'Profil').click();
+  const display=page.getByLabel('Darstellung',{exact:true});
+  await expect(display).toHaveValue('');
+  await display.selectOption('dark');
+  await expect(page.locator('html')).toHaveAttribute('data-theme','dark');
+  expect(await canonical(page)).toEqual(before);
+  expect(await page.evaluate(()=>JSON.stringify(brand))).toBe(brandBefore);
+  const path=testInfo.outputPath('evo21-profil-dunkel.png');
+  await page.screenshot({path,animations:'disabled'});
+  await testInfo.attach('Darstellung im Profil',{path,contentType:'image/png'});
+  await page.reload();
+  await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
+  await expect(page.locator('html')).toHaveAttribute('data-theme','dark');
+  await mobileNav(page,'Profil').click();
+  await display.selectOption('');
+  await expect(page.locator('html')).toHaveAttribute('data-theme','light');
+});
