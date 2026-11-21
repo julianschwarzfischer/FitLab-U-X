@@ -112,8 +112,7 @@ test('confirmed database still boots when legacy object is empty and avatar pref
   const before=await canonical(page);
   await page.evaluate(()=>{
     localStorage.setItem(xp161Namespace+xpAKey,'{}');
-    const prefs=Object.keys(localStorage).filter(x=>/avatar/i.test(x));
-    for(const key of prefs)localStorage.removeItem(key);
+    fitStore161.removeItem(xpKey);
   });
   await page.reload();
   await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0,{timeout:20000});
@@ -208,8 +207,11 @@ for(const width of [320,375,390,430]){
   test(`mobile layout ${width}px does not horizontally overflow`,async({browser})=>{
     const context=await browser.newContext({viewport:{width,height:800},isMobile:true,deviceScaleFactor:2,hasTouch:true});
     const page=await context.newPage();await ready(page);
-    for(const name of ['today','nutrition','training','profile']){
-      await page.evaluate(name=>tab(name),name);
+    for(const [name, label] of [
+      ['today','Heute'],['nutrition','Ernährung'],['training','Training'],
+      ['progress','Fortschritt'],['profile','Profil']
+    ]){
+      await page.getByRole('navigation').getByRole('button',{name:label,exact:true}).click();
       const metrics=await page.evaluate(()=>{
         const {scrollWidth,clientWidth}=document.documentElement;
         const overflowing=[...document.querySelectorAll('body *')].flatMap(element=>{
@@ -226,7 +228,7 @@ for(const width of [320,375,390,430]){
         }).slice(0,25);
         return {scrollWidth,clientWidth,overflowing};
       });
-      expect(metrics.scrollWidth,`${name} overflow at ${width}px: ${JSON.stringify(metrics)}`).toBeLessThanOrEqual(metrics.clientWidth+1);
+      expect(metrics.scrollWidth,`${name} overflow at ${width}px: ${JSON.stringify(metrics)}`).toBeLessThanOrEqual(metrics.clientWidth);
     }
     await context.close();
   });

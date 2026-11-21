@@ -34,3 +34,9 @@ assert(migration.includes('if(get.result!==undefined)'),'Existing IndexedDB must
 assert(migration.indexOf('if(get.result!==undefined)')<migration.indexOf('fitStore161.getItem(xpAKey)'),'Legacy must not precede canonical IDB');
 console.log('PASS migration priority: existing IndexedDB before legacy');
 
+// Check parseability of separately loaded scripts and local PWA assets.
+for(const file of ['brand.js','sw.js'])new vm.Script(fs.readFileSync(file,'utf8'),{filename:file});
+const manifest=JSON.parse(fs.readFileSync('manifest.json','utf8'));
+assert(manifest.icons?.length,'Manifest needs install icons');
+for(const {src} of manifest.icons)assert(fs.statSync(src).isFile(),`Missing manifest icon: ${src}`);
+console.log('PASS external JavaScript and manifest icon files');
