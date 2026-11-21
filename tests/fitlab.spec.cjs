@@ -568,6 +568,7 @@ async function recordK1Set(page) {
 
 for(const sets of [2,8]){
   test(`K1 ${sets}/8 is consistent in saved result, week and cockpit after reload`,async({page},testInfo)=>{
+    await page.setViewportSize({width:390,height:844});
     await openK1Plan(page);
     await page.locator('#trainingout [data-plan-start]').click();
     await checkK1Draft(page,5,'lower');
