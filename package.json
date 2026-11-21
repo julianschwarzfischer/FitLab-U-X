@@ -1,0 +1,10 @@
+{
+  "name": "fitlab-quality-gate",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "test:browser": "playwright test",
+    "test:static": "node tests/static-regression.cjs"
+  },
+  "devDependencies": {"@playwright/test": "1.58.2"}
+}

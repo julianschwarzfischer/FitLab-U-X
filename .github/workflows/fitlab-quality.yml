@@ -1,0 +1,28 @@
+name: FITNESS LAB browser quality gate
+on:
+  workflow_dispatch:
+  push:
+    branches: ['test/evolution-ci-meilenstein']
+jobs:
+  browser-e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci --no-audit --no-fund
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:static
+      - run: npm run test:browser
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fitlab-browser-evidence
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 7
