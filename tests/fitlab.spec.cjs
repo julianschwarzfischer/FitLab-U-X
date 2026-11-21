@@ -321,7 +321,7 @@ async function enterCheckIn(page) {
 
 async function startPlannedWorkout(page) {
   await mobileNav(page, 'Training').click();
-  await page.locator('#trainingout button[onclick="beginAt(0)"]').first().click();
+  await page.locator('#trainingout button[data-plan-start]').first().click();
   await expect(page.locator('#trainingout .xpEvoWorkoutHead')).toBeVisible();
   await expect.poll(async () => (await canonical(page))?.trainingDraft?.items?.length).toBeGreaterThan(0);
 }
@@ -497,3 +497,162 @@ test('muscle map supports keyboard selection and the recovery gate protects an o
   await expect(page.locator('#trainingout .workFocus:visible .setline input').first()).toBeDisabled();
   expect((await canonical(page)).trainingDraft).toEqual(draft);
 });
+
+const k1Saturday = new Date('2026-11-21T12:00:00Z');
+
+async function openK1Plan(page, date=k1Saturday) {
+  await page.clock.setFixedTime(date);
+  await ready(page);
+  await enterCheckIn(page);
+  await mobileNav(page,'Training').click();
+}
+
+async function checkK1Draft(page,day,type) {
+  await expect.poll(async()=>{
+    const {trainingDraft:draft}=await canonical(page);
+    return draft&&[draft.day,draft.type];
+  }).toEqual([day,type]);
+}
+
+test('K1 Saturday starts Saturday from both default entry points and explicit Monday starts Monday', async ({browser},testInfo) => {
+  const contexts=[];
+  try {
+    for(const entry of ['today','default','monday']){
+      const context=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true,locale:'de-DE'});
+      contexts.push(context);
+      const page=await context.newPage();
+      await openK1Plan(page);
+      const quick=page.locator('#xpTrainingChoice [data-today-start]');
+      const weekly=page.locator('#trainingout [data-plan-start]');
+      await expect(quick).toHaveText('Heute: Samstag · Unterkörper starten');
+      await expect(weekly).toHaveText('Samstag · Unterkörper starten');
+      if(entry==='monday'){
+        await page.getByRole('button',{name:'Montag: Oberkörper, Nicht absolviert',exact:true}).click();
+        await expect(weekly).toHaveText('Montag · Oberkörper starten');
+        await expect(quick).toHaveText('Heute: Samstag · Unterkörper starten');
+        const path=testInfo.outputPath('k1-samstag-und-montag.png');
+        await page.screenshot({path,animations:'disabled'});
+        await testInfo.attach('Samstag und bewusst ausgewählter Montag',{path,contentType:'image/png'});
+      }
+      await (entry==='today'?quick:weekly).click();
+      await checkK1Draft(page,entry==='monday'?0:5,entry==='monday'?'upper':'lower');
+      await expect(page.locator('#trainingout .workHero')).toHaveAttribute('aria-label',entry==='monday'?'Oberkörper':'Unterkörper');
+    }
+  } finally {
+    await Promise.all(contexts.map(context=>context.close()));
+  }
+});
+
+test('K1 on Sunday the next Monday remains distinct from training today',async({page})=>{
+  await openK1Plan(page,new Date('2026-11-22T12:00:00Z'));
+  const choice=page.locator('#xpTrainingChoice');
+  await expect(choice.getByRole('heading')).toHaveText('Nächste geplante Einheit');
+  await expect(choice.getByRole('button',{name:'Vorzeitig: Montag · Oberkörper starten'})).toBeVisible();
+  await choice.getByRole('button',{name:'Vorzeitig: Montag · Oberkörper starten'}).click();
+  await checkK1Draft(page,0,'upper');
+  let data=await canonical(page);
+  expect(data.trainingDraft.date).toBe('2026-11-22');
+});
+
+async function recordK1Set(page) {
+  const card=page.locator('#trainingout .workFocus:visible');
+  const row=card.locator(':scope > .setline.next63');
+  await row.locator('input').first().fill('10');
+  if(await row.locator('input').count()>1)await row.locator('input').nth(1).fill('12.5');
+  await row.getByRole('button',{name:/Satz \d abschließen/}).click();
+  const timer=page.locator('#pauseDisplay');
+  if(await timer.isVisible())await timer.getByRole('button',{name:'Weiter'}).click();
+}
+
+for(const sets of [2,8]){
+  test(`K1 ${sets}/8 is consistent in saved result, week and cockpit after reload`,async({page},testInfo)=>{
+    await openK1Plan(page);
+    await page.locator('#trainingout [data-plan-start]').click();
+    await checkK1Draft(page,5,'lower');
+    const header=page.locator('#trainingout .xpEvoWorkoutHead');
+    await expect(header).toContainText('0/8 Sätze');
+    for(let i=0;i<sets;i++){
+      const active=page.locator('#trainingout .workFocus:visible');
+      if(await active.locator(':scope > .setline.next63').count()===0)
+        await active.getByRole('button',{name:'Weiter →',exact:true}).click();
+      await recordK1Set(page);
+      await expect(header).toContainText(`${i+1}/8 Sätze`);
+    }
+
+    await page.reload();
+    await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
+    await mobileNav(page,'Training').click();
+    await expect(header).toContainText(`${sets}/8 Sätze`);
+    await page.locator('#trainingout .xpEvoFinish > summary').click();
+    await page.getByLabel('Tatsächliche Trainingsdauer (Minuten)').fill('19.5');
+    const dialogs=[];
+    const accept=async dialog=>{dialogs.push(dialog.message());await dialog.accept();};
+    page.on('dialog',accept);
+    await page.getByRole('button',{name:'Training speichern',exact:true}).click();
+    await expect.poll(async()=>(await canonical(page)).trainingHistory?.length).toBe(1);
+    page.off('dialog',accept);
+    expect(dialogs).toEqual(sets===2?['Teilweise absolviert: 2 von 8 Sätzen. Training als Teilabschluss speichern?']:[]);
+
+    const saved=(await canonical(page)).trainingHistory[0];
+    expect(saved.items.flatMap(item=>item.sets).filter(set=>set.done)).toHaveLength(sets);
+    expect(saved.items.filter(item=>item.sets.every(set=>!set.done))).toHaveLength(sets===2?3:0);
+    expect(saved.minutes).toBe(19.5);
+    const label=sets===2?'Teilweise absolviert':'Vollständig abgeschlossen';
+    const choice=page.locator('#xpTrainingChoice');
+    await expect(choice.getByRole('heading')).toHaveText(label);
+    await expect(choice).toContainText(`${sets}/8 Sätze`);
+    await expect(page.getByRole('button',{name:`Samstag: Unterkörper, ${label}`,exact:true})).toBeVisible();
+    await mobileNav(page,'Heute').click();
+    const tile=page.locator('#xpHome .xpTile').filter({hasText:'Training'});
+    await expect(tile).toContainText(label);
+    await expect(tile).toContainText(`${sets}/8 Sätze`);
+    await tile.click();
+    const result=page.locator('#xpTrainingHistory [data-training-index="0"]');
+    await expect(result).toBeFocused();
+    await expect(result).toContainText(`${label} · ${sets}/8 Sätze`);
+    const path=testInfo.outputPath(`k1-${sets}-von-8.png`);
+    await page.screenshot({path,animations:'disabled'});
+    await testInfo.attach(`Historie ${sets}/8`,{path,contentType:'image/png'});
+  });
+}
+
+for(const width of [320,375,390,430]){
+  test(`K1 food search first hit is tappable without scrolling at ${width}px`,async({browser},testInfo)=>{
+    const context=await browser.newContext({viewport:{width,height:844},isMobile:true,hasTouch:true,locale:'de-DE'});
+    try {
+      const page=await context.newPage();
+      await ready(page);
+      await mobileNav(page,'Ernährung').click();
+      const nutrition=page.locator('#nutrition');
+      const quick=nutrition.locator('#xpCQuick');
+      await expect(nutrition.locator(':scope > .nutquick:visible')).toHaveCount(0);
+      await expect(nutrition.getByRole('button',{name:'Lebensmittel suchen',exact:true})).toHaveCount(1);
+      await expect(nutrition.getByRole('button',{name:'Selbst eintragen',exact:true})).toHaveCount(1);
+      await quick.getByRole('button',{name:'Lebensmittel suchen'}).tap();
+      const query=page.getByRole('searchbox',{name:'Name des Lebensmittels'});
+      await expect(query).toBeFocused();
+      const afterTap=await page.evaluate(()=>scrollY);
+      await query.pressSequentially('Haferflocken');
+      const result=page.locator('#results').getByRole('button',{name:/Haferflocken/}).first();
+      await expect(result).toBeVisible();
+      const bounds=await result.evaluate(button=>{
+        const rect=button.getBoundingClientRect();
+        return {top:rect.top,bottom:rect.bottom,nav:document.querySelector('nav').getBoundingClientRect().top,scroll:scrollY};
+      });
+      expect(bounds.top).toBeGreaterThanOrEqual(0);
+      expect(bounds.bottom).toBeLessThan(bounds.nav);
+      expect(Math.abs(bounds.scroll-afterTap)).toBeLessThanOrEqual(1);
+      const path=testInfo.outputPath(`k1-suche-${width}.png`);
+      await page.screenshot({path,animations:'disabled'});
+      await testInfo.attach(`Erster Treffer bei ${width}px`,{path,contentType:'image/png'});
+      await result.tap();
+      await expect(page.locator('#foodname')).toHaveValue('Haferflocken');
+      await page.locator('#grams').fill('60');
+      await page.locator('#add').tap();
+      await expect.poll(async()=>(await canonical(page)).log[await page.evaluate(()=>dateKey())]?.[0]?.g).toBe(60);
+      expect(await page.evaluate(()=>Math.round(totals(dateKey()).k))).toBe(222);
+    } finally {
+      await context.close();
+    }
+  });
+}
