@@ -9,7 +9,7 @@ assert(v && c,'Version / worker cache marker missing');
 const marker=v[1].toLowerCase().replace(/\s+/g,'-').replace(/\./g,'-');
 assert.equal(c[1],marker,`HTML/Worker version mismatch: ${marker} / ${c[1]}`);
 console.log('PASS quality gate: IndexedDB transaction path + HTML/Worker version match',marker);
-for(const marker of ['EVOLUTION UX 1','function xpEvolutionNutrition()','function xpEvolutionTraining()','id=\'xpEvoDaily\'']) {
+for(const marker of ['EVOLUTION UX 2','function xpEvolutionNutrition()','function xpEvolutionTraining()','id=\'xpEvoDaily\'']) {
   assert(html.includes(marker),`missing UX contract: ${marker}`);
 }
 assert(html.includes('xpEvolutionRenderBase.apply'), 'UX must decorate, not replace render');

@@ -178,7 +178,7 @@ test('real QA5 application automatically migrates into current IndexedDB', async
   expect(legacy).toEqual(saved);
   await page.unroute(root,oldRoute);
   await page.reload();
-  await expect(page.locator('#appVersion')).toContainText('QA 8');
+  await expect(page.locator('#appVersion')).toContainText('EVOLUTION 2.0');
   await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0,{timeout:20000});
   const migrated=await canonical(page);
   expect(migrated.p.age).toBe(41);
@@ -302,4 +302,186 @@ test('invalid nested backup cannot replace the confirmed IndexedDB record',async
   await page.reload();
   await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0,{timeout:20000});
   expect(await canonical(page)).toEqual(before);
+});
+
+const mobileNav = (page, name) => page.getByRole('navigation').getByRole('button', { name, exact: true });
+
+async function enterCheckIn(page) {
+  await mobileNav(page, 'Heute').click();
+  const focus = page.locator('#xpHome .xp12Focus');
+  await expect(focus.getByRole('button')).toHaveCount(1);
+  await expect(focus.getByRole('button')).toHaveText('Check-in starten ›');
+  await focus.getByRole('button').click();
+  await page.locator('#xpSleep').fill('8');
+  await page.locator('[data-xp-choice="energy"][data-v="4"]').click();
+  await page.locator('[data-xp-choice="soreness"][data-v="0"]').click();
+  await page.getByRole('button', { name: 'Check-in speichern', exact: true }).click();
+  await expect.poll(async () => (await canonical(page)).coach.days[await page.evaluate(() => dateKey())]?.sleep).toBe(8);
+}
+
+async function startPlannedWorkout(page) {
+  await mobileNav(page, 'Training').click();
+  await page.locator('#trainingout button[onclick="beginAt(0)"]').first().click();
+  await expect(page.locator('#trainingout .xpEvoWorkoutHead')).toBeVisible();
+  await expect.poll(async () => (await canonical(page))?.trainingDraft?.items?.length).toBeGreaterThan(0);
+}
+
+test('daily focus has one check-in action and nutrition reaches saved food, search and tools', async ({page}) => {
+  await ready(page);
+  await expect(page.locator('#xpHome .xp12Quick')).toHaveCount(0);
+  const coach = page.locator('#xpHome .xpEvoCoach');
+  await expect(coach).not.toHaveAttribute('open');
+  await coach.locator('summary').click();
+  await expect(coach).toContainText('Schlaf, Tagesform und Muskelkater');
+  await enterCheckIn(page);
+
+  await mobileNav(page, 'Ernährung').click();
+  const quick = page.locator('#xpCQuick');
+  await quick.getByRole('button', {name:'Lebensmittel suchen'}).click();
+  await expect(page.locator('#query')).toBeFocused();
+  await expect(quick.getByRole('button', {name:'Barcode scannen'})).toBeHidden();
+  await quick.locator('summary').click();
+  await expect(quick.getByRole('button', {name:'Barcode scannen'})).toBeVisible();
+  await quick.getByRole('button', {name:'Favoriten öffnen'}).click();
+  await expect(page.locator('#nutfavorites')).toHaveAttribute('open');
+  await quick.getByRole('button', {name:'Rezepte öffnen'}).click();
+  await expect(page.locator('#nutrecipes')).toHaveAttribute('open');
+  await addMeal(page, 'Synthetisches Frühstück', 125);
+
+  await page.locator('#xpEvoDaily').getByRole('button', {name:'Zum Tagebuch'}).click();
+  await expect(page.locator('#entries')).toBeFocused();
+  await expect(page.locator('#entries')).toContainText('Synthetisches Frühstück');
+  expect(await page.evaluate(() => totals(dateKey()).k)).toBe(215);
+  await page.getByRole('button', {name:'Vortag'}).click();
+  await expect(page.locator('#xpEvoDaily')).toContainText('ausgewählter Tag');
+  await expect(page.locator('#entries')).not.toContainText('Synthetisches Frühstück');
+  await page.getByRole('button', {name:'Folgetag'}).click();
+  await expect(page.locator('#entries')).toContainText('Synthetisches Frühstück');
+});
+
+test('training prioritizes one set, retains timer and technique, and persists a completed workout', async ({page}) => {
+  await ready(page);
+  await enterCheckIn(page);
+  await startPlannedWorkout(page);
+  const card = page.locator('#trainingout .workFocus:visible');
+  let current = card.locator(':scope > .setline');
+  await expect(current).toHaveCount(1);
+  await expect(current.getByRole('button')).toHaveText('Satz 1 abschließen');
+  const technique = card.locator('summary').filter({hasText:'Technik & Übungsanimation'});
+  await technique.click();
+  await expect(card.locator('.guide')).toBeVisible();
+  await expect(card.getByRole('button',{name:'Animation starten'})).toBeVisible();
+  await technique.click();
+
+  await current.locator('input').first().fill('12');
+  const weight = current.locator('input').nth(1);
+  if(await weight.count())await weight.fill('10');
+  await current.getByRole('button').click();
+  await expect.poll(async () => (await canonical(page))?.trainingDraft?.items[0].sets[0]?.done).toBe(true);
+  await expect(page.locator('#pauseDisplay')).toBeVisible();
+  await page.locator('#pauseDisplay').getByRole('button',{name:'Weiter'}).click();
+  await expect(page.locator('#pauseDisplay')).toBeHidden();
+  await expect(card.locator(':scope > .setline').getByRole('button')).toHaveText('Satz 2 abschließen');
+
+  await page.reload();
+  await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
+  await mobileNav(page, 'Training').click();
+  await expect(card.locator(':scope > .setline').getByRole('button')).toHaveText('Satz 2 abschließen');
+  await card.locator('summary').filter({hasText:'Alle Sätze'}).click();
+  await expect(card.getByRole('button',{name:'✓ Abgeschlossen · ändern'})).toBeVisible();
+  page.once('dialog',dialog=>dialog.accept());
+  await page.locator('#trainingout .traincontrols').getByRole('button',{name:'Training speichern'}).click();
+  await expect.poll(async () => (await canonical(page))?.trainingHistory?.[0]?.items[0]?.sets[0]?.reps).toBe(12);
+  expect((await canonical(page)).trainingDraft).toBeFalsy();
+});
+
+test('avatar appearance stays separate from profile calculations and brand controls', async ({page}) => {
+  await ready(page);
+  await mobileNav(page, 'Profil').click();
+  const profile = page.locator('#profile');
+  const before = await page.evaluate(async () => ({canonical:await xpIDBRead(),targets:calc(state.p)}));
+  const button = profile.getByRole('button',{name:'Weibliche Figur'});
+  const selectedImage = profile.locator('#xpProfile .xpBody image');
+  const original = await selectedImage.getAttribute('href');
+  await button.click();
+  await expect(button).toHaveAttribute('aria-pressed','true');
+  await expect(button).toBeFocused();
+  expect(await selectedImage.getAttribute('href')).not.toEqual(original);
+  expect(await page.evaluate(async () => ({canonical:await xpIDBRead(),targets:calc(state.p)}))).toEqual(before);
+  await profile.locator('summary').filter({hasText:'Körperdaten'}).click();
+  await expect(profile.getByLabel('Geschlecht für die Kalorienberechnung')).toHaveValue('m');
+  await expect(profile.locator('.xpEvoBrandGroup')).not.toHaveAttribute('open');
+  await profile.locator('.xpEvoBrandGroup summary').first().click();
+  await expect(profile.locator('#brandPanel')).toBeVisible();
+  await page.reload();
+  await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
+  await mobileNav(page, 'Profil').click();
+  await expect(button).toHaveAttribute('aria-pressed','true');
+});
+
+for(const width of [320,375,390,430]){
+  test(`evolution mobile walkthrough and screenshots at ${width}px`,async({browser},testInfo)=>{
+    const context=await browser.newContext({viewport:{width,height:844},deviceScaleFactor:2,isMobile:true,hasTouch:true,reducedMotion:'reduce'});
+    const page=await context.newPage();
+    await ready(page);
+    const screenshot=async(name)=>{
+      await page.evaluate(()=>window.scrollTo(0,0));
+      const viewport=await page.evaluate(()=>({width:document.documentElement.clientWidth,scrollWidth:document.documentElement.scrollWidth}));
+      expect(viewport.scrollWidth,`${name} at ${width}px`).toBe(viewport.width);
+      const path=testInfo.outputPath(`${width}-${name}.png`);
+      await page.screenshot({path,animations:'disabled'});
+      await testInfo.attach(`${width} px · ${name}`,{path,contentType:'image/png'});
+    };
+
+    await screenshot('heute');
+    await enterCheckIn(page);
+    await addMeal(page,'Synthetische Haferflocken',125);
+    await page.locator('#nutform').evaluate(el=>{el.open=false});
+    await screenshot('ernaehrung');
+    await mobileNav(page,'Profil').click();
+    await screenshot('profil');
+    await mobileNav(page,'Fortschritt').click();
+    await screenshot('fortschritt');
+    await startPlannedWorkout(page);
+    await screenshot('training');
+    if(width===390){
+      const technique=page.locator('#trainingout .workFocus:visible summary').filter({hasText:'Technik & Übungsanimation'});
+      await technique.click();
+      const visual=page.locator('#trainingout .workFocus:visible .visual64').first();
+      await expect(visual).toBeVisible();
+      const path=testInfo.outputPath('390-uebungstechnik.png');
+      await visual.screenshot({path,animations:'disabled'});
+      await testInfo.attach('390 px · Übungstechnik',{path,contentType:'image/png'});
+    }
+    await context.close();
+  });
+}
+
+test('muscle map supports keyboard selection and the recovery gate protects an open session',async({page})=>{
+  await ready(page);
+  await enterCheckIn(page);
+  await mobileNav(page,'Training').click();
+  await page.getByRole('button',{name:'Muskelgruppen auswählen'}).click();
+  const muscles=page.locator('#xpMusclePanel');
+  const hotspot=muscles.locator('[data-xp-hotspot]').first();
+  await hotspot.focus();
+  const key=await hotspot.getAttribute('data-xp-hotspot');
+  await hotspot.press('Enter');
+  await expect(muscles.locator(`[data-xp-list="${key}"]`)).toHaveAttribute('aria-pressed','true');
+  await muscles.getByRole('button',{name:'Rückseite'}).click();
+  await expect(muscles.getByRole('button',{name:'Rückseite'})).toHaveAttribute('aria-pressed','true');
+  await page.getByRole('button',{name:'Muskelwahl schließen'}).click();
+  await startPlannedWorkout(page);
+  const draft=(await canonical(page)).trainingDraft;
+  await mobileNav(page,'Heute').click();
+  await page.locator('#xpHome .xpEvoCheck').click();
+  await page.locator('#xpSleep').fill('4');
+  await page.locator('[data-xp-choice="energy"][data-v="1"]').click();
+  await page.locator('[data-xp-choice="soreness"][data-v="4"]').click();
+  await page.getByRole('button',{name:'Check-in speichern',exact:true}).click();
+  await expect(page.locator('#xpHome .xpEvoFocus')).toContainText('Erholung hat Vorrang');
+  await mobileNav(page,'Training').click();
+  await expect(page.locator('#trainingout .xpBReviewNotice')).toBeVisible();
+  await expect(page.locator('#trainingout .workFocus:visible .setline input').first()).toBeDisabled();
+  expect((await canonical(page)).trainingDraft).toEqual(draft);
 });
