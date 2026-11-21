@@ -677,7 +677,7 @@ for(const width of [320,375,390,430]){
   });
 }
 
-test('Evolution 2.1 discard requires accessible confirmation and preserves earlier history',async({page},testInfo)=>{
+test('Evolution 2.1 discard requires accessible confirmation and leaves no history entry',async({page},testInfo)=>{
   await page.setViewportSize({width:390,height:844});
   await openK1Plan(page);
   await page.locator('#trainingout [data-plan-start]').click();
@@ -780,4 +780,37 @@ test('Evolution 2.1 personal display is immediate, retained and separate from th
   await mobileNav(page,'Profil').click();
   await display.selectOption('');
   await expect(page.locator('html')).toHaveAttribute('data-theme','light');
+});
+
+test('Evolution 2.1 a scheduled draft remains resumable across midnight without changing its recording date',async({page})=>{
+  await openK1Plan(page);
+  await page.locator('#xpTrainingChoice [data-today-start]').click();
+  await checkK1Draft(page,5,'lower');
+  await recordK1Set(page);
+  await expect.poll(async()=>(await canonical(page)).trainingDraft?.items[0].sets[0].done).toBe(true);
+  await page.clock.setFixedTime(new Date('2026-11-22T12:00:00Z'));
+  await page.reload();
+  await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
+  await mobileNav(page,'Training').click();
+  await expect(mobileNav(page,'Training')).toHaveAttribute('aria-current','page');
+  await expect(page.locator('#trainingout .xpEvoWorkoutHead')).toContainText('1/8 Sätze');
+  await expect(page.locator('#trainingout .workFocus:visible .setline.next63')).toContainText('Satz 2');
+  expect((await canonical(page)).trainingDraft.date).toBe('2026-11-21');
+  await mobileNav(page,'Fortschritt').click();
+  await expect(mobileNav(page,'Fortschritt')).toHaveAttribute('aria-current','page');
+  await expect(mobileNav(page,'Training')).not.toHaveAttribute('aria-current','page');
+});
+
+test('Evolution 2.1 does not show a success result when durable workout save fails',async({page})=>{
+  await openK1Plan(page);
+  await page.locator('#xpTrainingChoice [data-today-start]').click();
+  await recordK1Set(page);
+  await expect.poll(async()=>(await canonical(page)).trainingDraft?.items[0].sets[0].done).toBe(true);
+  await page.evaluate(()=>{xpACommit=async()=>{throw Error('Synthetischer Speicherfehler');};});
+  await page.getByRole('button',{name:'Zum Abschluss',exact:true}).first().click();
+  await page.getByRole('button',{name:'Training speichern',exact:true}).click();
+  await page.getByRole('dialog',{name:'Teilabschluss speichern'}).getByRole('button',{name:'Teilabschluss speichern'}).click();
+  await expect(page.getByRole('dialog',{name:'Training konnte nicht gespeichert werden'})).toContainText('Entwurf bleibt');
+  expect((await canonical(page)).trainingHistory||[]).toHaveLength(0);
+  expect((await canonical(page)).trainingDraft.items[0].sets[0].done).toBe(true);
 });
