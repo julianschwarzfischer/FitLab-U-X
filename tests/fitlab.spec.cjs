@@ -891,6 +891,8 @@ test('Evolution 2.2 freezes historic goals through profile changes, midnight, ba
   await page.locator('#date').fill(date);
   await expect(page.locator('.xp22Day')).toContainText('bei der ersten Buchung gespeichert');
   await expect(page.locator('.xp22Day')).toContainText(await page.evaluate(k=>fmt(k,0),original.k));
+  await page.locator('#date').blur();
+  await page.locator('.xp22Day').evaluate(el=>el.scrollIntoView({block:'center',behavior:'instant'}));
   await captureEvolution22(page,testInfo,'evo22-historische-tagesbilanz');
   await mobileNav(page,'Profil').click();
   await page.locator('details:has(#export) > summary').click();
@@ -975,6 +977,7 @@ for(const width of [320,375,390,430]){
     const context=await browser.newContext({viewport:{width,height:844},isMobile:true,hasTouch:true,locale:'de-DE'});
     try{
       const page=await context.newPage();
+      page.setDefaultTimeout(10000);
       await page.clock.setFixedTime(new Date('2026-11-22T12:00:00Z'));
       await ready(page);
       const fixture=await seedEvolutionWeeks(page);
@@ -997,6 +1000,11 @@ for(const width of [320,375,390,430]){
       await expect(week).toContainText('2.000,0 ml');
       await expect(week).toContainText('-0,5 kg zur Vorwoche');
       await expect(week).toContainText('+1,0 h zur Vorwoche');
+      await page.locator('#xp15Progress').getByText('Details & Diagramme',{exact:true}).tap();
+      const range=page.getByLabel('Zeitraum der Übersicht');
+      await range.selectOption('14');
+      await expect(range).toBeVisible();
+      await expect(range).toHaveValue('14');
       const advice=await page.evaluate(()=>({advice:xp15Advice(),analysis:coachAnalysis()}));
       expect(advice.advice.title).toBe('Ernährungsdaten prüfen');
       expect(advice.analysis.step).toBe(0);
@@ -1041,7 +1049,7 @@ test('Evolution 2.2 restores an unbooked portion without creating or duplicating
   await expect(page.locator('#grams')).toHaveValue('73');
   await expect(page.locator('#fooderror')).toHaveText(/Ungespeicherte Portion wiederhergestellt/);
   expect(Object.values((await canonical(page)).log).flat()).toHaveLength(0);
-  await page.locator('#grams').scrollIntoViewIfNeeded();
+  await page.locator('#fooderror').evaluate(el=>el.scrollIntoView({block:'center',behavior:'instant'}));
   await captureEvolution22(page,testInfo,'evo22-portion-wiederhergestellt');
   await page.locator('#add').click();
   await expect(page.locator('#xp21DiaryStatus')).toContainText('73 g · Gespeichert');
@@ -1083,7 +1091,7 @@ test('Evolution 2.2 normal text and selected controls contrast across all main s
   await page.setViewportSize({width:390,height:844});
   await ready(page);
   await addMeal(page,'Kontrast-Testmahlzeit',100);
-  const modes=[['light','light','#ffffff'],['dark','dark','#000000'],['auto','dark','#ff7700'],['auto','light','#ffff00']];
+  const modes=[['light','light','#ffffff'],['dark','dark','#000000'],['dark','dark','#176f58'],['auto','dark','#ff7700'],['auto','light','#ffff00']];
   const screens=[
     ['Heute','#xpHome .xp12Focus h2,#xpHome .xpMainAction,nav [aria-current="page"]'],
     ['Ernährung','#xpCQuick button,.xp22Day strong,.xp22Day p,.xp22Day small,.xp22Day button,#xpEvoDaily button,.nutquick button'],
@@ -1120,7 +1128,7 @@ test('Evolution 2.2 normal text and selected controls contrast across all main s
       });
       expect(values.length,`${screen} provides measurable controls in ${scheme}`).toBeGreaterThan(0);
       for(const value of values)expect(value.ratio,`${screen}, ${scheme} ${primary}, ${value.control}`).toBeGreaterThanOrEqual(4.5);
-      if(screen==='Ernährung'&&setting==='dark'){
+      if(screen==='Ernährung'&&setting==='dark'&&primary==='#176f58'){
         for(const height of await page.locator('.nutquick button:visible').evaluateAll(list=>list.map(el=>el.getBoundingClientRect().height)))
           expect(height).toBeGreaterThanOrEqual(44);
         await page.locator('.xp22Day').scrollIntoViewIfNeeded();
