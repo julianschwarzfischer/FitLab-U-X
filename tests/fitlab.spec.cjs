@@ -517,7 +517,7 @@ async function checkK1Draft(page,day,type) {
 test('K1 Saturday starts Saturday from both default entry points and explicit Monday starts Monday', async ({browser},testInfo) => {
   const contexts=[];
   try {
-    for(const entry of ['today','default','monday']){
+    for(const entry of ['today','default','monday','today-after-monday']){
       const context=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true,locale:'de-DE'});
       contexts.push(context);
       const page=await context.newPage();
@@ -526,15 +526,17 @@ test('K1 Saturday starts Saturday from both default entry points and explicit Mo
       const weekly=page.locator('#trainingout [data-plan-start]');
       await expect(quick).toHaveText('Heute: Samstag · Unterkörper starten');
       await expect(weekly).toHaveText('Samstag · Unterkörper starten');
-      if(entry==='monday'){
+      if(entry==='monday'||entry==='today-after-monday'){
         await page.getByRole('button',{name:'Montag: Oberkörper, Nicht absolviert',exact:true}).click();
         await expect(weekly).toHaveText('Montag · Oberkörper starten');
         await expect(quick).toHaveText('Heute: Samstag · Unterkörper starten');
-        const path=testInfo.outputPath('k1-samstag-und-montag.png');
-        await page.screenshot({path,animations:'disabled'});
-        await testInfo.attach('Samstag und bewusst ausgewählter Montag',{path,contentType:'image/png'});
+        if(entry==='monday'){
+          const path=testInfo.outputPath('k1-samstag-und-montag.png');
+          await page.screenshot({path,animations:'disabled'});
+          await testInfo.attach('Samstag und bewusst ausgewählter Montag',{path,contentType:'image/png'});
+        }
       }
-      await (entry==='today'?quick:weekly).click();
+      await (entry.startsWith('today')?quick:weekly).click();
       await checkK1Draft(page,entry==='monday'?0:5,entry==='monday'?'upper':'lower');
       await expect(page.locator('#trainingout .workHero')).toHaveAttribute('aria-label',entry==='monday'?'Oberkörper':'Unterkörper');
     }
@@ -593,6 +595,10 @@ for(const sets of [2,8]){
     page.off('dialog',accept);
     expect(dialogs).toEqual(sets===2?['Teilweise absolviert: 2 von 8 Sätzen. Training als Teilabschluss speichern?']:[]);
 
+    await page.reload();
+    await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
+    await mobileNav(page,'Training').click();
+    expect((await canonical(page)).trainingDraft).toBeFalsy();
     const saved=(await canonical(page)).trainingHistory[0];
     expect(saved.items.flatMap(item=>item.sets).filter(set=>set.done)).toHaveLength(sets);
     expect(saved.items.filter(item=>item.sets.every(set=>!set.done))).toHaveLength(sets===2?3:0);
@@ -646,7 +652,7 @@ for(const width of [320,375,390,430]){
       await page.screenshot({path,animations:'disabled'});
       await testInfo.attach(`Erster Treffer bei ${width}px`,{path,contentType:'image/png'});
       await result.tap();
-      await expect(page.locator('#foodname')).toHaveValue('Haferflocken');
+      await expect(page.locator('#foodname')).toHaveValue('Haferflocken, trocken');
       await page.locator('#grams').fill('60');
       await page.locator('#add').tap();
       await expect.poll(async()=>(await canonical(page)).log[await page.evaluate(()=>dateKey())]?.[0]?.g).toBe(60);
