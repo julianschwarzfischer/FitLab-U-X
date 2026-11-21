@@ -1274,7 +1274,12 @@ function xpNextNormalizeBackup(source){
 const xpNextPreviousBackupValidation=validBackup;
 validBackup=function(s){
  if(s?.coach!==undefined&&(!xpNextPlain(s.coach)||s.coach.days!==undefined&&!xpNextPlain(s.coach.days)))return false;
- if(s?.p&&(['days','age','minutes'].some(k=>typeof s.p[k]!=='number'||!Number.isInteger(s.p[k]))))return false;
+ // A new profile deliberately has no age until onboarding. Require integers
+ // for supplied ages and for both training fields.
+ if(s?.p&&['days','age','minutes'].some(k=>{
+  const value=s.p[k];
+  return !(k==='age'&&value==='')&&!Number.isInteger(value);
+ }))return false;
  return xpNextPreviousBackupValidation(s);
 };
 // The import entrypoint invokes validBackup before save; saved data therefore cannot be replaced

@@ -58,8 +58,14 @@ async function seedLegacy(page, record) {
 
 test('new installation opens with empty storage', async ({page})=>{
   await page.goto('/');
-  await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
-  expect((await canonical(page)).p.age).toBe('');
+  const overlay=page.locator('#xpIDBBootOverlay');
+  await expect(overlay).toHaveCount(0);
+  const first=await canonical(page);
+  expect(first.p).toMatchObject({age:'',height:'',weight:'',goals:[]});
+  await expect(page.getByRole('heading',{name:'Willkommen'})).toBeVisible();
+  await page.reload();
+  await expect(overlay).toHaveCount(0);
+  expect(await canonical(page)).toEqual(first);
 });
 
 test('atomic parallel meal writes remain durable', async ({browser}) => {
@@ -204,8 +210,23 @@ for(const width of [320,375,390,430]){
     const page=await context.newPage();await ready(page);
     for(const name of ['today','nutrition','training','profile']){
       await page.evaluate(name=>tab(name),name);
-      const metrics=await page.evaluate(()=>({scrollWidth:document.documentElement.scrollWidth,clientWidth:document.documentElement.clientWidth}));
-      expect(metrics.scrollWidth,`${name} overflow at ${width}px`).toBeLessThanOrEqual(metrics.clientWidth+1);
+      const metrics=await page.evaluate(()=>{
+        const {scrollWidth,clientWidth}=document.documentElement;
+        const overflowing=[...document.querySelectorAll('body *')].flatMap(element=>{
+          const {left,right,width}=element.getBoundingClientRect();
+          if(!width||(left>=-1&&right<=clientWidth+1&&element.scrollWidth<=element.clientWidth+1))return [];
+          return [{
+            element:element.tagName,
+            id:element.id,
+            className:element.getAttribute('class'),
+            left:Math.round(left),right:Math.round(right),
+            scrollWidth:element.scrollWidth,clientWidth:element.clientWidth,
+            text:element.textContent.trim().slice(0,70)
+          }];
+        }).slice(0,25);
+        return {scrollWidth,clientWidth,overflowing};
+      });
+      expect(metrics.scrollWidth,`${name} overflow at ${width}px: ${JSON.stringify(metrics)}`).toBeLessThanOrEqual(metrics.clientWidth+1);
     }
     await context.close();
   });
