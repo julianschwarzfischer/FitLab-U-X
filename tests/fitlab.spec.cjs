@@ -814,3 +814,48 @@ test('Evolution 2.1 does not show a success result when durable workout save fai
   expect((await canonical(page)).trainingHistory||[]).toHaveLength(0);
   expect((await canonical(page)).trainingDraft.items[0].sets[0].done).toBe(true);
 });
+
+test('Evolution 2.1 integrated day from check-in and breakfast to workout history and progress',async({browser})=>{
+  const context=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true,locale:'de-DE'});
+  try{
+    const page=await context.newPage();
+    await openK1Plan(page);
+    await mobileNav(page,'Ernährung').tap();
+    await page.getByRole('button',{name:'Lebensmittel suchen',exact:true}).tap();
+    await page.getByRole('searchbox').pressSequentially('Haferflocken');
+    await page.locator('#results').getByRole('button',{name:/Haferflocken/}).first().tap();
+    await page.getByLabel('Menge (g)').fill('60');
+    await page.locator('#add').tap();
+    await expect(page.locator('#xp21DiaryStatus')).toContainText('60 g · Gespeichert');
+    await page.locator('#xpEvoDaily').getByRole('button',{name:'+250 ml',exact:true}).tap();
+    await expect.poll(async()=>(await canonical(page)).water['2026-11-21']).toBe(250);
+
+    await mobileNav(page,'Training').tap();
+    await page.locator('#xpTrainingChoice [data-today-start]').tap();
+    await checkK1Draft(page,5,'lower');
+    await recordK1Set(page);
+    await recordK1Set(page);
+    await page.getByRole('button',{name:'Zum Abschluss',exact:true}).first().tap();
+    await page.getByLabel('Tatsächliche Trainingsdauer (Minuten)').fill('19.5');
+    await page.getByRole('button',{name:'Training speichern',exact:true}).tap();
+    await page.getByRole('dialog',{name:'Teilabschluss speichern'}).getByRole('button',{name:'Teilabschluss speichern'}).tap();
+    const outcome=page.getByRole('dialog',{name:'Teilweise absolviert'});
+    await expect(outcome).toContainText('2/8 Sätze · 19,5 Min.');
+    await outcome.getByRole('button',{name:'Fertig',exact:true}).tap();
+    await expect(page.locator('#xp21HistoryLink')).toBeFocused();
+    await page.locator('#xp21HistoryLink').tap();
+    await expect(page.locator('[data-training-history-title]')).toBeFocused();
+    await mobileNav(page,'Fortschritt').tap();
+    await expect(mobileNav(page,'Fortschritt')).toHaveAttribute('aria-current','page');
+    await expect(page.getByRole('heading',{name:'Deine Fortschritte',exact:true})).toBeVisible();
+    await page.reload();
+    await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
+    const data=await canonical(page),day='2026-11-21';
+    expect(data.coach.days[day].sleep).toBe(8);
+    expect(data.log[day].map(entry=>entry.g)).toEqual([60]);
+    expect(data.water[day]).toBe(250);
+    expect(data.trainingHistory).toHaveLength(1);
+    expect(data.trainingHistory[0].minutes).toBe(19.5);
+    expect(data.trainingHistory[0].items.flatMap(item=>item.sets).filter(set=>set.done)).toHaveLength(2);
+  } finally {await context.close();}
+});
