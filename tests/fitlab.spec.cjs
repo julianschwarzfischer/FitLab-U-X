@@ -927,6 +927,12 @@ test('Evolution 2.2 distinguishes missing, zero, partial and confirmed and reope
   await addMeal(page,'Spätere gültige Ergänzung',100);
   await expect(quality).toContainText('Teilweise erfasst');
   expect((await canonical(page)).coach.days[day].complete).toBe(false);
+  await quality.getByRole('button',{name:'Tag als vollständig bestätigen'}).click();
+  await expect(quality).toContainText('Vollständig bestätigt');
+  page.once('dialog',dialog=>dialog.accept());
+  await page.locator('[data-nutdelete]').last().click();
+  await expect(quality).toContainText('Teilweise erfasst');
+  expect((await canonical(page)).coach.days[day].complete).toBe(false);
   await page.reload();
   await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
   await mobileNav(page,'Ernährung').click();
@@ -935,6 +941,8 @@ test('Evolution 2.2 distinguishes missing, zero, partial and confirmed and reope
 
 async function seedEvolutionWeeks(page){
   return page.evaluate(async()=>{
+    coachData();
+    state.trainingHistory ||= [];
     const reference=calc(state.p);
     const different=calc({...state.p,goals:[4],priority:'maintain',kind:'cardio',days:5,minutes:55});
     for(let offset=-14;offset<0;offset++){
@@ -1006,6 +1014,15 @@ for(const width of [320,375,390,430]){
         render();
       });
       expect((await page.evaluate(()=>xp15Advice())).title).toBe('Deine Woche entwickelt sich');
+      await mobileNav(page,'Heute').tap();
+      await expect(page.locator('#xpHome .xp12Focus')).toContainText('Deine Woche entwickelt sich');
+      if(width===390)await captureEvolution22(page,testInfo,'evo22-coach-tagesfokus');
+      await page.evaluate(async()=>{
+        state.coach.days[dateKey()].sleep=4;
+        if(!await save())throw Error('Unable to persist synthetic poor recovery');
+        render();
+      });
+      expect((await page.evaluate(()=>xp15Advice())).title).toBe('Erholung hat Vorrang');
     }finally{await context.close();}
   });
 }
