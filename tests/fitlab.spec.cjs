@@ -259,7 +259,7 @@ test('active training keeps week selector accessible behind disclosure',async({p
   await expect(week).toHaveCount(1);
   await expect(week.locator('.week')).toHaveCount(1);
   await expect(week).not.toHaveAttribute('open');
-  await week.locator('summary').click();
+  await week.locator(':scope > summary').click();
   await expect(week).toHaveAttribute('open');
 });
 
@@ -352,10 +352,10 @@ test('daily focus has one check-in action and nutrition reaches saved food, sear
   await expect(page.locator('#entries')).toBeFocused();
   await expect(page.locator('#entries')).toContainText('Synthetisches Frühstück');
   expect(await page.evaluate(() => totals(dateKey()).k)).toBe(215);
-  await page.getByRole('button', {name:'Vortag'}).click();
+  await page.getByRole('button', {name:'Vortag',exact:true}).click();
   await expect(page.locator('#xpEvoDaily')).toContainText('ausgewählter Tag');
   await expect(page.locator('#entries')).not.toContainText('Synthetisches Frühstück');
-  await page.getByRole('button', {name:'Folgetag'}).click();
+  await page.getByRole('button', {name:'Folgetag',exact:true}).click();
   await expect(page.locator('#entries')).toContainText('Synthetisches Frühstück');
 });
 
@@ -387,11 +387,23 @@ test('training prioritizes one set, retains timer and technique, and persists a 
   await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
   await mobileNav(page, 'Training').click();
   await expect(card.locator(':scope > .setline').getByRole('button')).toHaveText('Satz 2 abschließen');
-  await card.locator('summary').filter({hasText:'Alle Sätze'}).click();
+  await card.locator('summary').filter({hasText:'Weitere Sätze'}).click();
   await expect(card.getByRole('button',{name:'✓ Abgeschlossen · ändern'})).toBeVisible();
-  page.once('dialog',dialog=>dialog.accept());
-  await page.locator('#trainingout .traincontrols').getByRole('button',{name:'Training speichern'}).click();
+  await page.locator('#trainingout .xpEvoFinish > summary').click();
+  const duration=page.getByLabel('Tatsächliche Trainingsdauer (Minuten)');
+  await expect(duration).toHaveAttribute('inputmode','decimal');
+  const finish=page.locator('#trainingout .traincontrols').getByRole('button',{name:'Training speichern'});
+  await duration.fill('0');
+  await finish.click();
+  expect((await canonical(page)).trainingDraft).toBeTruthy();
+  await duration.fill('19');
+  page.once('dialog',async dialog=>{
+    expect(dialog.type()).toBe('confirm');
+    await dialog.accept();
+  });
+  await finish.click();
   await expect.poll(async () => (await canonical(page))?.trainingHistory?.[0]?.items[0]?.sets[0]?.reps).toBe(12);
+  expect((await canonical(page)).trainingHistory[0].minutes).toBe(19);
   expect((await canonical(page)).trainingDraft).toBeFalsy();
 });
 
@@ -461,7 +473,7 @@ test('muscle map supports keyboard selection and the recovery gate protects an o
   await ready(page);
   await enterCheckIn(page);
   await mobileNav(page,'Training').click();
-  await page.getByRole('button',{name:'Muskelgruppen auswählen'}).click();
+  await page.getByRole('button',{name:'Individuelles Training · Avatar',exact:true}).click();
   const muscles=page.locator('#xpMusclePanel');
   const hotspot=muscles.locator('[data-xp-hotspot]').first();
   await hotspot.focus();

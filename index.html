@@ -125,8 +125,8 @@ button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid 
 #nutrition #xpCQuick .xpCQuickGrid button{min-height:57px;line-height:1.25}
 #nutrition #xpCQuick .xpCQuickGrid small{font-size:11px}
 #trainingout .xpEvoWeekDetails{margin:9px 0 14px;border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:0 10px}
-#trainingout .xpEvoWeekDetails summary{cursor:pointer;min-height:46px;display:flex;align-items:center;font-size:13px;font-weight:700;color:var(--text);padding:10px 2px;list-style-position:inside}
-#trainingout .xpEvoWeekDetails[open] summary{border-bottom:1px solid var(--line)}
+#trainingout .xpEvoWeekDetails>summary{cursor:pointer;min-height:46px;display:flex;align-items:center;font-size:13px;font-weight:700;color:var(--text);padding:10px 2px;list-style-position:inside}
+#trainingout .xpEvoWeekDetails[open]>summary{border-bottom:1px solid var(--line)}
 #trainingout .xpEvoWeekDetails .week{margin:10px 0!important}
 @media(max-width:430px){#nutrition #xpCQuick .xpCQuickGrid{gap:7px}#nutrition #xpCQuick .xpCQuickGrid button{padding:10px 9px;min-width:0}#nutrition #xpCQuick{padding:12px}#trainingout{scroll-margin-top:12px}}
 #xpHome .xpHero,#nutrition>.xp12Hero,#profile>.xp12Hero,#training>.xp12Hero{min-height:105px;padding:20px 16px 24px!important}
@@ -166,7 +166,8 @@ button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid 
 #trainingout.xpEvoWorkout .workSteps{margin-top:10px}
 #trainingout.xpEvoWorkout .stickyPause{top:4px;bottom:auto;margin:6px 0;scroll-margin-top:4px}
 #trainingout.xpEvoWorkout .workFocus{scroll-margin-top:86px}
-#trainingout .xpEvoWorkoutHead+details{margin:6px 0}
+#trainingout.xpEvoWorkout .xpEvoFinish{margin:10px 0}
+#trainingout.xpEvoWorkout .xpEvoFinish .traincontrols{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
 #xpProfile .xpEvoLook{display:grid;gap:10px}
 #xpProfile .xpEvoLook .xpAvatarStage{width:min(100%,125px);justify-self:center}
 #xpProfile .xpEvoLook .xpBody{max-height:195px}
@@ -631,7 +632,8 @@ function recordSet(j,k,key,value){
 function setRir(j,v){let x=state.trainingDraft?.items[j];if(!x)return;if(v==='')delete x.rir;else x.rir=Number(v);save()}
 function setPause(j,v){let n=Number(v),item=state.trainingDraft?.items[j];if(item&&Number.isInteger(n)&&n>=15&&n<=300){item.pause=n;state.p.restSeconds=n;save();return true}return false}
 function estimateKcal(type,min,weight,intensity){let met=type==='mobility'?2.3:type==='cardio'?({3:3,5:4.3,7:6}[intensity]||4.3):({3:2.5,5:3.5,7:5}[intensity]||3.5);return Math.round(Math.max(0,met-1)*3.5*weight/200*min)}
-function finishTraining(){let d=state.trainingDraft;if(!d||!d.items.some(x=>x.sets.some(s=>s.done)))return alert('Mindestens einen Satz abschließen.');if(d.items.some(x=>x.sets.some(s=>!s.done))&&!confirm('Training mit nicht abgeschlossenen Sätzen speichern?'))return;let elapsed=d.started?Math.max(1,Math.round((Date.now()-d.started)/60000)):0;let min=Number(prompt('Tatsächliche Trainingsdauer inkl. kurzer Pausen (Minuten)',String(Math.min(180,elapsed||state.p.minutes))));if(!Number.isFinite(min)||min<=0||min>300)return;let weight=+state.p.weight,intensity=state.p.intensity;state.trainingHistory=[...history(),{date:d.date,type:d.type,planDay:d.xp13?null:d.day,origin:d.xp13?'custom':d.xp131Extra?'additional':'weekly',items:d.items,time:new Date().toLocaleTimeString('de-DE',{hour:'2-digit',minute:'2-digit'}),minutes:min,weight,intensity,kcal:estimateKcal(d.type,min,weight,intensity)}];for(const x of d.items){if(x.sets.some(v=>v.done)&&coachData().presets?.[x.id]?.scope==='next'&&x.coachUsed504===true)delete coachData().presets[x.id]}delete state.trainingDraft;timerEnd=0;clearInterval(timerHandle);save();render()}
+function workoutMinutes(d){const elapsed=d.started?Math.max(1,Math.round((Date.now()-d.started)/60000)):0;return Math.min(180,elapsed||state.p.minutes)}
+function finishTraining(minutes){let d=state.trainingDraft;if(!d||!d.items.some(x=>x.sets.some(s=>s.done)))return alert('Mindestens einen Satz abschließen.');if(d.items.some(x=>x.sets.some(s=>!s.done))&&!confirm('Training mit nicht abgeschlossenen Sätzen speichern?'))return;let min=Number(minutes??prompt('Tatsächliche Trainingsdauer inkl. kurzer Pausen (Minuten)',String(workoutMinutes(d))));if(!Number.isFinite(min)||min<=0||min>300)return;let weight=+state.p.weight,intensity=state.p.intensity;state.trainingHistory=[...history(),{date:d.date,type:d.type,planDay:d.xp13?null:d.day,origin:d.xp13?'custom':d.xp131Extra?'additional':'weekly',items:d.items,time:new Date().toLocaleTimeString('de-DE',{hour:'2-digit',minute:'2-digit'}),minutes:min,weight,intensity,kcal:estimateKcal(d.type,min,weight,intensity)}];for(const x of d.items){if(x.sets.some(v=>v.done)&&coachData().presets?.[x.id]?.scope==='next'&&x.coachUsed504===true)delete coachData().presets[x.id]}delete state.trainingDraft;timerEnd=0;clearInterval(timerHandle);save();render()}
 function cancelTraining(){if(confirm('Offenes Training verwerfen?')){delete state.trainingDraft;timerEnd=0;clearInterval(timerHandle);save();renderTraining()}}
 function updatePause(){let el=$('pauseDisplay');let sec=Math.max(0,Math.ceil((timerEnd-Date.now())/1000));if(el){el.innerHTML=sec?`Pause: ${Math.floor(sec/60)}:${String(sec%60).padStart(2,'0')} <button class="secondary" onclick="skipPause()">Überspringen</button>`:'';el.hidden=!sec}}
 function startPause(j){let s=state.trainingDraft?.items[j]?.pause||90;try{audioCtx ||= new (window.AudioContext||window.webkitAudioContext)();audioCtx.resume()}catch{}timerEnd=Date.now()+s*1000;clearInterval(timerHandle);updatePause();timerHandle=setInterval(()=>{updatePause();if(Date.now()>=timerEnd){clearInterval(timerHandle);try{let o=audioCtx.createOscillator(),g=audioCtx.createGain();o.connect(g);g.connect(audioCtx.destination);g.gain.value=.08;o.frequency.value=660;o.start();o.stop(audioCtx.currentTime+.3)}catch{}}},250)}
@@ -1013,7 +1015,7 @@ function xp13Generate(){if(xp13Ids.length&&!confirm('Vorhandene Auswahl durch ei
 function xp13Start(){if(!brand.modules.training||state.trainingDraft||!xp13Ids.length||!xpProfileReady()||!calc(state.p)||state.p.restricted||state.p.limits.trim()||recovery504().today)return alert('Training aktuell nicht verfügbar. Profil und Erholung prüfen.');if(xp13Ids.some(id=>!xp13Eligible().some(e=>e[0]===id))||xp13Estimate()>xp13Minutes)return alert('Übungsauswahl oder Zeit bitte erneut prüfen.');try{audioCtx ||= new (window.AudioContext||window.webkitAudioContext)();audioCtx.resume()}catch{}let deload=weekActive504(),items=xp13Ids.map(id=>{let dose=xp13Dose(id),preset=coachPreset(id),ex=exBy(id);return {id,coachUsed504:!!preset&&!deload,pause:Math.max(dose.pause,preset?.pause||0),sets:Array.from({length:dose.sets},(_,i)=>{let prev=latest(id)?.sets.filter(v=>v.done)[i];return {reps:deload?0:preset?.reps??prev?.reps??0,weight:deload?0:preset?.weight??prev?.weight??0,done:false}})}});state.trainingDraft={key:'xp13-custom',xp13:true,xp13Duration:xp13Estimate(),day:(new Date().getDay()+6)%7,date:dateKey(),type:'full',started:Date.now(),items};xpMuscleMode=false;xp13Ids=[];save();renderTraining();premiumDashboard();$('trainingout').scrollIntoView({block:'start'});}
 const xp13MuscleBase=xpRenderMuscles;xpRenderMuscles=function(){xp13MuscleBase();let root=$('xpMusclePanel');if(!root||root.hidden)return;let elig=xp13Eligible();xp13Ids=xp13Ids.filter(id=>!!exBy(id));if(xp13Mode==='free'){root.innerHTML='<div class="xpSectionHero"><div class="xpEyebrow">DEIN TRAINING</div><h3>Freies Training</h3><small>Wähle deine Übungen selbst.</small></div>';}else{root.querySelector('.xpHeading')?.remove();root.querySelector('.xpRecs')?.remove();root.querySelectorAll('button').forEach(b=>{if((b.getAttribute('onclick')||'').startsWith('xpOpenPlan('))b.remove()});[...root.querySelectorAll('small')].filter(x=>x.textContent.startsWith('Der bestehende Plan')).forEach(x=>x.remove());}
 let box=document.createElement('div');box.className='xp13Builder';box.innerHTML=`<div class="xpEyebrow">DEINE EINHEIT</div><h3>Wie viel Zeit hast du?</h3><div class="xpChoices">${[20,30,45,60].map(n=>`<button class="secondary" aria-pressed="${xp13Minutes===n}" onclick="xp13Config('minutes',${n})">${n} Min.</button>`).join('')}</div><h3>Equipment</h3><div class="xpChoices"><button class="secondary" aria-pressed="${xp13Place==='profile'}" onclick="xp13Config('place','profile')">Mein Equipment</button><button class="secondary" aria-pressed="${xp13Place==='body'}" onclick="xp13Config('place','body')">Ohne Geräte</button></div><small>Trainingsort und Geräte im Profil ändern. Keine Geräte werden automatisch vorausgesetzt.</small>${xp13Mode==='muscle'?'<button class="xpFull" onclick="xp13Generate()">Trainingsvorschlag erstellen</button>':''}<div id="xp13Proposal"><h3>Deine Übungen · ${xp13Estimate()} Min.</h3>${xp13Ids.map((id,i)=>`<div class="xp13Exercise"><b>${i+1}. ${esc(exBy(id)[1])}</b><small>${xp13Dose(id).sets} × ${xp13Dose(id).reps} · ${xp13Dose(id).pause} s Pause</small>${!elig.some(e=>e[0]===id)?'<small role="status">Passt nicht zur aktuellen Muskel- oder Geräteauswahl. Bitte tauschen oder entfernen.</small>':''}<div class="xpChoices"><select aria-label="Übung ${i+1} austauschen" onchange="xp13Swap(${i},this.value)"><option value="${id}">Tauschen</option>${elig.filter(e=>!xp13Ids.includes(e[0])).map(e=>`<option value="${e[0]}">${esc(e[1])}</option>`).join('')}</select><button class="secondary" aria-label="Übung ${i+1} entfernen" onclick="xp13Remove(${i})">×</button></div></div>`).join('')||'<small>Noch keine Übungen gewählt.</small>'}<label>Weitere Übung hinzufügen<select onchange="xp13Add(this.value)"><option value="">Bitte wählen</option>${elig.filter(e=>!xp13Ids.includes(e[0])).map(e=>`<option value="${e[0]}">${esc(e[1])}</option>`).join('')}</select></label><p role="status">${esc(xp13Message|| (xp13Estimate()>xp13Minutes?'Auswahl bleibt erhalten. Bitte Zeit erhöhen oder Übungen entfernen.':xp131Invalid()?'Bitte unpassende Übungen tauschen oder entfernen.':''))}</p>${xp13Mode==='muscle'?`<small>${[...xpMuscles].filter(k=>!xp13Ids.some(id=>(xpMap[k]||[]).includes(id))).map(k=>xpNames[k]).join(', ')?'Noch nicht abgedeckt: '+esc([...xpMuscles].filter(k=>!xp13Ids.some(id=>(xpMap[k]||[]).includes(id))).map(k=>xpNames[k]).join(', ')):''}</small>`:''}<button class="xpFull" ${!xp13Ids.length||xp131Invalid()||recovery504().today?'disabled':''} onclick="xp13Start()">Training starten</button><small>Geschätzte Dauer inklusive Aufwärmen. Dein Wochenplan bleibt unverändert.</small></div>`;root.append(box);let controls=box.querySelectorAll('.xpChoices');if(controls.length>=2){let config=document.createElement('div');config.className='xp131Config';let hs=box.querySelectorAll('h3');config.append(hs[0],controls[0],hs[1],controls[1]);root.querySelector('.xpSectionHero')?.after(config);}let p=box.querySelector('#xp13Proposal');if(p){let generate=box.querySelector('button[onclick="xp13Generate()"]');if(generate){generate.textContent=xp13Ids.length?'Vorschlag neu erstellen':'Vorschlag erstellen';generate.style.marginTop='6px';}}};
-const xp13ChoiceBase=xpRenderTrainingChoice;xpRenderTrainingChoice=function(){xp13ChoiceBase();let root=$('xpTrainingChoice');if(!root||root.hidden||state.trainingDraft)return;if(xp131Count()&&!xp13Done()&&!planToday131()){root.querySelector('h3').textContent='Training heute erledigt';let p=root.querySelector('p');if(p)p.textContent=xp131Count()+' freie oder zusätzliche Einheit(en) gespeichert.';}if(xp13Done()){root.querySelector('h3').textContent='Training heute erledigt';let btn=root.querySelector('button');if(btn&&btn.getAttribute('onclick')==='xpStartToday()'){btn.textContent='Wochenplan ansehen';btn.setAttribute('onclick',"$('trainingout').scrollIntoView({block:'start'})");}}let b=root.querySelector('button[aria-expanded]');if(b){b.textContent=xpMuscleMode&&xp13Mode==='muscle'?'Muskelwahl geöffnet':'Individuelles Training · Avatar';b.setAttribute('onclick',"xp13SetMode('muscle')");}root.insertAdjacentHTML('beforeend','<button class="secondary xpFull" onclick="xp13SetMode(\'free\')">Freies Training · Übungen wählen</button>');};
+const xp13ChoiceBase=xpRenderTrainingChoice;xpRenderTrainingChoice=function(){xp13ChoiceBase();let root=$('xpTrainingChoice');if(!root||root.hidden||state.trainingDraft)return;if(xp131Count()&&!xp13Done()&&!planToday131()){root.querySelector('h3').textContent='Training heute erledigt';let p=root.querySelector('p');if(p)p.textContent=xp131Count()+' freie oder zusätzliche Einheit(en) gespeichert.';}if(xp13Done()){root.querySelector('h3').textContent='Training heute erledigt';let btn=root.querySelector('button');if(btn&&btn.getAttribute('onclick')==='xpStartToday()'){btn.textContent='Wochenplan ansehen';btn.setAttribute('onclick',"$('trainingout').scrollIntoView({block:'start'})");}}let b=root.querySelector('button[aria-expanded]');if(b){const open=xpMuscleMode&&xp13Mode==='muscle';b.setAttribute('aria-expanded',String(open));b.textContent=open?'Muskelwahl schließen':'Individuelles Training · Avatar';b.setAttribute('onclick',open?'xpMuscleMode=false;xpRenderMuscles();xpRenderTrainingChoice()':"xp13SetMode('muscle')");}root.insertAdjacentHTML('beforeend','<button class="secondary xpFull" onclick="xp13SetMode(\'free\')">Freies Training · Übungen wählen</button>');};
 const xp13RenderBase=renderTraining;renderTraining=function(){xp13RenderBase();if(xp13Active()){let root=$('trainingout');root.querySelector('.week')?.remove();root.querySelectorAll('select[onchange^="swapExercise"]').forEach(e=>{e.previousElementSibling?.remove();e.remove()});let h=root.querySelector('.workPlanRow b');if(h)h.textContent='Individuelles Training';}};
 
 const xp131StartBase=startTraining;startTraining=function(){if(recovery504().today||recovery504().repeated){alert('Erholung hat Vorrang. Training heute nicht starten. Offene Einheiten können geprüft oder abgeschlossen werden.');return;}let extra=xp131SelectedDone(),before=state.trainingDraft;if(extra&&!confirm('Diese Planeinheit ist heute bereits erledigt. Als zusätzliches Training starten?'))return;xp131StartBase();if(extra&&state.trainingDraft&&state.trainingDraft!==before){state.trainingDraft.xp131Extra=true;save();renderTraining();}};
@@ -1468,7 +1470,7 @@ function xpEvolutionNutrition(){
  '<div class="xpEvoWater"><span>Wasser · '+(d===dateKey()?'heute':'ausgewählter Tag')+'</span><b>'+fmt(water/1000,2)+' l</b></div>';
  const recent=$('nutfast');
  if(recent&&!$('xpEvoRecent')){
-  const details=xpEvoDetails('Zuletzt verwendet', 'xpEvoDisclosure');
+  const details=xpEvoDetails('Favoriten & zuletzt verwendet');
   details.id='xpEvoRecent';recent.before(details);details.append(recent);
  }
 }
@@ -1498,7 +1500,7 @@ function xpEvolutionTraining(){
  for(let node=hero.previousSibling;node;){
   const prev=node.previousSibling;
   if(node!==title){
-   if(node.matches?.('.trainingmeta')&&node.querySelector('b')?.textContent!=='Aufwärmen · 5 Min.')notices.unshift(node);
+   if(node.matches?.('.trainingmeta:not([role=status])')&&node.querySelector('b')?.textContent!=='Aufwärmen · 5 Min.')notices.unshift(node);
    else plan.insertBefore(node,plan.firstChild.nextSibling);
   }
   node=prev;
@@ -1520,6 +1522,24 @@ function xpEvolutionTraining(){
  plan.hidden=plan.childNodes.length===1;
  const history=root.querySelector('details[ontoggle]');
  if(history)history.before(plan);else root.append(plan);
+ const controls=root.querySelector('.traincontrols');
+ const finish=controls?.querySelector('button[onclick="finishTraining()"]');
+ if(finish){
+  const end=xpEvoDetails('Training abschließen','xpEvoDisclosure xpEvoFinish');
+  const label=document.createElement('label'),duration=document.createElement('input');
+  label.htmlFor='xpWorkoutMinutes';label.textContent='Tatsächliche Trainingsdauer (Minuten)';
+  duration.id=label.htmlFor;duration.type='number';duration.inputMode='decimal';
+  duration.required=true;duration.max='300';duration.step='any';duration.value=workoutMinutes(draft);
+  duration.oninput=()=>duration.setCustomValidity('');
+  finish.onclick=()=>{
+   duration.setCustomValidity(duration.value!==''&&+duration.value<=0?'Bitte eine Dauer über 0 Minuten eingeben.':'');
+   if(duration.reportValidity())finishTraining(duration.value);
+  };
+  controls.before(end);end.append(label,duration,controls);
+  // The final exercise can reveal the same controls without opening another dialog.
+  const last=cards.at(-1).querySelector('.workSteps button:last-child');
+  if(last)last.onclick=()=>{end.open=true;end.scrollIntoView({block:'center',behavior:'smooth'});duration.focus({preventScroll:true})};
+ }
 
  for(const card of cards){
   const rows=[...card.querySelectorAll(':scope > .setline')];
@@ -1527,7 +1547,7 @@ function xpEvolutionTraining(){
   if(!current)continue;
   const h=card.querySelector('h3'),steps=card.querySelector('.workSteps');
   const guide=card.querySelector(':scope > details:has(.guide)');
-  const otherSets=xpEvoDetails('Alle Sätze ('+rows.length+')');
+  const otherSets=xpEvoDetails('Weitere Sätze ('+(rows.length-1)+')');
   const options=xpEvoDetails('Übung, Satzanzahl & Pause');
   const technique=[...card.children].filter(node=>node.matches('.exerciseinfo')||node.tagName==='P'||node.tagName==='SMALL');
   if(guide){
