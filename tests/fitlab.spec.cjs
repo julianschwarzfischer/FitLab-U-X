@@ -178,7 +178,7 @@ test('real QA5 application automatically migrates into current IndexedDB', async
   expect(legacy).toEqual(saved);
   await page.unroute(root,oldRoute);
   await page.reload();
-  await expect(page.locator('#appVersion')).toContainText('EVOLUTION 2.1');
+  await expect(page.locator('#appVersion')).toContainText('EVOLUTION 2.2');
   await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0,{timeout:20000});
   const migrated=await canonical(page);
   expect(migrated.p.age).toBe(41);
@@ -858,4 +858,317 @@ test('Evolution 2.1 integrated day from check-in and breakfast to workout histor
     expect(data.trainingHistory[0].minutes).toBe(19.5);
     expect(data.trainingHistory[0].items.flatMap(item=>item.sets).filter(set=>set.done)).toHaveLength(2);
   } finally {await context.close();}
+});
+
+async function captureEvolution22(page,testInfo,name){
+  const path=testInfo.outputPath(name+'.png');
+  await page.screenshot({path,animations:'disabled'});
+  await testInfo.attach(name,{path,contentType:'image/png'});
+}
+
+test('Evolution 2.2 freezes historic goals through profile changes, midnight, backup and reload',async({page},testInfo)=>{
+  await page.setViewportSize({width:390,height:844});
+  await page.clock.setFixedTime(k1Saturday);
+  await ready(page);
+  const date='2026-11-21',next='2026-11-22';
+  const initial=await page.evaluate(()=>calc(state.p));
+  await addMeal(page,'Historical breakfast',100);
+  const original=(await canonical(page)).dayTargets[date];
+  expect(original).toMatchObject(initial);
+  await mobileNav(page,'Profil').click();
+  await page.locator('details:has(#weight) > summary').click();
+  await page.locator('#weight').fill('95');
+  await expect.poll(async()=> (await canonical(page)).p.weight).toBe(95);
+  const changed=await page.evaluate(()=>calc(state.p));
+  expect(changed.k).not.toBe(initial.k);
+  await addMeal(page,'Same day after profile change',100);
+  expect((await canonical(page)).dayTargets[date]).toEqual(original);
+  await page.clock.setFixedTime(new Date(next+'T12:00:00Z'));
+  await page.reload();
+  await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
+  await addMeal(page,'Tomorrow uses changed target',100);
+  expect((await canonical(page)).dayTargets[next]).toMatchObject(changed);
+  await page.locator('#date').fill(date);
+  await expect(page.locator('.xp22Day')).toContainText('bei der ersten Buchung gespeichert');
+  await expect(page.locator('.xp22Day')).toContainText(await page.evaluate(k=>fmt(k,0),original.k));
+  await captureEvolution22(page,testInfo,'evo22-historische-tagesbilanz');
+  await mobileNav(page,'Profil').click();
+  await page.locator('details:has(#export) > summary').click();
+  const pending=page.waitForEvent('download');
+  await page.locator('#export').click();
+  const json=require('node:fs').readFileSync(await (await pending).path());
+  expect(JSON.parse(json).dayTargets[date]).toEqual(original);
+  page.once('dialog',dialog=>dialog.accept());
+  await page.locator('#import').setInputFiles({name:'evolution22.json',mimeType:'application/json',buffer:json});
+  await expect(page.locator('#importstatus')).toContainText('Sicherung erfolgreich');
+  await page.reload();
+  await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
+  expect((await canonical(page)).dayTargets).toEqual(JSON.parse(json).dayTargets);
+});
+
+test('Evolution 2.2 distinguishes missing, zero, partial and confirmed and reopens changed days',async({page})=>{
+  await page.clock.setFixedTime(k1Saturday);
+  await ready(page);
+  await mobileNav(page,'Ernährung').click();
+  const day='2026-11-21',quality=page.locator('.xp22Day');
+  await expect(quality).toContainText('Nicht erfasst');
+  await expect(quality).toContainText('Zufuhr ist unbekannt');
+  await expect(quality.getByRole('button')).toHaveCount(0);
+  await page.getByRole('button',{name:/Selbst eintragen/}).click();
+  await page.locator('#foodname').fill('Synthetischer Nullwert');
+  for(const id of ['fk','fp','fc','ff'])await page.locator('#'+id).fill('0');
+  await page.locator('#add').click();
+  await expect(page.locator('#xp21DiaryStatus')).toContainText('Gespeichert');
+  await expect(quality).toContainText('Teilweise erfasst');
+  await expect(quality).toContainText('0 kcal erfasst');
+  await quality.getByRole('button',{name:'Tag als vollständig bestätigen'}).click();
+  await expect(quality).toContainText('Vollständig bestätigt');
+  await expect.poll(async()=>(await canonical(page)).coach.days[day].complete).toBe(true);
+  await addMeal(page,'Spätere gültige Ergänzung',100);
+  await expect(quality).toContainText('Teilweise erfasst');
+  expect((await canonical(page)).coach.days[day].complete).toBe(false);
+  await page.reload();
+  await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
+  await mobileNav(page,'Ernährung').click();
+  await expect(quality).toContainText('Teilweise erfasst');
+});
+
+async function seedEvolutionWeeks(page){
+  return page.evaluate(async()=>{
+    const reference=calc(state.p);
+    const different=calc({...state.p,goals:[4],priority:'maintain',kind:'cardio',days:5,minutes:55});
+    for(let offset=-14;offset<0;offset++){
+      const date=coachDate(offset),previous=offset<=-8,goal=previous?different:reference;
+      const recorded=offset>=-12&&offset!==-8;
+      state.coach.days[date]={weight:previous?80.5:80,sleep:previous?7:8,energy:4,soreness:0,waist:null,fat:null,
+        complete:recorded&&offset!==-2};
+      if(!recorded)continue;
+      state.water[date]=previous?1500:2000;
+      if(offset!==-3) (state.dayTargets||={})[date]={...goal,recordedAt:date+'T12:00:00Z'};
+      const k=offset===-4?0:400;
+      state.log[date]=[{n:'Synthetischer Tagesmix '+date,_fid:'evo22-week-'+date,k,p:previous?16:24,
+        c:35,f:8,g:400,fiber:8,meal:'Frühstück'}];
+    }
+    const id=exs.find(ex=>ex[1]==='Kniebeuge')?.[0]||exs.find(ex=>!timed(ex)&&ex[0]!=='br')[0];
+    for(const [offset,weight,partial] of [[-10,40,false],[-6,45,false],[-1,42,true]]){
+      state.trainingHistory.push({date:coachDate(offset),type:'lower',minutes:30,items:[{id,sets:[
+        {done:true,reps:8,weight},{done:!partial,reps:8,weight}
+      ]}]});
+    }
+    state.coach.days[dateKey()]={weight:null,waist:null,fat:null,sleep:8,energy:4,soreness:0,complete:false};
+    if(!await save('replace'))throw Error('Could not persist synthetic weekly fixture');
+    render();
+    return {reference,different};
+  });
+}
+
+for(const width of [320,375,390,430]){
+  test(`Evolution 2.2 weekly comparison, missing data and layout at ${width}px`,async({browser},testInfo)=>{
+    const context=await browser.newContext({viewport:{width,height:844},isMobile:true,hasTouch:true,locale:'de-DE'});
+    try{
+      const page=await context.newPage();
+      await page.clock.setFixedTime(new Date('2026-11-22T12:00:00Z'));
+      await ready(page);
+      const fixture=await seedEvolutionWeeks(page);
+      expect(fixture.reference.protein).not.toBe(fixture.different.protein);
+      await mobileNav(page,'Fortschritt').tap();
+      const week=page.locator('#xp15Progress [data-evo22-week]');
+      await expect(week).toContainText('7/7 Tage mit Mahlzeiten · 5/7 vollständig bestätigt und plausibel · 4/7 mit belegtem Ziel');
+      await expect(week).toContainText('1 vollständig, 1 teilweise');
+      await expect(week).toContainText('+5,0 kg zur Vorwoche');
+      const format=await page.evaluate(({reference,different})=>{
+        const p=96/reference.protein*100,prev=64/different.protein*100;
+        return {k:fmt(1600/reference.k*100,0),p:fmt(p,0),delta:fmt(p-prev,0)};
+      },fixture);
+      await expect(week.getByRole('listitem').filter({hasText:'Protein'})).toContainText(`${format.p} % vom jeweiligen Tagesziel · +${format.delta} Pp.`);
+      await expect(week.getByRole('listitem').filter({hasText:'Kalorien'})).toContainText(`${format.k} %`);
+      const viewport=await page.evaluate(()=>({actual:document.documentElement.scrollWidth,expected:document.documentElement.clientWidth}));
+      expect(viewport).toEqual({actual:width,expected:width});
+      if(width===390)await captureEvolution22(page,testInfo,'evo22-wochenrueckblick');
+      await week.getByText('Gewicht, Wasser & Erholung').tap();
+      await expect(week).toContainText('2.000,0 ml');
+      await expect(week).toContainText('-0,5 kg zur Vorwoche');
+      await expect(week).toContainText('+1,0 h zur Vorwoche');
+      const advice=await page.evaluate(()=>({advice:xp15Advice(),analysis:coachAnalysis()}));
+      expect(advice.advice.title).toBe('Ernährungsdaten prüfen');
+      expect(advice.analysis.step).toBe(0);
+      await mobileNav(page,'Ernährung').tap();
+      await page.locator('#date').fill('2026-11-19');
+      await expect(page.locator('.xp22Day')).toContainText('Historisches Ziel nicht belegt');
+      await expect(page.locator('.xp22Day')).toContainText('96,0 g Protein');
+      await page.locator('#date').fill('2026-11-18');
+      await expect(page.locator('.xp22Day')).toContainText('Von Auswertungen ausgeschlossen');
+      await page.evaluate(async()=>{
+        const rejected=coachDate(-4);
+        state.log[rejected]=[];
+        state.coach.days[rejected].complete=false;
+        if(!await save('replace'))throw Error('Could not remove synthetic contradictory entry');
+        render();
+      });
+      expect((await page.evaluate(()=>xp15Advice())).title).toBe('Deine Woche entwickelt sich');
+    }finally{await context.close();}
+  });
+}
+
+test('Evolution 2.2 restores an unbooked portion without creating or duplicating a meal',async({page},testInfo)=>{
+  await page.setViewportSize({width:390,height:680});
+  await ready(page);
+  await mobileNav(page,'Ernährung').click();
+  await page.getByRole('button',{name:'Lebensmittel suchen',exact:true}).click();
+  await page.getByRole('searchbox').fill('Haferflocken');
+  await page.locator('#results').getByRole('button',{name:/Haferflocken/}).first().click();
+  await page.locator('#grams').fill('73');
+  await page.reload();
+  await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
+  await mobileNav(page,'Ernährung').click();
+  await expect(page.locator('#grams')).toHaveValue('73');
+  await expect(page.locator('#fooderror')).toHaveText(/Ungespeicherte Portion wiederhergestellt/);
+  expect(Object.values((await canonical(page)).log).flat()).toHaveLength(0);
+  await page.locator('#grams').scrollIntoViewIfNeeded();
+  await captureEvolution22(page,testInfo,'evo22-portion-wiederhergestellt');
+  await page.locator('#add').click();
+  await expect(page.locator('#xp21DiaryStatus')).toContainText('73 g · Gespeichert');
+  await page.reload();
+  await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
+  expect(Object.values((await canonical(page)).log).flat().map(row=>row.g)).toEqual([73]);
+  expect(await page.evaluate(()=>xp22ReadPortion())).toBeNull();
+});
+
+test('Evolution 2.2 pause uses an absolute deadline through reload, background jump and expiration',async({page},testInfo)=>{
+  await page.setViewportSize({width:390,height:844});
+  await openK1Plan(page);
+  await page.locator('#xpTrainingChoice [data-today-start]').click();
+  const row=page.locator('#trainingout .workFocus:visible > .setline.next63');
+  await row.locator('input').first().fill('10');
+  await row.locator('input').nth(1).fill('12.5');
+  await row.getByRole('button',{name:/Satz \d abschließen/}).click();
+  await expect(page.locator('#pauseDisplay')).toBeVisible();
+  await expect.poll(async()=>(await canonical(page)).trainingDraft.items[0].sets[0].done).toBe(true);
+  const timer=await page.evaluate(()=>JSON.parse(fitStore161.getItem('fitnesslab-pause')));
+  expect(timer.end).toBeGreaterThan(k1Saturday.getTime()+15000);
+  await page.clock.setFixedTime(new Date(timer.end-17000));
+  await page.reload();
+  await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
+  await mobileNav(page,'Training').click();
+  await expect(page.locator('#pauseDisplay')).toContainText('0:17');
+  await captureEvolution22(page,testInfo,'evo22-pausentimer');
+  await page.clock.setFixedTime(new Date(timer.end+1000));
+  await page.evaluate(()=>document.dispatchEvent(new Event('visibilitychange')));
+  await expect(page.locator('#pauseDisplay')).toBeHidden();
+  await page.reload();
+  await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
+  await mobileNav(page,'Training').click();
+  await expect(page.locator('#pauseDisplay')).toBeHidden();
+  expect((await canonical(page)).trainingDraft.items[0].sets[0].done).toBe(true);
+});
+
+test('Evolution 2.2 normal text and selected controls contrast across all main screens and themes',async({page},testInfo)=>{
+  await page.setViewportSize({width:390,height:844});
+  await ready(page);
+  await addMeal(page,'Kontrast-Testmahlzeit',100);
+  const modes=[['light','light','#ffffff'],['dark','dark','#000000'],['auto','dark','#ff7700'],['auto','light','#ffff00']];
+  const screens=[
+    ['Heute','#xpHome .xp12Focus h2,#xpHome .xpMainAction,nav [aria-current="page"]'],
+    ['Ernährung','#xpCQuick button,.xp22Day strong,.xp22Day p,.xp22Day small,.xp22Day button,#xpEvoDaily button,.nutquick button'],
+    ['Training','#xpTrainingChoice h3,#xpTrainingChoice button'],
+    ['Fortschritt','#xp15Progress .xp22Week h3,#xp15Progress .xp22Period,#xp15Progress .xp22Focus strong,#xp15Progress .xp22Week summary'],
+    ['Profil','#xpDisplayTheme,label[for="xpDisplayTheme"]']
+  ];
+  for(const [setting,scheme,primary] of modes){
+    await page.emulateMedia({colorScheme:scheme});
+    await mobileNav(page,'Profil').click();
+    await page.evaluate(color=>{brand=normalizeBrand({...brand,primary:color});applyBrand();},primary);
+    await page.locator('#xpDisplayTheme').selectOption(setting);
+    await expect(page.locator('html')).toHaveAttribute('data-theme',scheme);
+    for(const [screen,selector] of screens){
+      await mobileNav(page,screen).click();
+      const values=await page.locator(selector).evaluateAll(elements=>{
+        const channels=(color)=>color.match(/[\d.]+/g)?.map(Number);
+        const overlay=(top,below)=>below.map((base,i)=>base*(1-(top[3]??1))+top[i]*(top[3]??1));
+        const lum=(rgb)=>[0.2126,0.7152,0.0722].reduce((total,factor,i)=>{
+          const s=rgb[i]/255;
+          return total+factor*(s<=0.04045?s/12.92:((s+0.055)/1.055)**2.4);
+        },0);
+        return elements.flatMap(el=>{
+          if(!el.getClientRects().length||!el.textContent.trim()&&el.tagName!=='SELECT')return [];
+          const chain=[];
+          for(let node=el;node;node=node.parentElement)chain.unshift(node);
+          const omitted=chain.some(node=>getComputedStyle(node).backgroundImage!=='none');
+          if(omitted)return [];
+          const bg=chain.reduce((below,node)=>overlay(channels(getComputedStyle(node).backgroundColor),below),[255,255,255]);
+          const text=overlay(channels(getComputedStyle(el).color),bg);
+          const ratios=[lum(bg),lum(text)].sort((a,b)=>b-a);
+          return [{control:el.textContent.trim().slice(0,70),ratio:(ratios[0]+0.05)/(ratios[1]+0.05)}];
+        });
+      });
+      expect(values.length,`${screen} provides measurable controls in ${scheme}`).toBeGreaterThan(0);
+      for(const value of values)expect(value.ratio,`${screen}, ${scheme} ${primary}, ${value.control}`).toBeGreaterThanOrEqual(4.5);
+      if(screen==='Ernährung'&&setting==='dark'){
+        for(const height of await page.locator('.nutquick button:visible').evaluateAll(list=>list.map(el=>el.getBoundingClientRect().height)))
+          expect(height).toBeGreaterThanOrEqual(44);
+        await page.locator('.xp22Day').scrollIntoViewIfNeeded();
+        await captureEvolution22(page,testInfo,'evo22-kontrast-dunkel');
+      }
+    }
+  }
+});
+
+test('Evolution 2.2 real service worker update from 2.1 keeps data and an offline write survives reload',async({browser})=>{
+  const {createServer}=require('node:http');
+  const {execFileSync}=require('node:child_process');
+  const fs=require('node:fs');
+  const old='b4604bb056feee3c074e123186baba88bc2cfe25';
+  const versions=Object.fromEntries(['/','/index.html','/sw.js'].map(path=>{
+    const file=path==='/'?'index.html':path.slice(1);
+    return [path,[execFileSync('git',['show',old+':'+file],{maxBuffer:4*1024*1024}),fs.readFileSync(file)]];
+  }));
+  const assets={'/brand.js':'text/javascript','/manifest.json':'application/json','/icon-180.png':'image/png','/icon-192.png':'image/png','/icon-512.png':'image/png'};
+  let version=0;
+  const server=createServer((req,res)=>{
+    const route=new URL(req.url,'http://localhost').pathname;
+    const hasVersion=Object.hasOwn(versions,route);
+    if(!hasVersion&&!Object.hasOwn(assets,route)){res.writeHead(404).end();return;}
+    res.writeHead(200,{'Cache-Control':'no-store','Content-Type':hasVersion?(route.endsWith('.js')?'text/javascript':'text/html; charset=utf-8'):assets[route]});
+    res.end(hasVersion?versions[route][version]:fs.readFileSync(route.slice(1)));
+  });
+  await new Promise((resolve,reject)=>{server.once('error',reject);server.listen(0,'127.0.0.1',resolve);});
+  let context;
+  try{
+    context=await browser.newContext({baseURL:`http://127.0.0.1:${server.address().port}`,serviceWorkers:'allow'});
+    const page=await context.newPage();
+    await ready(page);
+    await expect(page.locator('#appVersion')).toContainText('EVOLUTION 2.1');
+    await page.waitForFunction(()=>navigator.serviceWorker.controller!==null);
+    await addMeal(page,'Pre-update synthetic 2.1',115);
+    const prior=await canonical(page),previousController=await page.evaluate(()=>navigator.serviceWorker.controller.scriptURL);
+    expect(previousController).toMatch(/\/sw\.js$/);
+    version=1;
+    await page.evaluate(async()=>{
+      window.testControllerChanged=false;
+      navigator.serviceWorker.addEventListener('controllerchange',()=>window.testControllerChanged=true,{once:true});
+      await (await navigator.serviceWorker.ready).update();
+    });
+    await page.waitForFunction(()=>window.testControllerChanged);
+    await page.waitForFunction(async()=>{
+      const keys=await caches.keys();
+      return keys.some(key=>key.endsWith('evolution-2-2'))&&!keys.some(key=>key.endsWith('evolution-2-1'));
+    });
+    await page.reload();
+    await expect(page.locator('#appVersion')).toContainText('EVOLUTION 2.2');
+    await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
+    expect(await canonical(page)).toEqual(prior);
+    await context.setOffline(true);
+    await page.reload();
+    await expect(page.locator('#appVersion')).toContainText('EVOLUTION 2.2');
+    await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
+    await addMeal(page,'Post-update offline 2.2',116);
+    await page.reload();
+    await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
+    expect(Object.values((await canonical(page)).log).flat().map(x=>[x.n,x.g])).toEqual([
+      ['Pre-update synthetic 2.1',115],['Post-update offline 2.2',116]
+    ]);
+  }finally{
+    await context?.close();
+    await new Promise(resolve=>server.close(resolve));
+  }
 });
