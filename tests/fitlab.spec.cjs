@@ -178,7 +178,7 @@ test('real QA5 application automatically migrates into current IndexedDB', async
   expect(legacy).toEqual(saved);
   await page.unroute(root,oldRoute);
   await page.reload();
-  await expect(page.locator('#appVersion')).toContainText('EVOLUTION 2.2');
+  await expect(page.locator('#appVersion')).toContainText('EVOLUTION 2.3');
   await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0,{timeout:20000});
   const migrated=await canonical(page);
   expect(migrated.p.age).toBe(41);
@@ -1176,15 +1176,15 @@ test('Evolution 2.2 real service worker update from 2.1 keeps data and an offlin
     await page.waitForFunction(()=>window.testControllerChanged);
     await page.waitForFunction(async()=>{
       const keys=await caches.keys();
-      return keys.some(key=>key.endsWith('evolution-2-2'))&&!keys.some(key=>key.endsWith('evolution-2-1'));
+      return keys.some(key=>key.endsWith('evolution-2-3'))&&!keys.some(key=>key.endsWith('evolution-2-1'));
     });
     await page.reload();
-    await expect(page.locator('#appVersion')).toContainText('EVOLUTION 2.2');
+    await expect(page.locator('#appVersion')).toContainText('EVOLUTION 2.3');
     await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
     expect(await canonical(page)).toEqual(prior);
     await context.setOffline(true);
     await page.reload();
-    await expect(page.locator('#appVersion')).toContainText('EVOLUTION 2.2');
+    await expect(page.locator('#appVersion')).toContainText('EVOLUTION 2.3');
     await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
     await addMeal(page,'Post-update offline 2.2',116);
     await page.reload();
@@ -1196,4 +1196,67 @@ test('Evolution 2.2 real service worker update from 2.1 keeps data and an offlin
     await context?.close();
     await new Promise(resolve=>server.close(resolve));
   }
+});
+
+test('Evolution 2.3 profile boundaries, manual changes and unmodified reference macros',async({page})=>{
+  await ready(page);
+  const result=await page.evaluate(()=>{
+    const p={...state.p,weight:48,height:160,age:55,sex:'f',days:0,kind:'mobility',goals:[0],priority:'auto'};
+    const normal={...state.p,weight:80,height:180,age:38,sex:'m',kind:'strength',goals:[2],priority:'gain'};
+    return {unsafe:[p,{...p,weight:47},{...p,weight:50},{...p,goals:[6],priority:'maintain',adjust:-200},
+      {...normal,age:17},{...normal,age:19},{...normal,restricted:true},{...normal,height:''}].map(x=>calc(x)),
+      maintain:calc({...p,goals:[6],priority:'maintain'}),normal:calc(normal)};
+  });
+  expect(result.unsafe).toEqual(Array(8).fill(null));
+  expect(result.maintain.k).toBeGreaterThan(1200);
+  expect(result.normal).toMatchObject({k:2550,protein:144,carbs:309,fat:82});
+  await page.evaluate(()=>{Object.assign(state.p,{weight:48,height:160,age:55,sex:'f',days:0,kind:'mobility'});render();tab('today');});
+  await expect(page.locator('#xpHome .xp12Focus')).toContainText('Profil und Ziel prüfen');
+  await page.locator('#xpHome .xpMainAction').click();
+  await expect(page.locator('#profile')).toBeVisible();
+});
+
+test('Evolution 2.3 five confirmed low days preempt every start and link to the actual diary',async({page},testInfo)=>{
+  await page.setViewportSize({width:390,height:844});await ready(page);
+  await page.clock.setFixedTime(new Date('2026-11-23T12:00:00Z'));
+  const d=await page.evaluate(async()=>{
+    coachData();const goal=calc(state.p);
+    for(let i=1;i<=5;i++){
+      const date=coachDate(-i);
+      state.log[date]=[{_fid:'low-'+i,n:'Synthetischer Tagesmix',g:100,k:325,p:10,c:60,f:5,meal:'Mittagessen'}];
+      (state.dayTargets||={})[date]={...goal,recordedAt:date+'T08:00:00Z'};state.coach.days[date]={complete:false};
+    }
+    if(safetyAdvice()?.hold)throw Error('Partial entries must not establish low intake');
+    for(let i=1;i<=5;i++)state.coach.days[coachDate(-i)].complete=true;
+    state.coach.days[dateKey()]={sleep:8,energy:5,soreness:0,complete:false};
+    if(!await save('replace'))throw Error('Failed to save fixture');
+    render();return coachDate(-1);
+  });
+  await page.reload();await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
+  await expect(page.locator('#xpHome .xp12Focus')).toContainText('Ernährung vor dem Training prüfen');
+  await captureEvolution22(page,testInfo,'evo23-ernaehrung-pruefen');
+  await page.locator('#xpHome .xpMainAction').click();await expect(page.locator('#date')).toHaveValue(d);
+  await expect(page.locator('.xp22Day')).toContainText('325 kcal');
+  page.on('dialog',dialog=>dialog.accept());
+  const gates=await page.evaluate(()=>{startTraining();beginAt(0,0);xpStartToday();xp13Start();
+    return {draft:!!state.trainingDraft,open:xpBTrainingState().canStart,goal:calc(state.p),days:nutritionReview(state).count};});
+  expect(gates).toEqual({draft:false,open:false,goal:null,days:5});
+  await mobileNav(page,'Fortschritt').click();await expect(page.locator('.xp22Focus')).toContainText('Portionen');
+});
+
+test('Evolution 2.3 median and dated correction preserve the original measurement until saved',async({page},testInfo)=>{
+  await page.setViewportSize({width:375,height:812});await ready(page);
+  const d=await page.evaluate(async()=>{coachData();
+    for(let i=1;i<=14;i++)state.coach.days[coachDate(-i)]={weight:i===3?95:80,complete:false};
+    if(!await save('replace'))throw Error('Failed to save weights');render();return coachDate(-3);
+  });
+  await mobileNav(page,'Fortschritt').click();
+  await expect(page.locator('.xp22Focus')).toContainText('95,0 kg');
+  await captureEvolution22(page,testInfo,'evo23-gewicht-pruefen');
+  expect((await canonical(page)).coach.days[d].weight).toBe(95);
+  await page.locator('.xp22Focus button').click();await expect(page.locator('#coachdate')).toHaveValue(d);
+  await expect(page.locator('#coach-weight')).toBeFocused();await page.locator('#coach-weight').fill('80');
+  await page.evaluate(()=>coachSave());
+  await expect.poll(async()=>(await canonical(page)).coach.days[d].weight).toBe(80);
+  expect(await page.evaluate(()=>({issue:trendAdvice(),trend:coachAnalysis().trend}))).toEqual({issue:null,trend:0});
 });
