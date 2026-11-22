@@ -1164,6 +1164,25 @@ test(`Evolution 2.3 real service worker update from ${previousVersion} keeps dat
     await ready(page);
     await expect(page.locator('#appVersion')).toContainText('EVOLUTION '+previousVersion);
     await page.waitForFunction(()=>navigator.serviceWorker.controller!==null);
+    if(previousVersion==='2.2'){
+      await page.clock.setFixedTime(new Date('2026-11-23T12:00:00Z'));
+      const original=await page.evaluate(()=>{
+        const copy=structuredClone(state);
+        try{
+          const small=calc({...state.p,weight:48,height:160,age:55,sex:'f',days:0,kind:'mobility',goals:[0]});
+          Object.assign(state.p,{age:38,goals:[2],priority:'gain',kind:'strength'});
+          const target=calc(state.p);coachData();
+          for(let i=1;i<=5;i++){
+            const d=coachDate(-i);
+            state.log[d]=[{n:'Synthetischer Rückvergleich',g:100,k:325,p:10,c:60,f:5,meal:'Mittagessen'}];
+            state.coach.days[d]={complete:true};(state.dayTargets||={})[d]=target;
+          }
+          state.coach.days[dateKey()]={sleep:8,energy:4,soreness:0};
+          return {k:small.k,action:xp15Advice().action,canStart:xpBTrainingState().canStart};
+        }finally{state=copy;}
+      });
+      expect(original).toEqual({k:1100,action:'xpTrainingGo()',canStart:true});
+    }
     await addMeal(page,'Pre-update synthetic 2.1',115);
     const prior=await canonical(page),previousController=await page.evaluate(()=>navigator.serviceWorker.controller.scriptURL);
     expect(previousController).toMatch(/\/sw\.js$/);
@@ -1369,4 +1388,21 @@ test('Evolution 2.3 persistent protein gaps lead to a dated meal review without 
   await expect(focus).toContainText('Proteinversorgung prüfen');
   await focus.locator('.xpMainAction').click();await expect(page.locator('#date')).toHaveValue(day);
   await mobileNav(page,'Fortschritt').click();await expect(page.locator('#xp15Progress .xp22Focus')).toContainText('Proteinziels');
+});
+
+test('Evolution 2.3 performance action focuses the same comparable lift named by the coach',async({page},testInfo)=>{
+  await page.setViewportSize({width:390,height:844});
+  await ready(page);await page.clock.setFixedTime(new Date('2026-11-22T12:00:00Z'));
+  await seedEvolutionWeeks(page);
+  await page.evaluate(()=>{
+    state.log={};state.dayTargets={};
+    for(const d of Object.values(state.coach.days))d.complete=false;
+    render();tab('today');
+  });
+  await expect(page.locator('#xpHome .xpEvoFocus')).toContainText('Vergleichbaren Satz ansehen');
+  await page.locator('#xpHome .xpMainAction').click();
+  const detail=page.locator('#xp15Progress [data-performance]');
+  await expect(detail.locator('summary')).toBeFocused();
+  await expect(detail).toContainText('Kniebeuge: 45,0 kg bei 8 Wdh. · +5,0 kg');
+  await captureEvolution22(page,testInfo,'evo23-leistungsvergleich');
 });
