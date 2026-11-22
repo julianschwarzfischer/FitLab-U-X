@@ -1425,6 +1425,7 @@ test('Evolution 3 exercise atlas searches equipment and opens a technique previe
   await atlas.locator('#xp3AtlasList button').first().click();
   await expect(atlas.locator('#xp3AtlasDetail h3')).toContainText('Kniebeuge');
   await expect(atlas.locator('.visual64 svg')).toHaveCount(1);
+  await expect(atlas.locator('.xp3AtlasHistory')).toContainText('Noch keine abgeschlossenen Sätze');
   await atlas.locator('#xp3AtlasSearch').fill('');
   await atlas.locator('#xp3AtlasEquipment').selectOption('owned');
   await expect(atlas.locator('#xp3AtlasCount')).toContainText('mit deinem Equipment');
