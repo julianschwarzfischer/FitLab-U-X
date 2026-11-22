@@ -35,8 +35,12 @@ assert(migration.indexOf('if(get.result!==undefined)')<migration.indexOf('fitSto
 console.log('PASS migration priority: existing IndexedDB before legacy');
 
 // Check parseability of separately loaded scripts and local PWA assets.
-for(const file of ['brand.js','sw.js'])new vm.Script(fs.readFileSync(file,'utf8'),{filename:file});
+for(const file of ['brand.js','sw.js','exercise-atlas.js'])new vm.Script(fs.readFileSync(file,'utf8'),{filename:file});
 const manifest=JSON.parse(fs.readFileSync('manifest.json','utf8'));
 assert(manifest.icons?.length,'Manifest needs install icons');
 for(const {src} of manifest.icons)assert(fs.statSync(src).isFile(),`Missing manifest icon: ${src}`);
 console.log('PASS external JavaScript and manifest icon files');
+
+assert(html.includes('src="exercise-atlas.js"'),'Exercise atlas must be loaded by HTML');
+assert(sw.includes("'./exercise-atlas.js'"),'Exercise atlas must be cached for offline use');
+console.log('PASS Evolution 3 exercise atlas: external script and offline resource');
