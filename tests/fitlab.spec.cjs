@@ -1441,9 +1441,8 @@ test('Evolution 3 exercise atlas supports no-animation exercises and 320px reduc
   await page.evaluate(()=>tab('training'));
   const atlas=page.locator('#xp3Atlas');
   await atlas.locator('summary').click();
-  const noMotion=await page.evaluate(()=>exs.find(x=>!motion64[x[0]])?.[0]);
-  expect(noMotion).toBeTruthy();
-  await atlas.locator('#xp3AtlasList button[data-ex="'+noMotion+'"]').click();
+  await page.evaluate(()=>{ delete motion64.sq; });
+  await atlas.locator('#xp3AtlasList button[data-ex="sq"]').click();
   await expect(atlas.locator('#xp3AtlasDetail')).toContainText('keine geprüfte Bewegungssequenz');
   await expect.poll(()=>page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth)).toBe(true);
 });
