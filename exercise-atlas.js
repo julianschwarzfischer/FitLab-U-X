@@ -28,6 +28,11 @@ styles.textContent=`
 .xp3AtlasDetail h3{margin:0;font-size:20px}
 .xp3AtlasDetail p{font-size:14px;line-height:1.5}
 .xp3AtlasNote{padding:10px;border-radius:12px;background:var(--tint);font-size:13px}
+.xp3AtlasHistory{border-top:1px solid var(--line);padding-top:10px;margin:12px 0}
+.xp3AtlasHistory h4{font-size:14px;margin:0 0 7px}
+.xp3AtlasRecent{margin:0;padding:0;list-style:none;display:grid;gap:6px}
+.xp3AtlasRecent li{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:12px;border:1px solid var(--line);border-radius:9px;padding:8px}
+.xp3AtlasRecent span{text-align:right}
 #xp3Atlas .visual64 svg{max-height:210px}
 #xp3Atlas .visual64 .motion64 button{min-width:0;font-size:12px;padding:8px 4px}
 #xp3Atlas button{min-height:44px}
@@ -51,11 +56,26 @@ function drawList(){
  list.innerHTML=entries.map(ex=>`<button type="button" class="xp3AtlasItem" data-ex="${esc(ex[0])}" aria-pressed="${selected===ex[0]}"><b>${esc(ex[1])}</b><small>${esc(groupNames[ex[2]]||ex[2])}</small><span class="xp3Available">${fit(ex)?'Mit deinem Equipment möglich':'Weiteres Equipment erforderlich'}</span></button>`).join('')||'<p class="xp3AtlasIntro">Keine passende Übung. Versuche andere Filter.</p>';
  if(selected&&!entries.some(x=>x[0]===selected)){selected='';$atlas.querySelector('#xp3AtlasDetail').innerHTML='';}
 }
+function personalHistory(ex){
+ const recent=history().filter(h=>h&&Array.isArray(h.items)).flatMap(h=>
+ h.items.filter(i=>i&&i.id===ex[0]&&Array.isArray(i.sets)).map(i=>({
+ date:String(h.date||''),sets:i.sets.filter(v=>v&&v.done&&(Number.isFinite(+v.reps)&&+v.reps>0))
+ }))).filter(x=>x.sets.length).sort((a,b)=>b.date.localeCompare(a.date)).slice(0,4);
+ if(!recent.length)return '<p class="xp3AtlasIntro">Noch keine abgeschlossenen Sätze für diese Übung dokumentiert.</p>';
+ const lines=recent.map(x=>{
+  let top=x.sets.reduce((a,b)=>!a||(+b.weight||0)>(+a.weight||0)||(+b.weight||0)===(+a.weight||0)&&+b.reps>+a.reps?b:a,null);
+  if(!top)return '';
+  const amount=timed(ex)?fmt(+top.reps,0)+' '+unit(ex):fmt(+top.reps,0)+' Wiederholungen';
+  const load=!timed(ex)&&Number.isFinite(+top.weight)&&+top.weight>0?' · '+fmt(+top.weight,1)+' '+loadLabel(ex):'';
+  return '<li><strong>'+esc(x.date?dateDE(x.date):'Ohne Datum')+'</strong><span>'+esc(amount+load)+'</span></li>';
+ }).join('');
+ return '<ul class="xp3AtlasRecent">'+lines+'</ul><p class="xp3AtlasIntro">Dokumentierte Bestsätze je Trainingseintrag. Unterschiedliche Wiederholungszahlen und Bedingungen sind nicht direkt als Leistungssteigerung vergleichbar.</p>';
+}
 function show(id){
  const ex=exBy(id);if(!ex)return;
  const detail=$atlas.querySelector('#xp3AtlasDetail');selected=id;
  const known=fit(ex),gear=ex[3].map(i=>equipment[i]).filter(Boolean),muscle=muscleLabel641(ex);
- detail.innerHTML=`<h3 id="xp3AtlasExercise">${esc(ex[1])}</h3><p>${esc(groupNames[ex[2]]||ex[2])} · ${esc(muscle)}</p><p class="xp3AtlasNote">${known?'Mit deinem aktuellen Equipment durchführbar.':'Für deinen aktuellen Gerätebestand nicht verfügbar.'} ${gear.length?'Benötigtes Equipment (abhängig von Variante): '+esc(gear.join(', '))+'.':'Ohne zusätzliche Geräte möglich.'}</p>${motion64[id]?exerciseGuide(ex):`<div class="xp3AtlasNote"><strong>Technik</strong><p>${esc(ex[4])}</p><p>Für diese Übung liegt aktuell keine geprüfte Bewegungssequenz vor.</p></div>`}<p class="xp3AtlasIntro">Die vorhandenen Bewegungsbilder sind schematische Lernhilfen, keine anatomisch validierte 3D-Darstellung. Wähle eine schmerzfreie Ausführung und passe das Training an deine Möglichkeiten an.</p>`;
+ detail.innerHTML=`<h3 id="xp3AtlasExercise">${esc(ex[1])}</h3><p>${esc(groupNames[ex[2]]||ex[2])} · ${esc(muscle)}</p><p class="xp3AtlasNote">${known?'Mit deinem aktuellen Equipment durchführbar.':'Für deinen aktuellen Gerätebestand nicht verfügbar.'} ${gear.length?'Benötigtes Equipment (abhängig von Variante): '+esc(gear.join(', '))+'.':'Ohne zusätzliche Geräte möglich.'}</p><section class="xp3AtlasHistory"><h4>Deine bisherigen Einheiten</h4>${personalHistory(ex)}</section>${motion64[id]?exerciseGuide(ex):`<div class="xp3AtlasNote"><strong>Technik</strong><p>${esc(ex[4])}</p><p>Für diese Übung liegt aktuell keine geprüfte Bewegungssequenz vor.</p></div>`}<p class="xp3AtlasIntro">Die vorhandenen Bewegungsbilder sind schematische Lernhilfen, keine anatomisch validierte 3D-Darstellung. Wähle eine schmerzfreie Ausführung und passe das Training an deine Möglichkeiten an.</p>`;
  const box=detail.querySelector('.visual64');if(box&&motion64[id]){const svg=box.querySelector('svg');frame64(svg,id,0);box._step=0;const play=box.querySelector('.play64'),step=box.querySelector('.step64');if(play)play.addEventListener('click',e=>{e.preventDefault();toggle64(play)});if(step)step.addEventListener('click',e=>{e.preventDefault();step64(step)})}
  drawList();detail.setAttribute('tabindex','-1');detail.focus({preventScroll:true});
 }
