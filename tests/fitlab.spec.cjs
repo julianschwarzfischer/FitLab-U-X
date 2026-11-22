@@ -1138,11 +1138,11 @@ test('Evolution 2.2 normal text and selected controls contrast across all main s
   }
 });
 
-test('Evolution 2.2 real service worker update from 2.1 keeps data and an offline write survives reload',async({browser})=>{
+for(const [previousVersion,old] of [['2.1','b4604bb056feee3c074e123186baba88bc2cfe25'],['2.2','20a78aaba9fcf9713292fa4b45d43e5fc534da30']])
+test(`Evolution 2.3 real service worker update from ${previousVersion} keeps data and an offline write survives reload`,async({browser})=>{
   const {createServer}=require('node:http');
   const {execFileSync}=require('node:child_process');
   const fs=require('node:fs');
-  const old='b4604bb056feee3c074e123186baba88bc2cfe25';
   const versions=Object.fromEntries(['/','/index.html','/sw.js'].map(path=>{
     const file=path==='/'?'index.html':path.slice(1);
     return [path,[execFileSync('git',['show',old+':'+file],{maxBuffer:4*1024*1024}),fs.readFileSync(file)]];
@@ -1162,7 +1162,7 @@ test('Evolution 2.2 real service worker update from 2.1 keeps data and an offlin
     context=await browser.newContext({baseURL:`http://127.0.0.1:${server.address().port}`,serviceWorkers:'allow'});
     const page=await context.newPage();
     await ready(page);
-    await expect(page.locator('#appVersion')).toContainText('EVOLUTION 2.1');
+    await expect(page.locator('#appVersion')).toContainText('EVOLUTION '+previousVersion);
     await page.waitForFunction(()=>navigator.serviceWorker.controller!==null);
     await addMeal(page,'Pre-update synthetic 2.1',115);
     const prior=await canonical(page),previousController=await page.evaluate(()=>navigator.serviceWorker.controller.scriptURL);
@@ -1174,10 +1174,10 @@ test('Evolution 2.2 real service worker update from 2.1 keeps data and an offlin
       await (await navigator.serviceWorker.ready).update();
     });
     await page.waitForFunction(()=>window.testControllerChanged);
-    await page.waitForFunction(async()=>{
+    await page.waitForFunction(async previous=>{
       const keys=await caches.keys();
-      return keys.some(key=>key.endsWith('evolution-2-3'))&&!keys.some(key=>key.endsWith('evolution-2-1'));
-    });
+      return keys.some(key=>key.endsWith('evolution-2-3'))&&!keys.some(key=>key.endsWith('evolution-'+previous.replace('.','-')));
+    },previousVersion);
     await page.reload();
     await expect(page.locator('#appVersion')).toContainText('EVOLUTION 2.3');
     await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
@@ -1224,11 +1224,11 @@ test('Evolution 2.3 five confirmed low days preempt every start and link to the 
     for(let i=1;i<=5;i++){
       const date=coachDate(-i);
       state.log[date]=[{_fid:'low-'+i,n:'Synthetischer Tagesmix',g:100,k:325,p:10,c:60,f:5,meal:'Mittagessen'}];
-      (state.dayTargets||={})[date]={...goal,recordedAt:date+'T08:00:00Z'};state.coach.days[date]={complete:false};
+      (state.dayTargets||={})[date]={...goal,recordedAt:date+'T08:00:00Z'};state.coach.days[date]={weight:null,waist:null,fat:null,sleep:null,energy:null,soreness:null,complete:false};
     }
     if(safetyAdvice()?.hold)throw Error('Partial entries must not establish low intake');
     for(let i=1;i<=5;i++)state.coach.days[coachDate(-i)].complete=true;
-    state.coach.days[dateKey()]={sleep:8,energy:5,soreness:0,complete:false};
+    state.coach.days[dateKey()]={weight:null,waist:null,fat:null,sleep:8,energy:5,soreness:0,complete:false};
     if(!await save('replace'))throw Error('Failed to save fixture');
     render();return coachDate(-1);
   });
@@ -1247,7 +1247,7 @@ test('Evolution 2.3 five confirmed low days preempt every start and link to the 
 test('Evolution 2.3 median and dated correction preserve the original measurement until saved',async({page},testInfo)=>{
   await page.setViewportSize({width:375,height:812});await ready(page);
   const d=await page.evaluate(async()=>{coachData();
-    for(let i=1;i<=14;i++)state.coach.days[coachDate(-i)]={weight:i===3?95:80,complete:false};
+    for(let i=1;i<=14;i++)state.coach.days[coachDate(-i)]={weight:i===3?95:80,waist:null,fat:null,sleep:null,energy:null,soreness:null,complete:false};
     if(!await save('replace'))throw Error('Failed to save weights');render();return coachDate(-3);
   });
   await mobileNav(page,'Fortschritt').click();
@@ -1259,4 +1259,57 @@ test('Evolution 2.3 median and dated correction preserve the original measuremen
   await page.evaluate(()=>coachSave());
   await expect.poll(async()=>(await canonical(page)).coach.days[d].weight).toBe(80);
   expect(await page.evaluate(()=>({issue:trendAdvice(),trend:coachAnalysis().trend}))).toEqual({issue:null,trend:0});
+});
+
+test('Evolution 2.3 historical inconsistency opens the exact entry and missing data do not imply zero',async({page})=>{
+  await ready(page);await page.clock.setFixedTime(new Date('2026-11-22T12:00:00Z'));await seedEvolutionWeeks(page);
+  await mobileNav(page,'Heute').click();await page.locator('#xpHome .xpMainAction').click();
+  await expect(page.locator('#date')).toHaveValue('2026-11-18');
+  await expect(page.locator('.xp22Day')).toContainText('Von Auswertungen ausgeschlossen');
+  await expect(page.locator('[data-nutedit]').first()).toBeFocused();
+  expect(await page.evaluate(()=>{const d=xp22Day(coachDate(-20));return [d.confirmed,d.label,nutritionReview(state).low]})).toEqual([false,'Nicht erfasst',null]);
+});
+
+test('Evolution 2.3 six long training days prioritize recovery without changing goals',async({page})=>{
+  await ready(page);
+  const signals=await page.evaluate(()=>{
+    const p={...state.p};const baseline=calc(p);
+    const session={type:'full',minutes:100,items:[{id:'sq',sets:[{done:true,reps:8,weight:10}]}]};
+    state.trainingHistory=Array.from({length:5},(_,i)=>({...session,date:coachDate(-i)}));
+    const short=loadReview(state);state.trainingHistory.push({...session,date:coachDate(-5)});
+    return {short,locked:xpBTrainingState().locked,title:xp15Advice().title,target:calc(p).k,baseline:baseline.k};
+  });
+  expect(signals.short).toBe(false);expect(signals.locked).toBe(true);expect(signals.title).toBe('Belastung prüfen');expect(signals.target).toBe(signals.baseline);
+});
+
+test('Evolution 2.3 comparable macro estimates for strength, recomp, maintenance and cardio',async({page})=>{
+  await ready(page);
+  const x=await page.evaluate(()=>{
+    const baseline={...state.p,weight:80,height:180,age:38,sex:'m',kind:'strength'};
+    return [[0],[0,2],[6],[4]].map((goals,i)=>{
+      const r=calc({...baseline,goals,kind:i===3?'cardio':'strength'});
+      return [r.k,r.protein,r.carbs,r.fat];
+    });
+  });
+  expect(x.slice(0,3)).toEqual([[2100,162,212,67],[2100,170,204,67],[2350,128,291,75]]);
+  expect(x[3][0]).toBe(2350);expect(x[3][3]).toBeLessThan(x[2][3]);
+});
+
+test('Evolution 2.3 relative intake boundary, missing targets and short weight series',async({page})=>{
+  await ready(page);
+  const results=await page.evaluate(()=>{
+    coachData();const ref=calc(state.p);
+    const snapshot=()=>({low:!!nutritionReview(state).low,trend:coachAnalysis().trend,weight:trendAdvice()});
+    const results=[];
+    for(let i=1;i<=3;i++){
+      const date=coachDate(-i);
+      state.coach.days[date]={weight:i===1?95:80,complete:true};
+      state.log[date]=[{n:'Synthetische Portion',g:300,k:300,p:15,c:42,f:8,meal:'Mittagessen'}];
+      (state.dayTargets||={})[date]={...ref,k:2000};results.push(snapshot());
+    }
+    delete state.dayTargets[coachDate(-1)];results.push(snapshot());
+    return results;
+  });
+  expect(results.map(x=>x.low)).toEqual([false,false,true,false]);
+  expect(results.every(x=>x.trend===null&&x.weight===null)).toBe(true);
 });
