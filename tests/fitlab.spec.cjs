@@ -1256,6 +1256,9 @@ test('Evolution 2.3 five confirmed low days preempt every start and link to the 
   await captureEvolution22(page,testInfo,'evo23-ernaehrung-pruefen');
   await page.locator('#xpHome .xpMainAction').click();await expect(page.locator('#date')).toHaveValue(d);
   await expect(page.locator('.xp22Day')).toContainText('325 kcal');
+  await mobileNav(page,'Heute').click();
+  await page.locator('#xpHome .xpTile').filter({hasText:'Coach'}).click();
+  await expect(page.locator('#date')).toBeVisible();await expect(page.locator('#date')).toHaveValue(d);
   page.on('dialog',dialog=>dialog.accept());
   const gates=await page.evaluate(()=>{startTraining();beginAt(0,0);xpStartToday();xp13Start();
     return {draft:!!state.trainingDraft,open:xpBTrainingState().canStart,goal:calc(state.p),days:nutritionReview(state).count};});

@@ -1820,7 +1820,13 @@ xpHomeMarkup=function(){
  label.className='xpEyebrow';label.textContent='Heute im Fokus';
  const heading=document.createElement('h3');heading.textContent=title;
  focusRow.append(label,heading);
- const briefReason=safetyAdvice()?.summary;
+ const focusAdvice=xp15Advice(),briefReason=focusAdvice.summary;
+ const coachTile=view.querySelector('.xpTile[onclick="xpAction(\'coach\')"]');
+ if(coachTile&&(focusAdvice.hold||focusAdvice.action.startsWith('coachDestination('))){
+  coachTile.setAttribute('onclick',focusAdvice.action);
+  coachTile.querySelector('strong').textContent='Ansehen';
+  coachTile.lastElementChild.textContent=focusAdvice.label;
+ }
  if(briefReason){const context=document.createElement('p');context.className='xpSafetyContext';context.textContent=briefReason;focusRow.append(context);}
  const check=group.querySelector('button.xpBrief');
  if(primary.getAttribute('onclick')===check?.getAttribute('onclick'))check?.remove();
