@@ -1409,3 +1409,41 @@ test('Evolution 2.3 performance action focuses the same comparable lift named by
   await expect(detail).toContainText('Kniebeuge: 45,0 kg bei 8 Wdh. · +5,0 kg');
   await captureEvolution22(page,testInfo,'evo23-leistungsvergleich');
 });
+
+
+test('Evolution 3 exercise atlas searches equipment and opens a technique preview without changing stored fitness data',async({page})=>{
+  await ready(page);
+  const before=await canonical(page);
+  await page.evaluate(()=>tab('training'));
+  const atlas=page.locator('#xp3Atlas');
+  await expect(atlas).toBeVisible();
+  await atlas.locator('summary').click();
+  const count=await page.evaluate(()=>window.fitlabAtlas3.getCount());
+  expect(count).toBeGreaterThan(15);
+  await atlas.locator('#xp3AtlasSearch').fill('Kniebeuge');
+  await expect(atlas.locator('#xp3AtlasList button')).toHaveCount(1);
+  await atlas.locator('#xp3AtlasList button').first().click();
+  await expect(atlas.locator('#xp3AtlasDetail h3')).toContainText('Kniebeuge');
+  await expect(atlas.locator('.visual64 svg')).toHaveCount(1);
+  await atlas.locator('#xp3AtlasSearch').fill('');
+  await atlas.locator('#xp3AtlasEquipment').selectOption('owned');
+  await expect(atlas.locator('#xp3AtlasCount')).toContainText('mit deinem Equipment');
+  const owned=await atlas.locator('#xp3AtlasList button').count();
+  expect(owned).toBeGreaterThan(0);
+  expect(owned).toBeLessThanOrEqual(count);
+  await expect.poll(async()=>JSON.stringify(await canonical(page))).toBe(JSON.stringify(before));
+});
+
+test('Evolution 3 exercise atlas supports no-animation exercises and 320px reduced-motion view',async({page})=>{
+  await page.setViewportSize({width:320,height:640});
+  await page.emulateMedia({reducedMotion:'reduce'});
+  await ready(page);
+  await page.evaluate(()=>tab('training'));
+  const atlas=page.locator('#xp3Atlas');
+  await atlas.locator('summary').click();
+  const noMotion=await page.evaluate(()=>exs.find(x=>!motion64[x[0]])?.[0]);
+  expect(noMotion).toBeTruthy();
+  await atlas.locator('#xp3AtlasList button[data-ex="'+noMotion+'"]').click();
+  await expect(atlas.locator('#xp3AtlasDetail')).toContainText('keine geprüfte Bewegungssequenz');
+  await expect.poll(()=>page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth)).toBe(true);
+});
