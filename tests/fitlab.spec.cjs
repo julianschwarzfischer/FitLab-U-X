@@ -1241,7 +1241,7 @@ test('Evolution 2.3 five confirmed low days preempt every start and link to the 
   const gates=await page.evaluate(()=>{startTraining();beginAt(0,0);xpStartToday();xp13Start();
     return {draft:!!state.trainingDraft,open:xpBTrainingState().canStart,goal:calc(state.p),days:nutritionReview(state).count};});
   expect(gates).toEqual({draft:false,open:false,goal:null,days:5});
-  await mobileNav(page,'Fortschritt').click();await expect(page.locator('.xp22Focus')).toContainText('Portionen');
+  await mobileNav(page,'Fortschritt').click();await expect(page.locator('#xp15Progress .xp22Focus')).toContainText('Portionen');
 });
 
 test('Evolution 2.3 median and dated correction preserve the original measurement until saved',async({page},testInfo)=>{
@@ -1251,10 +1251,10 @@ test('Evolution 2.3 median and dated correction preserve the original measuremen
     if(!await save('replace'))throw Error('Failed to save weights');render();return coachDate(-3);
   });
   await mobileNav(page,'Fortschritt').click();
-  await expect(page.locator('.xp22Focus')).toContainText('95,0 kg');
+  await expect(page.locator('#xp15Progress .xp22Focus')).toContainText('95,0 kg');
   await captureEvolution22(page,testInfo,'evo23-gewicht-pruefen');
   expect((await canonical(page)).coach.days[d].weight).toBe(95);
-  await page.locator('.xp22Focus button').click();await expect(page.locator('#coachdate')).toHaveValue(d);
+  await page.locator('#xp15Progress .xp22Focus button').click();await expect(page.locator('#coachdate')).toHaveValue(d);
   await expect(page.locator('#coach-weight')).toBeFocused();await page.locator('#coach-weight').fill('80');
   await page.evaluate(()=>coachSave());
   await expect.poll(async()=>(await canonical(page)).coach.days[d].weight).toBe(80);
@@ -1354,4 +1354,19 @@ test('Evolution 2.3 food protection preserves a logged set in an open workout af
   await page.getByRole('button',{name:'Training speichern',exact:true}).click();
   await page.getByRole('dialog',{name:'Teilabschluss speichern'}).getByRole('button',{name:'Teilabschluss speichern'}).click();
   await expect.poll(async()=>(await canonical(page)).trainingHistory?.at(-1)?.items).toEqual(draft.items);
+});
+
+test('Evolution 2.3 persistent protein gaps lead to a dated meal review without celebrating low energy',async({page})=>{
+  await ready(page);await page.clock.setFixedTime(new Date('2026-11-22T12:00:00Z'));await seedEvolutionWeeks(page);
+  const day=await page.evaluate(()=>{
+    const clean=coachDate(-4);delete state.log[clean];state.coach.days[clean].complete=false;
+    for(const d of xp22Week(0).days.filter(x=>x.rows)){
+      state.log[d.date][0]={...state.log[d.date][0],k:300,p:10,c:46,f:8};
+    }
+    render();return coachDate(-1);
+  });
+  await mobileNav(page,'Heute').click();const focus=page.locator('#xpHome .xp12Focus');
+  await expect(focus).toContainText('Proteinversorgung prüfen');
+  await focus.locator('.xpMainAction').click();await expect(page.locator('#date')).toHaveValue(day);
+  await mobileNav(page,'Fortschritt').click();await expect(page.locator('#xp15Progress .xp22Focus')).toContainText('Proteinziels');
 });
