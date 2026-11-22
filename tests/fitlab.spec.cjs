@@ -1313,3 +1313,45 @@ test('Evolution 2.3 relative intake boundary, missing targets and short weight s
   expect(results.map(x=>x.low)).toEqual([false,false,true,false]);
   expect(results.every(x=>x.trend===null&&x.weight===null)).toBe(true);
 });
+
+test('Evolution 2.3 existing deficit snapshot is retained for history but cannot bypass a changed profile',async({page},testInfo)=>{
+  await page.setViewportSize({width:390,height:844});await ready(page);
+  await addMeal(page,'Synthetischer Frühstückseintrag',100);
+  const key=await page.evaluate(()=>dateKey()),snapshot=(await canonical(page)).dayTargets[key];
+  expect(snapshot.delta).toBeLessThan(0);
+  await mobileNav(page,'Profil').click();
+  for(const [id,value] of [['weight','48'],['height','160'],['age','55']]){
+    await page.locator('#'+id).evaluate(el=>{for(let p=el;p;p=p.parentElement)if(p.tagName==='DETAILS')p.open=true});
+    await page.locator('#'+id).fill(value);
+  }
+  await expect.poll(async()=>(await canonical(page)).p.weight).toBe(48);
+  await page.reload();await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
+  await expect(page.locator('#xpHome .xp12Focus')).toContainText('Profil und Ziel prüfen');
+  await page.locator('#xpHome .xpEvoCoach summary').click();
+  await captureEvolution22(page,testInfo,'evo23-profilschutz');
+  expect((await canonical(page)).dayTargets[key]).toEqual(snapshot);
+  expect(await page.evaluate(()=>xp22Target(dateKey()))).toBeNull();
+  expect(await page.evaluate(()=>{const s=structuredClone(state);s.p.goals=[6];s.p.priority='maintain';
+    return {current:calc(s.p,s)?.k,saved:xp22Target(dateKey(),s)};})).toMatchObject({saved:null});
+});
+
+test('Evolution 2.3 food protection preserves a logged set in an open workout after reload',async({page},testInfo)=>{
+  await page.setViewportSize({width:390,height:844});await openK1Plan(page);
+  await page.locator('#trainingout [data-plan-start]').click();await checkK1Draft(page,5,'lower');await recordK1Set(page);
+  const draft=(await canonical(page)).trainingDraft;
+  await page.evaluate(async()=>{
+    const date=coachDate(-1);coachData();
+    state.log[date]=[{n:'Synthetischer Tag',_fid:'review-draft-food',g:100,k:325,p:10,c:60,f:5,meal:'Abendessen'}];
+    state.coach.days[date]={weight:null,waist:null,fat:null,sleep:null,energy:null,soreness:null,complete:true};
+    if(!await save('replace'))throw Error('Failed to persist review fixture');
+  });
+  await page.reload();await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
+  await mobileNav(page,'Training').click();await expect(page.locator('#trainingout .xpBReviewNotice')).toBeVisible();
+  await expect(page.locator('#trainingout .workFocus:visible .setline input').first()).toBeDisabled();
+  expect((await canonical(page)).trainingDraft).toEqual(draft);
+  await captureEvolution22(page,testInfo,'evo23-trainingspruefung');
+  await page.locator('#trainingout .xpEvoFinish > summary').click();await page.getByLabel('Tatsächliche Trainingsdauer (Minuten)').fill('12');
+  await page.getByRole('button',{name:'Training speichern',exact:true}).click();
+  await page.getByRole('dialog',{name:'Teilabschluss speichern'}).getByRole('button',{name:'Teilabschluss speichern'}).click();
+  await expect.poll(async()=>(await canonical(page)).trainingHistory?.at(-1)?.items).toEqual(draft.items);
+});

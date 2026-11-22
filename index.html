@@ -553,7 +553,7 @@ function profileBoundary(p,estimate){
  if(p.restricted||String(p.limits||'').trim())return 'Eine persönliche Einschränkung ist angegeben. Lass passende Ziele und Belastungen fachlich klären.';
  if(!Number.isFinite(bmi)||!Number.isInteger(Number(p.age))||+p.age<20||+p.age>100||+p.weight<35||+p.weight>300||+p.height<120||+p.height>230)
   return 'Für diese Altersgruppe oder diese Körperangaben bietet die App keine individuelle Zielberechnung an. Prüfe dein Profil.';
- if(bmi<18.5||(bmi<20&&(request||estimate?.balance< -50)))return 'Deine Angaben liegen im oder nahe am unteren BMI-Bereich. Die App schlägt hier keine Gewichtsabnahme vor. Prüfe Gewicht und Ziel und besprich einen Abnahmewunsch fachlich.';
+ if(bmi<18.5||(bmi<20&&(request||estimate?.delta<0||estimate?.balance< -50)))return 'Deine Angaben liegen im oder nahe am unteren BMI-Bereich. Die App schlägt hier keine Gewichtsabnahme vor. Prüfe Gewicht und Ziel und besprich einen Abnahmewunsch fachlich.';
  if(estimate&&estimate.k<=1200&&(request||estimate.balance< -50))return 'Das errechnete Defizitziel liegt in einem Bereich, der fachlich begleitet werden sollte. Prüfe dein Ziel mit einer qualifizierten Fachperson.';
  if(!estimate)return 'Für deine Kombination aus Körperdaten und Zielen ist keine verlässliche Berechnung möglich. Prüfe die Angaben im Profil.';
  return '';
@@ -587,10 +587,11 @@ function weightSeries(s){
 }
 function coachDestination(kind,date){
  if(kind==='food'){
+  if(!brand.modules.nutrition){tab('profile');return;}
   tab('nutrition');$('date').value=date;render();
   const first=(state.log[date]||[]).findIndex(row=>nutritionCheck141(row).level==='block');
   const el=first>=0?document.querySelector('[data-nutedit="'+first+'"]'):null;
-  const target=el||document.querySelector('.xp22Day');if(target){for(let p=target;p;p=p.parentElement)if(p.tagName==='DETAILS')p.open=true;target.tabIndex=-1;target.focus();}return;
+  const target=el||document.querySelector('.xp22Day');if(target){for(let p=target;p;p=p.parentElement)if(p.tagName==='DETAILS')p.open=true;if(!el)target.tabIndex=-1;target.focus();}return;
  }
  if(kind==='weight'){
   coachSelected=date;coachOpen=true;tab('today');render();xpOpen('coach','coachdate');
@@ -603,8 +604,8 @@ function safetyAdvice(s=state){
  const action=(kind,date)=>"coachDestination('"+kind+"','"+date+"')";
  if(profile)return {title:'Profil und Ziel prüfen',body:profile,why:'Alter, Körperangaben, Zielwahl und manuelle Anpassungen begrenzen automatische Empfehlungen. Ein BMI allein erlaubt keine Diagnose.',action:"tab('profile')",label:'Profil prüfen',hold:true};
  const {invalid,low,count}=nutritionReview(s);
- if(low)return {title:'Ernährung vor dem Training prüfen',body:dateDE(low.date)+' ist als vollständig bestätigt. Prüfe Portionen und fehlende Mahlzeiten. Falls die geringe Zufuhr zutrifft, hole ernährungsfachlichen oder ärztlichen Rat ein.',why:count+' auffällige bestätigte Tage im Zeitraum von heute und sieben Vortagen. Am '+dateDE(low.date)+' sind '+fmt(low.sum.k,0)+' kcal und '+fmt(low.sum.p,0)+' g Protein dokumentiert. Intensive Trainingsimpulse und Defizitziele pausieren.',label:'Ernährungstag prüfen',action:action('food',low.date),hold:true};
- if(invalid)return {title:'Ernährungsdaten prüfen',body:'Am '+dateDE(invalid.date)+' passen die Nährwertangaben nicht zusammen. Dieser Tag zählt nicht zur Auswertung.',why:'Eine Korrektur verbessert die Grundlage für den Vergleich mit deinem persönlichen Ziel.',action:action('food',invalid.date),label:'Einträge prüfen',hold:false};
+ if(low)return {title:'Ernährung vor dem Training prüfen',body:dateDE(low.date)+' ist als vollständig bestätigt. Prüfe Portionen und fehlende Mahlzeiten. Falls die geringe Zufuhr zutrifft, hole ernährungsfachlichen oder ärztlichen Rat ein.',why:count+' auffällige bestätigte Tage im Zeitraum von heute und sieben Vortagen. Am '+dateDE(low.date)+' sind '+fmt(low.sum.k,0)+' kcal und '+fmt(low.sum.p,0)+' g Protein dokumentiert. Intensive Trainingsimpulse und Defizitziele pausieren.',label:brand.modules.nutrition?'Ernährungstag prüfen':'Profil und Modulzugang prüfen',action:action('food',low.date),hold:true};
+ if(invalid)return {title:'Ernährungsdaten prüfen',body:'Am '+dateDE(invalid.date)+' passen die Nährwertangaben nicht zusammen. Dieser Tag zählt nicht zur Auswertung.',why:'Eine Korrektur verbessert die Grundlage für den Vergleich mit deinem persönlichen Ziel.',action:action('food',invalid.date),label:brand.modules.nutrition?'Einträge prüfen':'Profil und Modulzugang prüfen',hold:false};
  return null;
 }
 function trendAdvice(s=state){
@@ -2013,8 +2014,16 @@ function xp22DiaryCommit(merged,remote,dates,writeDate,recordedAt){
  }
 }
 function xp22Target(date,s=state){
- if(date===dateKey()&&!calc(s.p,s))return null;
- return s.dayTargets?.[date]||(date===dateKey()&&!s.log?.[date]?.length?calc(s.p):null);
+ const snapshot=s.dayTargets?.[date];
+ if(date!==dateKey())return snapshot||null;
+ const current=calc(s.p,s);
+ if(!current)return null;
+ if(snapshot){
+  if(profileBoundary(s.p,snapshot))return null;
+  if((snapshot.delta<0||snapshot.balance< -50)&&nutritionReview(s).low)return null;
+  return snapshot;
+ }
+ return s.log?.[date]?.length?null:current;
 }
 function xp22Day(date,s=state){
  const rows=s.log?.[date]||[],valid=coachDayValid16(s,date),confirmed=!!rows.length&&!!s.coach?.days?.[date]?.complete;
@@ -2076,6 +2085,11 @@ function xp22WeekInsight(current,previous){
   return 'Du hast an mehr Tagen Mahlzeiten dokumentiert als in der Vorwoche.';
  return '';
 }
+function performanceMatch(current,previous){
+ const matches=[...current.comparable].filter(([key])=>previous.comparable.has(key));
+ const gain=([key,row])=>row.weight-previous.comparable.get(key).weight;
+ return matches.sort((a,b)=>gain(b)-gain(a))[0];
+}
 function xp22WeekMarkup(){
  const a=xp22Week(0),b=xp22Week(-7),en=brand.modules.nutrition,tr=brand.modules.training;
  const signed=(n,d=1)=>`${n>0?'+':''}${fmt(n,d)}`;
@@ -2089,10 +2103,11 @@ function xp22WeekMarkup(){
  };
  const metrics=a.scored&&a.ratios?['k','p','c','f'].map((key,i)=>
   `<li><b>${['Kalorien','Protein','Kohlenhydrate','Fett'][i]}</b><span>${a.ratios[key]===null?'–':fmt(a.ratios[key],0)+' %'} vom jeweiligen Tagesziel${a.scored>=3&&b.scored>=3&&a.ratios[key]!==null&&b.ratios[key]!==null?' · '+signed(a.ratios[key]-b.ratios[key],0)+' Pp. zur Vorwoche':''}</span></li>`).join(''):'<li>Keine bestätigten Tage mit belegtem Ziel.</li>';
- const match=[...a.comparable].filter(([key])=>b.comparable.has(key))
-  .sort(([ka,aRow],[kb,bRow])=>Math.abs(bRow.weight-b.comparable.get(kb).weight)-Math.abs(aRow.weight-b.comparable.get(ka).weight))[0];
+ const match=performanceMatch(a,b);
  const performance=match?`${esc(match[1].name)}: ${fmt(match[1].weight,1)} kg bei ${match[1].reps} Wdh. · ${signed(match[1].weight-b.comparable.get(match[0]).weight)} kg zur Vorwoche`:'Noch keine Lastwerte für dieselbe Übung und Wiederholungszahl in beiden Wochen.';
- const recovery=recovery504(),issue=safetyAdvice()||((recovery.today||recovery.repeated||loadReview(state))?xp15Advice():trendAdvice()),positive=issue?'':xp22WeekInsight(a,b);
+ const recovery=recovery504(),advice=xp15Advice();
+ const issue=safetyAdvice()||((recovery.today||recovery.repeated||loadReview(state)||advice.action.startsWith('coachDestination('))?advice:trendAdvice());
+ const positive=issue?'':xp22WeekInsight(a,b);
  const next=tr&&(recovery.today||recovery.repeated)?'Heute Erholung einplanen.':en&&a.qualified<3?'Dokumentiere Mahlzeiten und bestätige vollständig erfasste Tage.':a.recovery<3?'Ergänze Check-ins für ein besseres Bild von Schlaf und Tagesform.':'Halte deinen Rhythmus und prüfe die Entwicklung über mehrere Wochen.';
  return `<section class="xpCard xp22Week" data-evo22-week><h3>Dein Wochenrückblick</h3><p class="xp22Period">${dateDE(a.keys[0])} – ${dateDE(a.keys.at(-1))} · die letzten 7 abgeschlossenen Tage</p>
  <div class="xp22Focus"><strong>${positive?'Dein Fortschritt':'Dein nächster Schritt'}</strong><p>${esc(issue?.body||positive||next)}</p>${issue?'<button class="secondary" onclick="'+esc(issue.action)+'">'+esc(issue.label)+'</button>':''}${positive?`<small>Nächster Schritt: ${next}</small>`:''}</div>
@@ -2118,8 +2133,8 @@ xp15Advice=function(){
  if(brand.modules.nutrition&&protein.length>=3){
   const d=protein.at(-1);return {title:progress?'Deine Woche entwickelt sich':'Proteinversorgung prüfen',body:protein.length+' dokumentierte Tage lagen unter drei Vierteln ihres Proteinziels. Prüfe Mahlzeiten und Portionsmengen am '+dateDE(d.date)+'.',why:'Der Vergleich nutzt bestätigte, plausible Tage und das jeweils gespeicherte Ziel. Energie und Protein gemeinsam betrachten.',label:'Mahlzeiten ansehen',action:"coachDestination('food','"+d.date+"')"};
  }
- const best=[...now.comparable].find(([key,row])=>before.comparable.has(key)&&row.weight>before.comparable.get(key).weight);
- if(brand.modules.training&&best)return {title:'Vergleichbaren Satz ansehen',body:best[1].name+' bei '+best[1].reps+' Wiederholungen: höheres dokumentiertes Gewicht als in der Vorwoche.',why:'Gleiche Übung und Wiederholungszahl. Ein Bestsatz allein belegt keinen langfristigen Trend.',label:'Leistung vergleichen',action:"coachDestination('performance','')"};
+ const best=performanceMatch(now,before);
+ if(brand.modules.training&&best&&best[1].weight>before.comparable.get(best[0]).weight)return {title:'Vergleichbaren Satz ansehen',body:best[1].name+' bei '+best[1].reps+' Wiederholungen: höheres dokumentiertes Gewicht als in der Vorwoche.',why:'Gleiche Übung und Wiederholungszahl. Ein Bestsatz allein belegt keinen langfristigen Trend.',label:'Leistung vergleichen',action:"coachDestination('performance','')"};
  const gap=brand.modules.nutrition&&now.qualified<3;
  const direction=state.p.priority==='auto'
   ?state.p.goals.some(goal=>goal===0||goal===1)?'loss':state.p.goals.some(goal=>goal===2||goal===7)?'gain':'maintain'
