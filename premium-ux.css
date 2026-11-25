@@ -151,3 +151,23 @@ html[data-theme="dark"] .nav button.active {
 }
 html[data-theme="dark"] .nav button.active svg,
 html[data-theme="dark"] .nav button[aria-current="page"] svg {color:#f3fff8!important;}
+
+/* Mobile profile wizard: visual focus, keyboard clearance and actionable errors */
+#profile .xp12WizardNav{gap:10px;align-items:stretch;}
+#profile .xp12WizardNav button{min-height:52px;}
+#profile [data-xp-input-draft="true"],#profile input[aria-invalid="true"]{
+ border:2px solid #b45c3c!important;
+ background:var(--surface)!important;
+}
+#profile [data-xp-profile-hint]{display:block;font-size:12px;line-height:1.4;min-height:0;margin:5px 0;color:var(--text);}
+#profile [data-xp-profile-hint]:empty{display:none}
+#profile #xp12Message:not([hidden]){margin-top:12px;padding:12px;line-height:1.5;scroll-margin-top:24px;}
+#profile #bodyfields input{font-size:16px;min-height:50px;}
+#profile #bodyfields > div {min-width:0;}
+#profile input,#profile select{scroll-margin-top:25vh;scroll-margin-bottom:34vh;}
+@media(max-width:600px){
+ body:has(#profile input:focus) .nav,body:has(#profile select:focus) .nav {visibility:hidden;pointer-events:none;}
+ body:has(#profile input:focus) #profile .xp12WizardNav,
+ body:has(#profile select:focus) #profile .xp12WizardNav {bottom:8px;}
+ #profile .xp12WizardNav button {min-height:52px;}
+}
