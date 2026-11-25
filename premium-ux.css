@@ -1,0 +1,144 @@
+/* FITNESS LAB · Evolution 3.0 Premium UX foundation.
+ * Layered, token-based styling without changing data, coaching or training logic.
+ * Readable on 320px screens, respects brand colors and reduced motion. */
+:root {
+  --ux-space-1: 5px; --ux-space-2: 9px; --ux-space-3: 14px; --ux-space-4: 20px;
+  --ux-radius-sm: 12px; --ux-radius-card: 20px;
+  --ux-shadow-card: 0 8px 26px #112c2110;
+  --ux-shadow-focus: 0 0 0 3px var(--tint), 0 0 0 5px var(--primary);
+}
+html {scroll-padding-bottom: calc(94px + env(safe-area-inset-bottom));}
+body {line-height: 1.48; -webkit-tap-highlight-color: transparent;}
+main {max-width: 740px; padding-top: 16px;}
+main>div:not(.hidden)>h2, #today h2 {
+  font-size: clamp(24px, 5.4vw, 30px); line-height: 1.18;
+  letter-spacing: -.65px; font-weight: 800;
+}
+main>div:not(.hidden)>h2 {margin: 12px 0 14px;}
+section, .panel {
+  box-shadow: var(--ux-shadow-card);
+  border: 1px solid var(--line); border-radius: var(--ux-radius-card);
+}
+section section, .panel section {box-shadow:none;}
+section > h3:first-child {line-height:1.3; letter-spacing:-.15px;}
+small, .muted {line-height:1.5;}
+button, input, select, textarea {touch-action:manipulation;}
+button {
+  min-height:44px; font-weight:650; line-height:1.25;
+  transition:background-color .16s ease, border-color .16s ease, transform .16s ease;
+}
+button:not(:disabled):active {transform:scale(.985);}
+:where(button,input,textarea,select,summary,a,[tabindex]):focus-visible {
+  outline:3px solid var(--primary); outline-offset:3px;
+}
+input, textarea, select {min-height:44px;}
+summary {min-height:44px; display:list-item; align-content:center;}
+a {color:var(--primary-text); text-underline-offset:3px;}
+/* Three distinct levels: focus / contextual task / supporting reference. */
+.xpHero, .xpSectionHero {overflow:hidden;}
+.xpHero {box-shadow:0 14px 34px #102b2522;}
+.xpHero h2 {max-width:23ch;}
+.xpCard, .xp15Stat, .dashcard {border-radius:var(--ux-radius-card);}
+.xp15Stat strong, .xpTile strong, .dashnum {font-variant-numeric:tabular-nums;}
+.xpTile, .xpQuick button {min-height:86px; gap:6px; justify-content:center;}
+.xpQuick button b, .xpTile b {line-height:1.28;}
+.xpQuick button small, .xpTile small {line-height:1.38;}
+/* Keep section disclosure states understandable across all modules. */
+:where(#nutrition,#training,#profile,#today) details>summary {
+  color:var(--primary-text); border-radius:var(--ux-radius-sm);
+}
+:where(#nutrition,#training,#profile,#today) details[open]>summary {
+  margin-bottom:8px;
+}
+:where(#nutrition,#training,#profile,#today) details>summary::marker {color:var(--primary-text);}
+:where(#nutrition,#training,#profile,#today) details>summary:hover {background:var(--tint);}
+/* Current task always comes before reference material in nutrition. */
+#nutrition .nutgroup, #nutrition #foodform {
+  border-radius:var(--ux-radius-card); scroll-margin-top:14px;
+}
+#nutrition #xpCQuick button {min-height:48px;}
+#nutrition #xpEvoDaily {
+  border:1px solid var(--line); box-shadow:none; border-radius:var(--ux-radius-card);
+}
+#nutrition #xpEvoDaily .xpEvoWater {
+  border-top:1px solid var(--line); padding-top:12px; margin-top:12px;
+}
+#nutrition #xp21PortionKcal .stat, #nutrition .nut14balance strong {
+  font-variant-numeric:tabular-nums;
+}
+#nutrition #results button, #nutrition [data-nutedit],
+#nutrition [data-nutdelete], #nutrition #add {min-height:44px;}
+#nutrition .entry .actions button {padding-inline:10px;}
+#nutrition #foodform #preview {border:1px solid var(--line);}
+/* Workout: make current set the visual anchor, with secondary guidance quieter. */
+#trainingout .workHero {
+  box-shadow:var(--ux-shadow-card);
+  border-radius:var(--ux-radius-card);
+}
+#trainingout .workFocus .next63 {
+  border:2px solid var(--primary); border-radius:16px;
+  padding:14px; background:var(--surface-soft);
+  box-shadow:0 6px 20px #102b2512;
+}
+#trainingout .workFocus .next63 input {
+  font-variant-numeric:tabular-nums; font-size:22px;
+}
+#trainingout .workTimer .clock {
+  font-variant-numeric:tabular-nums;
+}
+#trainingout .guide, #xp3Atlas .visual64 {
+  border-radius:var(--ux-radius-card); overflow:hidden;
+}
+#trainingout .xpEvoFinish, #trainingout .xpEvoWeekDetails {
+  border-top:1px solid var(--line);padding-top:8px;
+}
+/* Progress: secondary statistics support the weekly insight. */
+#xp15Progress .xp22Week, #analytics65 {
+  border-radius:var(--ux-radius-card); overflow-wrap:anywhere;
+}
+#xp15Progress .xp15Stat {min-width:0;}
+#xp15Progress .xp15Stat strong {overflow-wrap:anywhere;}
+#xp15Progress .xpHeading {
+  display:flex; align-items:center; flex-wrap:wrap; gap:10px;
+}
+#xp15Progress .xpHeading select {max-width:180px; min-width:110px;}
+#xp15Progress .xp22Week li {border-bottom:1px solid var(--line);padding:8px 0;}
+/* Profile: visibly group essential fitness settings and optional branding. */
+#profile>section {scroll-margin-top:14px;}
+#profile>section>h3:first-child {
+  padding-bottom:9px; border-bottom:1px solid var(--line); margin-bottom:14px;
+}
+#profile .xp21Theme {
+  background:var(--surface-soft); border-radius:14px; padding:10px;
+}
+#profile #brandPanel {box-shadow:none;}
+#profile input[type=range] {min-height:44px;}
+/* Fixed bottom nav: clear selected state and reliable reachable labels. */
+.nav {
+  box-shadow:0 -7px 26px #0d2a2112;
+  padding-bottom:max(6px,env(safe-area-inset-bottom));
+  border-top:1px solid var(--line);
+}
+.nav button {
+  min-height:54px; border-radius:12px; gap:2px;
+  font-size:11px; line-height:1.15; font-weight:600;
+}
+.nav button.active {
+  font-weight:800; color:var(--primary-text);
+  box-shadow:inset 0 0 0 1px var(--line);
+}
+.nav button .xpIcon {width:21px;height:21px;}
+/* No hover-only affordances, no automatic motion for reduced-motion users. */
+@media(hover:none) {
+  :where(#nutrition,#training,#profile,#today) details>summary:hover {background:transparent;}
+}
+@media(max-width:350px) {
+  main {padding-inline:10px;}
+  .nav button {font-size:10px; min-width:0; padding-inline:2px;}
+  #trainingout .workFocus .next63 {padding:9px;}
+  #xp15Progress .xpHeading select {max-width:100%;}
+}
+@media(prefers-reduced-motion:reduce) {
+  html {scroll-behavior:auto!important;}
+  *, *::before, *::after {animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;}
+}
