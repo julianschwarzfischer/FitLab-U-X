@@ -178,7 +178,7 @@ test('real QA5 application automatically migrates into current IndexedDB', async
   expect(legacy).toEqual(saved);
   await page.unroute(root,oldRoute);
   await page.reload();
-  await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3 MOBILE V1');
+  await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3 FLOW V1');
   await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0,{timeout:20000});
   const migrated=await canonical(page);
   expect(migrated.p.age).toBe(41);
@@ -1196,15 +1196,15 @@ test(`Atlas V2 real service worker update from ${previousVersion} keeps data and
     await page.waitForFunction(()=>window.testControllerChanged);
     await page.waitForFunction(async previous=>{
       const keys=await caches.keys();
-      return keys.some(key=>key.endsWith('evolution-3-mobile-v1'))&&!keys.some(key=>key.endsWith('evolution-'+previous.replace('.','-')));
+      return keys.some(key=>key.endsWith('evolution-3-flow-v1'))&&!keys.some(key=>key.endsWith('evolution-'+previous.replace('.','-')));
     },previousVersion);
     await page.reload();
-    await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3 MOBILE V1');
+    await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3 FLOW V1');
     await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
     expect(await canonical(page)).toEqual(prior);
     await context.setOffline(true);
     await page.reload();
-    await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3 MOBILE V1');
+    await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3 FLOW V1');
     await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
     await addMeal(page,'Post-update offline 2.2',116);
     await page.reload();
@@ -1564,4 +1564,45 @@ test('Evolution 3 mobile numeric keyboard follows body field order',async({page}
  await page.locator('#height').press('Enter');
  await expect(page.locator('#age')).toBeFocused();
  await expect(page.locator('#xpAStorageAlert')).toHaveCount(0);
+});
+
+test('Evolution 3 flow makes barcode, favorites and recipes directly accessible',async({page})=>{
+ await ready(page);await page.evaluate(()=>tab('nutrition'));
+ const quick=page.locator('#xpCQuick');
+ await expect(quick.getByRole('button',{name:'Barcode',exact:true})).toBeVisible();
+ await expect(quick.getByRole('button',{name:'Favoriten',exact:true})).toBeVisible();
+ await expect(quick.getByRole('button',{name:'Rezepte',exact:true})).toBeVisible();
+ await quick.getByRole('button',{name:'Favoriten',exact:true}).click();
+ await expect(page.locator('#nutfavorites')).toHaveAttribute('open','');
+});
+
+test('Evolution 3 quick portion shortcuts change preview but never write diary',async({page})=>{
+ await page.setViewportSize({width:390,height:844});
+ await ready(page);await page.evaluate(()=>tab('nutrition'));
+ await page.getByRole('button',{name:/Selbst eintragen/}).click();
+ await page.locator('#foodname').fill('Künstliches Testgericht');
+ await page.locator('#fk').fill('200');
+ await page.locator('#fp').fill('10');
+ await page.locator('#fc').fill('30');
+ await page.locator('#ff').fill('4');
+ const before=await canonical(page);
+ await page.locator('.xpEvoPortionPresets').getByRole('button',{name:'150 g'}).click();
+ await expect(page.locator('#grams')).toHaveValue('150');
+ await expect(page.locator('#xp21PortionKcal')).toContainText('300');
+ const after=await canonical(page);
+ expect(after.log).toEqual(before.log);
+ expect(await page.evaluate(()=>xpABlocked)).toBe(false);
+});
+
+test('Evolution 3 active exercise opens technique without altering training draft',async({page})=>{
+ await ready(page);await startPlannedWorkout(page);
+ const card=page.locator('#trainingout .workFocus:visible').first();
+ const action=card.getByRole('button',{name:'Bewegung & Technik ansehen'});
+ await expect(action).toBeVisible();
+ const guide=card.locator('details').filter({has:page.locator('.guide')}).first();
+ const before=(await canonical(page)).trainingDraft;
+ await action.click();
+ await expect(guide).toHaveAttribute('open','');
+ await expect(action).toHaveAttribute('aria-expanded','true');
+ expect((await canonical(page)).trainingDraft).toEqual(before);
 });
