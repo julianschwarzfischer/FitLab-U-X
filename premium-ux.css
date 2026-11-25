@@ -171,3 +171,10 @@ html[data-theme="dark"] .nav button[aria-current="page"] svg {color:#f3fff8!impo
  body:has(#profile select:focus) #profile .xp12WizardNav {bottom:8px;}
  #profile .xp12WizardNav button {min-height:52px;}
 }
+
+/* Evolution 3 Flow: direct nutrition actions, quick portions, technique affordance */
+.xpCQuickShortcuts,.xpEvoPortionPresets{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:10px 0}
+.xpEvoPortionPresets{grid-template-columns:repeat(4,minmax(0,1fr));}
+.xpCQuickShortcuts button,.xpEvoPortionPresets button{min-width:0;min-height:44px;padding:9px 4px;font-size:13px;}
+.xpEvoTechniqueAction{width:100%;min-height:46px;margin:10px 0 2px;}
+@media(max-width:350px){.xpCQuickShortcuts button,.xpEvoPortionPresets button{font-size:12px;}}
