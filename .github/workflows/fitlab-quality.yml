@@ -24,6 +24,20 @@ jobs:
         run: npm run test:static
       - name: Playwright browser checks
         run: npm run test:browser
+      # Separate static staging package, not a deployment. Runs only after all checks succeed.
+      - name: Package isolated iPhone staging build
+        if: success() && github.ref == 'refs/heads/dev/evolution-3-premium-ux'
+        run: |
+          git archive --format=zip --output=fitlab-iphone-staging.zip HEAD \\
+            index.html brand.js exercise-atlas.js premium-ux.css sw.js manifest.json \\
+            icon-180.png icon-192.png icon-512.png media/poses/
+      - name: Upload staging package (no publication)
+        if: success() && github.ref == 'refs/heads/dev/evolution-3-premium-ux'
+        uses: actions/upload-artifact@v4
+        with:
+          name: fitlab-iphone-staging
+          path: fitlab-iphone-staging.zip
+          retention-days: 14
       - if: always()
         uses: actions/upload-artifact@v4
         with:
