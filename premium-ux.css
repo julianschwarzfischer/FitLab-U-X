@@ -142,3 +142,12 @@ a {color:var(--primary-text); text-underline-offset:3px;}
   html {scroll-behavior:auto!important;}
   *, *::before, *::after {animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;}
 }
+
+/* High-contrast active tab in dark appearance, independent of chosen brand accent. */
+html[data-theme="dark"] .nav button[aria-current="page"],
+html[data-theme="dark"] .nav button.active {
+  background:#263a31!important;
+  color:#f3fff8!important;
+}
+html[data-theme="dark"] .nav button.active svg,
+html[data-theme="dark"] .nav button[aria-current="page"] svg {color:#f3fff8!important;}
