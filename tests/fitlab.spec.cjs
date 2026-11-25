@@ -1513,7 +1513,8 @@ test('iPhone onboarding: numeric keystrokes do not permanently block saving', as
   await page.setViewportSize({width:390,height:844});
   await page.goto('/');
   await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0,{timeout:20000});
-  await page.evaluate(()=>tab('profile'));
+  await page.evaluate(()=>{tab('profile');xp12Step=1;xp12WizardUI()});
+  await expect(page.locator('#bodyfields')).toBeVisible();
   for(const [id,partial,complete] of [['height','1','178'],['age','3','39'],['weight','9','90']]){
     await page.locator('#'+id).fill(partial);
     await expect(page.locator('#'+id)).toHaveAttribute('aria-invalid','true');
