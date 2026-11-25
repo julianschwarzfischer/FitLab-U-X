@@ -2,10 +2,10 @@ name: FITNESS LAB browser quality gate
 on:
   workflow_dispatch:
   push:
-    branches: ['test/evolution-ci-meilenstein', 'dev/evolution-3-exercise-atlas', 'dev/evolution-3-premium-ux']
+    branches: ['test/evolution-ci-meilenstein', 'dev/evolution-3-exercise-atlas', 'dev/evolution-3-premium-ux', 'dev/evolution-3-ios-save-fix']
 jobs:
   browser-e2e:
-    if: github.ref == 'refs/heads/test/evolution-ci-meilenstein' || github.ref == 'refs/heads/dev/evolution-3-exercise-atlas' || github.ref == 'refs/heads/dev/evolution-3-premium-ux'
+    if: github.ref == 'refs/heads/test/evolution-ci-meilenstein' || github.ref == 'refs/heads/dev/evolution-3-exercise-atlas' || github.ref == 'refs/heads/dev/evolution-3-premium-ux' || github.ref == 'refs/heads/dev/evolution-3-ios-save-fix'
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     permissions:
