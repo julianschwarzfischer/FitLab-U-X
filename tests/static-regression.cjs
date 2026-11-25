@@ -44,3 +44,10 @@ console.log('PASS external JavaScript and manifest icon files');
 assert(html.includes('src="exercise-atlas.js"'),'Exercise atlas must be loaded by HTML');
 assert(sw.includes("'./exercise-atlas.js'"),'Exercise atlas must be cached for offline use');
 console.log('PASS Evolution 3 exercise atlas: external script and offline resource');
+
+const css=fs.readFileSync('premium-ux.css','utf8');
+assert(html.includes('href="premium-ux.css"'),'Premium UX stylesheet missing from HTML');
+assert(sw.includes("'./premium-ux.css'"),'Premium UX stylesheet missing from offline cache');
+for(const selector of ['#nutrition','#trainingout','#profile','#xp15Progress','.nav'])assert(css.includes(selector),'Missing Premium UX design coverage for '+selector);
+assert(css.includes('prefers-reduced-motion'),'Premium UX must support reduced motion');
+console.log('PASS premium UX cross-module design and offline resource');
