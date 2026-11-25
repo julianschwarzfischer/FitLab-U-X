@@ -2,10 +2,10 @@ name: FITNESS LAB browser quality gate
 on:
   workflow_dispatch:
   push:
-    branches: ['test/evolution-ci-meilenstein', 'dev/evolution-3-exercise-atlas', 'dev/evolution-3-premium-ux', 'dev/evolution-3-ios-save-fix', 'dev/evolution-3-mobile-flow']
+    branches: ['test/evolution-ci-meilenstein', 'dev/evolution-3-exercise-atlas', 'dev/evolution-3-premium-ux', 'dev/evolution-3-ios-save-fix', 'dev/evolution-3-mobile-flow', 'dev/evolution-3-nutrition-training-flow']
 jobs:
   browser-e2e:
-    if: github.ref == 'refs/heads/test/evolution-ci-meilenstein' || github.ref == 'refs/heads/dev/evolution-3-exercise-atlas' || github.ref == 'refs/heads/dev/evolution-3-premium-ux' || github.ref == 'refs/heads/dev/evolution-3-ios-save-fix' || github.ref == 'refs/heads/dev/evolution-3-mobile-flow'
+    if: github.ref == 'refs/heads/test/evolution-ci-meilenstein' || github.ref == 'refs/heads/dev/evolution-3-exercise-atlas' || github.ref == 'refs/heads/dev/evolution-3-premium-ux' || github.ref == 'refs/heads/dev/evolution-3-ios-save-fix' || github.ref == 'refs/heads/dev/evolution-3-mobile-flow' || github.ref == 'refs/heads/dev/evolution-3-nutrition-training-flow'
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     permissions:
@@ -26,13 +26,13 @@ jobs:
         run: npm run test:browser
       # Separate static staging package, not a deployment. Runs only after all checks succeed.
       - name: Package isolated iPhone staging build
-        if: success() && (github.ref == 'refs/heads/dev/evolution-3-premium-ux' || github.ref == 'refs/heads/dev/evolution-3-ios-save-fix' || github.ref == 'refs/heads/dev/evolution-3-mobile-flow')
+        if: success() && (github.ref == 'refs/heads/dev/evolution-3-premium-ux' || github.ref == 'refs/heads/dev/evolution-3-ios-save-fix' || github.ref == 'refs/heads/dev/evolution-3-mobile-flow' || github.ref == 'refs/heads/dev/evolution-3-nutrition-training-flow')
         run: |
           git archive --format=zip --output=fitlab-iphone-staging.zip HEAD \
             index.html brand.js exercise-atlas.js premium-ux.css sw.js manifest.json \
             icon-180.png icon-192.png icon-512.png media/poses/
       - name: Upload staging package (no publication)
-        if: success() && (github.ref == 'refs/heads/dev/evolution-3-premium-ux' || github.ref == 'refs/heads/dev/evolution-3-ios-save-fix' || github.ref == 'refs/heads/dev/evolution-3-mobile-flow')
+        if: success() && (github.ref == 'refs/heads/dev/evolution-3-premium-ux' || github.ref == 'refs/heads/dev/evolution-3-ios-save-fix' || github.ref == 'refs/heads/dev/evolution-3-mobile-flow' || github.ref == 'refs/heads/dev/evolution-3-nutrition-training-flow')
         uses: actions/upload-artifact@v4
         with:
           name: fitlab-iphone-staging
