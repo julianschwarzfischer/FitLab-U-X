@@ -339,12 +339,10 @@ test('daily focus has one check-in action and nutrition reaches saved food, sear
   const quick = page.locator('#xpCQuick');
   await quick.getByRole('button', {name:'Lebensmittel suchen'}).click();
   await expect(page.locator('#query')).toBeFocused();
-  await expect(quick.getByRole('button', {name:'Barcode scannen'})).toBeHidden();
-  await quick.locator('summary').click();
-  await expect(quick.getByRole('button', {name:'Barcode scannen'})).toBeVisible();
-  await quick.getByRole('button', {name:'Favoriten öffnen'}).click();
+  await expect(quick.getByRole('button', {name:'Barcode',exact:true})).toBeVisible();
+  await quick.getByRole('button', {name:'Favoriten',exact:true}).click();
   await expect(page.locator('#nutfavorites')).toHaveAttribute('open');
-  await quick.getByRole('button', {name:'Rezepte öffnen'}).click();
+  await quick.getByRole('button', {name:'Rezepte',exact:true}).click();
   await expect(page.locator('#nutrecipes')).toHaveAttribute('open');
   await addMeal(page, 'Synthetisches Frühstück', 125);
 
