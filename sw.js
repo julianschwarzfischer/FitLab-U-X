@@ -1,6 +1,6 @@
 const SCOPE_ID=encodeURIComponent(new URL(self.registration.scope).pathname);
 const CACHE_PREFIX='fitnesslab-experience-'+SCOPE_ID+'-';
-const CACHE=CACHE_PREFIX+'1-6-2-evolution-3-atlas';
+const CACHE=CACHE_PREFIX+'1-6-2-evolution-3-atlas-v1';
 const FILES=['./','./index.html','./brand.js','./exercise-atlas.js','./manifest.json','./icon-180.png','./icon-192.png','./icon-512.png'];
 self.addEventListener('install',e=>e.waitUntil((async()=>{const c=await caches.open(CACHE);await c.addAll(FILES.map(url=>new Request(url,{cache:'reload'})));await self.skipWaiting();})()));
 self.addEventListener('activate',e=>e.waitUntil((async()=>{await Promise.all((await caches.keys()).filter(k=>k.startsWith(CACHE_PREFIX)&&k!==CACHE).map(k=>caches.delete(k)));await self.clients.claim();})()));

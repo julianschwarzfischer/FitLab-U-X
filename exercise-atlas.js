@@ -77,7 +77,22 @@ function show(id){
  const known=fit(ex),gear=ex[3].map(i=>equipment[i]).filter(Boolean),muscle=muscleLabel641(ex);
  detail.innerHTML=`<h3 id="xp3AtlasExercise">${esc(ex[1])}</h3><p>${esc(groupNames[ex[2]]||ex[2])} · ${esc(muscle)}</p><p class="xp3AtlasNote">${known?'Mit deinem aktuellen Equipment durchführbar.':'Für deinen aktuellen Gerätebestand nicht verfügbar.'} ${gear.length?'Benötigtes Equipment (abhängig von Variante): '+esc(gear.join(', '))+'.':'Ohne zusätzliche Geräte möglich.'}</p><section class="xp3AtlasHistory"><h4>Deine bisherigen Einheiten</h4>${personalHistory(ex)}</section>${motion64[id]?exerciseGuide(ex):`<div class="xp3AtlasNote"><strong>Technik</strong><p>${esc(ex[4])}</p><p>Für diese Übung liegt aktuell keine geprüfte Bewegungssequenz vor.</p></div>`}<p class="xp3AtlasIntro">Die vorhandenen Bewegungsbilder sind schematische Lernhilfen, keine anatomisch validierte 3D-Darstellung. Wähle eine schmerzfreie Ausführung und passe das Training an deine Möglichkeiten an.</p>`;
  const box=detail.querySelector('.visual64');if(box&&motion64[id]){const svg=box.querySelector('svg');frame64(svg,id,0);box._step=0;const play=box.querySelector('.play64'),step=box.querySelector('.step64');if(play)play.addEventListener('click',e=>{e.preventDefault();toggle64(play)});if(step)step.addEventListener('click',e=>{e.preventDefault();step64(step)})}
- drawList();detail.setAttribute('tabindex','-1');detail.focus({preventScroll:true});
+ const regions=Object.keys(xpMap).filter(key=>xpMap[key].includes(id));
+ if(regions.length){
+  const button=document.createElement('button'),panel=document.createElement('div');
+  button.type='button';button.className='secondary';button.textContent='Muskelkarte ansehen';button.setAttribute('aria-expanded','false');
+  panel.hidden=true;detail.append(button,panel);
+  let side=Object.keys(xpBodyRegions('mf')).some(k=>regions.includes(k))?'front':'back';
+  function draw(){
+   panel.innerHTML=xpAvatarSVG(xpPrefs.avatar,side,false,regions);
+   const labels=regions.filter(k=>Object.hasOwn(xpBodyRegions((xpPrefs.avatar==='f'?'f':'m')+(side==='front'?'f':'b')),k));
+   const caption=document.createElement('p');caption.textContent=labels.length?labels.map(k=>xpNames[k]).join(' · '):'Keine markierte Region in dieser Ansicht.';
+   const flip=document.createElement('button');flip.type='button';flip.className='secondary';flip.textContent=side==='front'?'Rückansicht zeigen':'Vorderansicht zeigen';
+   flip.onclick=()=>{side=side==='front'?'back':'front';draw();panel.lastChild.focus()};panel.append(caption,flip);
+  }
+  button.onclick=()=>{panel.hidden=!panel.hidden;button.setAttribute('aria-expanded',String(!panel.hidden));button.textContent=panel.hidden?'Muskelkarte ansehen':'Muskelkarte schließen';if(!panel.hidden)draw()};
+ }
+ drawList();detail.setAttribute('tabindex','-1');detail.focus();
 }
 function mount(){
  const root=document.getElementById('training');if(!root)return;
@@ -94,7 +109,7 @@ function mount(){
  $atlas.querySelector('#xp3AtlasGroup').addEventListener('change',e=>{group=e.target.value;drawList()});
  $atlas.querySelector('#xp3AtlasEquipment').addEventListener('change',e=>{onlyAvailable=e.target.value==='owned';drawList()});
  $atlas.querySelector('#xp3AtlasList').addEventListener('click',e=>{const b=e.target.closest('button[data-ex]');if(b)show(b.dataset.ex)});
- $atlas.querySelector('#xp3AtlasDisclosure').addEventListener('toggle',e=>{if(e.target.open)drawList();else{for(const box of $atlas.querySelectorAll('.visual64')){if(box._raf)cancelAnimationFrame(box._raf);box._raf=0}}});
+ $atlas.querySelector('#xp3AtlasDisclosure').addEventListener('toggle',e=>{if(e.target.open)drawList();else{for(const box of $atlas.querySelectorAll('.visual64')){if(box._raf)cancelAnimationFrame(box._raf);box._raf=0;const play=box.querySelector('.play64');if(play)play.textContent='Animation starten'}}});
  drawList();
 }
 mount();

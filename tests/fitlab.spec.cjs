@@ -1447,3 +1447,36 @@ test('Evolution 3 exercise atlas supports no-animation exercises and 320px reduc
   await expect(atlas.locator('#xp3AtlasDetail')).toContainText('keine geprüfte Bewegungssequenz');
   await expect.poll(()=>page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth)).toBe(true);
 });
+
+test('Five atlas motion plates support playback and static poses without training writes',async({page})=>{
+  await page.setViewportSize({width:390,height:844});
+  await ready(page);
+  const before=await canonical(page);
+  await page.evaluate(()=>tab('training'));
+  const atlas=page.locator('#xp3Atlas');
+  await atlas.locator('summary').click();
+  for(const id of ['sq','bp','row','oh','lu']){
+    await atlas.locator('[data-ex="'+id+'"]').click();
+    const plate=atlas.locator('.visual64');
+    const arm=plate.locator('[data-part="arm"]');
+    const start=await arm.getAttribute('transform');
+    await plate.locator('.play64').click();
+    await expect(plate.locator('.play64')).toHaveText('Animation pausieren');
+    await expect.poll(()=>arm.getAttribute('transform')).not.toBe(start);
+    await plate.locator('.play64').click();
+    await expect(plate.locator('.play64')).toHaveText('Animation starten');
+  }
+  await page.emulateMedia({reducedMotion:'reduce'});
+  await page.setViewportSize({width:320,height:680});
+  const box=atlas.locator('.visual64');
+  await expect(box.locator('.play64')).toBeHidden();
+  const caption=await box.locator('.stage64').innerText();
+  await box.locator('.step64').click();
+  await expect(box.locator('.stage64')).not.toHaveText(caption);
+  await atlas.getByRole('button',{name:'Muskelkarte ansehen'}).click();
+  await expect(atlas.locator('.xpBody .selected')).not.toHaveCount(0);
+  await atlas.getByRole('button',{name:'Rückansicht zeigen'}).click();
+  await expect(atlas.locator('.xpBody')).toHaveAttribute('aria-label',/Rückansicht/);
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+  expect(await canonical(page)).toEqual(before);
+});
