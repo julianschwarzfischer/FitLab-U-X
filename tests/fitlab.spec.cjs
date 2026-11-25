@@ -1508,3 +1508,26 @@ test('Evolution 3 premium UX respects reduced motion without altering fitness da
   await expect.poll(()=>page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
   expect(await canonical(page)).toEqual(before);
 });
+
+test('iPhone onboarding: numeric keystrokes do not permanently block saving', async ({page})=>{
+  await page.setViewportSize({width:390,height:844});
+  await page.goto('/');
+  await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0,{timeout:20000});
+  await page.evaluate(()=>tab('profile'));
+  for(const [id,partial,complete] of [['height','1','178'],['age','3','39'],['weight','9','90']]){
+    await page.locator('#'+id).fill(partial);
+    await expect(page.locator('#'+id)).toHaveAttribute('aria-invalid','true');
+    expect(await page.evaluate(()=>xpABlocked)).toBe(false);
+    await page.locator('#'+id).fill(complete);
+    await expect(page.locator('#'+id)).not.toHaveAttribute('aria-invalid','true');
+    await expect.poll(async()=>Number((await canonical(page)).p[id])).toBe(Number(complete));
+  }
+  await expect(page.locator('#xpAStorageAlert')).toHaveCount(0);
+  await page.reload();
+  await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0,{timeout:20000});
+  const saved=await canonical(page);
+  expect(saved.p.height).toBe(178);
+  expect(saved.p.age).toBe(39);
+  expect(saved.p.weight).toBe(90);
+  expect(await page.evaluate(()=>xpABlocked)).toBe(false);
+});
