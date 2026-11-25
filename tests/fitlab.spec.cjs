@@ -1482,3 +1482,29 @@ test('Five atlas motion plates support playback and static poses without trainin
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
   expect(await canonical(page)).toEqual(before);
 });
+
+
+test('Evolution 3 premium UX stylesheet loads across five sections at small viewport',async({page})=>{
+  await page.setViewportSize({width:320,height:700});
+  await ready(page);
+  const css=await page.evaluate(()=>[...document.styleSheets].some(x=>x.href?.includes('premium-ux.css')));
+  expect(css).toBe(true);
+  const steps=[()=>page.evaluate(()=>tab('today')),()=>page.evaluate(()=>tab('nutrition')),()=>page.evaluate(()=>tab('training')),()=>page.evaluate(()=>{xpOpen('progress');tab('today');xpOpen('progress')}),()=>page.evaluate(()=>tab('profile'))];
+  for(const visit of steps){
+    await visit();
+    await expect.poll(()=>page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+  }
+  const nav=page.locator('.nav button').first();
+  await expect(nav).toHaveCSS('min-height','54px');
+});
+
+test('Evolution 3 premium UX respects reduced motion without altering fitness data',async({page})=>{
+  await page.emulateMedia({reducedMotion:'reduce'});
+  await ready(page);
+  const before=await canonical(page);
+  const reduced=await page.evaluate(()=>getComputedStyle(document.querySelector('button')).transitionDuration);
+  expect(parseFloat(reduced)).toBeLessThan(0.01);
+  await page.evaluate(()=>tab('nutrition'));
+  await expect.poll(()=>page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+  expect(await canonical(page)).toEqual(before);
+});
