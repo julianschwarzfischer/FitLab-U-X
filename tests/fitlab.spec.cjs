@@ -178,7 +178,7 @@ test('real QA5 application automatically migrates into current IndexedDB', async
   expect(legacy).toEqual(saved);
   await page.unroute(root,oldRoute);
   await page.reload();
-  await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3 IOS V1');
+  await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3 MOBILE V1');
   await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0,{timeout:20000});
   const migrated=await canonical(page);
   expect(migrated.p.age).toBe(41);
@@ -1196,15 +1196,15 @@ test(`Atlas V2 real service worker update from ${previousVersion} keeps data and
     await page.waitForFunction(()=>window.testControllerChanged);
     await page.waitForFunction(async previous=>{
       const keys=await caches.keys();
-      return keys.some(key=>key.endsWith('evolution-3-ios-v1'))&&!keys.some(key=>key.endsWith('evolution-'+previous.replace('.','-')));
+      return keys.some(key=>key.endsWith('evolution-3-mobile-v1'))&&!keys.some(key=>key.endsWith('evolution-'+previous.replace('.','-')));
     },previousVersion);
     await page.reload();
-    await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3 IOS V1');
+    await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3 MOBILE V1');
     await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
     expect(await canonical(page)).toEqual(prior);
     await context.setOffline(true);
     await page.reload();
-    await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3 IOS V1');
+    await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3 MOBILE V1');
     await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
     await addMeal(page,'Post-update offline 2.2',116);
     await page.reload();
@@ -1531,4 +1531,37 @@ test('iPhone onboarding: numeric keystrokes do not permanently block saving', as
   expect(saved.p.age).toBe(39);
   expect(saved.p.weight).toBe(90);
   expect(await page.evaluate(()=>xpABlocked)).toBe(false);
+});
+
+
+test('Evolution 3 mobile wizard points to incomplete body fields instead of silently continuing',async({page})=>{
+ await page.setViewportSize({width:390,height:650});
+ await ready(page);
+ await page.evaluate(()=>{tab('profile');xp12Step=1;xp12WizardUI()});
+ await expect(page.locator('#bodyfields')).toBeVisible();
+ await page.locator('#weight').fill('90');
+ await page.locator('#height').fill('1');
+ await page.evaluate(()=>xp12Advance());
+ await expect(page.locator('#xp12Message')).toBeVisible();
+ await expect(page.locator('#height')).toBeFocused();
+ expect(await page.evaluate(()=>xp12Step)).toBe(1);
+ expect(await page.evaluate(()=>xpABlocked)).toBe(false);
+ await page.locator('#height').fill('178');
+ await page.locator('#age').fill('39');
+ await page.locator('#sex').selectOption('m');
+ await page.evaluate(()=>xp12Advance());
+ expect(await page.evaluate(()=>xp12Step)).toBe(2);
+ await expect(page.locator('#xpAStorageAlert')).toHaveCount(0);
+});
+
+test('Evolution 3 mobile numeric keyboard follows body field order',async({page})=>{
+ await ready(page);
+ await page.evaluate(()=>{tab('profile');xp12Step=1;xp12WizardUI()});
+ await page.locator('#weight').fill('90');
+ await page.locator('#weight').press('Enter');
+ await expect(page.locator('#height')).toBeFocused();
+ await page.locator('#height').fill('178');
+ await page.locator('#height').press('Enter');
+ await expect(page.locator('#age')).toBeFocused();
+ await expect(page.locator('#xpAStorageAlert')).toHaveCount(0);
 });
