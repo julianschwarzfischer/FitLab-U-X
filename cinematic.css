@@ -13,7 +13,7 @@
 #xpHome .xpHero>* ,#xpDeep .xp12DetailHero>*{position:relative;z-index:1;}
 #xpHome .xpHero h2{letter-spacing:-.042em;line-height:1.04;text-wrap:balance;}
 #xpHome .xpHero .xpEyebrow{letter-spacing:.16em;}
-#xpHome .xpHomeStack,#xpHome .xpHeading,#xpHome .xpTiles,#xpHome .xpCoachCompact,#xpHome .xpStrip,#xpDeep .xp12DetailHero{
+#xpHome .xpHomeStack,#xpHome .xpHeading,#xpHome .xpTiles,#xpHome .xpCoachCompact,#xpHome .xpStrip,#xpHome .xpEvoCoach,#xpHome .xp12Focus,#xpDeep .xp12DetailHero{
  scroll-margin-top:14vh;
 }
 #xpHome .xpTiles{perspective:900px;}
