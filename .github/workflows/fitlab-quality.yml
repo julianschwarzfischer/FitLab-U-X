@@ -2,7 +2,7 @@ name: FITNESS LAB browser quality gate
 on:
   workflow_dispatch:
   push:
-    branches: ['test/evolution-ci-meilenstein', 'dev/evolution-3-exercise-atlas', 'dev/evolution-3-premium-ux', 'dev/evolution-3-ios-save-fix', 'dev/evolution-3-mobile-flow', 'dev/evolution-3-nutrition-training-flow', 'dev/evolution-3-1-cinematic', 'dev/evolution-3-2-premium-first-impression'
+    branches: ['test/evolution-ci-meilenstein', 'dev/evolution-3-exercise-atlas', 'dev/evolution-3-premium-ux', 'dev/evolution-3-ios-save-fix', 'dev/evolution-3-mobile-flow', 'dev/evolution-3-nutrition-training-flow', 'dev/evolution-3-1-cinematic', 'dev/evolution-3-2-premium-first-impression']
 jobs:
   browser-e2e:
     if: github.ref == 'refs/heads/test/evolution-ci-meilenstein' || github.ref == 'refs/heads/dev/evolution-3-exercise-atlas' || github.ref == 'refs/heads/dev/evolution-3-premium-ux' || github.ref == 'refs/heads/dev/evolution-3-ios-save-fix' || github.ref == 'refs/heads/dev/evolution-3-mobile-flow' || github.ref == 'refs/heads/dev/evolution-3-nutrition-training-flow' || github.ref == 'refs/heads/dev/evolution-3-1-cinematic' || github.ref == 'refs/heads/dev/evolution-3-2-premium-first-impression'
