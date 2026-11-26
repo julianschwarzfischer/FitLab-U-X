@@ -1666,7 +1666,7 @@ test('Evolution 3.2 fresh install previews cockpit before personal data is enter
  await expect(first).toHaveCount(1);
  await expect(first.getByRole('heading',{name:/Willkommen/})).toBeVisible();
  await expect(first.locator('[data-scene="body"] img.heroPhoto')).toHaveCount(1);
- await expect(first.locator('.heroAgenda dt')).toHaveCount(3);
+ await expect(first.locator('.heroAgenda dt')).toHaveText(['Tagesform','Training','Ernährung','Fortschritt']);
  await expect(first).toContainText('Noch keine persönlichen Messwerte');
  const empty=await canonical(page);
  expect(empty.p).toMatchObject({weight:'',height:'',age:'',goals:[]});

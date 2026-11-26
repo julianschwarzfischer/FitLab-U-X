@@ -2423,7 +2423,7 @@ xpHomeMarkup=function(){
   ['rest','recovery',724,543,'Erholung ist Teil des Erfolgs','Schlaf, Tagesform und Muskelkater helfen deinem Coach, Erholung einzuplanen.','Wasser, Handtuch und Notizbuch am Fenster mit Blick in den Wald.'],
   ['cockpit','cockpit',840,588,'Alles im Cockpit','Vorschau · Noch keine persönlichen Messwerte','Trainingsnotizbuch, Wasser und Handtuch auf einem Tisch.']
  ];
- const rows=[['check','Tagesform','Check-in'],['training','Training','Wochenplan'],['nutrition','Ernährung','Tagesbilanz']];
+ const rows=[['check','Tagesform','Check-in'],['training','Training','Wochenplan'],['nutrition','Ernährung','Tagesbilanz'],['progress','Fortschritt','Verlauf']];
  const preview='<dl class="heroAgenda">'+rows.map(([icon,title,detail])=>`<div><dt>${xpIcon(icon)}${title}</dt><dd>${detail}</dd></div>`).join('')+'</dl>';
  const returning=xpProfileReady();
  const action=(label)=>`<button type="button" onclick="${returning?'xpStoryToggle(false)':'xpSetup()'}">${label} →</button>`;
