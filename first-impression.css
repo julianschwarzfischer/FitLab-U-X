@@ -88,36 +88,145 @@
 #xpHome .xpStoryDiscovery strong{display:block;font-size:clamp(23px,6vw,32px);line-height:1.04;letter-spacing:-.04em}
 #xpHome .xpStoryDiscovery p{color:#c4e0d0;font-size:13px;line-height:1.5;margin:8px 0 0}
 #xpHome .xpStoryDiscovery button{background:#d6fbe1!important;color:#16382b!important;min-height:51px;border-radius:14px!important;font-weight:750;border:0!important}
-#xpHome .xpStoryReturn{position:sticky;top:0;z-index:12;padding:9px 10px 0;background:var(--bg)}
-#xpHome .xpStoryReturn button{width:100%;min-height:46px;background:#d8f6e2;color:#123426;border:1px solid #a6cfb7;border-radius:12px;font-weight:750}
-
-#xpHome .flowStory{background:#15221e;color:#fff;padding:0;overflow:hidden;box-shadow:none;border-radius:20px}
-.flowStory .cineRun{margin:0;padding:0;border:0;border-radius:0;background:transparent}
-.flowStory .cineScreen{position:relative;isolation:isolate;display:flex;align-items:flex-end;min-height:clamp(440px,83svh,850px);overflow:hidden}
-.flowStory .cineVisual{position:absolute;inset:0;z-index:-1;overflow:hidden}
-#xpHome .flowStory .xpFirstHeroArt,#xpHome .flowStory .xpAvatarStage,#xpHome .flowStory .xpBody,.flowStory .cineVisual img{display:block;position:static;width:100%;height:100%;max-width:none;max-height:none;margin:0;filter:none;border-radius:0;animation:none}
-#xpHome .flowStory .xpFirstHeroArt:before{display:none}
-.flowStory .cineVisual img{object-fit:cover;object-position:center 38%}
-.flowStory .cineVisual:after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,#101a16 0%,#111916be 24%,transparent 68%)}
-.flowStory .cineCopy{padding:32px clamp(18px,6vw,40px);color:#fff;width:100%;box-sizing:border-box}
-.flowStory .cineCopy small{color:#e5ce9b;font:700 11px/1.4 system-ui;letter-spacing:.18em;text-transform:uppercase}
-#xpHome .flowStory h2{font:720 clamp(43px,12vw,90px)/.95 system-ui;letter-spacing:-.066em;color:inherit;margin:12px 0}
-.flowStory p{color:inherit;line-height:1.48;font-size:15px;max-width:33ch;margin:14px 0}
-.flowStory button{width:auto;min-height:46px;padding:12px 19px;border:0;border-radius:28px;background:#ebf4df;color:#17271f}
-.flowCue{display:inline-block;border-top:1px solid #d1b991;padding-top:10px;color:#eee3c9;font-size:13px}
-.flowStory [data-scene="food"] .cineScreen{min-height:73svh}
-.flowStory [data-scene="rest"] .cineScreen{min-height:67svh}
-.flowStory [data-scene="cockpit"] .cineScreen{min-height:auto;background:#e9eee4;color:#162b22}
-.flowStory [data-scene="cockpit"] .cineCopy{padding-block:50px;color:inherit}
-.flowStory [data-scene="cockpit"] small{color:#52664f}
-.flowAgenda{margin:22px 0 20px;border-block:1px solid #a9bbab;padding:15px 0}
-#xpHome .flowAgenda .xpFirstMini{display:flex;flex-direction:row;align-items:center;justify-content:start;gap:10px;background:none;min-height:0;padding:10px 0;border:0}
-.flowAgenda svg{width:19px;height:19px}.flowAgenda span{margin-left:auto;font-size:13px}
-.flowStory [data-scene="cockpit"] button{background:#203c2f;color:white}
-@media(prefers-reduced-motion:no-preference){
- .flowEntered .cineCopy{animation:flowCopy .55s ease-out both}
- .flowEntered .cineVisual img{animation:flowPhoto 1.5s ease-out both}
- @keyframes flowCopy{from{opacity:.75;transform:translateY(8px)}}
- @keyframes flowPhoto{from{transform:scale(1.035)}to{transform:scale(1)}}
+/* Full-bleed story chrome is conditional on the visible Today view. */
+html:has(#today:not(.hidden) #xpHome:not([hidden]) .heroStory) {
+  background:#111e19;
+  color-scheme:dark;
+  scroll-behavior:auto;
 }
-.flowStory [data-scene="cockpit"] .cineVisual{display:none}
+body:has(#today:not(.hidden) #xpHome:not([hidden]) .heroStory) {
+  background:#111e19;
+  color:#f4f5ed;
+}
+body:has(#today:not(.hidden) #xpHome:not([hidden]) .heroStory) > main {
+  max-width:none;
+  padding:0 0 calc(72px + env(safe-area-inset-bottom));
+}
+body:has(#today:not(.hidden) #xpHome:not([hidden]) .heroStory) > header {
+  background:#111e19;
+  color:#f4f5ed;
+  padding-inline:max(16px, env(safe-area-inset-left), env(safe-area-inset-right));
+}
+body:has(#today:not(.hidden) #xpHome:not([hidden]) .heroStory) > header :is(#appVersion,#xpBrandIcon) {
+  color:#b9d0c3;
+}
+body:has(#today:not(.hidden) #xpHome:not([hidden]) .heroStory) > .nav {
+  --xp-ink:#f5fbf7;
+  background:#111e19;
+  border-color:#2f443b;
+  box-shadow:none;
+  backdrop-filter:none;
+}
+body:has(#today:not(.hidden) #xpHome:not([hidden]) .heroStory) > .nav button {
+  background:transparent;
+  color:#c6d8ce;
+}
+body:has(#today:not(.hidden) #xpHome:not([hidden]) .heroStory) > .nav button.active {
+  background:#294237;
+  color:#f5fbf7;
+  box-shadow:inset 0 0 0 1px #58776a;
+}
+#xpHome .heroStory {
+  background:#111e19;
+  color:#f4f5ed;
+  border-radius:0;
+  box-shadow:none;
+  overflow:visible;
+}
+#xpHome .heroStory .cineRun {
+  margin:0;
+  padding:0;
+  border:0;
+  border-radius:0;
+  box-shadow:none;
+  background:linear-gradient(#111e19,var(--chapter-tone) 22%,var(--chapter-tone) 76%,#111e19);
+  color:#f4f5ed;
+}
+.heroStory [data-scene="body"] {--chapter-tone:#192b21}
+.heroStory [data-scene="food"] {--chapter-tone:#28291c}
+.heroStory [data-scene="train"] {--chapter-tone:#26201b}
+.heroStory [data-scene="rest"] {--chapter-tone:#202c2d}
+.heroStory [data-scene="cockpit"] {--chapter-tone:#1d2b23}
+.heroStory .cineScreen {
+  position:relative;
+  min-height:calc(100svh - 78px - env(safe-area-inset-bottom));
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  max-width:900px;
+  margin-inline:auto;
+  padding-block:18px 38px;
+}
+.heroStory .heroPhoto {
+  display:block;
+  width:100%;
+  max-width:720px;
+  height:auto;
+  object-fit:contain;
+  margin:0 auto;
+  border:0;
+  border-radius:0;
+  mask-image:linear-gradient(transparent,#000 7%,#000 89%,transparent);
+}
+.heroStory .cineCopy {
+  width:min(100%,650px);
+  margin-inline:auto;
+  padding:18px max(22px,env(safe-area-inset-left),env(safe-area-inset-right)) 8px;
+}
+#xpHome .heroStory h2 {
+  margin:0;
+  font-size:clamp(36px,9.5vw,72px);
+  font-weight:720;
+  line-height:1.02;
+  letter-spacing:-.052em;
+  text-wrap:balance;
+  color:inherit;
+}
+.heroStory p {
+  max-width:40ch;
+  margin:14px 0 18px;
+  font-size:clamp(15px,3.9vw,19px);
+  color:#cbd9d1;
+}
+#xpHome .heroStory button {
+  width:auto;
+  min-height:46px;
+  padding:12px 20px;
+  border:0;
+  border-radius:24px;
+  background:#def1e4;
+  color:#172c22;
+}
+.heroStory .xpStoryReturn {
+  max-width:900px;
+  margin:auto;
+  padding:10px max(22px,env(safe-area-inset-left)) 0;
+}
+#xpHome .heroStory .xpStoryReturn button {
+  background:transparent;
+  border:1px solid #577265;
+  color:#e6f1e9;
+}
+.heroAgenda {
+  margin:22px 0;
+  padding:0;
+  border-top:1px solid #586d60;
+}
+.heroAgenda > div {
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:4px 12px;
+  padding:10px 0;
+  border-bottom:1px solid #586d60;
+}
+.heroAgenda dt {display:flex;align-items:center;gap:9px;font-weight:650}
+.heroAgenda dd {margin:0;color:#cbd9d1}
+.heroAgenda svg {width:18px;height:18px}
+@media (min-width:900px) {
+  .heroStory .heroPhoto {
+    mask-image:linear-gradient(transparent,#000 7%,#000 89%,transparent),
+      linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);
+    mask-composite:intersect;
+  }
+}

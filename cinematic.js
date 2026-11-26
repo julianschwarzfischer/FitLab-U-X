@@ -14,11 +14,7 @@
   const r=el.getBoundingClientRect();
   return r.width>0&&r.height>0&&r.top<window.innerHeight*.95&&r.bottom>0;
  }
- const storyObserver='IntersectionObserver' in window?new IntersectionObserver(entries=>{
-  for(const {target,isIntersecting} of entries)if(isIntersecting){target.classList.add('flowEntered');storyObserver.unobserve(target)}
- },{threshold:.15}):null;
  function update(){
-  document.querySelectorAll('.flowStory .cineRun:not(.flowEntered)').forEach(scene=>storyObserver?.observe(scene));
   scheduled=false;
   const nodes=[...document.querySelectorAll(selector)];
   if(reduced.matches||!('IntersectionObserver' in window)){
@@ -51,10 +47,11 @@
  }
  function updateScroll(){
   if(frame||reduced.matches)return;
+  const hero=document.querySelector('#today:not(.hidden) #xpHome:not([hidden]) .xpHero');
+  if(!hero)return;
   frame=requestAnimationFrame(()=>{
    frame=0;
-   const hero=document.querySelector('#xpHome:not([hidden]) .xpHero');
-   if(!hero)return;
+   if(!hero.isConnected)return;
    const rect=hero.getBoundingClientRect();
    const progress=Math.max(-1,Math.min(1,-rect.top/Math.max(rect.height,1)));
    hero.style.setProperty('--cine-scroll',String(progress));
