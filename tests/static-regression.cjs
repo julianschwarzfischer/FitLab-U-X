@@ -51,3 +51,13 @@ assert(sw.includes("'./premium-ux.css'"),'Premium UX stylesheet missing from off
 for(const selector of ['#nutrition','#trainingout','#profile','#xp15Progress','.nav'])assert(css.includes(selector),'Missing Premium UX design coverage for '+selector);
 assert(css.includes('prefers-reduced-motion'),'Premium UX must support reduced motion');
 console.log('PASS premium UX cross-module design and offline resource');
+
+const cinematicCSS=fs.readFileSync('cinematic.css','utf8');
+const cinematicJS=fs.readFileSync('cinematic.js','utf8');
+new vm.Script(cinematicJS,{filename:'cinematic.js'});
+assert(html.includes('href="cinematic.css"'),'Cinematic stylesheet not loaded');
+assert(html.includes('src="cinematic.js"'),'Cinematic script not loaded');
+assert(sw.includes("'./cinematic.css'")&&sw.includes("'./cinematic.js'"),'Cinematic assets missing from offline cache');
+assert(cinematicCSS.includes('prefers-reduced-motion:reduce'),'Reduced-motion CSS missing');
+assert(cinematicJS.includes('IntersectionObserver'),'Cinematic reveal engine missing');
+console.log('PASS cinematic motion assets, syntax and reduced-motion safeguard');
