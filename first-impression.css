@@ -1,0 +1,64 @@
+/* FITNESS LAB 3.2 — First Impression: same visual language before and after onboarding.
+   CSS-only presentation; no persisted data, algorithm, or security changes. */
+:root{--first-ink:#effaf7;--first-muted:#bbd4ca;--first-bg:#0d211d;--first-accent:#a3f0c2}
+#xpHome .xpFirstWelcome{position:relative;isolation:isolate;overflow:hidden;padding:0;border-radius:26px;background:#102821;color:var(--first-ink);box-shadow:0 20px 55px rgba(4,22,18,.12)}
+#xpHome .xpFirstHero{min-height:425px;display:grid;grid-template-columns:1fr .8fr;align-items:center;gap:0;position:relative;padding:38px 0 42px 25px;background:radial-gradient(ellipse at 87% 45%,rgba(119,205,158,.25),transparent 58%),linear-gradient(145deg,#122b25,#0a1717 90%)}
+#xpHome .xpFirstHero:before{content:"";position:absolute;inset:auto -27% -80% 6%;aspect-ratio:1;border:1px solid rgba(184,255,219,.13);box-shadow:0 0 0 40px rgba(184,255,219,.025),0 0 0 100px rgba(184,255,219,.016);border-radius:50%;pointer-events:none}
+#xpHome .xpFirstCopy{z-index:2;min-width:0}
+#xpHome .xpFirstEyebrow{display:flex;align-items:center;gap:8px;color:#a6e8c1;letter-spacing:.16em;font-size:10px;font-weight:800;text-transform:uppercase}
+#xpHome .xpFirstEyebrow:before{content:"";width:20px;height:1px;background:currentColor}
+#xpHome .xpFirstHero h2{font-size:clamp(35px,8.5vw,63px);letter-spacing:-.06em;line-height:1.04;font-weight:760;text-wrap:balance;margin:22px 0 14px;color:#fff}
+#xpHome .xpFirstHero p{line-height:1.52;color:#c5dcd2;font-size:14px;max-width:290px;margin-bottom:24px}
+#xpHome .xpFirstStart{width:auto;min-width:215px;min-height:54px;padding:13px 20px!important;background:#d1f6dc!important;color:#143026!important;border:0!important;border-radius:14px!important;font-weight:750!important;box-shadow:0 7px 25px rgba(148,242,179,.16)}
+#xpHome .xpFirstHeroArt{align-self:stretch;display:flex;justify-content:center;align-items:center;min-width:0;overflow:hidden;position:relative;z-index:1}
+#xpHome .xpFirstHeroArt:before{content:"";position:absolute;aspect-ratio:1;width:245px;max-width:160%;border-radius:50%;background:radial-gradient(circle,rgba(161,247,193,.24),transparent 66%);filter:blur(7px)}
+#xpHome .xpFirstHeroArt .xpAvatarStage{max-width:100%;margin:0;z-index:1}
+#xpHome .xpFirstHeroArt .xpBody{width:190px;height:395px;max-height:395px;max-width:100%;filter:drop-shadow(0 12px 30px rgba(0,0,0,.4))}
+#xpHome .xpFirstPreview{padding:24px 20px 28px;background:linear-gradient(175deg,#16352e,#152b27);border-top:1px solid rgba(218,255,234,.09)}
+#xpHome .xpFirstPreviewHeading{display:flex;align-items:start;justify-content:space-between;gap:10px;margin-bottom:17px}
+#xpHome .xpFirstPreviewHeading h3{margin:4px 0 0;color:#f6fff9;font-size:24px;letter-spacing:-.035em;line-height:1.15}
+#xpHome .xpFirstPreviewHeading span{color:#acdec5;font-size:11px;padding:6px 9px;border:1px solid rgba(162,230,188,.26);border-radius:999px;white-space:nowrap}
+#xpHome .xpFirstDashboard{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+#xpHome .xpFirstMini{min-width:0;min-height:157px;background:rgba(255,255,255,.065);border:1px solid rgba(229,255,237,.11);border-radius:19px;padding:14px 12px 12px;display:flex;flex-direction:column;justify-content:space-between;gap:8px}
+#xpHome .xpFirstMini svg{width:23px;height:23px;color:#b1f1cc;stroke:currentColor}
+#xpHome .xpFirstMini strong{color:#fff;font-size:15px;line-height:1.25}
+#xpHome .xpFirstMini small{font-size:11px;line-height:1.4;color:#bedbd0}
+#xpHome .xpFirstMiniViz{height:25px;display:flex;align-items:end;gap:4px}
+#xpHome .xpFirstMiniViz i{width:8px;height:var(--h);border-radius:6px;background:linear-gradient(#bdf6d1,#4a997d);opacity:.85}
+#xpHome .xpFirstMiniViz.ring{display:block;width:28px;height:28px;border-radius:50%;border:5px solid rgba(173,242,198,.25);border-right-color:#a6f2c7;border-top-color:#a6f2c7;transform:rotate(-25deg)}
+#xpHome .xpFirstMiniViz.pulse{height:26px;align-items:center}
+#xpHome .xpFirstMiniViz.pulse:before{content:"";width:100%;height:2px;background:linear-gradient(90deg,transparent,#9feabc,transparent);transform:skewY(-7deg);box-shadow:10px -7px 0 -1px #9feabc}
+#xpHome .xpFirstFoot{padding:0 20px 24px;color:#9ebbad;font-size:11px;background:#152b27}
+#xpHome .xpFirstFoot span{display:inline-flex;gap:7px;align-items:center}
+#xpHome .xpFirstFoot span:before{content:"";width:6px;height:6px;border-radius:50%;background:#a4f0c2}
+#profile.xpFirstSetting{position:relative}
+#profile.xpFirstSetting>.xpEvoProfileHeading{font-size:23px;letter-spacing:-.03em}
+#profile .xpFirstSetupHero{background:linear-gradient(142deg,#112921,#10201d);color:#eafaf2;border-radius:24px;padding:18px 17px;display:grid;grid-template-columns:minmax(0,1fr) 92px;gap:8px;align-items:center;overflow:hidden;position:relative;isolation:isolate}
+#profile .xpFirstSetupHero:before{content:"";position:absolute;right:-16%;top:-85%;width:68%;aspect-ratio:1;border:1px solid rgba(180,245,206,.16);border-radius:50%;pointer-events:none}
+#profile .xpFirstSetupHero .xpAvatarStage{width:92px;max-height:150px;overflow:hidden;margin:0}
+#profile .xpFirstSetupHero .xpBody{width:85px;height:160px;max-height:160px}
+#profile .xpFirstSetupHero .xpFirstEyebrow{color:#b6eccb;font-size:10px;text-transform:uppercase;letter-spacing:.15em;font-weight:800}
+#profile .xpFirstSetupHero h3{font-size:clamp(25px,6vw,33px);line-height:1.12;letter-spacing:-.04em;margin:10px 0 9px;color:#fff}
+#profile .xpFirstSetupHero p{font-size:12px;line-height:1.5;color:#c0dace;margin:0}
+#profile .xpFirstSetupHero .xp12Steps{margin-top:17px;display:flex;gap:5px}
+#profile .xpFirstSetupHero .xp12Steps i{height:5px;flex:1;background:rgba(212,255,231,.2);border-radius:999px}
+#profile .xpFirstSetupHero .xp12Steps i.on{background:#a7f0c4}
+#profile .xpFirstSetupMessage{margin:10px 0 0;background:#fff0d6;color:#633f13;padding:10px 12px;border-radius:10px;font-weight:650;font-size:13px}
+#profile .xpFirstSetupMessage[hidden]{display:none}
+#profile .xp12Group{border:1px solid var(--line);border-radius:18px;overflow:hidden;margin-top:12px;padding:0;background:var(--surface)}
+#profile .xp12Group>summary{padding:14px 15px;min-height:45px;font-size:15px;font-weight:750}
+#profile .xp12Group>section{border:0;box-shadow:none;padding:17px 15px 19px;margin:0;border-radius:0}
+#profile .xp12Group[open]>summary{border-bottom:1px solid var(--line);background:var(--tint)}
+#profile .xp12WizardNav{display:flex;gap:10px;justify-content:space-between;margin:18px 0 25px;padding:0}
+#profile .xp12WizardNav button{flex:1;min-width:0;min-height:52px;border-radius:14px;font-weight:700}
+#profile #bodyfields{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+#profile #bodyfields>div{border:1px solid var(--line);background:var(--tint);padding:11px;border-radius:13px;min-width:0}
+#profile #bodyfields input{font-size:22px;font-weight:750;background:var(--surface);min-height:49px}
+#profile #bodyfields label{font-size:12px;font-weight:650}
+#profile #goals button,#profile .chips button{border-radius:999px;min-height:46px}
+#profile .xpFirstSetupSideNote{padding:0 3px;color:var(--muted);font-size:12px;line-height:1.5}
+@media(min-width:700px){#xpHome .xpFirstHero{padding-left:45px;min-height:485px}#xpHome .xpFirstHeroArt .xpBody{width:230px;height:445px;max-height:445px}#xpHome .xpFirstPreview{padding:28px 36px}#xpHome .xpFirstFoot{padding:0 36px 26px}}
+@media(max-width:390px){#xpHome .xpFirstHero{min-height:405px;padding-left:17px;grid-template-columns:1fr .67fr}#xpHome .xpFirstHero h2{font-size:36px}#xpHome .xpFirstHeroArt .xpBody{height:350px;max-height:350px}#xpHome .xpFirstMini{padding:10px 8px;min-height:151px}#xpHome .xpFirstMini strong{font-size:13px}#xpHome .xpFirstPreview{padding:20px 13px}#xpHome .xpFirstPreviewHeading h3{font-size:22px}}
+@media(max-width:340px){#xpHome .xpFirstHero{min-height:380px}#xpHome .xpFirstHero h2{font-size:32px}#xpHome .xpFirstStart{min-width:0;width:100%;font-size:13px}#xpHome .xpFirstHeroArt .xpBody{width:116px;height:310px;max-height:310px}#xpHome .xpFirstDashboard{gap:6px}#xpHome .xpFirstMini small{font-size:10px}}
+@media(prefers-reduced-motion:no-preference){#xpHome .xpFirstHeroArt .xpAvatarStage{animation:xpFirstFloat 7s ease-in-out infinite alternate}#xpHome .xpFirstHeroArt:before{animation:xpFirstGlow 6s ease-in-out infinite alternate}#xpHome .xpFirstMini{transition:transform .35s ease,background .35s ease}#xpHome .xpFirstMini:hover{transform:translateY(-3px);background:rgba(255,255,255,.09)}@keyframes xpFirstFloat{from{transform:translateY(7px)}to{transform:translateY(-9px)}}@keyframes xpFirstGlow{from{opacity:.6;transform:scale(.94)}to{opacity:1;transform:scale(1.05)}}}
+@media(prefers-reduced-motion:reduce){#xpHome .xpFirstHeroArt *,#xpHome .xpFirstHeroArt:before{animation:none!important;transition:none!important}#xpHome .xpFirstMini{transition:none!important}}
