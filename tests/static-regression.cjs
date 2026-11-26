@@ -61,3 +61,10 @@ assert(sw.includes("'./cinematic.css'")&&sw.includes("'./cinematic.js'"),'Cinema
 assert(cinematicCSS.includes('prefers-reduced-motion:reduce'),'Reduced-motion CSS missing');
 assert(cinematicJS.includes('IntersectionObserver'),'Cinematic reveal engine missing');
 console.log('PASS cinematic motion assets, syntax and reduced-motion safeguard');
+
+const firstCSS=fs.readFileSync('first-impression.css','utf8');
+assert(html.includes('href="first-impression.css"'),'Premium first impression CSS missing from document');
+assert(sw.includes("'./first-impression.css'"),'First impression CSS missing from offline cache');
+assert(firstCSS.includes('prefers-reduced-motion:reduce'),'First impression reduced-motion CSS missing');
+assert(html.includes('xpFirstWelcome')&&html.includes('xpFirstSetupHero'),'Premium welcome or wizard not present');
+console.log('PASS premium preview, onboarding and offline presentation assets');
