@@ -5,7 +5,7 @@
  const selector=[
   '#xpHome .xpHero','#xpHome .xpHomeStack','#xpHome .xpHeading',
   '#xpHome .xpTiles .xpTile','#xpHome .xpCoachCompact',
-  '#xpHome .xpStrip','#xpDeep .xp12DetailHero',
+  '#xpHome .xpStrip','#xpHome .xpEvoCoach','#xpHome .xp12Focus','#xpDeep .xp12DetailHero',
   '#xpCheck > :is(section,.xpHero,.xpCard)'
  ].join(',');
  let observer,scheduled=false,frame=0;
