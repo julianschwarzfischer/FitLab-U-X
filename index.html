@@ -2407,8 +2407,15 @@ window.addEventListener('pageshow',event=>{if(event.persisted)xp22PauseRestore()
 // EVOLUTION 3.2 — welcome is a visual preview, not synthetic personal fitness results.
 // Empty onboarding still owns an empty persisted profile.
 const xpFirstOriginalHome=xpHomeMarkup;
+let xpStoryMode=false;
+function xpStoryToggle(show){
+ xpStoryMode=!!show;
+ premiumDashboard();
+ xpOpen('home');
+ window.scrollTo({top:0,behavior:'instant'});
+}
 xpHomeMarkup=function(){
- if(xpProfileReady())return xpFirstOriginalHome();
+ if(xpProfileReady()&&!xpStoryMode)return xpFirstOriginalHome();
  const model=xpAvatarSVG(xpPrefs.avatar,'front',false);
  const chapters=[
   ['body','Dein Körper.<br>Dein Weg.','Training, Ernährung und Erholung in deinem Rhythmus.',model],
@@ -2417,7 +2424,7 @@ xpHomeMarkup=function(){
   ['rest','Raum für<br>Erholung.','Schlaf und Tagesform geben deinem Training Richtung.','<img loading="lazy" src="media/scenes/recovery.webp" alt="">'],
   ['cockpit','Dein Tag.<br>Ein Blick.','Vorschau · Noch keine persönlichen Messwerte','<div class="cineDial" aria-hidden="true"></div>']
  ];
- return `<div class="xpFirstWelcome cineStory">${chapters.map(([key,title,copy,art],i)=>`<section class="cineRun" data-scene="${key}"><div class="cineScreen"><div class="cineVisual ${i===0?'xpFirstHeroArt':''}" aria-hidden="true">${art}</div><div class="cineCopy"><small>${['Willkommen','Training','Ernährung','Tagesform','Cockpit-Vorschau'][i]}</small><h2 ${i===0?'aria-label="Willkommen. Dein Körper. Dein Weg."':''}>${title}</h2><p>${copy}</p>${i===4?'<div class="cinePreview"><span class="xpFirstMini">Trainingsplan</span><span class="xpFirstMini">Tagesbilanz</span><span class="xpFirstMini">Check-in</span></div>':''}${i===0||i===4?`<button type="button" onclick="xpSetup()">${i?'Profil einrichten':'Meinen Weg starten'} →</button>`:''}</div></div></section>`).join('')}</div>`;
+ return `${xpProfileReady()?'<div class="xpStoryReturn"><button type="button" onclick="xpStoryToggle(false)">‹ Zurück zum Cockpit</button></div>':''}<div class="xpFirstWelcome cineStory">${chapters.map(([key,title,copy,art],i)=>`<section class="cineRun" data-scene="${key}"><div class="cineScreen"><div class="cineVisual ${i===0?'xpFirstHeroArt':''}" aria-hidden="true">${art}</div><div class="cineCopy"><small>${['Willkommen','Training','Ernährung','Tagesform','Cockpit-Vorschau'][i]}</small><h2 ${i===0?'aria-label="Willkommen. Dein Körper. Dein Weg."':''}>${title}</h2><p>${copy}</p>${i===4?'<div class="cinePreview"><span class="xpFirstMini">Trainingsplan</span><span class="xpFirstMini">Tagesbilanz</span><span class="xpFirstMini">Check-in</span></div>':''}${i===0||i===4?`<button type="button" onclick="${xpProfileReady()?'xpStoryToggle(false)':'xpSetup()'}">${xpProfileReady()?'Zum persönlichen Cockpit':i?'Profil einrichten':'Meinen Weg starten'} →</button>`:''}</div></div></section>`).join('')}</div>`;
 };
 // Keep the existing wizard navigation, checks and input handlers. Only recompose its visual heading.
 const xpFirstOriginalWizard=xp12WizardUI;
@@ -2464,6 +2471,10 @@ xpHomeMarkup=function(){
  const container=document.createElement('div');container.innerHTML=original;
  const tiles=container.querySelector('.xpTiles');
  if(!tiles)return original;
+ const experience=document.createElement('section');
+ experience.className='xpStoryDiscovery';
+ experience.innerHTML='<div><small>CINEMATIC EXPERIENCE 3.3</small><strong>Dein Körper. Dein Weg.</strong><p>Erlebe die neue FITNESS LAB Story in fünf bewegten Kapiteln.</p></div><button type="button" onclick="xpStoryToggle(true)">Erlebnis entdecken →</button>';
+ container.querySelector('.xpHero')?.after(experience);
  const section=document.createElement('section');
  section.className='xpCineAvatarChapter';
  section.setAttribute('aria-label','Dein Körpermodell und deine Entwicklung');
