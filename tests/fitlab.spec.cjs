@@ -1699,7 +1699,7 @@ test('Evolution 3.2 entrance visuals respect reduced motion and stay offline cac
  await page.emulateMedia({reducedMotion:'reduce'});
  await page.goto('/');await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0,{timeout:20000});
  await expect(page.locator('#xpHome .xpFirstWelcome')).toBeVisible();
- expect(await page.locator('#xpHome .heroStory .heroPhoto').evaluate(el=>getComputedStyle(el).animationName)).toBe('none');
+ for(const image of await page.locator('#xpHome .heroStory .heroPhoto').all())await expect(image).toHaveCSS('animation-name','none');
  expect(await page.locator('link[href="first-impression.css"]').count()).toBe(1);
  const css=await page.evaluate(async()=>{let r=await fetch('first-impression.css');return r.status});
  expect(css).toBe(200);
