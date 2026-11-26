@@ -46,3 +46,26 @@
  #xpHome .xpHero::after{right:-55%;top:-24%;width:108%;opacity:.4;}
  #xpHome .xpHero h2{letter-spacing:-.025em;}
 }
+
+/* Avatar uses the existing real body visualization; no invented progress morphing. */
+#xpHome .xpCineAvatarChapter{
+ position:relative;display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);align-items:center;
+ gap:12px;min-height:290px;padding:20px 14px;overflow:hidden;border-radius:22px;
+ background:linear-gradient(145deg,#102c29,#173b35 56%,#152623);
+ color:#f1faf6;margin:20px 0;isolation:isolate;
+}
+#xpHome .xpCineAvatarChapter::before{
+ content:"";position:absolute;inset:auto -28% -75% -30%;aspect-ratio:1;border-radius:50%;
+ border:1px solid rgba(154,239,201,.24);box-shadow:0 0 0 30px rgba(154,239,201,.045),0 0 0 85px rgba(154,239,201,.025);
+ pointer-events:none;z-index:-1;
+}
+#xpHome .xpCineAvatarVisual{height:250px;min-width:0;display:grid;align-items:end;justify-items:center;overflow:hidden;}
+#xpHome .xpCineAvatarVisual .xpAvatarStage{max-height:250px;min-height:0;max-width:100%;margin:0;}
+#xpHome .xpCineAvatarVisual .xpBody{width:min(100%,150px);height:250px;max-height:250px;object-fit:contain;filter:drop-shadow(0 10px 24px rgba(0,0,0,.2));}
+#xpHome .xpCineAvatarWords{min-width:0;position:relative;z-index:1;}
+#xpHome .xpCineAvatarWords .xpEyebrow{font-size:10px;letter-spacing:.13em;color:#a6e8ca;}
+#xpHome .xpCineAvatarWords h3{font-size:clamp(23px,6vw,36px);line-height:1.04;letter-spacing:-.04em;margin:12px 0;}
+#xpHome .xpCineAvatarWords p{font-size:13px;line-height:1.5;color:#d9ebe4;margin-bottom:12px;}
+#xpHome .xpCineAvatarFacts{font-size:12px;color:#b8e4d1;margin-bottom:15px;}
+#xpHome .xpCineAvatarWords button{width:100%;min-height:46px;color:#f2fffa!important;border:1px solid #7acaa6!important;background:rgba(255,255,255,.07)!important;}
+@media(max-width:350px){#xpHome .xpCineAvatarChapter{grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:7px;padding:13px 10px;}#xpHome .xpCineAvatarVisual .xpBody{max-width:118px;} }
