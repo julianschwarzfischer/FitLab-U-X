@@ -178,7 +178,7 @@ test('real QA5 application automatically migrates into current IndexedDB', async
   expect(legacy).toEqual(saved);
   await page.unroute(root,oldRoute);
   await page.reload();
-  await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3.5 HERO VISUAL STABILITY');
+  await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3.6 DESIGN FIRST');
   await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0,{timeout:20000});
   const migrated=await canonical(page);
   expect(migrated.p.age).toBe(41);
@@ -1136,7 +1136,7 @@ test('Evolution 2.2 normal text and selected controls contrast across all main s
   }
 });
 
-for(const [previousVersion,old] of [['3.4 NATURAL FLOW','009a9454edd1e1bf578e0bd21f5ee5d8effb4ed6'],['3.3 STORY ACCESS','0e30e98b34092b5d7018ce78f98393288456fcc6'],['2.1','b4604bb056feee3c074e123186baba88bc2cfe25'],['2.2','20a78aaba9fcf9713292fa4b45d43e5fc534da30']])
+for(const [previousVersion,old] of [['3.5 HERO VISUAL STABILITY','658428695ccfc7d21114fe8506006bc593fcd58e'],['3.4 NATURAL FLOW','009a9454edd1e1bf578e0bd21f5ee5d8effb4ed6'],['3.3 STORY ACCESS','0e30e98b34092b5d7018ce78f98393288456fcc6'],['2.1','b4604bb056feee3c074e123186baba88bc2cfe25'],['2.2','20a78aaba9fcf9713292fa4b45d43e5fc534da30']])
 test(`Atlas V2 real service worker update from ${previousVersion} keeps data and an offline write survives reload`,async({browser})=>{
   const {createServer}=require('node:http');
   const {execFileSync}=require('node:child_process');
@@ -1149,12 +1149,19 @@ test(`Atlas V2 real service worker update from ${previousVersion} keeps data and
   for(const id of ['sq','bp','row','oh','lu'])assets['/media/poses/'+id+'.webp']='image/webp';
   for(const name of ['path','strength'])assets['/media/scenes/'+name+'.webp']='image/webp';
   for(const name of ['head-to-toe','food','training','recovery','cockpit','head-to-toe-male','training-male','head-to-toe-neutral','training-neutral'])assets['/media/hero/'+name+'.webp']='image/webp';
+  assets['/design-story.js']='text/javascript';
+  for(const name of fs.readdirSync('media/design-first'))assets['/media/design-first/'+name]='image/webp';
+  if(previousVersion.startsWith('3.5')){
+    for(const route of ['/first-impression.css','/premium-ux.css','/cinematic.css','/cinematic.js']){
+      versions[route]=[execFileSync('git',['show',old+':'+route.slice(1)]),fs.readFileSync(route.slice(1))];
+    }
+  }
   let version=0;
   const server=createServer((req,res)=>{
     const route=new URL(req.url,'http://localhost').pathname;
     const hasVersion=Object.hasOwn(versions,route);
     if(!hasVersion&&!Object.hasOwn(assets,route)){res.writeHead(404).end();return;}
-    res.writeHead(200,{'Cache-Control':'no-store','Content-Type':hasVersion?(route.endsWith('.js')?'text/javascript':'text/html; charset=utf-8'):assets[route]});
+    res.writeHead(200,{'Cache-Control':'no-store','Content-Type':assets[route]||(route.endsWith('.js')?'text/javascript':'text/html; charset=utf-8')});
     res.end(hasVersion?versions[route][version]:fs.readFileSync(route.slice(1)));
   });
   await new Promise((resolve,reject)=>{server.once('error',reject);server.listen(0,'127.0.0.1',resolve);});
@@ -1196,16 +1203,23 @@ test(`Atlas V2 real service worker update from ${previousVersion} keeps data and
     await page.waitForFunction(()=>window.testControllerChanged);
     await page.waitForFunction(async previous=>{
       const keys=await caches.keys();
-      return keys.some(key=>key.endsWith('evolution-3-5-hero-visual-stability'))&&!keys.some(key=>key.endsWith('evolution-'+previous.toLowerCase().replace(/[. ]/g,'-')));
+      return keys.some(key=>key.endsWith('evolution-3-6-design-first'))&&!keys.some(key=>key.endsWith('evolution-'+previous.toLowerCase().replace(/[. ]/g,'-')));
     },previousVersion);
     await page.reload();
-    await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3.5 HERO VISUAL STABILITY');
+    await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3.6 DESIGN FIRST');
     await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
     expect(await canonical(page)).toEqual(prior);
     await context.setOffline(true);
     await page.reload();
-    await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3.5 HERO VISUAL STABILITY');
+    await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3.6 DESIGN FIRST');
     await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
+    if(previousVersion.startsWith('3.5')){
+      await page.getByRole('button',{name:/Erlebnis entdecken/}).click();
+      const story=page.locator('fitlab-design-story');
+      await expect(story.locator('main section')).toHaveCount(5);
+      await story.locator('img.male-photo').first().evaluate(img=>img.decode());
+      await story.getByRole('button',{name:/Zurück zur Startseite/}).click();
+    }
     await addMeal(page,'Post-update offline 2.2',116);
     await page.reload();
     await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
@@ -1743,12 +1757,12 @@ test('Evolution 3.3 returning PWA user can see the full cinematic story and retu
  await expect(page.locator('#xpHome .xpStoryDiscovery')).toBeVisible();
  const before=await canonical(page);
  await page.locator('#xpHome .xpStoryDiscovery button').click();
- await expect(page.locator('#xpHome .cineRun')).toHaveCount(5);
- await expect(page.locator('#xpHome .xpStoryReturn button')).toBeVisible();
+ await expect(page.locator('fitlab-design-story main section')).toHaveCount(5);
+ await expect(page.locator('fitlab-design-story button.back')).toBeVisible();
  expect(await canonical(page)).toEqual(before);
- await page.locator('#xpHome .xpStoryReturn button').click();
+ await page.locator('fitlab-design-story button.back').click();
  await expect(page.locator('#xpHome .xpTiles')).toBeVisible();
- await expect(page.locator('#xpHome .cineRun')).toHaveCount(0);
+ await expect(page.locator('fitlab-design-story main section')).toHaveCount(0);
  expect(await canonical(page)).toEqual(before);
  expect(await page.evaluate(()=>xpABlocked)).toBe(false);
 });
@@ -1773,30 +1787,86 @@ test('Full-bleed story keeps all five hero images local, bounded and readable of
 });
 
 
-for(const [label,sex,suffix] of [['female','f',''],['male','m','-male'],['missing','','-neutral'],['ambiguous','x','-neutral']]){
- test(`Hero artwork follows the ${label} profile while shared chapters and profile data stay intact`,async({page})=>{
+for(const [label,sex,selected] of [['female','f','female'],['male','m','male'],['missing','',''],['ambiguous','x','']]){
+ test(`Design First uses the ${label} profile and changes only the visual preference`,async({page})=>{
   await page.setViewportSize({width:390,height:844});
   await ready(page,sex==='x'?'':sex);
   const before=await canonical(page);
   if(sex==='x')await page.evaluate(()=>{state.p.sex='x';premiumDashboard()});
-  if(sex==='f'||sex==='m'){
-   expect(before.p.sex).toBe(sex);
-   await page.locator('#xpHome .xpStoryDiscovery button').click();
+  await page.getByRole('button',{name:/Erlebnis entdecken/}).click();
+  const story=page.locator('fitlab-design-story');
+  await expect(story.locator('main section')).toHaveCount(5);
+  const chosen=story.locator('input:checked');
+  if(selected)await expect(chosen).toHaveAttribute('id',selected);
+  else{
+   await expect(chosen).toHaveCount(0);
+   await expect(story.getByText('Wähle eine Bilddarstellung.')).toBeVisible();
+   await expect(story.locator('.identity img:visible')).toHaveCount(0);
   }
-  const scenes=page.locator('.heroStory .cineRun');
-  await expect(scenes).toHaveCount(5);
-  const expected=['head-to-toe'+suffix,'food','training'+suffix,'recovery','cockpit'];
-  for(let i=0;i<expected.length;i++){
-   const image=scenes.nth(i).locator('img');
-   await expect(image).toHaveAttribute('src',`media/hero/${expected[i]}.webp`);
-   await image.scrollIntoViewIfNeeded();
-   const box=await image.evaluate(async el=>{
-    await el.decode();
-    const rect=el.getBoundingClientRect();
-    return {sameSize:el.naturalWidth===Number(el.getAttribute('width'))&&el.naturalHeight===Number(el.getAttribute('height')),left:rect.left,width:rect.width};
-   });
-   expect(box).toEqual({sameSize:true,left:0,width:390});
+  const shared=story.locator('section.nutrition img, section.recovery img');
+  const initial=await shared.evaluateAll(images=>images.map(img=>img.currentSrc));
+  for(const variant of ['female','male']){
+   await story.locator(`label[for=${variant}]`).click();
+   await expect(chosen).toHaveAttribute('id',variant);
+   for(const chapter of ['identity','training']){
+    const image=story.locator(`section.${chapter} img:visible`);
+    await expect(image).toHaveAttribute('src',`media/design-first/${chapter}-${variant}.webp`);
+    await image.evaluate(img=>img.decode());
+   }
+   expect(await shared.evaluateAll(images=>images.map(img=>img.currentSrc))).toEqual(initial);
   }
   expect(await canonical(page)).toEqual(before);
+  await story.getByRole('button',{name:/Zurück zur Startseite/}).click();
+  await expect(story).toHaveCount(0);
+  await page.getByRole('button',{name:/Erlebnis entdecken/}).click();
+  await expect(chosen).toHaveAttribute('id','male');
  });
 }
+
+test('Design First remains isolated, static and uncropped across the four mobile widths',async({page})=>{
+ await ready(page);
+ await page.addStyleTag({content:'section, header, main, .copy, .photo, button {border-radius:99px!important; padding:89px!important;background:magenta!important}'});
+ await page.evaluate(()=>xpStoryToggle());
+ const story=page.locator('fitlab-design-story');
+ await expect(page.locator('body > nav')).toBeHidden();
+ await expect(story.locator('header')).toHaveCSS('background-color','rgb(20, 27, 19)');
+ for(const width of [320,375,390,430]){
+  await page.setViewportSize({width,height:844});
+  for(const variant of ['female','male']){
+   await story.locator(`label[for=${variant}]`).click();
+   for(const image of await story.locator('main img:visible').all()){
+    const info=await image.evaluate(async img=>{
+     await img.decode();
+     const box=img.getBoundingClientRect(),css=getComputedStyle(img);
+     return {width:box.width,left:box.left,ratio:box.width/box.height,native:img.naturalWidth/img.naturalHeight,fit:css.objectFit,animation:css.animationName};
+    });
+    expect(info).toMatchObject({width,left:0,fit:'contain',animation:'none'});
+    expect(info.ratio).toBeCloseTo(info.native,2);
+   }
+   expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBe(width);
+  }
+ }
+ const section=story.locator('section.training');
+ await section.scrollIntoViewIfNeeded();
+ const distance=await section.evaluate(el=>{
+  const top=el.getBoundingClientRect().top;
+  scrollBy({top:120,behavior:'instant'});
+  return top-el.getBoundingClientRect().top;
+ });
+ expect(distance).toBeCloseTo(120,0);
+ await page.keyboard.press('Escape');
+ await expect(story).toHaveCount(0);
+ await expect(page.locator('body > nav')).toBeVisible();
+});
+
+test('Design First cockpit renders real recorded values and leaves missing data explicit',async({page})=>{
+ await ready(page);
+ await page.getByRole('button',{name:/Erlebnis entdecken/}).click();
+ const story=page.locator('fitlab-design-story');
+ await expect(story.locator('.tile strong')).toHaveText(['–','–','–','–']);
+ await story.getByRole('button',{name:/Zurück zur Startseite/}).click();
+ await addMeal(page,'Story QA Abendessen',123);
+ await page.evaluate(()=>{tab('today');xpStoryToggle()});
+ await expect(story.locator('.tile').nth(2)).toContainText('212 kcal');
+ await expect(story.locator('.tile').nth(3)).toContainText('Noch kein Gewichtsverlauf');
+});

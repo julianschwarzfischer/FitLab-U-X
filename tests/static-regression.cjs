@@ -68,3 +68,11 @@ assert(sw.includes("'./first-impression.css'"),'First impression CSS missing fro
 assert(firstCSS.includes('prefers-reduced-motion:reduce'),'First impression reduced-motion CSS missing');
 assert(html.includes('xpFirstWelcome')&&html.includes('xpFirstSetupHero'),'Premium welcome or wizard not present');
 console.log('PASS premium preview, onboarding and offline presentation assets');
+
+const story=fs.readFileSync('design-story.js','utf8');
+new vm.Script(story,{filename:'design-story.js'});
+assert(html.includes('src="design-story.js"')&&sw.includes("'./design-story.js'"),'Story script must load offline');
+const storyImages=[...story.matchAll(/src="(media\/design-first\/[a-z-]+\.webp)"/g)].map(match=>match[1]);
+assert.equal(new Set(storyImages).size,6,'Each reference image must be unique');
+for(const path of storyImages)assert(fs.statSync(path).isFile()&&sw.includes(`'./${path}'`),`Missing offline asset: ${path}`);
+console.log('PASS isolated Design First script and six original local images');
