@@ -2,10 +2,10 @@ name: FITNESS LAB browser quality gate
 on:
   workflow_dispatch:
   push:
-    branches: ['test/evolution-ci-meilenstein', 'dev/evolution-3-exercise-atlas', 'dev/evolution-3-premium-ux', 'dev/evolution-3-ios-save-fix', 'dev/evolution-3-mobile-flow', 'dev/evolution-3-nutrition-training-flow', 'dev/evolution-3-1-cinematic', 'dev/evolution-3-2-premium-first-impression','dev/evolution-3-3-cinematic-redesign']
+    branches: ['test/evolution-ci-meilenstein', 'dev/evolution-3-exercise-atlas', 'dev/evolution-3-premium-ux', 'dev/evolution-3-ios-save-fix', 'dev/evolution-3-mobile-flow', 'dev/evolution-3-nutrition-training-flow', 'dev/evolution-3-1-cinematic', 'dev/evolution-3-2-premium-first-impression','dev/evolution-3-3-cinematic-redesign', 'dev/evolution-3-3-story-access']
 jobs:
   browser-e2e:
-    if: github.ref == 'refs/heads/test/evolution-ci-meilenstein' || github.ref == 'refs/heads/dev/evolution-3-exercise-atlas' || github.ref == 'refs/heads/dev/evolution-3-premium-ux' || github.ref == 'refs/heads/dev/evolution-3-ios-save-fix' || github.ref == 'refs/heads/dev/evolution-3-mobile-flow' || github.ref == 'refs/heads/dev/evolution-3-nutrition-training-flow' || github.ref == 'refs/heads/dev/evolution-3-1-cinematic' || github.ref == 'refs/heads/dev/evolution-3-2-premium-first-impression' || github.ref == 'refs/heads/dev/evolution-3-3-cinematic-redesign'
+    if: github.ref == 'refs/heads/test/evolution-ci-meilenstein' || github.ref == 'refs/heads/dev/evolution-3-exercise-atlas' || github.ref == 'refs/heads/dev/evolution-3-premium-ux' || github.ref == 'refs/heads/dev/evolution-3-ios-save-fix' || github.ref == 'refs/heads/dev/evolution-3-mobile-flow' || github.ref == 'refs/heads/dev/evolution-3-nutrition-training-flow' || github.ref == 'refs/heads/dev/evolution-3-1-cinematic' || github.ref == 'refs/heads/dev/evolution-3-2-premium-first-impression' || github.ref == 'refs/heads/dev/evolution-3-3-cinematic-redesign' || github.ref == 'refs/heads/dev/evolution-3-3-story-access'
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     permissions:
@@ -26,13 +26,13 @@ jobs:
         run: npm run test:browser
       # Separate static staging package, not a deployment. Runs only after all checks succeed.
       - name: Package isolated iPhone staging build
-        if: success() && (github.ref == 'refs/heads/dev/evolution-3-premium-ux' || github.ref == 'refs/heads/dev/evolution-3-ios-save-fix' || github.ref == 'refs/heads/dev/evolution-3-mobile-flow' || github.ref == 'refs/heads/dev/evolution-3-nutrition-training-flow' || github.ref == 'refs/heads/dev/evolution-3-1-cinematic' || github.ref == 'refs/heads/dev/evolution-3-2-premium-first-impression' || github.ref == 'refs/heads/dev/evolution-3-3-cinematic-redesign')
+        if: success() && (github.ref == 'refs/heads/dev/evolution-3-premium-ux' || github.ref == 'refs/heads/dev/evolution-3-ios-save-fix' || github.ref == 'refs/heads/dev/evolution-3-mobile-flow' || github.ref == 'refs/heads/dev/evolution-3-nutrition-training-flow' || github.ref == 'refs/heads/dev/evolution-3-1-cinematic' || github.ref == 'refs/heads/dev/evolution-3-2-premium-first-impression' || github.ref == 'refs/heads/dev/evolution-3-3-cinematic-redesign' || github.ref == 'refs/heads/dev/evolution-3-3-story-access')
         run: |
           git archive --format=zip --output=fitlab-iphone-staging.zip HEAD \
             index.html brand.js exercise-atlas.js premium-ux.css cinematic.css cinematic.js first-impression.css sw.js manifest.json \
             icon-180.png icon-192.png icon-512.png media/
       - name: Upload staging package (no publication)
-        if: success() && (github.ref == 'refs/heads/dev/evolution-3-premium-ux' || github.ref == 'refs/heads/dev/evolution-3-ios-save-fix' || github.ref == 'refs/heads/dev/evolution-3-mobile-flow' || github.ref == 'refs/heads/dev/evolution-3-nutrition-training-flow' || github.ref == 'refs/heads/dev/evolution-3-1-cinematic' || github.ref == 'refs/heads/dev/evolution-3-2-premium-first-impression' || github.ref == 'refs/heads/dev/evolution-3-3-cinematic-redesign')
+        if: success() && (github.ref == 'refs/heads/dev/evolution-3-premium-ux' || github.ref == 'refs/heads/dev/evolution-3-ios-save-fix' || github.ref == 'refs/heads/dev/evolution-3-mobile-flow' || github.ref == 'refs/heads/dev/evolution-3-nutrition-training-flow' || github.ref == 'refs/heads/dev/evolution-3-1-cinematic' || github.ref == 'refs/heads/dev/evolution-3-2-premium-first-impression' || github.ref == 'refs/heads/dev/evolution-3-3-cinematic-redesign' || github.ref == 'refs/heads/dev/evolution-3-3-story-access')
         uses: actions/upload-artifact@v4
         with:
           name: fitlab-iphone-staging
