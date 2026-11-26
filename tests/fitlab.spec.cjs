@@ -1638,3 +1638,21 @@ test('Evolution 3.1 motion stylesheets are delivered and offline-cached',async({
  })));
  expect(assets).toEqual([{url:'cinematic.css',status:200},{url:'cinematic.js',status:200}]);
 });
+test('Evolution 3.1 avatar chapter reuses real body artwork and opens real progress',async({page})=>{
+ await page.setViewportSize({width:375,height:812});
+ await ready(page);
+ const chapter=page.locator('#xpHome .xpCineAvatarChapter');
+ await expect(chapter).toHaveCount(1);
+ await expect(chapter.locator('.xpBody')).toHaveCount(1);
+ await expect(chapter).toContainText('Trainingstage / Woche im Profil');
+ const original=await canonical(page);
+ await chapter.getByRole('button',{name:'Entwicklung ansehen'}).click();
+ await expect(page.locator('#xpDeep')).toBeVisible();
+ expect(await canonical(page)).toEqual(original);
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);
+});
+test('Evolution 3.1 onboarding does not show progress avatar without valid profile',async({page})=>{
+ await page.goto('/');
+ await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0,{timeout:20000});
+ await expect(page.locator('#xpHome .xpCineAvatarChapter')).toHaveCount(0);
+});
