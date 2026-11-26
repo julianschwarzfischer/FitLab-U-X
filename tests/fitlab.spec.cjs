@@ -178,7 +178,7 @@ test('real QA5 application automatically migrates into current IndexedDB', async
   expect(legacy).toEqual(saved);
   await page.unroute(root,oldRoute);
   await page.reload();
-  await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3.3 CINEMATIC');
+  await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3.3 STORY ACCESS');
   await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0,{timeout:20000});
   const migrated=await canonical(page);
   expect(migrated.p.age).toBe(41);
@@ -1194,15 +1194,15 @@ test(`Atlas V2 real service worker update from ${previousVersion} keeps data and
     await page.waitForFunction(()=>window.testControllerChanged);
     await page.waitForFunction(async previous=>{
       const keys=await caches.keys();
-      return keys.some(key=>key.endsWith('evolution-3-3-cinematic'))&&!keys.some(key=>key.endsWith('evolution-'+previous.replace('.','-')));
+      return keys.some(key=>key.endsWith('evolution-3-3-story-access'))&&!keys.some(key=>key.endsWith('evolution-'+previous.replace('.','-')));
     },previousVersion);
     await page.reload();
-    await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3.3 CINEMATIC');
+    await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3.3 STORY ACCESS');
     await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
     expect(await canonical(page)).toEqual(prior);
     await context.setOffline(true);
     await page.reload();
-    await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3.3 CINEMATIC');
+    await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3.3 STORY ACCESS');
     await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
     await addMeal(page,'Post-update offline 2.2',116);
     await page.reload();
