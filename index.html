@@ -2402,5 +2402,32 @@ function xp22PauseRestore(){
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)xp22PauseRestore();});
 window.addEventListener('pageshow',event=>{if(event.persisted)xp22PauseRestore();});
 
+
+// Evolution 3.1 · A factual avatar chapter using the already installed body art.
+// It is a presentation of the configured avatar, never a simulation of body change.
+const xpCineChapterBase=xpHomeMarkup;
+xpHomeMarkup=function(){
+ const original=xpCineChapterBase();
+ if(!xpProfileReady())return original;
+ const container=document.createElement('div');container.innerHTML=original;
+ const tiles=container.querySelector('.xpTiles');
+ if(!tiles)return original;
+ const section=document.createElement('section');
+ section.className='xpCineAvatarChapter';
+ section.setAttribute('aria-label','Dein Körpermodell und deine Entwicklung');
+ const days=Number(state.p.days);
+ const name=typeof xpPrefs.name==='string'&&xpPrefs.name.trim()?xpPrefs.name.trim():'Dein Weg';
+ section.innerHTML=`<div class="xpCineAvatarVisual" aria-hidden="true">${xpAvatarSVG(xpPrefs.avatar,'front',false)}</div>
+  <div class="xpCineAvatarWords">
+   <div class="xpEyebrow">DEIN KÖRPER · DEIN WEG</div>
+   <h3>${esc(name)}</h3>
+   <p>Deine Ziele geben die Richtung vor. Deine dokumentierten Fortschritte zeigen den Weg.</p>
+   <div class="xpCineAvatarFacts"><span>${esc(String(days))} Trainingstage / Woche im Profil</span></div>
+   <button type="button" class="secondary" onclick="xpOpen('progress')">Entwicklung ansehen ›</button>
+  </div>`;
+ tiles.after(section);
+ return container.innerHTML;
+};
+
 void xpIDBBoot();if('serviceWorker'in navigator&&location.protocol.startsWith('http')){let hadController=!!navigator.serviceWorker.controller;navigator.serviceWorker.addEventListener('controllerchange',()=>{if(hadController)xp131UpdateNotice();hadController=true;});navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(reg=>{reg.update().catch(()=>{});document.addEventListener('visibilitychange',()=>{if(!document.hidden)reg.update().catch(()=>{})});}).catch(()=>{});}
 </script><script src="exercise-atlas.js"></script><script src="cinematic.js" defer></script></body></html>
