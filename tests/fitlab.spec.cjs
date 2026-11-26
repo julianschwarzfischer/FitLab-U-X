@@ -178,7 +178,7 @@ test('real QA5 application automatically migrates into current IndexedDB', async
   expect(legacy).toEqual(saved);
   await page.unroute(root,oldRoute);
   await page.reload();
-  await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3 FLOW V1');
+  await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3 CINEMATIC V1');
   await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0,{timeout:20000});
   const migrated=await canonical(page);
   expect(migrated.p.age).toBe(41);
@@ -1194,15 +1194,15 @@ test(`Atlas V2 real service worker update from ${previousVersion} keeps data and
     await page.waitForFunction(()=>window.testControllerChanged);
     await page.waitForFunction(async previous=>{
       const keys=await caches.keys();
-      return keys.some(key=>key.endsWith('evolution-3-flow-v1'))&&!keys.some(key=>key.endsWith('evolution-'+previous.replace('.','-')));
+      return keys.some(key=>key.endsWith('evolution-3-cinematic-v1'))&&!keys.some(key=>key.endsWith('evolution-'+previous.replace('.','-')));
     },previousVersion);
     await page.reload();
-    await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3 FLOW V1');
+    await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3 CINEMATIC V1');
     await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
     expect(await canonical(page)).toEqual(prior);
     await context.setOffline(true);
     await page.reload();
-    await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3 FLOW V1');
+    await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3 CINEMATIC V1');
     await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
     await addMeal(page,'Post-update offline 2.2',116);
     await page.reload();
@@ -1603,4 +1603,38 @@ test('Evolution 3 active exercise opens technique without altering training draf
  await expect(guide).toHaveAttribute('open','');
  await expect(action).toHaveAttribute('aria-expanded','true');
  expect((await canonical(page)).trainingDraft).toEqual(before);
+});
+
+test('Evolution 3.1 cinematic stage reveals cockpit without changing saved fitness data',async({page})=>{
+ await page.setViewportSize({width:390,height:844});await ready(page);
+ await expect(page.locator('#xpHome .xpHero')).toHaveClass(/xpCine/);
+ await expect(page.locator('#xpHome .xpHero')).toHaveAttribute('data-cine-visible','yes');
+ await expect(page.locator('#xpHome .xpTiles .xpTile').first()).toHaveClass(/xpCine/);
+ const saved=await canonical(page);
+ await page.locator('#xpHome .xpCoachCompact').scrollIntoViewIfNeeded();
+ await expect(page.locator('#xpHome .xpCoachCompact')).toHaveAttribute('data-cine-visible','yes');
+ expect(await canonical(page)).toEqual(saved);
+ await expect(page.locator('#xpAStorageAlert')).toHaveCount(0);
+});
+
+test('Evolution 3.1 respects reduced motion and keeps cockpit controls functional',async({page})=>{
+ await page.emulateMedia({reducedMotion:'reduce'});
+ await ready(page);
+ const hero=page.locator('#xpHome .xpHero');
+ await expect(hero).toHaveAttribute('data-cine-visible','yes');
+ expect(await hero.evaluate(el=>getComputedStyle(el).transitionDuration)).toBe('0s');
+ const before=await canonical(page);
+ await page.locator('#xpHome .xpBrief').first().click();
+ await expect(page.locator('#xpCheck')).toBeVisible();
+ expect(await canonical(page)).toEqual(before);
+});
+
+test('Evolution 3.1 motion stylesheets are delivered and offline-cached',async({page})=>{
+ await ready(page);
+ expect(await page.locator('link[href="cinematic.css"]').count()).toBe(1);
+ expect(await page.locator('script[src="cinematic.js"]').count()).toBe(1);
+ const assets=await page.evaluate(async()=>Promise.all(['cinematic.css','cinematic.js'].map(async url=>{
+  const response=await fetch(url);return {url,status:response.status};
+ })));
+ expect(assets).toEqual([{url:'cinematic.css',status:200},{url:'cinematic.js',status:200}]);
 });
