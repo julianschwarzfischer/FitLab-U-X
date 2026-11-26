@@ -178,7 +178,7 @@ test('real QA5 application automatically migrates into current IndexedDB', async
   expect(legacy).toEqual(saved);
   await page.unroute(root,oldRoute);
   await page.reload();
-  await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3 CINEMATIC V1');
+  await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3 FIRST IMPRESSION V1');
   await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0,{timeout:20000});
   const migrated=await canonical(page);
   expect(migrated.p.age).toBe(41);
@@ -1145,7 +1145,7 @@ test(`Atlas V2 real service worker update from ${previousVersion} keeps data and
     const file=path==='/'?'index.html':path.slice(1);
     return [path,[execFileSync('git',['show',old+':'+file],{maxBuffer:4*1024*1024}),fs.readFileSync(file)]];
   }));
-  const assets={'/premium-ux.css':'text/css','/cinematic.css':'text/css','/cinematic.js':'text/javascript','/exercise-atlas.js':'text/javascript','/brand.js':'text/javascript','/manifest.json':'application/json','/icon-180.png':'image/png','/icon-192.png':'image/png','/icon-512.png':'image/png'};
+  const assets={'/premium-ux.css':'text/css','/first-impression.css':'text/css','/cinematic.css':'text/css','/cinematic.js':'text/javascript','/exercise-atlas.js':'text/javascript','/brand.js':'text/javascript','/manifest.json':'application/json','/icon-180.png':'image/png','/icon-192.png':'image/png','/icon-512.png':'image/png'};
   for(const id of ['sq','bp','row','oh','lu'])assets['/media/poses/'+id+'.webp']='image/webp';
   let version=0;
   const server=createServer((req,res)=>{
@@ -1194,15 +1194,15 @@ test(`Atlas V2 real service worker update from ${previousVersion} keeps data and
     await page.waitForFunction(()=>window.testControllerChanged);
     await page.waitForFunction(async previous=>{
       const keys=await caches.keys();
-      return keys.some(key=>key.endsWith('evolution-3-cinematic-v1'))&&!keys.some(key=>key.endsWith('evolution-'+previous.replace('.','-')));
+      return keys.some(key=>key.endsWith('evolution-3-first-impression-v1'))&&!keys.some(key=>key.endsWith('evolution-'+previous.replace('.','-')));
     },previousVersion);
     await page.reload();
-    await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3 CINEMATIC V1');
+    await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3 FIRST IMPRESSION V1');
     await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
     expect(await canonical(page)).toEqual(prior);
     await context.setOffline(true);
     await page.reload();
-    await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3 CINEMATIC V1');
+    await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3 FIRST IMPRESSION V1');
     await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
     await addMeal(page,'Post-update offline 2.2',116);
     await page.reload();
@@ -1655,4 +1655,50 @@ test('Evolution 3.1 onboarding does not show progress avatar without valid profi
  await page.goto('/');
  await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0,{timeout:20000});
  await expect(page.locator('#xpHome .xpCineAvatarChapter')).toHaveCount(0);
+});
+
+test('Evolution 3.2 fresh install previews cockpit before personal data is entered',async({page})=>{
+ await page.setViewportSize({width:375,height:812});
+ await page.goto('/');await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0,{timeout:20000});
+ const first=page.locator('#xpHome .xpFirstWelcome');
+ await expect(first).toHaveCount(1);
+ await expect(first.getByRole('heading',{name:/Willkommen/})).toBeVisible();
+ await expect(first.locator('.xpFirstHeroArt .xpBody')).toHaveCount(1);
+ await expect(first.locator('.xpFirstMini')).toHaveCount(3);
+ await expect(first).toContainText('Noch keine persönlichen Messwerte');
+ const empty=await canonical(page);
+ expect(empty.p).toMatchObject({weight:'',height:'',age:'',goals:[]});
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);
+ await first.getByRole('button',{name:/Meinen Weg starten/}).click();
+ await expect(page.locator('#xp12Intro .xpFirstSetupHero')).toBeVisible();
+ await expect(page.locator('#xp12Intro .xpFirstSetupHero .xpBody')).toHaveCount(1);
+ expect(await canonical(page)).toEqual(empty);
+});
+
+test('Evolution 3.2 profile uses same cinematic language without changing wizard safeguards',async({page})=>{
+ await ready(page);
+ await page.evaluate(()=>{tab('profile');xp12Step=1;xp12WizardUI()});
+ await expect(page.locator('#xp12Intro .xpFirstSetupHero')).toContainText('Deine Körperdaten');
+ await expect(page.locator('#bodyfields')).toBeVisible();
+ await page.locator('#weight').fill('90');
+ await page.locator('#height').fill('280');
+ await page.evaluate(()=>xp12Advance());
+ await expect(page.locator('#xp12Message')).toBeVisible();
+ await page.locator('#height').fill('180');
+ await expect(page.locator('#xp12Message')).toBeHidden();
+ await page.locator('#age').fill('39');
+ await page.locator('#sex').selectOption('m');
+ await page.evaluate(()=>xp12Advance());
+ expect(await page.evaluate(()=>xp12Step)).toBe(2);
+ expect(await page.evaluate(()=>xpABlocked)).toBe(false);
+});
+
+test('Evolution 3.2 entrance visuals respect reduced motion and stay offline cached',async({page})=>{
+ await page.emulateMedia({reducedMotion:'reduce'});
+ await page.goto('/');await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0,{timeout:20000});
+ await expect(page.locator('#xpHome .xpFirstWelcome')).toBeVisible();
+ expect(await page.locator('#xpHome .xpFirstHeroArt .xpAvatarStage').evaluate(el=>getComputedStyle(el).animationName)).toBe('none');
+ expect(await page.locator('link[href="first-impression.css"]').count()).toBe(1);
+ const css=await page.evaluate(async()=>{let r=await fetch('first-impression.css');return r.status});
+ expect(css).toBe(200);
 });
