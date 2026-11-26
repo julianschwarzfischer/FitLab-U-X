@@ -3,7 +3,7 @@
  'use strict';
  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)');
  const selector=[
-  '#xpHome .xpHero','#xpHome .xpHomeStack','#xpHome .xpHeading',
+  '#xpHome .xpFirstHero','#xpHome .xpFirstPreview','#xpHome .xpFirstMini','#xpHome .xpHero','#xpHome .xpHomeStack','#xpHome .xpHeading',
   '#xpHome .xpTiles .xpTile','#xpHome .xpCoachCompact',
   '#xpHome .xpStrip','#xpHome .xpCineAvatarChapter','#xpHome .xpEvoCoach','#xpHome .xp12Focus','#xpDeep .xp12DetailHero',
   '#xpCheck > :is(section,.xpHero,.xpCard)'
