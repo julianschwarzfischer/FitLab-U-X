@@ -63,36 +63,13 @@
 @media(prefers-reduced-motion:no-preference){#xpHome .xpFirstHeroArt .xpAvatarStage{animation:xpFirstFloat 7s ease-in-out infinite alternate}#xpHome .xpFirstHeroArt:before{animation:xpFirstGlow 6s ease-in-out infinite alternate}#xpHome .xpFirstMini{transition:transform .35s ease,background .35s ease}#xpHome .xpFirstMini:hover{transform:translateY(-3px);background:rgba(255,255,255,.09)}@keyframes xpFirstFloat{from{transform:translateY(7px)}to{transform:translateY(-9px)}}@keyframes xpFirstGlow{from{opacity:.6;transform:scale(.94)}to{opacity:1;transform:scale(1.05)}}}
 @media(prefers-reduced-motion:reduce){#xpHome .xpFirstHeroArt *,#xpHome .xpFirstHeroArt:before{animation:none!important;transition:none!important}#xpHome .xpFirstMini{transition:none!important}}
 
-/* A chapter holds the stage while natural scrolling changes the framing. */
-#xpHome .cineStory{margin:0 -14px;border-radius:0;overflow:visible;background:#141716;color:#fff;box-shadow:none}
-.cineRun{position:relative;height:123svh;min-height:620px;margin:0;padding:0;border:0;border-radius:0;background:#191b1a}
-.cineScreen{position:sticky;top:0;height:calc(100svh - 74px);min-height:490px;overflow:hidden;isolation:isolate}
-.cineVisual,.cineVisual:after{position:absolute;inset:0}
-.cineVisual{transform:translateY(calc(var(--travel,0)*-3%)) scale(calc(1 + var(--travel,0)*.12));transform-origin:55% 40%;pointer-events:none}
-.cineVisual:after{content:'';background:linear-gradient(0deg,#090c0cf5 0%,#090c0cd9 18%,transparent 68%)}
-.cineVisual img{width:100%;height:100%;object-fit:cover}
-#xpHome .cineStory .xpFirstHeroArt{display:block;background:#202020}
-#xpHome .cineStory .xpFirstHeroArt:before{display:none}
-#xpHome .cineStory .xpAvatarStage{position:absolute;inset:-15% -18% -5% 8%;max-width:none;border-radius:0;background:none;animation:none}
-#xpHome .cineStory .xpBody{height:125%;width:100%;max-height:none;filter:none}
 .cineLift{height:100%;background:#202020 url(media/poses/row.webp) left center/200% auto no-repeat}
-.cineRun[data-pulled] .cineLift{background-position:right center}
-.cineCopy{position:absolute;bottom:6%;left:max(6%,24px);right:6%;color:#fff;z-index:2}
-.cineCopy small{font:700 12px/1.4 system-ui;letter-spacing:.17em;text-transform:uppercase;color:#bdf4cf}
-#xpHome .cineCopy h2{font:750 clamp(48px,13vw,98px)/.92 system-ui;letter-spacing:-.074em;color:white;margin:13px 0}
-.cineCopy p{max-width:32ch;color:#eff4ef;font-size:16px;line-height:1.4}
-.cineCopy button{background:#dcf9df;color:#122018;border:none;border-radius:32px;padding:13px 21px;width:auto;min-height:46px}
-.cineDial{position:absolute;inset:8% -15% auto auto;width:95%;aspect-ratio:1;border-radius:50%;background:repeating-radial-gradient(circle,#101e1c 0 13%,#8bd3b5 13.2% 13.7%,#173831 14% 17%);transform:rotateX(38deg) rotateZ(-16deg)}
-#xpHome .cinePreview .xpFirstMini{display:inline-block;padding:4px 10px;margin:0 4px 10px 0;min-height:0;border:1px solid #71887b;border-radius:20px;color:white;font-size:12px}
 #profile .xpFirstSetupHero{position:relative;isolation:isolate;overflow:hidden;display:flex;align-items:flex-end;min-height:clamp(155px,30svh,330px);padding:20px;color:white;background:#161d1b;border-radius:0}
 #profile .xpFirstSetupHero>div:first-child{z-index:1;max-width:76%;text-shadow:0 2px 8px #000}
 #profile .xpFirstSetupHero>div:last-child{position:absolute;inset:0 0 0 28%;opacity:.7;mask-image:linear-gradient(90deg,transparent,#000 45%)}
 #profile .xpFirstSetupHero img,#profile .xpFirstSetupHero .xpBody{height:100%;width:100%;object-fit:cover}
 #profile.xpFirstSetting:focus-within .xpFirstSetupHero{min-height:115px}
 #profile.xpFirstSetting input,#profile.xpFirstSetting select{min-height:44px;font-size:16px;scroll-margin:65px}
-@media(prefers-reduced-motion:reduce){.cineRun{height:auto;min-height:0}.cineScreen{position:relative}.cineVisual{transform:none}}
-#xpHome .cineStory .xpFirstHeroArt{position:absolute;inset:0;height:100%;z-index:0}
-#xpHome .cineStory .xpAvatarStage{inset:-4% -24% -10% 10%}
 #profile.xpFirstSetting>.xp12Hero{display:none}
 #profile.xpFirstSetting #xp12Intro{padding:0;border:0;overflow:hidden}
 #profile.xpFirstSetting .xpFirstSetupHero{min-height:31svh;margin:0}
@@ -113,3 +90,34 @@
 #xpHome .xpStoryDiscovery button{background:#d6fbe1!important;color:#16382b!important;min-height:51px;border-radius:14px!important;font-weight:750;border:0!important}
 #xpHome .xpStoryReturn{position:sticky;top:0;z-index:12;padding:9px 10px 0;background:var(--bg)}
 #xpHome .xpStoryReturn button{width:100%;min-height:46px;background:#d8f6e2;color:#123426;border:1px solid #a6cfb7;border-radius:12px;font-weight:750}
+
+#xpHome .flowStory{background:#15221e;color:#fff;padding:0;overflow:hidden;box-shadow:none;border-radius:20px}
+.flowStory .cineRun{margin:0;padding:0;border:0;border-radius:0;background:transparent}
+.flowStory .cineScreen{position:relative;isolation:isolate;display:flex;align-items:flex-end;min-height:clamp(440px,83svh,850px);overflow:hidden}
+.flowStory .cineVisual{position:absolute;inset:0;z-index:-1;overflow:hidden}
+#xpHome .flowStory .xpFirstHeroArt,#xpHome .flowStory .xpAvatarStage,#xpHome .flowStory .xpBody,.flowStory .cineVisual img{display:block;position:static;width:100%;height:100%;max-width:none;max-height:none;margin:0;filter:none;border-radius:0;animation:none}
+#xpHome .flowStory .xpFirstHeroArt:before{display:none}
+.flowStory .cineVisual img{object-fit:cover;object-position:center 38%}
+.flowStory .cineVisual:after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,#101a16 0%,#111916be 24%,transparent 68%)}
+.flowStory .cineCopy{padding:32px clamp(18px,6vw,40px);color:#fff;width:100%;box-sizing:border-box}
+.flowStory .cineCopy small{color:#e5ce9b;font:700 11px/1.4 system-ui;letter-spacing:.18em;text-transform:uppercase}
+#xpHome .flowStory h2{font:720 clamp(43px,12vw,90px)/.95 system-ui;letter-spacing:-.066em;color:inherit;margin:12px 0}
+.flowStory p{color:inherit;line-height:1.48;font-size:15px;max-width:33ch;margin:14px 0}
+.flowStory button{width:auto;min-height:46px;padding:12px 19px;border:0;border-radius:28px;background:#ebf4df;color:#17271f}
+.flowCue{display:inline-block;border-top:1px solid #d1b991;padding-top:10px;color:#eee3c9;font-size:13px}
+.flowStory [data-scene="food"] .cineScreen{min-height:73svh}
+.flowStory [data-scene="rest"] .cineScreen{min-height:67svh}
+.flowStory [data-scene="cockpit"] .cineScreen{min-height:auto;background:#e9eee4;color:#162b22}
+.flowStory [data-scene="cockpit"] .cineCopy{padding-block:50px;color:inherit}
+.flowStory [data-scene="cockpit"] small{color:#52664f}
+.flowAgenda{margin:22px 0 20px;border-block:1px solid #a9bbab;padding:15px 0}
+#xpHome .flowAgenda .xpFirstMini{display:flex;flex-direction:row;align-items:center;justify-content:start;gap:10px;background:none;min-height:0;padding:10px 0;border:0}
+.flowAgenda svg{width:19px;height:19px}.flowAgenda span{margin-left:auto;font-size:13px}
+.flowStory [data-scene="cockpit"] button{background:#203c2f;color:white}
+@media(prefers-reduced-motion:no-preference){
+ .flowEntered .cineCopy{animation:flowCopy .55s ease-out both}
+ .flowEntered .cineVisual img{animation:flowPhoto 1.5s ease-out both}
+ @keyframes flowCopy{from{opacity:.75;transform:translateY(8px)}}
+ @keyframes flowPhoto{from{transform:scale(1.035)}to{transform:scale(1)}}
+}
+.flowStory [data-scene="cockpit"] .cineVisual{display:none}

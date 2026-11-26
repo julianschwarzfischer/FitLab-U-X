@@ -178,7 +178,7 @@ test('real QA5 application automatically migrates into current IndexedDB', async
   expect(legacy).toEqual(saved);
   await page.unroute(root,oldRoute);
   await page.reload();
-  await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3.3 STORY ACCESS');
+  await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3.4 NATURAL FLOW');
   await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0,{timeout:20000});
   const migrated=await canonical(page);
   expect(migrated.p.age).toBe(41);
@@ -1136,7 +1136,7 @@ test('Evolution 2.2 normal text and selected controls contrast across all main s
   }
 });
 
-for(const [previousVersion,old] of [['2.1','b4604bb056feee3c074e123186baba88bc2cfe25'],['2.2','20a78aaba9fcf9713292fa4b45d43e5fc534da30']])
+for(const [previousVersion,old] of [['3.3 STORY ACCESS','0e30e98b34092b5d7018ce78f98393288456fcc6'],['2.1','b4604bb056feee3c074e123186baba88bc2cfe25'],['2.2','20a78aaba9fcf9713292fa4b45d43e5fc534da30']])
 test(`Atlas V2 real service worker update from ${previousVersion} keeps data and an offline write survives reload`,async({browser})=>{
   const {createServer}=require('node:http');
   const {execFileSync}=require('node:child_process');
@@ -1147,6 +1147,7 @@ test(`Atlas V2 real service worker update from ${previousVersion} keeps data and
   }));
   const assets={'/media/scenes/nutrition.webp':'image/webp','/media/scenes/recovery.webp':'image/webp','/premium-ux.css':'text/css','/first-impression.css':'text/css','/cinematic.css':'text/css','/cinematic.js':'text/javascript','/exercise-atlas.js':'text/javascript','/brand.js':'text/javascript','/manifest.json':'application/json','/icon-180.png':'image/png','/icon-192.png':'image/png','/icon-512.png':'image/png'};
   for(const id of ['sq','bp','row','oh','lu'])assets['/media/poses/'+id+'.webp']='image/webp';
+  for(const name of ['path','strength'])assets['/media/scenes/'+name+'.webp']='image/webp';
   let version=0;
   const server=createServer((req,res)=>{
     const route=new URL(req.url,'http://localhost').pathname;
@@ -1194,15 +1195,15 @@ test(`Atlas V2 real service worker update from ${previousVersion} keeps data and
     await page.waitForFunction(()=>window.testControllerChanged);
     await page.waitForFunction(async previous=>{
       const keys=await caches.keys();
-      return keys.some(key=>key.endsWith('evolution-3-3-story-access'))&&!keys.some(key=>key.endsWith('evolution-'+previous.replace('.','-')));
+      return keys.some(key=>key.endsWith('evolution-3-4-natural-flow'))&&!keys.some(key=>key.endsWith('evolution-'+previous.toLowerCase().replace(/[. ]/g,'-')));
     },previousVersion);
     await page.reload();
-    await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3.3 STORY ACCESS');
+    await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3.4 NATURAL FLOW');
     await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
     expect(await canonical(page)).toEqual(prior);
     await context.setOffline(true);
     await page.reload();
-    await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3.3 STORY ACCESS');
+    await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3.4 NATURAL FLOW');
     await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
     await addMeal(page,'Post-update offline 2.2',116);
     await page.reload();
@@ -1703,14 +1704,18 @@ test('Evolution 3.2 entrance visuals respect reduced motion and stay offline cac
  expect(css).toBe(200);
 });
 
-test('Cinematic chapters scrub the training pose and lead into setup at mobile widths',async({page})=>{
+test('Natural-flow chapters scroll with the viewport and lead into setup at mobile widths',async({page})=>{
  await page.goto('/');
  await expect(page.locator('.cineRun')).toHaveCount(5);
  const training=page.locator('[data-scene="train"]');
  for(const width of [320,390]){
   await page.setViewportSize({width,height:820});
-  await training.evaluate(e=>scrollBy(0,e.getBoundingClientRect().top+e.offsetHeight-e.firstElementChild.offsetHeight));
-  await expect(training).toHaveAttribute('data-pulled','');
+  await training.scrollIntoViewIfNeeded();
+  await expect(training).toHaveClass(/flowEntered/);
+  const displacement=await training.locator('.cineScreen').evaluate(el=>{
+   const top=el.getBoundingClientRect().top;scrollBy({top:120,behavior:'instant'});return top-el.getBoundingClientRect().top;
+  });
+  expect(displacement).toBeCloseTo(120,0);
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);
  }
  await page.emulateMedia({reducedMotion:'reduce'});
@@ -1733,4 +1738,23 @@ test('Evolution 3.3 returning PWA user can see the full cinematic story and retu
  await expect(page.locator('#xpHome .cineRun')).toHaveCount(0);
  expect(await canonical(page)).toEqual(before);
  expect(await page.evaluate(()=>xpABlocked)).toBe(false);
+});
+
+test('Natural flow keeps studio media local, bounded and readable offline with reduced motion',async({page,context})=>{
+ await page.emulateMedia({reducedMotion:'reduce'});
+ await page.goto('/');
+ await page.waitForFunction(()=>!!navigator.serviceWorker.controller);
+ await context.setOffline(true);
+ await page.reload();
+ const scenes=page.locator('.flowStory .cineRun');
+ expect(await scenes.evaluateAll(els=>els.map(el=>el.dataset.scene))).toEqual(['body','food','train','rest','cockpit']);
+ let bytes=0;
+ for(const img of await scenes.locator('img').all()){
+  await img.scrollIntoViewIfNeeded();
+  bytes+=await img.evaluate(async el=>{
+   await el.decode();return (await (await fetch(el.currentSrc)).blob()).size;
+  });
+  await expect(img).toHaveCSS('animation-name','none');
+ }
+ expect(bytes).toBeLessThan(300*1024);
 });
