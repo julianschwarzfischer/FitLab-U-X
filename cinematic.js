@@ -69,3 +69,23 @@
  }
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
+
+// Only the welcome story participates. Native scrolling and focus remain available.
+(()=>{
+ const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+ let frame=0;
+ function paint(){
+  frame=0;
+  for(const scene of document.querySelectorAll('.cineRun')){
+   const rect=scene.getBoundingClientRect();
+   if(rect.bottom<0||rect.top>innerHeight)continue;
+   const distance=Math.max(1,rect.height-scene.firstElementChild.offsetHeight);
+   const p=reduced.matches?0:Math.min(1,Math.max(0,-rect.top/distance));
+   scene.style.setProperty('--travel',p.toFixed(3));
+   scene.toggleAttribute('data-pulled',p>.5);
+  }
+ }
+ function schedule(){if(!frame)frame=requestAnimationFrame(paint)}
+ addEventListener('scroll',schedule,{passive:true});addEventListener('resize',schedule);
+ reduced.addEventListener?.('change',schedule);schedule();
+})();

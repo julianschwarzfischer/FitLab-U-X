@@ -178,7 +178,7 @@ test('real QA5 application automatically migrates into current IndexedDB', async
   expect(legacy).toEqual(saved);
   await page.unroute(root,oldRoute);
   await page.reload();
-  await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3 FIRST IMPRESSION V1');
+  await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3.3 CINEMATIC');
   await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0,{timeout:20000});
   const migrated=await canonical(page);
   expect(migrated.p.age).toBe(41);
@@ -1145,7 +1145,7 @@ test(`Atlas V2 real service worker update from ${previousVersion} keeps data and
     const file=path==='/'?'index.html':path.slice(1);
     return [path,[execFileSync('git',['show',old+':'+file],{maxBuffer:4*1024*1024}),fs.readFileSync(file)]];
   }));
-  const assets={'/premium-ux.css':'text/css','/first-impression.css':'text/css','/cinematic.css':'text/css','/cinematic.js':'text/javascript','/exercise-atlas.js':'text/javascript','/brand.js':'text/javascript','/manifest.json':'application/json','/icon-180.png':'image/png','/icon-192.png':'image/png','/icon-512.png':'image/png'};
+  const assets={'/media/scenes/nutrition.webp':'image/webp','/media/scenes/recovery.webp':'image/webp','/premium-ux.css':'text/css','/first-impression.css':'text/css','/cinematic.css':'text/css','/cinematic.js':'text/javascript','/exercise-atlas.js':'text/javascript','/brand.js':'text/javascript','/manifest.json':'application/json','/icon-180.png':'image/png','/icon-192.png':'image/png','/icon-512.png':'image/png'};
   for(const id of ['sq','bp','row','oh','lu'])assets['/media/poses/'+id+'.webp']='image/webp';
   let version=0;
   const server=createServer((req,res)=>{
@@ -1194,15 +1194,15 @@ test(`Atlas V2 real service worker update from ${previousVersion} keeps data and
     await page.waitForFunction(()=>window.testControllerChanged);
     await page.waitForFunction(async previous=>{
       const keys=await caches.keys();
-      return keys.some(key=>key.endsWith('evolution-3-first-impression-v1'))&&!keys.some(key=>key.endsWith('evolution-'+previous.replace('.','-')));
+      return keys.some(key=>key.endsWith('evolution-3-3-cinematic'))&&!keys.some(key=>key.endsWith('evolution-'+previous.replace('.','-')));
     },previousVersion);
     await page.reload();
-    await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3 FIRST IMPRESSION V1');
+    await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3.3 CINEMATIC');
     await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
     expect(await canonical(page)).toEqual(prior);
     await context.setOffline(true);
     await page.reload();
-    await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3 FIRST IMPRESSION V1');
+    await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3.3 CINEMATIC');
     await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
     await addMeal(page,'Post-update offline 2.2',116);
     await page.reload();
@@ -1701,4 +1701,20 @@ test('Evolution 3.2 entrance visuals respect reduced motion and stay offline cac
  expect(await page.locator('link[href="first-impression.css"]').count()).toBe(1);
  const css=await page.evaluate(async()=>{let r=await fetch('first-impression.css');return r.status});
  expect(css).toBe(200);
+});
+
+test('Cinematic chapters scrub the training pose and lead into setup at mobile widths',async({page})=>{
+ await page.goto('/');
+ await expect(page.locator('.cineRun')).toHaveCount(5);
+ const training=page.locator('[data-scene="train"]');
+ for(const width of [320,390]){
+  await page.setViewportSize({width,height:820});
+  await training.evaluate(e=>scrollBy(0,e.getBoundingClientRect().top+e.offsetHeight-e.firstElementChild.offsetHeight));
+  await expect(training).toHaveAttribute('data-pulled','');
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);
+ }
+ await page.emulateMedia({reducedMotion:'reduce'});
+ await expect(training.locator('.cineVisual')).toHaveCSS('transform','none');
+ await page.locator('[data-scene="cockpit"] button').click();
+ await expect(page.locator('#xp12Intro')).toContainText('SCHRITT 1 VON 4');
 });
