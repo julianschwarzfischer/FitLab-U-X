@@ -1145,7 +1145,7 @@ test(`Atlas V2 real service worker update from ${previousVersion} keeps data and
     const file=path==='/'?'index.html':path.slice(1);
     return [path,[execFileSync('git',['show',old+':'+file],{maxBuffer:4*1024*1024}),fs.readFileSync(file)]];
   }));
-  const assets={'/premium-ux.css':'text/css','/exercise-atlas.js':'text/javascript','/brand.js':'text/javascript','/manifest.json':'application/json','/icon-180.png':'image/png','/icon-192.png':'image/png','/icon-512.png':'image/png'};
+  const assets={'/premium-ux.css':'text/css','/cinematic.css':'text/css','/cinematic.js':'text/javascript','/exercise-atlas.js':'text/javascript','/brand.js':'text/javascript','/manifest.json':'application/json','/icon-180.png':'image/png','/icon-192.png':'image/png','/icon-512.png':'image/png'};
   for(const id of ['sq','bp','row','oh','lu'])assets['/media/poses/'+id+'.webp']='image/webp';
   let version=0;
   const server=createServer((req,res)=>{
@@ -1611,8 +1611,8 @@ test('Evolution 3.1 cinematic stage reveals cockpit without changing saved fitne
  await expect(page.locator('#xpHome .xpHero')).toHaveAttribute('data-cine-visible','yes');
  await expect(page.locator('#xpHome .xpTiles .xpTile').first()).toHaveClass(/xpCine/);
  const saved=await canonical(page);
- await page.locator('#xpHome .xpCoachCompact').scrollIntoViewIfNeeded();
- await expect(page.locator('#xpHome .xpCoachCompact')).toHaveAttribute('data-cine-visible','yes');
+ await page.locator('#xpHome .xpEvoCoach').scrollIntoViewIfNeeded();
+ await expect(page.locator('#xpHome .xpEvoCoach')).toHaveAttribute('data-cine-visible','yes');
  expect(await canonical(page)).toEqual(saved);
  await expect(page.locator('#xpAStorageAlert')).toHaveCount(0);
 });
@@ -1624,7 +1624,7 @@ test('Evolution 3.1 respects reduced motion and keeps cockpit controls functiona
  await expect(hero).toHaveAttribute('data-cine-visible','yes');
  expect(await hero.evaluate(el=>getComputedStyle(el).transitionDuration)).toBe('0s');
  const before=await canonical(page);
- await page.locator('#xpHome .xpBrief').first().click();
+ await page.locator('#xpHome .xp12Focus').getByRole('button').first().click();
  await expect(page.locator('#xpCheck')).toBeVisible();
  expect(await canonical(page)).toEqual(before);
 });
