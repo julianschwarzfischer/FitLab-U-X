@@ -1776,8 +1776,9 @@ test('Full-bleed story keeps all five hero images local, bounded and readable of
 for(const [label,sex,suffix] of [['female','f',''],['male','m','-male'],['missing','','-neutral'],['ambiguous','x','-neutral']]){
  test(`Hero artwork follows the ${label} profile while shared chapters and profile data stay intact`,async({page})=>{
   await page.setViewportSize({width:390,height:844});
-  await ready(page,sex);
+  await ready(page,sex==='x'?'':sex);
   const before=await canonical(page);
+  if(sex==='x')await page.evaluate(()=>{state.p.sex='x';premiumDashboard()});
   if(sex==='f'||sex==='m'){
    expect(before.p.sex).toBe(sex);
    await page.locator('#xpHome .xpStoryDiscovery button').click();
