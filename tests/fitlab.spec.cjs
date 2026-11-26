@@ -1868,5 +1868,5 @@ test('Design First cockpit renders real recorded values and leaves missing data 
  await addMeal(page,'Story QA Abendessen',123);
  await page.evaluate(()=>{tab('today');xpStoryToggle()});
  await expect(story.locator('.tile').nth(2)).toContainText('212 kcal');
- await expect(story.locator('.tile').nth(3)).toContainText('Noch kein Gewichtsverlauf');
+ await expect(story.locator('.tile').nth(3)).toContainText('Kein Gewichtsverlauf');
 });

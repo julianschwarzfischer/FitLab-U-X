@@ -2422,10 +2422,10 @@ function xpDesignStoryTiles(){
   chart=values.map((value,index)=>`${index?'L':'M'}${(2+106*index/(values.length-1)).toFixed(1)} ${(span?26-24*(value-min)/span:14).toFixed(1)}`).join(' ');
  }
  return [
-  {value:checkCount===3?'Erfasst':checkCount?`${checkCount} von 3`:'–',note:checkCount?'Heutiger Check-in':'Noch kein Check-in',ratio:checkCount/3},
-  {value:sessions.length?String(sessions.length):'–',note:sessions.length?'Abgeschlossen diese Woche':'Diese Woche keine Einheit erfasst',check:sessions.length>0},
-  {value:kcal===null?'–':`${fmt(kcal,0)} kcal`,note:kcal===null?day.rows?'Tageswerte prüfen':'Heute noch nicht erfasst':target?`von ${fmt(target.k,0)} kcal`:'Tagesziel nicht verfügbar',ratio:kcal!==null&&target?.k>0?kcal/target.k:null},
-  {value:last===undefined?'–':weights.length===1?`${fmt(last)} kg`:`${last>first?'+':''}${fmt(last-first)} kg`,note:weights.length>=2?'Gewichtsverlauf · 30 Tage':weights.length?'Eine Messung erfasst':'Noch kein Gewichtsverlauf',chart}
+  {value:checkCount===3?'Erfasst':checkCount?`${checkCount} von 3`:'–',note:checkCount?'Heutiger Check-in':'Kein Check-in',ratio:checkCount/3},
+  {value:sessions.length?String(sessions.length):'–',note:sessions.length?'Abgeschlossen diese Woche':'Keine Einheit',check:sessions.length>0},
+  {value:kcal===null?'–':`${fmt(kcal,0)} kcal`,note:kcal===null?day.rows?'Tageswerte prüfen':'Nicht erfasst':target?`von ${fmt(target.k,0)} kcal`:'Tagesziel nicht verfügbar',ratio:kcal!==null&&target?.k>0?kcal/target.k:null},
+  {value:last===undefined?'–':weights.length===1?`${fmt(last)} kg`:`${last>first?'+':''}${fmt(last-first)} kg`,note:weights.length>=2?'Gewichtsverlauf · 30 Tage':weights.length?'Eine Messung erfasst':'Kein Gewichtsverlauf',chart}
  ];
 }
 function xpStoryToggle(){
