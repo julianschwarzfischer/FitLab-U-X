@@ -3,17 +3,17 @@ const { test, expect } = require('@playwright/test');
 // All tests use a fresh browser context and entirely synthetic fitness records.
 // Give returning-user scenarios an isolated, valid synthetic profile. Keep the
 // genuinely empty browser scenario independent so a boot regression stays visible.
-async function ready(page) {
+async function ready(page,sex='m') {
   await page.route('**/__test_setup__', route => route.fulfill({contentType:'text/html', body:'<!doctype html>'}));
   await page.goto('/__test_setup__');
-  await page.evaluate(() => {
+  await page.evaluate(sex => {
     const key='flx161:'+encodeURIComponent(location.origin+'/|')+':fitnesslab-experience-v1';
     if (localStorage.getItem(key) !== null) return;
-    const p={goals:[0],priority:'auto',weight:80,height:180,age:40,sex:'m',bodyfat:'',waist:'',
+    const p={goals:[0],priority:'auto',weight:80,height:180,age:40,sex,bodyfat:'',waist:'',
       activity:'1.25',sleep:'7.5',experience:'beginner',place:'home',kind:'mix',days:4,minutes:60,
       intensity:'5',equipment:[],extra:'',limits:'',restricted:false,adjust:0};
     localStorage.setItem(key,JSON.stringify({p,log:{},favorites:[],water:{},recipes:[],waterGoal:2500}));
-  });
+  },sex);
   await page.goto('/');
   await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0, {timeout: 20000});
   await expect(page.locator('#appVersion')).not.toBeEmpty();
@@ -1148,7 +1148,7 @@ test(`Atlas V2 real service worker update from ${previousVersion} keeps data and
   const assets={'/media/scenes/nutrition.webp':'image/webp','/media/scenes/recovery.webp':'image/webp','/premium-ux.css':'text/css','/first-impression.css':'text/css','/cinematic.css':'text/css','/cinematic.js':'text/javascript','/exercise-atlas.js':'text/javascript','/brand.js':'text/javascript','/manifest.json':'application/json','/icon-180.png':'image/png','/icon-192.png':'image/png','/icon-512.png':'image/png'};
   for(const id of ['sq','bp','row','oh','lu'])assets['/media/poses/'+id+'.webp']='image/webp';
   for(const name of ['path','strength'])assets['/media/scenes/'+name+'.webp']='image/webp';
-  for(const name of ['head-to-toe','food','training','recovery','cockpit'])assets['/media/hero/'+name+'.webp']='image/webp';
+  for(const name of ['head-to-toe','food','training','recovery','cockpit','head-to-toe-male','training-male','head-to-toe-neutral','training-neutral'])assets['/media/hero/'+name+'.webp']='image/webp';
   let version=0;
   const server=createServer((req,res)=>{
     const route=new URL(req.url,'http://localhost').pathname;
@@ -1771,3 +1771,31 @@ test('Full-bleed story keeps all five hero images local, bounded and readable of
  }
  expect(bytes).toBeLessThan(300*1024);
 });
+
+
+for(const [label,sex,suffix] of [['female','f',''],['male','m','-male'],['missing','','-neutral'],['ambiguous','x','-neutral']]){
+ test(`Hero artwork follows the ${label} profile while shared chapters and profile data stay intact`,async({page})=>{
+  await page.setViewportSize({width:390,height:844});
+  await ready(page,sex);
+  const before=await canonical(page);
+  if(sex==='f'||sex==='m'){
+   expect(before.p.sex).toBe(sex);
+   await page.locator('#xpHome .xpStoryDiscovery button').click();
+  }
+  const scenes=page.locator('.heroStory .cineRun');
+  await expect(scenes).toHaveCount(5);
+  const expected=['head-to-toe'+suffix,'food','training'+suffix,'recovery','cockpit'];
+  for(let i=0;i<expected.length;i++){
+   const image=scenes.nth(i).locator('img');
+   await expect(image).toHaveAttribute('src',`media/hero/${expected[i]}.webp`);
+   await image.scrollIntoViewIfNeeded();
+   const box=await image.evaluate(async el=>{
+    await el.decode();
+    const rect=el.getBoundingClientRect();
+    return {sameSize:el.naturalWidth===Number(el.getAttribute('width'))&&el.naturalHeight===Number(el.getAttribute('height')),left:rect.left,width:rect.width};
+   });
+   expect(box).toEqual({sameSize:true,left:0,width:390});
+  }
+  expect(await canonical(page)).toEqual(before);
+ });
+}

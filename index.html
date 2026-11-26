@@ -2416,10 +2416,17 @@ function xpStoryToggle(show){
 }
 xpHomeMarkup=function(){
  if(xpProfileReady()&&!xpStoryMode)return xpFirstOriginalHome();
+ const heroProfile=state.p?.sex==='f'?'female':state.p?.sex==='m'?'male':'neutral';
+ const portraits={
+  female:['head-to-toe','Eine Athletin auf einem Waldweg im Morgenlicht.','training','Eine Athletin bei einer Kniebeuge mit Kurzhantel.'],
+  male:['head-to-toe-male','Ein Athlet auf einem Waldweg im Morgenlicht.','training-male','Ein Athlet bei einer Kniebeuge mit Kurzhantel.'],
+  neutral:['head-to-toe-neutral','Ein Waldweg im Morgenlicht.','training-neutral','Eine Kurzhantel und eine Trainingsmatte im Studio.']
+ };
+ const [welcomeImage,welcomeAlt,trainingImage,trainingAlt]=portraits[heroProfile];
  const chapters=[
-  ['body','head-to-toe',480,543,'Dein Weg beginnt hier','Setze dir Ziele für Training, Ernährung und Erholung.','Eine Athletin auf einem Waldweg im Morgenlicht.'],
+  ['body',welcomeImage,480,543,'Dein Weg beginnt hier','Setze dir Ziele für Training, Ernährung und Erholung.',welcomeAlt],
   ['food','food',550,543,'Ernährung, die zu dir passt','Dein Profil gibt die Richtung für deine Kalorien- und Makroziele vor.','Eine Bowl mit Lachs, Gemüse und Quinoa.'],
-  ['train','training',520,543,'Training mit Plan','Erfasse deine Sätze und knüpfe beim nächsten Training an deine Leistung an.','Eine Athletin bei einer Kniebeuge mit Kurzhantel.'],
+  ['train',trainingImage,520,543,'Training mit Plan','Erfasse deine Sätze und knüpfe beim nächsten Training an deine Leistung an.',trainingAlt],
   ['rest','recovery',724,543,'Erholung ist Teil des Erfolgs','Schlaf, Tagesform und Muskelkater helfen deinem Coach, Erholung einzuplanen.','Wasser, Handtuch und Notizbuch am Fenster mit Blick in den Wald.'],
   ['cockpit','cockpit',840,588,'Alles im Cockpit','Vorschau · Noch keine persönlichen Messwerte','Trainingsnotizbuch, Wasser und Handtuch auf einem Tisch.']
  ];
