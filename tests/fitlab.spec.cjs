@@ -1718,3 +1718,19 @@ test('Cinematic chapters scrub the training pose and lead into setup at mobile w
  await page.locator('[data-scene="cockpit"] button').click();
  await expect(page.locator('#xp12Intro')).toContainText('SCHRITT 1 VON 4');
 });
+
+test('Evolution 3.3 returning PWA user can see the full cinematic story and return without touching data',async({page})=>{
+ await page.setViewportSize({width:390,height:844});
+ await ready(page);
+ await expect(page.locator('#xpHome .xpStoryDiscovery')).toBeVisible();
+ const before=await canonical(page);
+ await page.locator('#xpHome .xpStoryDiscovery button').click();
+ await expect(page.locator('#xpHome .cineRun')).toHaveCount(5);
+ await expect(page.locator('#xpHome .xpStoryReturn button')).toBeVisible();
+ expect(await canonical(page)).toEqual(before);
+ await page.locator('#xpHome .xpStoryReturn button').click();
+ await expect(page.locator('#xpHome .xpTiles')).toBeVisible();
+ await expect(page.locator('#xpHome .cineRun')).toHaveCount(0);
+ expect(await canonical(page)).toEqual(before);
+ expect(await page.evaluate(()=>xpABlocked)).toBe(false);
+});
