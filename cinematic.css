@@ -1,0 +1,48 @@
+/* FITNESS LAB Evolution 3.1 · Cinematic Experience V1.
+   Visual-only. No application state, input handlers or storage operations. */
+:root{--cine-distance:30px;--cine-ease:cubic-bezier(.18,.72,.24,1);}
+#xpHome .xpHero,#xpDeep .xp12DetailHero{isolation:isolate;position:relative;overflow:hidden;}
+#xpHome .xpHero::after,#xpDeep .xp12DetailHero::after{
+ content:"";position:absolute;z-index:0;pointer-events:none;right:-18%;top:-90%;
+ width:85%;aspect-ratio:1;border-radius:50%;
+ border:1px solid rgba(255,255,255,.19);
+ box-shadow:0 0 0 25px rgba(255,255,255,.025),0 0 0 58px rgba(255,255,255,.025);
+ transform:translate3d(0,calc(var(--cine-scroll,0)*45px),0) rotate(calc(var(--cine-scroll,0)*14deg));
+ opacity:.7;
+}
+#xpHome .xpHero>* ,#xpDeep .xp12DetailHero>*{position:relative;z-index:1;}
+#xpHome .xpHero h2{letter-spacing:-.042em;line-height:1.04;text-wrap:balance;}
+#xpHome .xpHero .xpEyebrow{letter-spacing:.16em;}
+#xpHome .xpHomeStack,#xpHome .xpHeading,#xpHome .xpTiles,#xpHome .xpCoachCompact,#xpHome .xpStrip,#xpDeep .xp12DetailHero{
+ scroll-margin-top:14vh;
+}
+#xpHome .xpTiles{perspective:900px;}
+#xpHome .xpTile{transform-origin:50% 80%;}
+#xpHome .xpTile .xpTileHead{position:relative;}
+#xpHome .xpCoachCompact{position:relative;overflow:hidden;}
+#xpHome .xpCoachCompact::after{content:"";position:absolute;inset:auto -12% -150% auto;width:70%;aspect-ratio:1;pointer-events:none;border-radius:50%;background:radial-gradient(circle,rgba(135,210,177,.13),transparent 66%);}
+@media (prefers-reduced-motion:no-preference){
+ .xpCine[data-cine-ready="yes"]{opacity:0;transform:translate3d(0,var(--cine-distance),0) scale(.978);filter:blur(4px);}
+ .xpCine[data-cine-ready="yes"][data-cine-visible="yes"]{
+  opacity:1;transform:translate3d(0,0,0) scale(1);filter:blur(0);
+ }
+ .xpCine[data-cine-ready="yes"]{
+  transition:opacity .68s var(--cine-ease),transform .84s var(--cine-ease),filter .65s ease;
+  transition-delay:var(--cine-delay,0ms);
+ }
+ #xpHome .xpHero.xpCine{--cine-distance:18px;}
+ #xpHome .xpTile.xpCine{--cine-distance:28px;}
+ #xpHome .xpTiles .xpTile:nth-child(2){--cine-delay:65ms;}
+ #xpHome .xpTiles .xpTile:nth-child(3){--cine-delay:125ms;}
+ #xpHome .xpTiles .xpTile:nth-child(4){--cine-delay:190ms;}
+ #xpHome .xpTiles .xpTile:nth-child(n+5){--cine-delay:225ms;}
+ #xpHome .xpTile.xpCine[data-cine-visible="yes"]{transform:translate3d(0,0,0) rotateX(0);}
+}
+@media (prefers-reduced-motion:reduce){
+ .xpCine{opacity:1!important;filter:none!important;transform:none!important;transition:none!important;animation:none!important;}
+ #xpHome .xpHero::after,#xpDeep .xp12DetailHero::after{transform:none!important;}
+}
+@media(max-width:450px){
+ #xpHome .xpHero::after{right:-55%;top:-24%;width:108%;opacity:.4;}
+ #xpHome .xpHero h2{letter-spacing:-.025em;}
+}
