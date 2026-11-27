@@ -4,6 +4,7 @@
  const profileKeys=['age','height','weight','sex','goals','priority','activity','days','minutes','intensity','kind','bodyfat','adjust','sleep','experience','place','equipment','limits','restricted'];
  const fingerprint=p=>JSON.stringify(profileKeys.map(key=>p[key]));
  const daysUntilReview=28;
+ const highPlannedLoad=p=>Number(p.days)*Number(p.minutes)*(Number(p.intensity)-1)>=3000;
  function evaluate(context,wish){
   const blocked=(reason,alternative)=>({state:'blocked',reason,alternative});
   const revise=(reason,alternative)=>({state:'revise',reason,alternative});
@@ -34,7 +35,7 @@
   if(target<weight){
    if(weight/h**2<25)return revise('Eine automatische Gewichtsabnahme lässt sich aus diesen Ausgangsdaten nicht ableiten.',
     {target:weight,description:'Gewichtserhalt und Kraftfortschritt als Zwischenziel prüfen.'});
-   if(Number(p.days)*Number(p.minutes)*(Number(p.intensity)-1)>=3000){
+   if(highPlannedLoad(p)){
     return revise('Für die hohe geplante Trainingslast ist ein zusätzliches Defizitziel nicht automatisch ableitbar.',
      {target:weight,description:'Gewicht zunächst stabilisieren oder Belastung und Energieversorgung mit fachlicher Unterstützung prüfen.'});
    }
@@ -59,6 +60,6 @@
   if(!loss)goals.push(6);
   return {...p,goals,adjust:Math.max(0,Number(p.adjust)),priority:loss?'loss':'maintain'};
  }
- root.fitLabGoalIntelligence={fingerprint,evaluate,effectiveProfile,daysUntilReview};
+ root.fitLabGoalIntelligence={fingerprint,evaluate,effectiveProfile,highPlannedLoad,daysUntilReview};
  if(typeof module!=='undefined')module.exports=root.fitLabGoalIntelligence;
 })(typeof window==='undefined'?globalThis:window);

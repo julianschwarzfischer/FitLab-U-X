@@ -10,7 +10,7 @@
  const facts=(recipe,portion,tag='b')=>`<div class="facts">${engine.nutrients.map((key,i)=>`<div><${tag}>${format(key,recipe.values[key]===null?null:recipe.values[key]*portion)}</${tag}><span>${labels[i]}</span></div>`).join('')}</div>`;
  let collectionPromise;
  function load(){
-  return collectionPromise??=Promise.all(['recipes','foods','allergen-matrix'].map(name=>fetch('nutrition/'+name+'.json?v=3815').then(response=>{
+  return collectionPromise??=Promise.all(['recipes','foods','allergen-matrix'].map(name=>fetch('nutrition/'+name+'.json?v=3816').then(response=>{
    if(!response.ok)throw Error('Rezeptdaten fehlen');
    return response.json();
   }))).then(([r,f,matrix])=>safety.attachMatrix(engine.enrich(r.recipes,f.foods),matrix)).catch(error=>{collectionPromise=null;throw error});
@@ -33,7 +33,7 @@
  }
  function show(api){
   const host=document.createElement('fitlab-nutrition'),root=host.attachShadow({mode:'open'});
-  root.innerHTML=`<link rel="stylesheet" href="nutrition/reference.css?v=3815"><div class="shell"><header><span class="brand"><b>╫</b> FITNESS LAB</span><a href="#tagebuch" data-action="diary">Tagebuch ↗</a></header>
+  root.innerHTML=`<link rel="stylesheet" href="nutrition/reference.css?v=3816"><div class="shell"><header><span class="brand"><b>╫</b> FITNESS LAB</span><a href="#tagebuch" data-action="diary">Tagebuch ↗</a></header>
    <main><div class="wrap intro"><div class="eyebrow">FITNESS LAB · PERSONAL NUTRITION</div><h1>Deine Rezeptwelt.</h1><div class="tabs"><button data-action="personal">Für mich</button><button data-action="all">Alle Rezepte</button></div><div id="context"></div></div>
    <div id="protection-status" class="wrap" hidden><p></p><button class="primary" data-action="profile">Meine Ernährung prüfen</button></div><div id="hero"></div><div id="recommendation"></div><div id="catalog" class="collection" hidden></div><div class="wrap"><label>Mahlzeit <select class="goal" id="meal">${Object.entries(meals).map(([id,name])=>`<option value="${id}">${name}</option>`).join('')}</select></label>
    <details id="preferences"><summary>Meine Ernährung</summary><div></div></details></div></main>

@@ -185,7 +185,7 @@ test('real QA5 application automatically migrates into current IndexedDB', async
   expect(legacy).toEqual(saved);
   await page.unroute(root,oldRoute);
   await page.reload();
-  await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3.8.15 RECIPE RELEASE');
+  await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3.8.16 CENTRAL SAFETY INTELLIGENCE');
   await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0,{timeout:20000});
   const migrated=await canonical(page);
   expect(migrated.p.age).toBe(41);
@@ -1214,15 +1214,15 @@ test(`Atlas V2 real service worker update from ${previousVersion} keeps data and
     await page.waitForFunction(()=>window.testControllerChanged);
     await page.waitForFunction(async previous=>{
       const keys=await caches.keys();
-      return keys.some(key=>key.endsWith('evolution-3-8-15-recipe-release'))&&!keys.some(key=>key.endsWith('evolution-'+previous.toLowerCase().replace(/[. ]/g,'-')));
+      return keys.some(key=>key.endsWith('evolution-3-8-16-central-safety-intelligence'))&&!keys.some(key=>key.endsWith('evolution-'+previous.toLowerCase().replace(/[. ]/g,'-')));
     },previousVersion);
     await page.reload();
-    await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3.8.15 RECIPE RELEASE');
+    await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3.8.16 CENTRAL SAFETY INTELLIGENCE');
     await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
     expect(await canonical(page)).toEqual(prior);
     await context.setOffline(true);
     await page.reload();
-    await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3.8.15 RECIPE RELEASE');
+    await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3.8.16 CENTRAL SAFETY INTELLIGENCE');
     await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
     if(previousVersion.startsWith('3.5')){
       await page.getByRole('button',{name:/Erlebnis entdecken/}).click();
@@ -2332,7 +2332,7 @@ test('Recipe Release checks 174 real bookings and six holds with no release over
  await ready(page,'m',false);
  await confirmNutrition(page);
  const result=await page.evaluate(async()=>{
-  const json=async name=>(await fetch('nutrition/'+name+'.json?v=3815')).json();
+  const json=async name=>(await fetch('nutrition/'+name+'.json?v=3816')).json();
   const [r,f,matrix]=await Promise.all(['recipes','foods','allergen-matrix'].map(json));
   const engine=fitLabNutritionEngine,safety=fitLabNutritionSafety;
   const recipes=safety.attachMatrix(engine.enrich(r.recipes,f.foods),matrix);
@@ -2368,3 +2368,94 @@ test('Recipe Release shows the R017 notice in the catalog and confirmation befor
  await card.getByRole('button',{name:'Ins Tagebuch übernehmen'}).click();
  expect(Object.values((await canonical(page)).log).flat()).toHaveLength(0);
 });
+
+test('Central Safety agrees across the baseline plan, recipes, coach and training and reopens after correction',async({page})=>{
+ await ready(page,'m',false);
+ await confirmNutrition(page);
+ const snapshot=()=>page.evaluate(()=>{
+  const d=xpSafetyDecision();
+  return {target:calc(state.p)?.k??null,recipeTarget:xpNutritionModel().target?.kcal??null,
+   recipesBlocked:xpNutritionModel().blocked,plan:makePlan(state.p).length,canStart:xpBTrainingState().canStart,
+   coach:xp15Advice().title,recovery:xp161aRecoveryGate().reason,recoveryCard:recoveryHTML(),decision:d.advice?.title??null,goal:d.active.state};
+ });
+ const normal=await snapshot();
+ expect(normal).toMatchObject({recipesBlocked:false,canStart:true,goal:'baseline'});
+ expect(normal.plan).toBeGreaterThan(0);
+ await page.evaluate(async()=>{
+  state.p.goals=[0,2];await save();tab('profile');
+  for(const [id,value] of Object.entries({days:'7',minutes:'180',intensity:'7',adjust:'-300'})){
+   const input=$(id);input.value=value;input.dispatchEvent(new Event('input',{bubbles:true}));await xpAQueue;
+  }
+  tab('today');
+ });
+ await page.reload();await page.waitForFunction(()=>xpIDBReady);
+ const held=await snapshot();
+ expect(held).toMatchObject({target:null,recipeTarget:null,recipesBlocked:true,plan:0,canStart:false,
+  decision:'Trainingslast und Energieziel abstimmen',coach:'Trainingslast und Energieziel abstimmen',goal:'baseline'});
+ expect(held.recovery).toContain('1.260 geplante Minuten');
+ expect(held.recoveryCard).toContain(held.recovery);
+ await page.locator('fitlab-personal-dashboard .nutrition .action').click();
+ const nutrition=page.locator('fitlab-nutrition');
+ await expect(nutrition.getByText(/keine passende persönliche Empfehlung/)).toBeVisible();
+ await nutrition.getByRole('button',{name:'Alle Rezepte'}).click();
+ await expect(nutrition.locator('#catalog-list summary')).toHaveCount(30);
+ await nutrition.locator('[data-id=R003] summary').click();
+ await expect(nutrition.locator('[data-id=R003] [data-action=book]')).toBeDisabled();
+ await nutrition.locator('[data-id=R001] summary').click();
+ await expect(nutrition.locator('[data-id=R001] [data-action=book]')).toBeEnabled();
+ page.once('dialog',dialog=>dialog.accept());
+ await nutrition.locator('[data-id=R001] [data-action=book]').click();
+ await expect(nutrition.getByText('Zutaten im Tagebuch gespeichert.')).toBeVisible();
+ await nutrition.getByRole('link',{name:/Tagebuch/}).click();
+ await addMeal(page,'Manuelles Tagebuch während Schutzpause',125);
+
+ // A protected day may already contain entries. Only the live budget reopens, never the historic snapshot.
+ await page.evaluate(async()=>{Object.assign(state.p,{days:4,minutes:60});await save();render()});
+ const resumed=await snapshot();
+ expect(resumed).toMatchObject({recipesBlocked:false,canStart:true,decision:null});
+ expect(resumed.target).toBeGreaterThan(0);
+ expect(resumed.plan).toBeGreaterThan(0);
+ expect((await canonical(page)).dayTargets?.[await page.evaluate(()=>dateKey())]).toBeUndefined();
+});
+
+test('Central Safety reevaluates confirmed goals, high load at maintenance, and low intake',async({page})=>{
+ await ready(page,'m',false);
+ await confirmNutrition(page);
+ const decision=()=>page.evaluate(()=>{const d=xpSafetyDecision();return [d.active.state,d.target?.k??null,d.training.locked,d.recommendationsAllowed]});
+ await page.evaluate(async()=>{Object.assign(state.p,{weight:90,goals:[0,2]});await save()});
+ expect(await page.evaluate(()=>xpGoalConfirm({target:85,days:120,kinds:['fatLoss','muscleGain'],muscleKg:null},fitLabGoalIntelligence.fingerprint(state.p)))).toBe(true);
+ expect(await decision()).toEqual(['confirmed',expect.any(Number),false,true]);
+ await page.evaluate(async()=>{Object.assign(state.p,{days:7,minutes:180,intensity:'7'});await save()});
+ expect(await decision()).toEqual(['paused',null,true,false]);
+ expect(await page.evaluate(()=>xpGoalConfirm({target:90,days:60,kinds:['maintain'],muscleKg:null},fitLabGoalIntelligence.fingerprint(state.p)))).toBe(true);
+ expect(await decision()).toEqual(['confirmed',expect.any(Number),false,true]);
+ await page.evaluate(async()=>{
+  const date=dateKey();
+  state.log[date]=[{n:'Synthetisch',g:325,k:100,p:3,c:13,f:4,meal:'Mittagessen',_fid:xpAId()}];
+  await save();
+  coachData().days[date]={complete:true};
+  await save();
+ });
+ expect(await decision()).toEqual(['paused',null,true,false]);
+});
+
+for(const kind of ['scheduled','free']){
+ test('Central Safety denies a stale '+kind+' start against canonical profile changes in another tab',async({page,context})=>{
+  await ready(page,'m',false);
+  const other=await context.newPage();await other.goto('/');await other.waitForFunction(()=>xpIDBReady);
+  await page.evaluate(()=>{xpIDBSynchronize=async()=>{};if(xpIDBChannel)xpIDBChannel.onmessage=null;window.alert=()=>{}});
+  expect(await page.evaluate(()=>xpBTrainingState().canStart)).toBe(true);
+  await other.evaluate(async()=>{Object.assign(state.p,{days:7,minutes:180,intensity:'7',goals:[0,2],adjust:-300});await save()});
+  expect(await page.evaluate(()=>xpBTrainingState().canStart)).toBe(true);
+  const result=await page.evaluate(async kind=>{
+   if(kind==='scheduled'){selectedTrainingDay=0;startTraining()}
+   else{xp13Mode='free';xp13Ids=xp13Eligible().slice(0,1).map(x=>x[0]);if(!xp13Ids.length)throw Error('No eligible free exercise');xp13Start()}
+   await xpAQueue;
+   return {draft:!!state.trainingDraft,canonical:!!(await xpIDBRead()).trainingDraft,storageLocked:xpABlocked};
+  },kind);
+  expect(result).toEqual({draft:false,canonical:false,storageLocked:false});
+  await addMeal(page,'Tagebuch nach verweigertem Start',125);
+  expect((await canonical(other)).p.days).toBe(7);
+  await other.close();
+ });
+}
