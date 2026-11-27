@@ -7,7 +7,7 @@
  const format=(key,value)=>value==null?'–':number(value,key==='kcal'?0:1)+(key==='kcal'?'':' g');
  const meals={frühstück:'Frühstück',mittag:'Mittagessen',abend:'Abendessen',snack:'Snacks'};
  const image=(recipe,cls='')=>`<img class="${cls}" src="nutrition/recipes/${recipe.id}.webp" alt="${escape(recipe.name)}"${cls?' loading="lazy"':''}>`;
- const facts=(recipe,portion)=>`<div class="facts">${engine.nutrients.map((key,i)=>`<div><b>${format(key,recipe.values[key]===null?null:recipe.values[key]*portion)}</b><span>${labels[i]}</span></div>`).join('')}</div>`;
+ const facts=(recipe,portion,tag='b')=>`<div class="facts">${engine.nutrients.map((key,i)=>`<div><${tag}>${format(key,recipe.values[key]===null?null:recipe.values[key]*portion)}</${tag}><span>${labels[i]}</span></div>`).join('')}</div>`;
  let collectionPromise;
  function load(){
   return collectionPromise??=Promise.all(['recipes','foods'].map(name=>fetch('nutrition/'+name+'.json').then(response=>{
@@ -33,7 +33,7 @@
   const host=document.createElement('fitlab-nutrition'),root=host.attachShadow({mode:'open'});
   root.innerHTML=`<link rel="stylesheet" href="nutrition/reference.css"><div class="shell"><header><span class="brand"><b>╫</b> FITNESS LAB</span><a href="#tagebuch" data-action="diary">Tagebuch ↗</a></header>
    <main><div class="wrap intro"><div class="eyebrow">FITNESS LAB · PERSONAL NUTRITION</div><h1>Deine Rezeptwelt.</h1><div class="tabs"><button data-action="personal">Für mich</button><button data-action="all">Alle Rezepte</button></div><div id="context"></div></div>
-   <div id="hero"></div><div id="recommendation"></div><div id="catalog" class="collection" hidden></div><div class="wrap"><label>Mahlzeit <select id="meal">${Object.entries(meals).map(([id,name])=>`<option value="${id}">${name}</option>`).join('')}</select></label>
+   <div id="hero"></div><div id="recommendation"></div><div id="catalog" class="collection" hidden></div><div class="wrap"><label>Mahlzeit <select class="goal" id="meal">${Object.entries(meals).map(([id,name])=>`<option value="${id}">${name}</option>`).join('')}</select></label>
    <details id="preferences"><summary>Meine Ernährung</summary><div></div></details></div></main>
    <footer class="foot"><button data-action="back">Zurück zum Dashboard ↑</button></footer></div>`;
   const $=id=>root.getElementById(id);
@@ -52,7 +52,7 @@
   function detail(recipe,multiplier){
    const blocked=engine.restrictions(recipe,profile);
    return `<div class="portion"><strong>Portion wählen</strong><small>Alle Mengen passen sich an.</small></div>
-    <div class="portion-options" aria-label="Portionsgröße">${engine.portions.map(value=>`<button data-action="portion" data-id="${recipe.id}" data-value="${value}" aria-pressed="${value===multiplier}">${number(value,1)}</button>`).join('')}</div>${facts(recipe,multiplier)}<small>Berechnete Richtwerte je gewählte Portion.</small>
+    <div class="portion-options" aria-label="Portionsgröße">${engine.portions.map(value=>`<button data-action="portion" data-id="${recipe.id}" data-value="${value}" aria-pressed="${value===multiplier}">${number(value,1)}</button>`).join('')}</div>${facts(recipe,multiplier,'strong')}<small>Berechnete Richtwerte je gewählte Portion.</small>
     <h3>Zutaten</h3><ul class="ingredients">${recipe.rows.map(({food,grams})=>`<li><span>${escape(food.name)} <small>(${escape(food.state)})</small></span><strong>${number(grams*multiplier/recipe.base_servings,2)} g</strong></li>`).join('')}</ul>
     <h3 class="line">Zubereitung</h3>${recipe.passive_time?`<p>${escape(recipe.passive_time)}</p>`:''}<ol class="steps">${recipe.steps.map(step=>`<li>${escape(step)}</li>`).join('')}</ol>
     <p>Allergene laut Zutatenliste: ${escape(recipe.declared.join(', ')||'keine deklariert')}. Etiketten und Kreuzkontakte prüfen.</p>
