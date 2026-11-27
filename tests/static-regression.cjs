@@ -84,6 +84,6 @@ for(const asset of storyImages)assert(personal.includes('src="'+asset+'"'),'Miss
 console.log('PASS Personal Dashboard shares the six byte-identical reference images and caches its runtime');
 
 require('./nutrition-engine.cjs');
-for(const path of ['nutrition/engine.js','nutrition/experience.js','nutrition/reference.css','nutrition/foods.json','nutrition/recipes.json',...fs.readdirSync('nutrition/recipes').map(name=>'nutrition/recipes/'+name)])assert(sw.includes("'./"+path+"'")||sw.includes("'./"+path+"?v=3816'"),'Missing cached nutrition resource: '+path);
+for(const path of ['nutrition/engine.js','nutrition/experience.js','nutrition/reference.css','nutrition/foods.json','nutrition/recipes.json',...fs.readdirSync('nutrition/recipes').map(name=>'nutrition/recipes/'+name)])assert(sw.includes("'./"+path+"'")||sw.includes("'./"+path+"?v=390'"),'Missing cached nutrition resource: '+path);
 
 require('./intelligent-safety.cjs');

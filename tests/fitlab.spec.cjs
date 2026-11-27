@@ -185,7 +185,7 @@ test('real QA5 application automatically migrates into current IndexedDB', async
   expect(legacy).toEqual(saved);
   await page.unroute(root,oldRoute);
   await page.reload();
-  await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3.8.16 CENTRAL SAFETY INTELLIGENCE');
+  await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3.9 UNIFIED PREMIUM EXPERIENCE');
   await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0,{timeout:20000});
   const migrated=await canonical(page);
   expect(migrated.p.age).toBe(41);
@@ -1156,7 +1156,9 @@ test(`Atlas V2 real service worker update from ${previousVersion} keeps data and
   for(const id of ['sq','bp','row','oh','lu'])assets['/media/poses/'+id+'.webp']='image/webp';
   for(const name of ['path','strength'])assets['/media/scenes/'+name+'.webp']='image/webp';
   for(const name of ['head-to-toe','food','training','recovery','cockpit','head-to-toe-male','training-male','head-to-toe-neutral','training-neutral'])assets['/media/hero/'+name+'.webp']='image/webp';
-  assets['/design-story.js']=assets['/personal-dashboard.js']='text/javascript';
+  assets['/design-story.js']=assets['/personal-dashboard.js']=assets['/unified-premium.js']='text/javascript';
+  assets['/unified-premium.css']='text/css';
+  for(const name of fs.readdirSync('media/premium'))assets['/media/premium/'+name]='image/webp';
   for(const name of ['safety.js','goal.js','goal-view.js','goal.css','allergen-matrix.json','engine.js','experience.js','reference.css','foods.json','recipes.json']){
     assets['/nutrition/'+name]=name.endsWith('.js')?'text/javascript':name.endsWith('.css')?'text/css':'application/json';
   }
@@ -1214,15 +1216,15 @@ test(`Atlas V2 real service worker update from ${previousVersion} keeps data and
     await page.waitForFunction(()=>window.testControllerChanged);
     await page.waitForFunction(async previous=>{
       const keys=await caches.keys();
-      return keys.some(key=>key.endsWith('evolution-3-8-16-central-safety-intelligence'))&&!keys.some(key=>key.endsWith('evolution-'+previous.toLowerCase().replace(/[. ]/g,'-')));
+      return keys.some(key=>key.endsWith('evolution-3-9-unified-premium-experience'))&&!keys.some(key=>key.endsWith('evolution-'+previous.toLowerCase().replace(/[. ]/g,'-')));
     },previousVersion);
     await page.reload();
-    await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3.8.16 CENTRAL SAFETY INTELLIGENCE');
+    await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3.9 UNIFIED PREMIUM EXPERIENCE');
     await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
     expect(await canonical(page)).toEqual(prior);
     await context.setOffline(true);
     await page.reload();
-    await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3.8.16 CENTRAL SAFETY INTELLIGENCE');
+    await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3.9 UNIFIED PREMIUM EXPERIENCE');
     await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
     if(previousVersion.startsWith('3.5')){
       await page.getByRole('button',{name:/Erlebnis entdecken/}).click();
@@ -2001,12 +2003,12 @@ test('Recipe world starts from Dashboard, synchronizes portions and files a deli
  await expect(nutrition.getByRole('heading',{name:'Deine Rezeptwelt.'})).toBeVisible();
  await expect(nutrition.getByRole('button',{name:'Für mich'})).toHaveAttribute('aria-pressed','true');
  await nutrition.locator('#meal').selectOption('mittag');
- const image=nutrition.locator('.slide img');
+ const image=nutrition.locator('.slide img').first();
  await expect(image).toBeVisible();
- const original=await image.getAttribute('src');
+ const original=await nutrition.locator('#slide-copy h2').textContent();
  await nutrition.locator('.dots button').nth(1).click();
- await expect(image).not.toHaveAttribute('src',original);
- expect(await nutrition.locator('.selector button.active').textContent()).toBe(await nutrition.locator('.recipe h2').textContent());
+ await expect(nutrition.locator('#slide-copy h2')).not.toHaveText(original);
+ expect(await nutrition.locator('#slide-copy h2').textContent()).toBe(await nutrition.locator('.recipe h2').textContent());
  const first=nutrition.locator('.recipe .ingredients li strong').first();
  const button=value=>nutrition.locator('.recipe [data-action=portion][data-value="'+value+'"]');
  await button(1).click();const baseline=parseFloat((await first.textContent()).replace(',','.'));
@@ -2020,8 +2022,8 @@ test('Recipe world starts from Dashboard, synchronizes portions and files a deli
  await expect(nutrition.locator('#catalog-list > details')).toHaveCount(1);
  await nutrition.locator('#catalog-list summary').click();
  const before=await canonical(page);
- page.once('dialog',dialog=>dialog.accept());
  await nutrition.getByRole('button',{name:'Ins Tagebuch übernehmen'}).click();
+ await nutrition.getByRole('dialog').getByRole('button',{name:'Bestätigen'}).click();
  await expect(nutrition.getByText('Zutaten im Tagebuch gespeichert.')).toBeVisible();
  const after=await canonical(page);
  expect(after.p).toEqual(before.p);
@@ -2064,14 +2066,11 @@ test('Recipe ranking uses the actual combined-goal targets and changes with the 
  await nutrition.locator('#meal').selectOption('mittag');
  await expect(nutrition.getByText('Fett reduzieren',{exact:true})).toBeVisible();
  await expect(nutrition.getByText('Muskelaufbau',{exact:true})).toBeVisible();
- await nutrition.locator('.slide img').waitFor();
- const hero=nutrition.locator('.slide img');
- const original=await hero.getAttribute('src');
- await hero.evaluate(el=>{
-  el.dispatchEvent(new TouchEvent('touchstart',{bubbles:true,composed:true,changedTouches:[new Touch({identifier:1,target:el,clientX:250,clientY:90})]}));
-  el.dispatchEvent(new TouchEvent('touchend',{bubbles:true,composed:true,changedTouches:[new Touch({identifier:1,target:el,clientX:100,clientY:93})]}));
- });
- await expect(hero).not.toHaveAttribute('src',original);
+ await nutrition.locator('.slide img').first().waitFor();
+ const heading=nutrition.locator('#slide-copy h2');
+ const original=await heading.textContent();
+ await nutrition.locator('.slider').press('ArrowRight');
+ await expect(heading).not.toHaveText(original);
  await nutrition.getByRole('link',{name:/Tagebuch/}).click();
  await addMeal(page,'Synthetisches Tagesbudget',4000);
  await page.locator('.nav [data-tab=today]').click();
@@ -2169,12 +2168,13 @@ test('Intelligent Safety invalidates a pending recipe confirmation inside the ca
  // Simulate a delayed BroadcastChannel message while the confirmation is pending.
  await page.evaluate(()=>{
   if(xpIDBChannel)xpIDBChannel.onmessage=null;
-  window.confirm=()=>true;
  });
  // Keep the first view stale even if its visibility triggers a normal sync.
  await page.evaluate(()=>{xpIDBSynchronize=async()=>{}});
- await confirmNutrition(other,{diet:'Vegan',allergy:['Milch']});
  await n.getByRole('button',{name:'Ins Tagebuch übernehmen'}).click();
+ await expect(n.getByRole('dialog')).toBeVisible();
+ await confirmNutrition(other,{diet:'Vegan',allergy:['Milch']});
+ await n.getByRole('dialog').getByRole('button',{name:'Bestätigen'}).click();
  await expect(n.getByText(/Ernährungsprofil, Rezeptfreigabe oder Datum hat sich geändert/)).toBeVisible();
  const saved=await canonical(other);
  expect(saved.nutritionProtection.selection.allergy).toEqual(['Milch']);
@@ -2305,15 +2305,15 @@ test('Recipe Release shows actual recommendations and refreshes the budget after
  await page.locator('fitlab-personal-dashboard .nutrition .action').click();
  const n=page.locator('fitlab-nutrition');
  await n.locator('#meal').selectOption('mittag');
- await expect(n.locator('.slide img')).toBeVisible();
+ await expect(n.locator('.slide img').first()).toBeVisible();
  await expect(n.getByText('Muskelaufbau',{exact:true})).toBeVisible();
  const initialBudget=await page.evaluate(()=>xpNutritionModel().budget);
- const current=await n.locator('.slide img').getAttribute('src');
+ const current=await n.locator('.slide img').first().getAttribute('src');
  const id=current.match(/R\d{3}/)[0];
  const selected=n.locator('.recipe [data-action=portion][data-value="1"]');
  await selected.click();
- page.once('dialog',d=>d.accept());
  await n.locator('.recipe').getByRole('button',{name:'Ins Tagebuch übernehmen'}).click();
+ await n.getByRole('dialog').getByRole('button',{name:'Bestätigen'}).click();
  await expect(n.getByText('Zutaten im Tagebuch gespeichert.')).toBeVisible();
  const model=await page.evaluate(()=>xpNutritionModel());
  expect(model.budget).not.toBe(initialBudget);
@@ -2332,7 +2332,7 @@ test('Recipe Release checks 174 real bookings and six holds with no release over
  await ready(page,'m',false);
  await confirmNutrition(page);
  const result=await page.evaluate(async()=>{
-  const json=async name=>(await fetch('nutrition/'+name+'.json?v=3816')).json();
+  const json=async name=>(await fetch('nutrition/'+name+'.json?v=390')).json();
   const [r,f,matrix]=await Promise.all(['recipes','foods','allergen-matrix'].map(json));
   const engine=fitLabNutritionEngine,safety=fitLabNutritionSafety;
   const recipes=safety.attachMatrix(engine.enrich(r.recipes,f.foods),matrix);
@@ -2364,8 +2364,9 @@ test('Recipe Release shows the R017 notice in the catalog and confirmation befor
  const card=n.locator('[data-id=R017]');
  await expect(card.locator('summary')).toContainText('Schwangerschaft und Stillzeit');
  await card.locator('summary').click();
- page.once('dialog',async d=>{expect(d.message()).toContain('Schwangerschaft und Stillzeit');await d.dismiss()});
  await card.getByRole('button',{name:'Ins Tagebuch übernehmen'}).click();
+ await expect(n.getByRole('dialog')).toContainText('Schwangerschaft und Stillzeit');
+ await n.getByRole('dialog').getByRole('button',{name:'Abbrechen'}).click();
  expect(Object.values((await canonical(page)).log).flat()).toHaveLength(0);
 });
 
@@ -2403,8 +2404,8 @@ test('Central Safety agrees across the baseline plan, recipes, coach and trainin
  await expect(nutrition.locator('[data-id=R003] [data-action=book]')).toBeDisabled();
  await nutrition.locator('[data-id=R001] summary').click();
  await expect(nutrition.locator('[data-id=R001] [data-action=book]')).toBeEnabled();
- page.once('dialog',dialog=>dialog.accept());
  await nutrition.locator('[data-id=R001] [data-action=book]').click();
+ await nutrition.getByRole('dialog').getByRole('button',{name:'Bestätigen'}).click();
  await expect(nutrition.getByText('Zutaten im Tagebuch gespeichert.')).toBeVisible();
  await nutrition.getByRole('link',{name:/Tagebuch/}).click();
  await addMeal(page,'Manuelles Tagebuch während Schutzpause',125);
@@ -2459,3 +2460,81 @@ for(const kind of ['scheduled','free']){
   await other.close();
  });
 }
+
+test('Unified Premium diary keeps a fixed studio during native document scrolling and reflects real entries',async({page})=>{
+ await ready(page,'m',false);
+ await addMeal(page,'Food Studio Gegenprobe',100);
+ await expect(page.locator('#xpPremiumDiary .ring-meter').first()).toHaveText('172');
+ const scene=page.locator('#fitlab-scene');
+ await expect(scene).toHaveCSS('position','fixed');
+ await expect(scene).toHaveCSS('background-image',/food-studio/);
+ const y=await scene.evaluate(el=>el.getBoundingClientRect().top);
+ await page.evaluate(()=>scrollTo(0,480));
+ expect(await page.evaluate(()=>scrollY)).toBeGreaterThan(0);
+ expect(await scene.evaluate(el=>el.getBoundingClientRect().top)).toBe(y);
+ const outer=await page.evaluate(()=>[document.documentElement.clientWidth,document.documentElement.scrollWidth]);
+ expect(outer[1]).toBe(outer[0]);
+});
+
+test('Unified Premium goal chart distinguishes measured history and an unconfirmed goal',async({page})=>{
+ await ready(page,'m',false);
+ await page.evaluate(()=>xpGoalOpen());
+ const g=page.locator('fitlab-goal');
+ await expect(g.locator('#goal-chart')).toContainText('Noch keine dokumentierten Gewichte');
+ await g.getByRole('button',{name:'Zurück'}).click();
+ await page.evaluate(()=>{
+  coachData().days[coachDate(-5)]={weight:81.5};coachData().days[coachDate(-1)]={weight:80};
+  xpGoalOpen();
+ });
+ await expect(g.getByRole('img',{name:/Gemessener Gewichtsverlauf/})).toBeVisible();
+ await expect(g.locator('#goal-chart circle')).toHaveCount(2);
+ await expect(g.locator('#goal-chart [stroke-dasharray]')).toHaveCount(0);
+ await expect(g.locator('.goal-scene')).toHaveCSS('position','fixed');
+});
+
+test('Unified Premium recipe rail responds to a native touch swipe and keeps the detail in sync',async({browser,browserName})=>{
+ test.skip(browserName!=='chromium','Native touch input uses Chromium CDP; WebKit covers the visible tap and keyboard controls.');
+ const context=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true,baseURL:test.info().project.use.baseURL});
+ try{
+  const page=await context.newPage();
+  await ready(page,'m',false);await confirmNutrition(page);
+  await page.locator('fitlab-personal-dashboard .nutrition .action').click();
+  const n=page.locator('fitlab-nutrition');
+  await n.locator('#meal').selectOption('mittag');
+  const track=n.locator('.slider');
+  await track.scrollIntoViewIfNeeded();
+  const title=n.locator('#slide-copy h2');
+  const before=await title.textContent();
+  const {x,y,width,height}=await track.boundingBox();
+  const cdp=await context.newCDPSession(page);
+  const center=y+height/2;
+  await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:x+width*.83,y:center}]});
+  for(let i=1;i<=7;i++){
+   await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:x+width*(.83-i*.095),y:center}]});
+  }
+  await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});
+  await expect(title).not.toHaveText(before);
+  await expect(n.locator('.recipe h2')).toHaveText(await title.textContent());
+  await expect(track).toHaveCSS('scroll-snap-type','x mandatory');
+ }finally{await context.close()}
+});
+
+test('Unified Premium workout uses the actual exercise and preserves draft on horizontal navigation',async({page})=>{
+ await ready(page,'f',false);
+ await page.evaluate(()=>{tab('training');selectedTrainingDay=0;startTraining()});
+ await expect.poll(async()=>Boolean((await canonical(page)).trainingDraft)).toBe(true);
+ const before=(await canonical(page)).trainingDraft;
+ const header=page.locator('#trainingout .workHero');
+ await expect(header).toBeVisible();
+ const scene=page.locator('#fitlab-scene');
+ await expect(scene).toHaveCSS('position','fixed');
+ await expect(page.locator('body')).toHaveAttribute('data-premium-avatar','f');
+ await expect(page.locator('body')).toHaveAttribute('data-premium-exercise',before.items[0].id);
+ await header.evaluate(el=>{
+  el.dispatchEvent(new PointerEvent('pointerdown',{bubbles:true,pointerId:8,clientX:275,clientY:30}));
+  el.dispatchEvent(new PointerEvent('pointerup',{bubbles:true,pointerId:8,clientX:100,clientY:31}));
+ });
+ await expect.poll(()=>page.evaluate(()=>focus63)).toBe(1);
+ await expect(page.locator('body')).toHaveAttribute('data-premium-exercise',before.items[1].id);
+ expect((await canonical(page)).trainingDraft).toEqual(before);
+});
