@@ -184,7 +184,7 @@ test('real QA5 application automatically migrates into current IndexedDB', async
   expect(legacy).toEqual(saved);
   await page.unroute(root,oldRoute);
   await page.reload();
-  await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3.7 PERSONAL DASHBOARD');
+  await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3.8 PERSONAL NUTRITION');
   await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0,{timeout:20000});
   const migrated=await canonical(page);
   expect(migrated.p.age).toBe(41);
@@ -1142,7 +1142,7 @@ test('Evolution 2.2 normal text and selected controls contrast across all main s
   }
 });
 
-for(const [previousVersion,old] of [['3.6 DESIGN FIRST','c43b25a30ab85a672073d4b89b14880b083c335e'],['3.5 HERO VISUAL STABILITY','658428695ccfc7d21114fe8506006bc593fcd58e'],['3.4 NATURAL FLOW','009a9454edd1e1bf578e0bd21f5ee5d8effb4ed6'],['3.3 STORY ACCESS','0e30e98b34092b5d7018ce78f98393288456fcc6'],['2.1','b4604bb056feee3c074e123186baba88bc2cfe25'],['2.2','20a78aaba9fcf9713292fa4b45d43e5fc534da30']])
+for(const [previousVersion,old] of [['3.7 PERSONAL DASHBOARD','7fbd1dee4e6ebb7d57ad7eda80023359b578577a'],['3.6 DESIGN FIRST','c43b25a30ab85a672073d4b89b14880b083c335e'],['3.5 HERO VISUAL STABILITY','658428695ccfc7d21114fe8506006bc593fcd58e'],['3.4 NATURAL FLOW','009a9454edd1e1bf578e0bd21f5ee5d8effb4ed6'],['3.3 STORY ACCESS','0e30e98b34092b5d7018ce78f98393288456fcc6'],['2.1','b4604bb056feee3c074e123186baba88bc2cfe25'],['2.2','20a78aaba9fcf9713292fa4b45d43e5fc534da30']])
 test(`Atlas V2 real service worker update from ${previousVersion} keeps data and an offline write survives reload`,async({browser})=>{
   const {createServer}=require('node:http');
   const {execFileSync}=require('node:child_process');
@@ -1156,6 +1156,10 @@ test(`Atlas V2 real service worker update from ${previousVersion} keeps data and
   for(const name of ['path','strength'])assets['/media/scenes/'+name+'.webp']='image/webp';
   for(const name of ['head-to-toe','food','training','recovery','cockpit','head-to-toe-male','training-male','head-to-toe-neutral','training-neutral'])assets['/media/hero/'+name+'.webp']='image/webp';
   assets['/design-story.js']=assets['/personal-dashboard.js']='text/javascript';
+  for(const name of ['engine.js','experience.js','reference.css','foods.json','recipes.json']){
+    assets['/nutrition/'+name]=name.endsWith('.js')?'text/javascript':name.endsWith('.css')?'text/css':'application/json';
+  }
+  for(const name of fs.readdirSync('nutrition/recipes'))assets['/nutrition/recipes/'+name]='image/webp';
   for(const name of fs.readdirSync('media/design-first'))assets['/media/design-first/'+name]='image/webp';
   if(previousVersion.startsWith('3.5')){
     for(const route of ['/first-impression.css','/premium-ux.css','/cinematic.css','/cinematic.js']){
@@ -1175,7 +1179,7 @@ test(`Atlas V2 real service worker update from ${previousVersion} keeps data and
   try{
     context=await browser.newContext({baseURL:`http://127.0.0.1:${server.address().port}`,serviceWorkers:'allow'});
     const page=await context.newPage();
-    await ready(page,'m',!previousVersion.startsWith('3.6'));
+    await ready(page,'m',!/^3\.[67]/.test(previousVersion));
     await expect(page.locator('#appVersion')).toContainText('EVOLUTION '+previousVersion);
     await page.waitForFunction(()=>navigator.serviceWorker.controller!==null);
     if(previousVersion==='2.2'){
@@ -1209,15 +1213,15 @@ test(`Atlas V2 real service worker update from ${previousVersion} keeps data and
     await page.waitForFunction(()=>window.testControllerChanged);
     await page.waitForFunction(async previous=>{
       const keys=await caches.keys();
-      return keys.some(key=>key.endsWith('evolution-3-7-personal-dashboard'))&&!keys.some(key=>key.endsWith('evolution-'+previous.toLowerCase().replace(/[. ]/g,'-')));
+      return keys.some(key=>key.endsWith('evolution-3-8-personal-nutrition'))&&!keys.some(key=>key.endsWith('evolution-'+previous.toLowerCase().replace(/[. ]/g,'-')));
     },previousVersion);
     await page.reload();
-    await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3.7 PERSONAL DASHBOARD');
+    await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3.8 PERSONAL NUTRITION');
     await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
     expect(await canonical(page)).toEqual(prior);
     await context.setOffline(true);
     await page.reload();
-    await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3.7 PERSONAL DASHBOARD');
+    await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3.8 PERSONAL NUTRITION');
     await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
     if(previousVersion.startsWith('3.5')){
       await page.getByRole('button',{name:/Erlebnis entdecken/}).click();
@@ -1226,7 +1230,7 @@ test(`Atlas V2 real service worker update from ${previousVersion} keeps data and
       await story.locator('img.male-photo').first().evaluate(img=>img.decode());
       await story.getByRole('button',{name:/Zurück zur Startseite/}).click();
     }
-    if(previousVersion.startsWith('3.6')){
+    if(/^3\.[67]/.test(previousVersion)){
       const dashboard=page.locator('fitlab-personal-dashboard');
       await expect(dashboard.locator('main section')).toHaveCount(5);
       await dashboard.locator('img.male-photo').first().evaluate(img=>img.decode());
@@ -1898,6 +1902,7 @@ test('Personal Dashboard opens at boot, retains original home access and restore
  let checkpoint=await page.evaluate(()=>scrollY);
  expect(checkpoint).toBeGreaterThan(0);
  await dash.locator('section.nutrition .photo').click();
+ await page.locator('fitlab-nutrition').getByRole('link',{name:/Tagebuch/}).click();
  await expect(page.locator('#nutrition')).toBeVisible();
  await page.locator('.nav [data-tab=today]').click();
  await expect(dash).toBeVisible();
@@ -1920,6 +1925,7 @@ test('Personal Dashboard routes every hero, action and cockpit tile to existing 
   ['.tile:nth-child(2)','#training'],['.tile:nth-child(3)','#nutrition'],['.tile:nth-child(4)','#xp15Progress']
  ]){
   await dash.locator(selector).click();
+  if(target==='#nutrition')await page.locator('fitlab-nutrition').getByRole('link',{name:/Tagebuch/}).click();
   await expect(page.locator(target)).toBeVisible();
   await expect(dash).toHaveCount(0);
   await page.locator('.nav [data-tab=today]').click();
@@ -1980,4 +1986,103 @@ test('Personal Dashboard preserves its approved styling against outer rules',asy
   await expect(image).toHaveCSS('animation-name','none');
   expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBe(width);
  }
+});
+
+test('Recipe world starts from Dashboard, synchronizes portions and files a deliberate offline booking',async({page,context})=>{
+ await ready(page,'m',false);
+ await page.waitForFunction(()=>!!navigator.serviceWorker.controller);
+ await context.setOffline(true);
+ const dashboard=page.locator('fitlab-personal-dashboard');
+ await dashboard.locator('section.nutrition .action').click();
+ const nutrition=page.locator('fitlab-nutrition');
+ await expect(nutrition.getByRole('heading',{name:'Deine Rezeptwelt.'})).toBeVisible();
+ await expect(nutrition.getByRole('button',{name:'Für mich'})).toHaveAttribute('aria-pressed','true');
+ await nutrition.locator('#meal').selectOption('mittag');
+ const image=nutrition.locator('.slide img');
+ await expect(image).toBeVisible();
+ const original=await image.getAttribute('src');
+ await nutrition.locator('.dots button').nth(1).click();
+ await expect(image).not.toHaveAttribute('src',original);
+ expect(await nutrition.locator('.selector button.active').textContent()).toBe(await nutrition.locator('.recipe h2').textContent());
+ const first=nutrition.locator('.recipe .ingredients li strong').first();
+ const button=value=>nutrition.locator('.recipe [data-action=portion][data-value="'+value+'"]');
+ await button(1).click();const baseline=parseFloat((await first.textContent()).replace(',','.'));
+ for(const value of [.5,1,1.5,2,2.5,3]){
+  await button(value).click();
+  expect(parseFloat((await first.textContent()).replace(',','.'))).toBeCloseTo(baseline*value,2);
+ }
+ await nutrition.getByRole('button',{name:'Alle Rezepte'}).click();
+ await expect(nutrition.locator('#catalog-list > details')).toHaveCount(30);
+ await nutrition.getByRole('searchbox').fill('Lachs');
+ await expect(nutrition.locator('#catalog-list > details')).toHaveCount(1);
+ await nutrition.locator('#catalog-list summary').click();
+ const before=await canonical(page);
+ page.once('dialog',dialog=>dialog.accept());
+ await nutrition.getByRole('button',{name:'Ins Tagebuch übernehmen'}).click();
+ await expect(nutrition.getByText('Zutaten im Tagebuch gespeichert.')).toBeVisible();
+ const after=await canonical(page);
+ expect(after.p).toEqual(before.p);
+ expect(Object.values(after.log).flat().length).toBeGreaterThan(1);
+ await nutrition.getByRole('link',{name:/Tagebuch/}).click();
+ await expect(page.locator('#nutrition')).toBeVisible();
+ await page.locator('.nav [data-tab=today]').click();
+ await expect(dashboard.locator('[data-value=calories]')).not.toHaveText('–');
+});
+
+test('Recipe world persists allergies and leaves the full warning-marked catalogue available',async({page})=>{
+ await ready(page,'f',false);
+ await page.locator('fitlab-personal-dashboard .nutrition .photo').click();
+ let nutrition=page.locator('fitlab-nutrition');
+ await nutrition.locator('#preferences > summary').click();
+ await nutrition.locator('input[name=allergy][value=Milch]').check();
+ await nutrition.getByRole('button',{name:'Speichern',exact:true}).click();
+ await expect(nutrition.getByText('Für deine aktuellen Angaben gibt es keine passende persönliche Empfehlung.')).toBeVisible();
+ await nutrition.getByRole('button',{name:'Alle Rezepte'}).click();
+ await expect(nutrition.locator('#catalog-list > details')).toHaveCount(30);
+ await nutrition.locator('#catalog-list > details').first().locator('summary').click();
+ await expect(nutrition.getByRole('button',{name:'Ins Tagebuch übernehmen'})).toBeDisabled();
+ await page.reload();
+ await page.locator('fitlab-personal-dashboard .nutrition .photo').click();
+ await nutrition.locator('#preferences > summary').click();
+ await expect(nutrition.locator('input[name=allergy][value=Milch]')).toBeChecked();
+});
+
+test('Recipe ranking uses the actual combined-goal targets and changes with the day intake',async({page})=>{
+ await ready(page,'m',false);
+ await page.evaluate(()=>{state.p.goals=[0,2];state.p.priority='auto';state.p.kind='strength';premiumDashboard()});
+ const target=await page.evaluate(()=>({actual:xpNutritionModel().target,calculated:calc(state.p)}));
+ expect(target.actual).toMatchObject({kcal:target.calculated.k,protein_g:target.calculated.protein,available_carbs_g:target.calculated.carbs,fat_g:target.calculated.fat});
+ await page.locator('fitlab-personal-dashboard .nutrition .action').click();
+ const nutrition=page.locator('fitlab-nutrition');
+ await nutrition.locator('#meal').selectOption('mittag');
+ await expect(nutrition.getByText('Fett reduzieren',{exact:true})).toBeVisible();
+ await expect(nutrition.getByText('Muskelaufbau',{exact:true})).toBeVisible();
+ await nutrition.locator('.slide img').waitFor();
+ const hero=nutrition.locator('.slide img');
+ const original=await hero.getAttribute('src');
+ await hero.evaluate(el=>{
+  el.dispatchEvent(new TouchEvent('touchstart',{bubbles:true,composed:true,changedTouches:[new Touch({identifier:1,target:el,clientX:250,clientY:90})]}));
+  el.dispatchEvent(new TouchEvent('touchend',{bubbles:true,composed:true,changedTouches:[new Touch({identifier:1,target:el,clientX:100,clientY:93})]}));
+ });
+ await expect(hero).not.toHaveAttribute('src',original);
+ await nutrition.getByRole('link',{name:/Tagebuch/}).click();
+ await addMeal(page,'Synthetisches Tagesbudget',4000);
+ await page.locator('.nav [data-tab=today]').click();
+ await page.locator('fitlab-personal-dashboard .nutrition .action').click();
+ await nutrition.locator('#meal').selectOption('mittag');
+ await expect(nutrition.getByText(/keine passende persönliche Empfehlung/)).toBeVisible();
+ await expect(nutrition.getByText(/keine Empfehlung, eine Mahlzeit auszulassen/)).toBeVisible();
+ await nutrition.getByRole('button',{name:'Alle Rezepte'}).click();
+ for(const width of [320,375,390,430]){
+  await page.setViewportSize({width,height:844});
+  await expect(nutrition.locator('#catalog-list > details')).toHaveCount(30);
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBe(width);
+ }
+ await nutrition.locator('#sort').selectOption('time');
+ const ids=await nutrition.locator('#catalog-list > details').evaluateAll(nodes=>nodes.map(node=>node.dataset.id));
+ const times=await page.evaluate(async ids=>{
+  const d=await (await fetch('nutrition/recipes.json')).json();
+  return ids.map(id=>d.recipes.find(r=>r.id===id).minutes);
+ },ids);
+ expect(times).toEqual([...times].sort((a,b)=>a-b));
 });

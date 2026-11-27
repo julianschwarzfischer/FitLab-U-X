@@ -82,3 +82,6 @@ new vm.Script(personal,{filename:'personal-dashboard.js'});
 assert(html.includes('src="personal-dashboard.js"')&&sw.includes("'./personal-dashboard.js'"),'Personal Dashboard must load offline');
 for(const asset of storyImages)assert(personal.includes('src="'+asset+'"'),'Missing approved dashboard image: '+asset);
 console.log('PASS Personal Dashboard shares the six byte-identical reference images and caches its runtime');
+
+require('./nutrition-engine.cjs');
+for(const path of ['nutrition/engine.js','nutrition/experience.js','nutrition/reference.css','nutrition/foods.json','nutrition/recipes.json',...fs.readdirSync('nutrition/recipes').map(name=>'nutrition/recipes/'+name)])assert(sw.includes("'./"+path+"'"),'Missing cached nutrition resource: '+path);

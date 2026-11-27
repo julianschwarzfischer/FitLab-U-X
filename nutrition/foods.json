@@ -1,0 +1,2973 @@
+{
+  "foods": [
+    {
+      "id": "F001",
+      "name": "Haferflocken",
+      "state": "trocken",
+      "source_record_id": "C133000",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 348,
+        "protein_g": 13.22,
+        "available_carbs_g": 53.3,
+        "fat_g": 6.65,
+        "fiber_g": 10.983
+      },
+      "mapping_status": "mapped",
+      "allergens_intrinsic_preliminary": [
+        "Gluten"
+      ],
+      "source_name": "Hafer Flocken",
+      "source_note": "",
+      "source_provenance": {
+        "kcal": {
+          "raw": 348,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 13.22,
+          "origin": "Analyse",
+          "reference": "-"
+        },
+        "available_carbs_g": {
+          "raw": 53.3,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 6.65,
+          "origin": "Analyse",
+          "reference": "-"
+        },
+        "fiber_g": {
+          "raw": 10.983,
+          "origin": "Analyse",
+          "reference": "-"
+        }
+      },
+      "gluten_grain": "Hafer"
+    },
+    {
+      "id": "F002",
+      "name": "Magerquark",
+      "state": "verzehrfertig",
+      "source_record_id": "M713100",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 66,
+        "protein_g": 11.85,
+        "available_carbs_g": 3.68,
+        "fat_g": 0.18,
+        "fiber_g": 0
+      },
+      "mapping_status": "mapped",
+      "allergens_intrinsic_preliminary": [
+        "Milch"
+      ],
+      "source_name": "Speisequark Magerstufe, Magerquark < 10 % Fett i. Tr.",
+      "source_note": "",
+      "source_provenance": {
+        "kcal": {
+          "raw": 66,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 11.85,
+          "origin": "Analyse",
+          "reference": "-"
+        },
+        "available_carbs_g": {
+          "raw": 3.68,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 0.18,
+          "origin": "Analyse",
+          "reference": "-"
+        },
+        "fiber_g": {
+          "raw": 0,
+          "origin": "Analyse",
+          "reference": "-"
+        }
+      }
+    },
+    {
+      "id": "F003",
+      "name": "Heidelbeeren",
+      "state": "roh",
+      "source_record_id": "F304100",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 61,
+        "protein_g": 0.5,
+        "available_carbs_g": 9.7,
+        "fat_g": 0.6,
+        "fiber_g": 4.9
+      },
+      "mapping_status": "mapped",
+      "allergens_intrinsic_preliminary": [],
+      "source_name": "Heidelbeere roh",
+      "source_note": "",
+      "source_provenance": {
+        "kcal": {
+          "raw": 61,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 0.5,
+          "origin": "Nährstoffdatenbank",
+          "reference": "National Food Institute, Food data (frida.fooddata.dk), version 5.2, May 2024"
+        },
+        "available_carbs_g": {
+          "raw": 9.7,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 0.6,
+          "origin": "Nährstoffdatenbank",
+          "reference": "Kirchhoff, E; Souci - Fachmann - Kraut - Die Zusammensetzung der Lebensmittel - Nährwert-Tabellen; 2008; 7"
+        },
+        "fiber_g": {
+          "raw": 4.9,
+          "origin": "Analyse",
+          "reference": "-"
+        }
+      }
+    },
+    {
+      "id": "F004",
+      "name": "Milch 1,5 %",
+      "state": "verzehrfertig",
+      "source_record_id": "M111200",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 44,
+        "protein_g": 3.49,
+        "available_carbs_g": 3.86,
+        "fat_g": 1.54,
+        "fiber_g": 0
+      },
+      "mapping_status": "mapped",
+      "allergens_intrinsic_preliminary": [
+        "Milch"
+      ],
+      "source_name": "Milch fettarm, frisch, 1,5 % Fett, pasteurisiert",
+      "source_note": "",
+      "source_provenance": {
+        "kcal": {
+          "raw": 44,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 3.49,
+          "origin": "Analyse",
+          "reference": "-"
+        },
+        "available_carbs_g": {
+          "raw": 3.86,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 1.54,
+          "origin": "Analyse",
+          "reference": "-"
+        },
+        "fiber_g": {
+          "raw": 0,
+          "origin": "Analyse",
+          "reference": "-"
+        }
+      }
+    },
+    {
+      "id": "F005",
+      "name": "Chiasamen",
+      "state": "trocken",
+      "source_record_id": "H480100",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 479,
+        "protein_g": 22.11,
+        "available_carbs_g": 3.66,
+        "fat_g": 32.79,
+        "fiber_g": 40.23
+      },
+      "mapping_status": "mapped",
+      "allergens_intrinsic_preliminary": [],
+      "source_name": "Chia-Samen",
+      "source_note": "",
+      "source_provenance": {
+        "kcal": {
+          "raw": 479,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 22.11,
+          "origin": "Analyse",
+          "reference": "-"
+        },
+        "available_carbs_g": {
+          "raw": 3.66,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 32.79,
+          "origin": "Analyse",
+          "reference": "-"
+        },
+        "fiber_g": {
+          "raw": 40.23,
+          "origin": "Analyse",
+          "reference": "-"
+        }
+      }
+    },
+    {
+      "id": "F006",
+      "name": "Ei",
+      "state": "roh ohne Schale",
+      "source_record_id": "E111100",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 135,
+        "protein_g": 13.175,
+        "available_carbs_g": 0.34,
+        "fat_g": 9,
+        "fiber_g": 0
+      },
+      "mapping_status": "mapped",
+      "allergens_intrinsic_preliminary": [
+        "Ei"
+      ],
+      "source_name": "Hühnerei roh",
+      "source_note": "",
+      "source_provenance": {
+        "kcal": {
+          "raw": 135,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 13.175,
+          "origin": "Aggregation",
+          "reference": "Converted value from: Koivistoinen P; Mineral element composition of Finnish foods. N, K, Ca, Mg, P, S, Fe, Cu, Mn, Zn, Mo, Co, Ni, Cr, F, Se, Si, Rb, Al, B, Br, Hg, As, Cd, Pb and Ash; Almqvist & Wiksell; 1980#Converted value from: Health, D. o; Nutrient analysis of eggs; 2013"
+        },
+        "available_carbs_g": {
+          "raw": 0.34,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 9,
+          "origin": "Literatur",
+          "reference": "Health, D. o; Nutrient analysis of eggs; 2013"
+        },
+        "fiber_g": {
+          "raw": 0,
+          "origin": "Logische Null",
+          "reference": "-"
+        }
+      }
+    },
+    {
+      "id": "F007",
+      "name": "Vollkornbrot Weizen",
+      "state": "verzehrfertig",
+      "source_record_id": "B111000",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 180,
+        "protein_g": 7.554,
+        "available_carbs_g": 31.9,
+        "fat_g": 0.86,
+        "fiber_g": 6.825
+      },
+      "mapping_status": "mapped",
+      "allergens_intrinsic_preliminary": [
+        "Gluten"
+      ],
+      "source_name": "Weizenvollkornbrot",
+      "source_note": "",
+      "source_provenance": {
+        "kcal": {
+          "raw": 180,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 7.554,
+          "origin": "Nährstoffdatenbank",
+          "reference": "Converted value from: Kirchhoff, E; Souci - Fachmann - Kraut - Die Zusammensetzung der Lebensmittel - Nährwert-Tabellen; 2008; 7"
+        },
+        "available_carbs_g": {
+          "raw": 31.9,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 0.86,
+          "origin": "Nährstoffdatenbank",
+          "reference": "Kirchhoff, E; Souci - Fachmann - Kraut - Die Zusammensetzung der Lebensmittel - Nährwert-Tabellen; 2008; 7"
+        },
+        "fiber_g": {
+          "raw": 6.825,
+          "origin": "Analyse",
+          "reference": "-"
+        }
+      },
+      "gluten_grain": "Weizen"
+    },
+    {
+      "id": "F008",
+      "name": "Spinat",
+      "state": "roh",
+      "source_record_id": "G211100",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 18,
+        "protein_g": 2.067,
+        "available_carbs_g": 0.93,
+        "fat_g": 0.3,
+        "fiber_g": 1.8
+      },
+      "mapping_status": "mapped",
+      "allergens_intrinsic_preliminary": [],
+      "source_name": "Spinat roh",
+      "source_note": "",
+      "source_provenance": {
+        "kcal": {
+          "raw": 18,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 2.067,
+          "origin": "Aggregation",
+          "reference": "Converted value from: Colonna, E., et al.; Nutritional quality of ten leafy vegetables harvested at two light intensities.; Food Chemistry; 2016; 199#Converted value from: Health, D. o; Nutrient analysis of fruit and vegetables; 2013#Converted value from: Koivistoinen P; Mineral element composition of Finnish foods. N, K, Ca, Mg, P, S, Fe, Cu, Mn, Zn, Mo, Co, Ni, Cr, F, Se, Si, Rb, Al, B, Br, Hg, As, Cd, Pb and Ash; Almqvist & Wiksell; 1980"
+        },
+        "available_carbs_g": {
+          "raw": 0.93,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 0.3,
+          "origin": "Nährstoffdatenbank",
+          "reference": "Kirchhoff, E; Souci - Fachmann - Kraut - Die Zusammensetzung der Lebensmittel - Nährwert-Tabellen; 2008; 7"
+        },
+        "fiber_g": {
+          "raw": 1.8,
+          "origin": "Analyse",
+          "reference": "-"
+        }
+      }
+    },
+    {
+      "id": "F009",
+      "name": "Tomate",
+      "state": "roh",
+      "source_record_id": "G561100",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 22,
+        "protein_g": 0.95,
+        "available_carbs_g": 3.25,
+        "fat_g": 0.11,
+        "fiber_g": 1.3
+      },
+      "mapping_status": "mapped",
+      "allergens_intrinsic_preliminary": [],
+      "source_name": "Tomate roh",
+      "source_note": "",
+      "source_provenance": {
+        "kcal": {
+          "raw": 22,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 0.95,
+          "origin": "Nährstoffdatenbank",
+          "reference": "Converted value from: Kirchhoff, E; Souci - Fachmann - Kraut - Die Zusammensetzung der Lebensmittel - Nährwert-Tabellen; 2008; 7"
+        },
+        "available_carbs_g": {
+          "raw": 3.25,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 0.11,
+          "origin": "Literatur",
+          "reference": "Pinela, J., Barros, L., Carvalho, A. M., Ferreira, I.; Nutritional composition and antioxidant activity of four tomato (Lycopersicon esculentum L.) farmer' varieties in Northeastern Portugal homegardens; Food and Chemical Toxicology; 2012; 50"
+        },
+        "fiber_g": {
+          "raw": 1.3,
+          "origin": "Analyse",
+          "reference": "-"
+        }
+      }
+    },
+    {
+      "id": "F010",
+      "name": "Olivenöl",
+      "state": "verzehrfertig",
+      "source_record_id": "Q120000",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 899,
+        "protein_g": 0,
+        "available_carbs_g": 0,
+        "fat_g": 99.9,
+        "fiber_g": 0
+      },
+      "mapping_status": "mapped",
+      "allergens_intrinsic_preliminary": [],
+      "source_name": "Olivenöl",
+      "source_note": "",
+      "source_provenance": {
+        "kcal": {
+          "raw": 899,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 0,
+          "origin": "Logische Null",
+          "reference": "-"
+        },
+        "available_carbs_g": {
+          "raw": 0,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 99.9,
+          "origin": "Übernommener Wert",
+          "reference": "-"
+        },
+        "fiber_g": {
+          "raw": 0,
+          "origin": "Logische Null",
+          "reference": "-"
+        }
+      }
+    },
+    {
+      "id": "F011",
+      "name": "Sojadrink ungesüßt",
+      "state": "verzehrfertig",
+      "source_record_id": "H841100",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 30,
+        "protein_g": 3.22,
+        "available_carbs_g": 0.4,
+        "fat_g": 1.297,
+        "fiber_g": 1.75
+      },
+      "mapping_status": "mapped",
+      "allergens_intrinsic_preliminary": [
+        "Soja"
+      ],
+      "source_name": "Sojadrink ungesüßt",
+      "source_note": "",
+      "source_provenance": {
+        "kcal": {
+          "raw": 30,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 3.22,
+          "origin": "Analyse",
+          "reference": "-"
+        },
+        "available_carbs_g": {
+          "raw": 0.4,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 1.297,
+          "origin": "Analyse",
+          "reference": "-"
+        },
+        "fiber_g": {
+          "raw": 1.75,
+          "origin": "Analyse",
+          "reference": "-"
+        }
+      }
+    },
+    {
+      "id": "F012",
+      "name": "Apfel",
+      "state": "roh",
+      "source_record_id": "F110100",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 58,
+        "protein_g": 0.424,
+        "available_carbs_g": 11.7,
+        "fat_g": 0.5,
+        "fiber_g": 2.275
+      },
+      "mapping_status": "mapped",
+      "allergens_intrinsic_preliminary": [],
+      "source_name": "Apfel roh",
+      "source_note": "",
+      "source_provenance": {
+        "kcal": {
+          "raw": 58,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 0.424,
+          "origin": "Aggregation",
+          "reference": "Converted value from: Koivistoinen P; Mineral element composition of Finnish foods. N, K, Ca, Mg, P, S, Fe, Cu, Mn, Zn, Mo, Co, Ni, Cr, F, Se, Si, Rb, Al, B, Br, Hg, As, Cd, Pb and Ash; Almqvist & Wiksell; 1980#Converted value from: Health, D. o; Nutrient analysis of fruit and vegetables; 2013"
+        },
+        "available_carbs_g": {
+          "raw": 11.7,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 0.5,
+          "origin": "Literatur",
+          "reference": "Health, D. o; Nutrient analysis of fruit and vegetables; 2013"
+        },
+        "fiber_g": {
+          "raw": 2.275,
+          "origin": "Aggregation",
+          "reference": "Converted value from: Feliciano, R. P., Antunes, C., Ramos, A., Serra, A. T., Figueira, M. E., Duarte, C. M. M., Carvalho, A. d, Bronze, M. R.; Characterization of traditional and exotic apple varieties from Portugal. Part 1 - Nutritional, phytochemical and sensory evaluation; Journal of Fuctional Foods; 2010; 2#Converted value from: Li, B. W. and Andrews, K. W.; Individual sugars, soluble, and insoluble dietary fiber contents of 70 high consumption foods.; Journal of Food Composition and Analysis; 2002; 15#Converted value from: Ramulu, P., Rao, P. U.; Total, insoluble and soluble dietary fiber contents of Indian fruits; Journal of Food Composition and Analysis; 2003; 16#Converted value from: Lee, Y., et al. ; Analytical dietary fiber database for the National Health and Nutrition Survey in Korea.; Journal of Food Composition and Analysis; 2008; 21"
+        }
+      }
+    },
+    {
+      "id": "F013",
+      "name": "Leinsamen geschrotet",
+      "state": "trocken",
+      "source_record_id": "H410400",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 468,
+        "protein_g": 22.27,
+        "available_carbs_g": 1.7,
+        "fat_g": 36.5,
+        "fiber_g": 21.565
+      },
+      "mapping_status": "mapped",
+      "allergens_intrinsic_preliminary": [],
+      "source_name": "Leinsamen geschrotet",
+      "source_note": "",
+      "source_provenance": {
+        "kcal": {
+          "raw": 468,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 22.27,
+          "origin": "Rezeptberechnung",
+          "reference": "-"
+        },
+        "available_carbs_g": {
+          "raw": 1.7,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 36.5,
+          "origin": "Rezeptberechnung",
+          "reference": "-"
+        },
+        "fiber_g": {
+          "raw": 21.565,
+          "origin": "Rezeptberechnung",
+          "reference": "-"
+        }
+      }
+    },
+    {
+      "id": "F014",
+      "name": "Hüttenkäse",
+      "state": "verzehrfertig",
+      "source_record_id": "M711300",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 109,
+        "protein_g": 13.3,
+        "available_carbs_g": 3.64,
+        "fat_g": 4.3,
+        "fiber_g": 0
+      },
+      "mapping_status": "provisional",
+      "allergens_intrinsic_preliminary": [
+        "Milch"
+      ],
+      "source_name": "Körniger Frischkäse mind. 20 % Fett i. Tr.",
+      "source_note": "Körniger Frischkäse 20 % Fett i.Tr. als Standard",
+      "source_provenance": {
+        "kcal": {
+          "raw": 109,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 13.3,
+          "origin": "Nährstoffdatenbank",
+          "reference": "Converted value from: National Food Institute, Food data (frida.fooddata.dk), version 5.2, May 2024"
+        },
+        "available_carbs_g": {
+          "raw": 3.64,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 4.3,
+          "origin": "Nährstoffdatenbank",
+          "reference": "Kirchhoff, E; Souci - Fachmann - Kraut - Die Zusammensetzung der Lebensmittel - Nährwert-Tabellen; 2008; 7"
+        },
+        "fiber_g": {
+          "raw": 0,
+          "origin": "Logische Null",
+          "reference": "-"
+        }
+      }
+    },
+    {
+      "id": "F015",
+      "name": "Gurke",
+      "state": "roh",
+      "source_record_id": "G520100",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 16,
+        "protein_g": 1.062,
+        "available_carbs_g": 1.97,
+        "fat_g": 0.2,
+        "fiber_g": 0.9
+      },
+      "mapping_status": "mapped",
+      "allergens_intrinsic_preliminary": [],
+      "source_name": "Gurke roh",
+      "source_note": "",
+      "source_provenance": {
+        "kcal": {
+          "raw": 16,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 1.062,
+          "origin": "Aggregation",
+          "reference": "Converted value from: Koivistoinen P; Mineral element composition of Finnish foods. N, K, Ca, Mg, P, S, Fe, Cu, Mn, Zn, Mo, Co, Ni, Cr, F, Se, Si, Rb, Al, B, Br, Hg, As, Cd, Pb and Ash; Almqvist & Wiksell; 1980#Converted value from: Health, D. o; Nutrient analysis of fruit and vegetables; 2013"
+        },
+        "available_carbs_g": {
+          "raw": 1.97,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 0.2,
+          "origin": "Nährstoffdatenbank",
+          "reference": "Kirchhoff, E; Souci - Fachmann - Kraut - Die Zusammensetzung der Lebensmittel - Nährwert-Tabellen; 2008; 7"
+        },
+        "fiber_g": {
+          "raw": 0.9,
+          "origin": "Analyse",
+          "reference": "-"
+        }
+      }
+    },
+    {
+      "id": "F016",
+      "name": "Radieschen",
+      "state": "roh",
+      "source_record_id": "G691100",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 18,
+        "protein_g": 1.05,
+        "available_carbs_g": 2.31,
+        "fat_g": 0.14,
+        "fiber_g": 1.5
+      },
+      "mapping_status": "mapped",
+      "allergens_intrinsic_preliminary": [],
+      "source_name": "Radieschen roh",
+      "source_note": "",
+      "source_provenance": {
+        "kcal": {
+          "raw": 18,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 1.05,
+          "origin": "Nährstoffdatenbank",
+          "reference": "Converted value from: Kirchhoff, E; Souci - Fachmann - Kraut - Die Zusammensetzung der Lebensmittel - Nährwert-Tabellen; 2008; 7"
+        },
+        "available_carbs_g": {
+          "raw": 2.31,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 0.14,
+          "origin": "Nährstoffdatenbank",
+          "reference": "Kirchhoff, E; Souci - Fachmann - Kraut - Die Zusammensetzung der Lebensmittel - Nährwert-Tabellen; 2008; 7"
+        },
+        "fiber_g": {
+          "raw": 1.5,
+          "origin": "Analyse",
+          "reference": "-"
+        }
+      }
+    },
+    {
+      "id": "F017",
+      "name": "Banane",
+      "state": "roh ohne Schale",
+      "source_record_id": "F503100",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 79,
+        "protein_g": 1.319,
+        "available_carbs_g": 15.89,
+        "fat_g": 0.4,
+        "fiber_g": 2
+      },
+      "mapping_status": "mapped",
+      "allergens_intrinsic_preliminary": [],
+      "source_name": "Banane roh",
+      "source_note": "",
+      "source_provenance": {
+        "kcal": {
+          "raw": 79,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 1.319,
+          "origin": "Aggregation",
+          "reference": "Converted value from: Health, D. o; Nutrient analysis of fruit and vegetables; 2013#Converted value from: Koivistoinen P; Mineral element composition of Finnish foods. N, K, Ca, Mg, P, S, Fe, Cu, Mn, Zn, Mo, Co, Ni, Cr, F, Se, Si, Rb, Al, B, Br, Hg, As, Cd, Pb and Ash; Almqvist & Wiksell; 1980"
+        },
+        "available_carbs_g": {
+          "raw": 15.89,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 0.4,
+          "origin": "Literatur",
+          "reference": "Morais, D. R., et al.; Proximate composition, mineral contents and fatty acid composition of the different parts and dried peels of tropical fruits cultivated in Brazil.; Journal of the Brazilian Chemical Society; 2017; 28; 2"
+        },
+        "fiber_g": {
+          "raw": 2,
+          "origin": "Analyse",
+          "reference": "-"
+        }
+      }
+    },
+    {
+      "id": "F018",
+      "name": "Rapsöl",
+      "state": "verzehrfertig",
+      "source_record_id": "Q180000",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 900,
+        "protein_g": 0,
+        "available_carbs_g": 0,
+        "fat_g": 100,
+        "fiber_g": 0
+      },
+      "mapping_status": "mapped",
+      "allergens_intrinsic_preliminary": [],
+      "source_name": "Rapsöl/Rüböl",
+      "source_note": "",
+      "source_provenance": {
+        "kcal": {
+          "raw": 900,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 0,
+          "origin": "Logische Null",
+          "reference": "-"
+        },
+        "available_carbs_g": {
+          "raw": 0,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 100,
+          "origin": "Nährstoffdatenbank",
+          "reference": "Kirchhoff, E; Souci - Fachmann - Kraut - Die Zusammensetzung der Lebensmittel - Nährwert-Tabellen; 2008; 7"
+        },
+        "fiber_g": {
+          "raw": 0,
+          "origin": "Logische Null",
+          "reference": "-"
+        }
+      }
+    },
+    {
+      "id": "F019",
+      "name": "Tofu natur",
+      "state": "verzehrfertig",
+      "source_record_id": "H861000",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 115,
+        "protein_g": 15.51,
+        "available_carbs_g": 0,
+        "fat_g": 5.63,
+        "fiber_g": 1.3
+      },
+      "mapping_status": "mapped",
+      "allergens_intrinsic_preliminary": [
+        "Soja"
+      ],
+      "source_name": "Tofu",
+      "source_note": "",
+      "source_provenance": {
+        "kcal": {
+          "raw": 115,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 15.51,
+          "origin": "Analyse",
+          "reference": "-"
+        },
+        "available_carbs_g": {
+          "raw": 0,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 5.63,
+          "origin": "Analyse",
+          "reference": "-"
+        },
+        "fiber_g": {
+          "raw": 1.3,
+          "origin": "Analyse",
+          "reference": "-"
+        }
+      }
+    },
+    {
+      "id": "F020",
+      "name": "Paprika",
+      "state": "roh",
+      "source_record_id": "G543100",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 36,
+        "protein_g": 1.025,
+        "available_carbs_g": 6.19,
+        "fat_g": 0.2,
+        "fiber_g": 2.2
+      },
+      "mapping_status": "provisional",
+      "allergens_intrinsic_preliminary": [],
+      "source_name": "Gemüsepaprika rot, roh",
+      "source_note": "rote Paprika als Standard",
+      "source_provenance": {
+        "kcal": {
+          "raw": 36,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 1.025,
+          "origin": "Aggregation",
+          "reference": "Converted value from: Koivistoinen P; Mineral element composition of Finnish foods. N, K, Ca, Mg, P, S, Fe, Cu, Mn, Zn, Mo, Co, Ni, Cr, F, Se, Si, Rb, Al, B, Br, Hg, As, Cd, Pb and Ash; Almqvist & Wiksell; 1980#Converted value from: Health, D. o; Nutrient analysis of fruit and vegetables; 2013"
+        },
+        "available_carbs_g": {
+          "raw": 6.19,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 0.2,
+          "origin": "Literatur",
+          "reference": "Health, D. o; Nutrient analysis of fruit and vegetables; 2013"
+        },
+        "fiber_g": {
+          "raw": 2.2,
+          "origin": "Literatur",
+          "reference": "Health, D. o; Nutrient analysis of fruit and vegetables; 2013"
+        }
+      }
+    },
+    {
+      "id": "F021",
+      "name": "Hähnchenbrust",
+      "state": "roh",
+      "source_record_id": "V416100",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 109,
+        "protein_g": 23.25,
+        "available_carbs_g": 0,
+        "fat_g": 1.81,
+        "fiber_g": 0
+      },
+      "mapping_status": "mapped",
+      "allergens_intrinsic_preliminary": [],
+      "source_name": "Hähnchen Brustfilet, roh",
+      "source_note": "",
+      "source_provenance": {
+        "kcal": {
+          "raw": 109,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 23.25,
+          "origin": "Analyse",
+          "reference": "-"
+        },
+        "available_carbs_g": {
+          "raw": 0,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 1.81,
+          "origin": "Analyse",
+          "reference": "-"
+        },
+        "fiber_g": {
+          "raw": 0,
+          "origin": "Logische Null",
+          "reference": "-"
+        }
+      }
+    },
+    {
+      "id": "F022",
+      "name": "Reis",
+      "state": "gekocht",
+      "source_record_id": "C352032",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 117,
+        "protein_g": 3.3,
+        "available_carbs_g": 24.8,
+        "fat_g": 0.35,
+        "fiber_g": 0.61
+      },
+      "mapping_status": "provisional",
+      "allergens_intrinsic_preliminary": [],
+      "source_name": "Reis poliert, gekocht",
+      "source_note": "polierter Reis als Standard",
+      "source_provenance": {
+        "kcal": {
+          "raw": 117,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 3.3,
+          "origin": "Analyse",
+          "reference": "-"
+        },
+        "available_carbs_g": {
+          "raw": 24.8,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 0.35,
+          "origin": "Analyse",
+          "reference": "-"
+        },
+        "fiber_g": {
+          "raw": 0.61,
+          "origin": "Analyse",
+          "reference": "-"
+        }
+      }
+    },
+    {
+      "id": "F023",
+      "name": "Brokkoli",
+      "state": "roh",
+      "source_record_id": "G312100",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 35,
+        "protein_g": 3.622,
+        "available_carbs_g": 2.3,
+        "fat_g": 0.5967,
+        "fiber_g": 3
+      },
+      "mapping_status": "mapped",
+      "allergens_intrinsic_preliminary": [],
+      "source_name": "Broccoli roh",
+      "source_note": "",
+      "source_provenance": {
+        "kcal": {
+          "raw": 35,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 3.622,
+          "origin": "Aggregation",
+          "reference": "Converted value from: Campas-Baypoli, O. N., et al.; Biochemical composition and physicochemical properties of broccoli flours.; International Journal of Food Sciences and Nutrition; 2009; 60#Converted value from: Health, D. o; Nutrient analysis of fruit and vegetables; 2013#Converted value from: dos Reis, L. C. R.; Effect of cooking on the concentration of bioactive compounds in broccoli (Brassica oleracea var. Avenger) and cauliflower (Brassica oleracea var. Alphina F1) grown in an organic system.; Food Chemistry; 2015; 172#Converted value from: Koivistoinen P; Mineral element composition of Finnish foods. N, K, Ca, Mg, P, S, Fe, Cu, Mn, Zn, Mo, Co, Ni, Cr, F, Se, Si, Rb, Al, B, Br, Hg, As, Cd, Pb and Ash; Almqvist & Wiksell; 1980"
+        },
+        "available_carbs_g": {
+          "raw": 2.3,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 0.5967,
+          "origin": "Literatur",
+          "reference": "Campas-Baypoli, O. N., et al.; Biochemical composition and physicochemical properties of broccoli flours.; International Journal of Food Sciences and Nutrition; 2009; 60"
+        },
+        "fiber_g": {
+          "raw": 3,
+          "origin": "Analyse",
+          "reference": "-"
+        }
+      }
+    },
+    {
+      "id": "F024",
+      "name": "Edamame geschält",
+      "state": "gegart",
+      "source_record_id": "G750902",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 94,
+        "protein_g": 8.6,
+        "available_carbs_g": 3.5,
+        "fat_g": 4.4,
+        "fiber_g": 3
+      },
+      "mapping_status": "provisional",
+      "allergens_intrinsic_preliminary": [
+        "Soja"
+      ],
+      "source_name": "Sojabohne unreif (Edamame) Konserve, abgetropft",
+      "source_note": "Konserve abgetropft als Näherung für gegart",
+      "source_provenance": {
+        "kcal": {
+          "raw": 94,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 8.6,
+          "origin": "Rezeptberechnung",
+          "reference": "-"
+        },
+        "available_carbs_g": {
+          "raw": 3.5,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 4.4,
+          "origin": "Rezeptberechnung",
+          "reference": "-"
+        },
+        "fiber_g": {
+          "raw": 3,
+          "origin": "Rezeptberechnung",
+          "reference": "-"
+        }
+      }
+    },
+    {
+      "id": "F025",
+      "name": "Karotten",
+      "state": "roh",
+      "source_record_id": "G620100",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 40,
+        "protein_g": 0.84,
+        "available_carbs_g": 6.471,
+        "fat_g": 0.4,
+        "fiber_g": 2.9
+      },
+      "mapping_status": "mapped",
+      "allergens_intrinsic_preliminary": [],
+      "source_name": "Karotte/Möhre, roh",
+      "source_note": "",
+      "source_provenance": {
+        "kcal": {
+          "raw": 40,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 0.84,
+          "origin": "Analyse",
+          "reference": "-"
+        },
+        "available_carbs_g": {
+          "raw": 6.471,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 0.4,
+          "origin": "Literatur",
+          "reference": "Health, D. o; Nutrient analysis of fruit and vegetables; 2013"
+        },
+        "fiber_g": {
+          "raw": 2.9,
+          "origin": "Analyse",
+          "reference": "-"
+        }
+      }
+    },
+    {
+      "id": "F026",
+      "name": "Sesam",
+      "state": "trocken",
+      "source_record_id": "H420100",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 565,
+        "protein_g": 20.896,
+        "available_carbs_g": 1.42,
+        "fat_g": 50.4,
+        "fiber_g": 11.18
+      },
+      "mapping_status": "mapped",
+      "allergens_intrinsic_preliminary": [
+        "Sesam"
+      ],
+      "source_name": "Sesam",
+      "source_note": "",
+      "source_provenance": {
+        "kcal": {
+          "raw": 565,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 20.896,
+          "origin": "Nährstoffdatenbank",
+          "reference": "Converted value from: Kirchhoff, E; Souci - Fachmann - Kraut - Die Zusammensetzung der Lebensmittel - Nährwert-Tabellen; 2008; 7"
+        },
+        "available_carbs_g": {
+          "raw": 1.42,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 50.4,
+          "origin": "Nährstoffdatenbank",
+          "reference": "Kirchhoff, E; Souci - Fachmann - Kraut - Die Zusammensetzung der Lebensmittel - Nährwert-Tabellen; 2008; 7"
+        },
+        "fiber_g": {
+          "raw": 11.18,
+          "origin": "Nährstoffdatenbank",
+          "reference": "Converted value from: Kirchhoff, E; Souci - Fachmann - Kraut - Die Zusammensetzung der Lebensmittel - Nährwert-Tabellen; 2008; 7"
+        }
+      }
+    },
+    {
+      "id": "F027",
+      "name": "Rinderhüftsteak",
+      "state": "roh",
+      "source_record_id": "U284100",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 110,
+        "protein_g": 22.1,
+        "available_carbs_g": 0,
+        "fat_g": 2.35,
+        "fiber_g": 0
+      },
+      "mapping_status": "mapped",
+      "allergens_intrinsic_preliminary": [],
+      "source_name": "Rind Hüfte, roh",
+      "source_note": "",
+      "source_provenance": {
+        "kcal": {
+          "raw": 110,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 22.1,
+          "origin": "Aggregation",
+          "reference": "Converted value from: The Swedish Food Agency; The Swedish Food Agency food database; 2022#Converted value from: SFK; SFK Online Version; 2007"
+        },
+        "available_carbs_g": {
+          "raw": 0,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 2.35,
+          "origin": "Nährstoffdatenbank",
+          "reference": "Leibniz-Institut für Lebensmittel-Systembiologie; SFK Online Version; 2016"
+        },
+        "fiber_g": {
+          "raw": 0,
+          "origin": "Logische Null",
+          "reference": "-"
+        }
+      }
+    },
+    {
+      "id": "F028",
+      "name": "Süßkartoffel",
+      "state": "roh",
+      "source_record_id": "K420100",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 119,
+        "protein_g": 1.63,
+        "available_carbs_g": 25.2,
+        "fat_g": 0.6,
+        "fiber_g": 3.14
+      },
+      "mapping_status": "mapped",
+      "allergens_intrinsic_preliminary": [],
+      "source_name": "Batate/Süßkartoffel, roh",
+      "source_note": "",
+      "source_provenance": {
+        "kcal": {
+          "raw": 119,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 1.63,
+          "origin": "Nährstoffdatenbank",
+          "reference": "Converted value from: Kirchhoff, E; Souci - Fachmann - Kraut - Die Zusammensetzung der Lebensmittel - Nährwert-Tabellen; 2008; 7"
+        },
+        "available_carbs_g": {
+          "raw": 25.2,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 0.6,
+          "origin": "Nährstoffdatenbank",
+          "reference": "Kirchhoff, E; Souci - Fachmann - Kraut - Die Zusammensetzung der Lebensmittel - Nährwert-Tabellen; 2008; 7"
+        },
+        "fiber_g": {
+          "raw": 3.14,
+          "origin": "Nährstoffdatenbank",
+          "reference": "Converted value from: Kirchhoff, E; Souci - Fachmann - Kraut - Die Zusammensetzung der Lebensmittel - Nährwert-Tabellen; 2008; 7"
+        }
+      }
+    },
+    {
+      "id": "F029",
+      "name": "Putenbrust",
+      "state": "roh",
+      "source_record_id": "V486100",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 105,
+        "protein_g": 24.1,
+        "available_carbs_g": 0,
+        "fat_g": 0.99,
+        "fiber_g": 0
+      },
+      "mapping_status": "mapped",
+      "allergens_intrinsic_preliminary": [],
+      "source_name": "Pute Brust, ohne Haut, roh",
+      "source_note": "",
+      "source_provenance": {
+        "kcal": {
+          "raw": 105,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 24.1,
+          "origin": "Nährstoffdatenbank",
+          "reference": "Converted value from: Kirchhoff, E; Souci - Fachmann - Kraut - Die Zusammensetzung der Lebensmittel - Nährwert-Tabellen; 2008; 7"
+        },
+        "available_carbs_g": {
+          "raw": 0,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 0.99,
+          "origin": "Nährstoffdatenbank",
+          "reference": "Kirchhoff, E; Souci - Fachmann - Kraut - Die Zusammensetzung der Lebensmittel - Nährwert-Tabellen; 2008; 7"
+        },
+        "fiber_g": {
+          "raw": 0,
+          "origin": "Logische Null",
+          "reference": "-"
+        }
+      }
+    },
+    {
+      "id": "F030",
+      "name": "Zwiebel",
+      "state": "roh",
+      "source_record_id": "G480100",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 34,
+        "protein_g": 1.156,
+        "available_carbs_g": 6.01,
+        "fat_g": 0.15,
+        "fiber_g": 1.4
+      },
+      "mapping_status": "mapped",
+      "allergens_intrinsic_preliminary": [],
+      "source_name": "Speisezwiebel roh",
+      "source_note": "",
+      "source_provenance": {
+        "kcal": {
+          "raw": 34,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 1.156,
+          "origin": "Aggregation",
+          "reference": "Converted value from: Koivistoinen P; Mineral element composition of Finnish foods. N, K, Ca, Mg, P, S, Fe, Cu, Mn, Zn, Mo, Co, Ni, Cr, F, Se, Si, Rb, Al, B, Br, Hg, As, Cd, Pb and Ash; Almqvist & Wiksell; 1980#Converted value from: Health, D. o; Nutrient analysis of fruit and vegetables; 2013"
+        },
+        "available_carbs_g": {
+          "raw": 6.01,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 0.15,
+          "origin": "Literatur",
+          "reference": "Tsiaganis MC, Laskari K, Melissari E; Fatty acid composition of Allium species lipids; Journal of Food Composition and Analysis; 2006"
+        },
+        "fiber_g": {
+          "raw": 1.4,
+          "origin": "Analyse",
+          "reference": "-"
+        }
+      }
+    },
+    {
+      "id": "F031",
+      "name": "Rinderhack (Standard, ca. 16 % Fett)",
+      "state": "roh",
+      "source_record_id": "U010100",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 224,
+        "protein_g": 19.102,
+        "available_carbs_g": 0,
+        "fat_g": 16.39,
+        "fiber_g": 0
+      },
+      "mapping_status": "mapped",
+      "allergens_intrinsic_preliminary": [],
+      "source_name": "Rind Hackfleisch, roh",
+      "source_note": "BLS Standard-Rinderhack, 16,39 g Fett/100 g; kein mageres Hack",
+      "source_provenance": {
+        "kcal": {
+          "raw": 224,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 19.102,
+          "origin": "Rezeptberechnung",
+          "reference": "-"
+        },
+        "available_carbs_g": {
+          "raw": 0,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 16.39,
+          "origin": "Rezeptberechnung",
+          "reference": "-"
+        },
+        "fiber_g": {
+          "raw": 0,
+          "origin": "Logische Null",
+          "reference": "-"
+        }
+      }
+    },
+    {
+      "id": "F032",
+      "name": "Vollkornnudeln Weizen",
+      "state": "trocken",
+      "source_record_id": "E510000",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 356,
+        "protein_g": 14.3,
+        "available_carbs_g": 62.9,
+        "fat_g": 2.93,
+        "fiber_g": 10.2
+      },
+      "mapping_status": "mapped",
+      "allergens_intrinsic_preliminary": [
+        "Gluten"
+      ],
+      "source_name": "Vollkornteigwaren eifrei, roh",
+      "source_note": "",
+      "source_provenance": {
+        "kcal": {
+          "raw": 356,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 14.3,
+          "origin": "Aggregation",
+          "reference": "Converted value from: Public Health England; McCance and Widdowson's The Composition of Foods Integrated Dataset; 2021#Converted value from: National Food Institute; Food data (frida.fooddata.dk), version 4.2; 2022#Converted value from: US Department of Agriculture, Agricultural Research Service; USDA National Nutrient Database for Standard Reference, Legacy Release; 2019"
+        },
+        "available_carbs_g": {
+          "raw": 62.9,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 2.93,
+          "origin": "Nährstoffdatenbank",
+          "reference": "US Department of Agriculture, Agricultural Research Service; USDA National Nutrient Database for Standard Reference, Legacy Release; 2019"
+        },
+        "fiber_g": {
+          "raw": 10.2,
+          "origin": "Aggregation",
+          "reference": "National Food Institute; Food data (frida.fooddata.dk), version 4.2; 2022#US Department of Agriculture, Agricultural Research Service; USDA National Nutrient Database for Standard Reference, Legacy Release; 2019#Public Health England; McCance and Widdowson's The Composition of Foods Integrated Dataset; 2021"
+        }
+      },
+      "gluten_grain": "Weizen"
+    },
+    {
+      "id": "F033",
+      "name": "Passierte Tomaten",
+      "state": "verzehrfertig",
+      "source_record_id": "R161200",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 29,
+        "protein_g": 1.18,
+        "available_carbs_g": 3.94,
+        "fat_g": 0.1,
+        "fiber_g": 1.81
+      },
+      "mapping_status": "mapped",
+      "allergens_intrinsic_preliminary": [],
+      "source_name": "Tomaten passiert/Tomatenpüree",
+      "source_note": "",
+      "source_provenance": {
+        "kcal": {
+          "raw": 29,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 1.18,
+          "origin": "Analyse",
+          "reference": "-"
+        },
+        "available_carbs_g": {
+          "raw": 3.94,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 0.1,
+          "origin": "Übernommener Wert",
+          "reference": "-"
+        },
+        "fiber_g": {
+          "raw": 1.81,
+          "origin": "Übernommener Wert",
+          "reference": "-"
+        }
+      }
+    },
+    {
+      "id": "F034",
+      "name": "Zucchini",
+      "state": "roh",
+      "source_record_id": "G582100",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 22,
+        "protein_g": 1.3,
+        "available_carbs_g": 3,
+        "fat_g": 0.287,
+        "fiber_g": 1.1
+      },
+      "mapping_status": "mapped",
+      "allergens_intrinsic_preliminary": [],
+      "source_name": "Zucchini roh",
+      "source_note": "",
+      "source_provenance": {
+        "kcal": {
+          "raw": 22,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 1.3,
+          "origin": "Literatur",
+          "reference": "Converted value from: Public Health England, Nutrient analysis of fruits and vegetables. 2017"
+        },
+        "available_carbs_g": {
+          "raw": 3,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 0.287,
+          "origin": "Nährstoffdatenbank",
+          "reference": "Kirchhoff, E; Souci - Fachmann - Kraut - Die Zusammensetzung der Lebensmittel - Nährwert-Tabellen; 2008; 7"
+        },
+        "fiber_g": {
+          "raw": 1.1,
+          "origin": "Analyse",
+          "reference": "-"
+        }
+      }
+    },
+    {
+      "id": "F035",
+      "name": "Kartoffeln",
+      "state": "roh",
+      "source_record_id": "K110100",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 83,
+        "protein_g": 1.94,
+        "available_carbs_g": 17.9,
+        "fat_g": 0.1,
+        "fiber_g": 1.42
+      },
+      "mapping_status": "mapped",
+      "allergens_intrinsic_preliminary": [],
+      "source_name": "Kartoffel geschält, roh",
+      "source_note": "",
+      "source_provenance": {
+        "kcal": {
+          "raw": 83,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 1.94,
+          "origin": "Analyse",
+          "reference": "-"
+        },
+        "available_carbs_g": {
+          "raw": 17.9,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 0.1,
+          "origin": "Literatur",
+          "reference": "Health, D. o; Nutrient analysis of fruit and vegetables; 2013"
+        },
+        "fiber_g": {
+          "raw": 1.42,
+          "origin": "Literatur",
+          "reference": "Converted value from: Lee, Y., et al. ; Analytical dietary fiber database for the National Health and Nutrition Survey in Korea.; Journal of Food Composition and Analysis; 2008; 21"
+        }
+      }
+    },
+    {
+      "id": "F036",
+      "name": "Schweinefilet",
+      "state": "roh",
+      "source_record_id": "U611100",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 118,
+        "protein_g": 22.79,
+        "available_carbs_g": 0,
+        "fat_g": 2.97,
+        "fiber_g": 0
+      },
+      "mapping_status": "mapped",
+      "allergens_intrinsic_preliminary": [],
+      "source_name": "Schwein Filet/Lende, roh",
+      "source_note": "",
+      "source_provenance": {
+        "kcal": {
+          "raw": 118,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 22.79,
+          "origin": "Analyse",
+          "reference": "-"
+        },
+        "available_carbs_g": {
+          "raw": 0,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 2.97,
+          "origin": "Analyse",
+          "reference": "-"
+        },
+        "fiber_g": {
+          "raw": 0,
+          "origin": "Logische Null",
+          "reference": "-"
+        }
+      }
+    },
+    {
+      "id": "F037",
+      "name": "Linsen",
+      "state": "gekocht",
+      "source_record_id": "H730132",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 119,
+        "protein_g": 9.083,
+        "available_carbs_g": 15.5,
+        "fat_g": 0.7,
+        "fiber_g": 7.23
+      },
+      "mapping_status": "mapped",
+      "allergens_intrinsic_preliminary": [],
+      "source_name": "Linse reif, gekocht",
+      "source_note": "",
+      "source_provenance": {
+        "kcal": {
+          "raw": 119,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 9.083,
+          "origin": "Rezeptberechnung",
+          "reference": "-"
+        },
+        "available_carbs_g": {
+          "raw": 15.5,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 0.7,
+          "origin": "Literatur",
+          "reference": "Public Health England, Nutrient analysis of fruits and vegetables. 2017"
+        },
+        "fiber_g": {
+          "raw": 7.23,
+          "origin": "Literatur",
+          "reference": "Converted value from: Aldwairji, M. A., et al. ; Analysis of dietary fibre of boiled and canned legumes commonly consumed in the United Kingdom.; Journal of Food Composition and Analysis; 2014; 36"
+        }
+      }
+    },
+    {
+      "id": "F038",
+      "name": "Kidneybohnen",
+      "state": "gekocht abgetropft",
+      "source_record_id": "H742902",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 128,
+        "protein_g": 8.5,
+        "available_carbs_g": 15.1,
+        "fat_g": 1,
+        "fiber_g": 11.23
+      },
+      "mapping_status": "mapped",
+      "allergens_intrinsic_preliminary": [],
+      "source_name": "Kidneybohne reif, Konserve, abgetropft",
+      "source_note": "",
+      "source_provenance": {
+        "kcal": {
+          "raw": 128,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 8.5,
+          "origin": "Rezeptberechnung",
+          "reference": "-"
+        },
+        "available_carbs_g": {
+          "raw": 15.1,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 1,
+          "origin": "Rezeptberechnung",
+          "reference": "-"
+        },
+        "fiber_g": {
+          "raw": 11.23,
+          "origin": "Literatur",
+          "reference": "Converted value from: Aldwairji, M. A., et al. ; Analysis of dietary fibre of boiled and canned legumes commonly consumed in the United Kingdom.; Journal of Food Composition and Analysis; 2014; 36"
+        }
+      }
+    },
+    {
+      "id": "F039",
+      "name": "Mais",
+      "state": "abgetropft",
+      "source_record_id": "G570902",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 79,
+        "protein_g": 2.71,
+        "available_carbs_g": 10.84,
+        "fat_g": 1.94,
+        "fiber_g": 3.59
+      },
+      "mapping_status": "mapped",
+      "allergens_intrinsic_preliminary": [],
+      "source_name": "Zuckermais Konserve, abgetropft",
+      "source_note": "",
+      "source_provenance": {
+        "kcal": {
+          "raw": 79,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 2.71,
+          "origin": "Analyse",
+          "reference": "-"
+        },
+        "available_carbs_g": {
+          "raw": 10.84,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 1.94,
+          "origin": "Analyse",
+          "reference": "-"
+        },
+        "fiber_g": {
+          "raw": 3.59,
+          "origin": "Analyse",
+          "reference": "-"
+        }
+      }
+    },
+    {
+      "id": "F040",
+      "name": "Bulgur Weizen",
+      "state": "trocken",
+      "source_record_id": "C119100",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 353,
+        "protein_g": 12.4,
+        "available_carbs_g": 68,
+        "fat_g": 2,
+        "fiber_g": 6.7
+      },
+      "mapping_status": "mapped",
+      "allergens_intrinsic_preliminary": [
+        "Gluten"
+      ],
+      "source_name": "Bulgur (Hartweizen) roh",
+      "source_note": "",
+      "source_provenance": {
+        "kcal": {
+          "raw": 353,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 12.4,
+          "origin": "Aggregation",
+          "reference": "Converted value from: US Department of Agriculture, Agricultural Research Service; USDA National Nutrient Database for Standard Reference, Legacy Release; 2019#Converted value from: Public Health England; McCance and Widdowson's The Composition of Foods Integrated Dataset; 2021"
+        },
+        "available_carbs_g": {
+          "raw": 68,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 2,
+          "origin": "Nährstoffdatenbank",
+          "reference": "Public Health England; McCance and Widdowson's The Composition of Foods Integrated Dataset; 2021"
+        },
+        "fiber_g": {
+          "raw": 6.7,
+          "origin": "Nährstoffdatenbank",
+          "reference": "Public Health England; McCance and Widdowson's The Composition of Foods Integrated Dataset; 2021"
+        }
+      },
+      "gluten_grain": "Weizen"
+    },
+    {
+      "id": "F041",
+      "name": "Naturjoghurt",
+      "state": "verzehrfertig",
+      "source_record_id": "M141300",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 67,
+        "protein_g": 3.98,
+        "available_carbs_g": 4.13,
+        "fat_g": 3.46,
+        "fiber_g": 0
+      },
+      "mapping_status": "provisional",
+      "allergens_intrinsic_preliminary": [
+        "Milch"
+      ],
+      "source_name": "Joghurt mild, mind. 3,5 % Fett",
+      "source_note": "Naturjoghurt 3,5 % als Standard",
+      "source_provenance": {
+        "kcal": {
+          "raw": 67,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 3.98,
+          "origin": "Analyse",
+          "reference": "-"
+        },
+        "available_carbs_g": {
+          "raw": 4.13,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 3.46,
+          "origin": "Analyse",
+          "reference": "-"
+        },
+        "fiber_g": {
+          "raw": 0,
+          "origin": "Analyse",
+          "reference": "-"
+        }
+      }
+    },
+    {
+      "id": "F042",
+      "name": "Lachsfilet",
+      "state": "roh",
+      "source_record_id": "T410100",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 180,
+        "protein_g": 19.9,
+        "available_carbs_g": 0,
+        "fat_g": 11.2,
+        "fiber_g": null
+      },
+      "mapping_status": "provisional",
+      "allergens_intrinsic_preliminary": [
+        "Fisch"
+      ],
+      "source_name": "Lachs roh",
+      "source_note": "Ballaststoffe unter der Nachweisgrenze; kein quantifizierter Wert.",
+      "source_provenance": {
+        "kcal": {
+          "raw": 180,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 19.9,
+          "origin": "Analyse",
+          "reference": "-"
+        },
+        "available_carbs_g": {
+          "raw": 0,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 11.2,
+          "origin": "Analyse",
+          "reference": "-"
+        },
+        "fiber_g": {
+          "raw": "<LOD",
+          "origin": "Analyse",
+          "reference": "-"
+        }
+      }
+    },
+    {
+      "id": "F043",
+      "name": "Quinoa",
+      "state": "gekocht",
+      "source_record_id": "C118032",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 104,
+        "protein_g": 3.491,
+        "available_carbs_g": 16.92,
+        "fat_g": 1.8,
+        "fiber_g": 3.08
+      },
+      "mapping_status": "provisional",
+      "allergens_intrinsic_preliminary": [],
+      "source_name": "Quinoa weiß, gekocht",
+      "source_note": "weiße Quinoa als Standard",
+      "source_provenance": {
+        "kcal": {
+          "raw": 104,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 3.491,
+          "origin": "Analyse",
+          "reference": "-"
+        },
+        "available_carbs_g": {
+          "raw": 16.92,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 1.8,
+          "origin": "Analyse",
+          "reference": "-"
+        },
+        "fiber_g": {
+          "raw": 3.08,
+          "origin": "Analyse",
+          "reference": "-"
+        }
+      }
+    },
+    {
+      "id": "F044",
+      "name": "Grüner Spargel",
+      "state": "roh",
+      "source_record_id": "G450100",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 28,
+        "protein_g": 1.96,
+        "available_carbs_g": 3.98,
+        "fat_g": 0.156,
+        "fiber_g": 1.4
+      },
+      "mapping_status": "provisional",
+      "allergens_intrinsic_preliminary": [],
+      "source_name": "Spargel roh",
+      "source_note": "Spargel allgemein statt grün",
+      "source_provenance": {
+        "kcal": {
+          "raw": 28,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 1.96,
+          "origin": "Nährstoffdatenbank",
+          "reference": "Converted value from: Kirchhoff, E; Souci - Fachmann - Kraut - Die Zusammensetzung der Lebensmittel - Nährwert-Tabellen; 2008; 7"
+        },
+        "available_carbs_g": {
+          "raw": 3.98,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 0.156,
+          "origin": "Nährstoffdatenbank",
+          "reference": "Kirchhoff, E; Souci - Fachmann - Kraut - Die Zusammensetzung der Lebensmittel - Nährwert-Tabellen; 2008; 7"
+        },
+        "fiber_g": {
+          "raw": 1.4,
+          "origin": "Analyse",
+          "reference": "-"
+        }
+      }
+    },
+    {
+      "id": "F045",
+      "name": "Rosenkohl",
+      "state": "roh",
+      "source_record_id": "G332100",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 40,
+        "protein_g": 4.45,
+        "available_carbs_g": 2.26,
+        "fat_g": 0.34,
+        "fiber_g": 4.4
+      },
+      "mapping_status": "mapped",
+      "allergens_intrinsic_preliminary": [],
+      "source_name": "Rosenkohl roh",
+      "source_note": "",
+      "source_provenance": {
+        "kcal": {
+          "raw": 40,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 4.45,
+          "origin": "Nährstoffdatenbank",
+          "reference": "Converted value from: Kirchhoff, E; Souci - Fachmann - Kraut - Die Zusammensetzung der Lebensmittel - Nährwert-Tabellen; 2008; 7"
+        },
+        "available_carbs_g": {
+          "raw": 2.26,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 0.34,
+          "origin": "Nährstoffdatenbank",
+          "reference": "Kirchhoff, E; Souci - Fachmann - Kraut - Die Zusammensetzung der Lebensmittel - Nährwert-Tabellen; 2008; 7"
+        },
+        "fiber_g": {
+          "raw": 4.4,
+          "origin": "Analyse",
+          "reference": "-"
+        }
+      }
+    },
+    {
+      "id": "F046",
+      "name": "Rote Zwiebel",
+      "state": "roh",
+      "source_record_id": "G480100",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 34,
+        "protein_g": 1.156,
+        "available_carbs_g": 6.01,
+        "fat_g": 0.15,
+        "fiber_g": 1.4
+      },
+      "mapping_status": "provisional",
+      "allergens_intrinsic_preliminary": [],
+      "source_name": "Speisezwiebel roh",
+      "source_note": "Speisezwiebel statt rot",
+      "source_provenance": {
+        "kcal": {
+          "raw": 34,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 1.156,
+          "origin": "Aggregation",
+          "reference": "Converted value from: Koivistoinen P; Mineral element composition of Finnish foods. N, K, Ca, Mg, P, S, Fe, Cu, Mn, Zn, Mo, Co, Ni, Cr, F, Se, Si, Rb, Al, B, Br, Hg, As, Cd, Pb and Ash; Almqvist & Wiksell; 1980#Converted value from: Health, D. o; Nutrient analysis of fruit and vegetables; 2013"
+        },
+        "available_carbs_g": {
+          "raw": 6.01,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 0.15,
+          "origin": "Literatur",
+          "reference": "Tsiaganis MC, Laskari K, Melissari E; Fatty acid composition of Allium species lipids; Journal of Food Composition and Analysis; 2006"
+        },
+        "fiber_g": {
+          "raw": 1.4,
+          "origin": "Analyse",
+          "reference": "-"
+        }
+      }
+    },
+    {
+      "id": "F047",
+      "name": "Kabeljau",
+      "state": "roh",
+      "source_record_id": "T204100",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 79,
+        "protein_g": 17.8,
+        "available_carbs_g": 0,
+        "fat_g": 0.84,
+        "fiber_g": 0
+      },
+      "mapping_status": "mapped",
+      "allergens_intrinsic_preliminary": [
+        "Fisch"
+      ],
+      "source_name": "Dorsch/Kabeljau, roh",
+      "source_note": "",
+      "source_provenance": {
+        "kcal": {
+          "raw": 79,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 17.8,
+          "origin": "Nährstoffdatenbank",
+          "reference": "Converted value from: US Department of Agriculture, Agricultural Research Service; USDA National Nutrient Database for Standard Reference, Legacy Release; 2019"
+        },
+        "available_carbs_g": {
+          "raw": 0,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 0.84,
+          "origin": "Nährstoffdatenbank",
+          "reference": "Leibniz-Institut für Lebensmittel-Systembiologie; SFK Online Version; 2016"
+        },
+        "fiber_g": {
+          "raw": 0,
+          "origin": "Logische Null",
+          "reference": "-"
+        }
+      }
+    },
+    {
+      "id": "F048",
+      "name": "Thunfisch in Wasser",
+      "state": "abgetropft",
+      "source_record_id": "T121902",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 95,
+        "protein_g": 22.87,
+        "available_carbs_g": 0,
+        "fat_g": 0.41,
+        "fiber_g": null
+      },
+      "mapping_status": "provisional",
+      "allergens_intrinsic_preliminary": [
+        "Fisch"
+      ],
+      "source_name": "Thunfisch im eigenen Saft, Konserve, abgetropft",
+      "source_note": "Ballaststoffe unter der Nachweisgrenze; kein quantifizierter Wert.",
+      "source_provenance": {
+        "kcal": {
+          "raw": 95,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 22.87,
+          "origin": "Analyse",
+          "reference": "-"
+        },
+        "available_carbs_g": {
+          "raw": 0,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 0.41,
+          "origin": "Analyse",
+          "reference": "-"
+        },
+        "fiber_g": {
+          "raw": "<LOD",
+          "origin": "Analyse",
+          "reference": "-"
+        }
+      }
+    },
+    {
+      "id": "F049",
+      "name": "Weiße Bohnen",
+      "state": "gekocht abgetropft",
+      "source_record_id": "H740902",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 130,
+        "protein_g": 9.0383,
+        "available_carbs_g": 17.72,
+        "fat_g": 0.597,
+        "fiber_g": 7.136
+      },
+      "mapping_status": "provisional",
+      "allergens_intrinsic_preliminary": [],
+      "source_name": "Gartenbohne reif, Konserve, abgetropft",
+      "source_note": "Gartenbohne allgemein statt weiß",
+      "source_provenance": {
+        "kcal": {
+          "raw": 130,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 9.0383,
+          "origin": "Rezeptberechnung",
+          "reference": "-"
+        },
+        "available_carbs_g": {
+          "raw": 17.72,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 0.597,
+          "origin": "Rezeptberechnung",
+          "reference": "-"
+        },
+        "fiber_g": {
+          "raw": 7.136,
+          "origin": "Rezeptberechnung",
+          "reference": "-"
+        }
+      }
+    },
+    {
+      "id": "F050",
+      "name": "Garnelen geschält",
+      "state": "roh",
+      "source_record_id": "T753100",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 87,
+        "protein_g": 18.6,
+        "available_carbs_g": 0,
+        "fat_g": 1.44,
+        "fiber_g": 0
+      },
+      "mapping_status": "mapped",
+      "allergens_intrinsic_preliminary": [
+        "Krebstiere"
+      ],
+      "source_name": "Garnele/Granat/Krabbe, roh",
+      "source_note": "",
+      "source_provenance": {
+        "kcal": {
+          "raw": 87,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 18.6,
+          "origin": "Nährstoffdatenbank",
+          "reference": "Converted value from: Kirchhoff, E; Souci - Fachmann - Kraut - Die Zusammensetzung der Lebensmittel - Nährwert-Tabellen; 2008; 7"
+        },
+        "available_carbs_g": {
+          "raw": 0,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 1.44,
+          "origin": "Nährstoffdatenbank",
+          "reference": "Kirchhoff, E; Souci - Fachmann - Kraut - Die Zusammensetzung der Lebensmittel - Nährwert-Tabellen; 2008; 7"
+        },
+        "fiber_g": {
+          "raw": 0,
+          "origin": "Logische Null",
+          "reference": "-"
+        }
+      }
+    },
+    {
+      "id": "F051",
+      "name": "Zitrone",
+      "state": "Saft",
+      "source_record_id": "F601600",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 30,
+        "protein_g": 0.63,
+        "available_carbs_g": 1.7,
+        "fat_g": 0.3,
+        "fiber_g": 0.129
+      },
+      "mapping_status": "mapped",
+      "allergens_intrinsic_preliminary": [],
+      "source_name": "Zitronensaft",
+      "source_note": "",
+      "source_provenance": {
+        "kcal": {
+          "raw": 30,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 0.63,
+          "origin": "Rezeptberechnung",
+          "reference": "-"
+        },
+        "available_carbs_g": {
+          "raw": 1.7,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 0.3,
+          "origin": "Rezeptberechnung",
+          "reference": "-"
+        },
+        "fiber_g": {
+          "raw": 0.129,
+          "origin": "Rezeptberechnung",
+          "reference": "-"
+        }
+      }
+    },
+    {
+      "id": "F052",
+      "name": "Rote Linsen",
+      "state": "trocken",
+      "source_record_id": "H730000",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 334,
+        "protein_g": 25.6,
+        "available_carbs_g": 48.8,
+        "fat_g": 2.17,
+        "fiber_g": 8.5
+      },
+      "mapping_status": "mapped",
+      "allergens_intrinsic_preliminary": [],
+      "source_name": "Linse rot reif",
+      "source_note": "",
+      "source_provenance": {
+        "kcal": {
+          "raw": 334,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 25.6,
+          "origin": "Aggregation",
+          "reference": "Converted value from: National Food Institute; Food data (frida.fooddata.dk), version 4.2; 2022#Converted value from: US Department of Agriculture, Agricultural Research Service; USDA National Nutrient Database for Standard Reference, Legacy Release; 2019"
+        },
+        "available_carbs_g": {
+          "raw": 48.8,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 2.17,
+          "origin": "Nährstoffdatenbank",
+          "reference": "US Department of Agriculture, Agricultural Research Service; USDA National Nutrient Database for Standard Reference, Legacy Release; 2019"
+        },
+        "fiber_g": {
+          "raw": 8.5,
+          "origin": "Aggregation",
+          "reference": "US Department of Agriculture, Agricultural Research Service; USDA National Nutrient Database for Standard Reference, Legacy Release; 2019#National Food Institute; Food data (frida.fooddata.dk), version 4.2; 2022"
+        }
+      }
+    },
+    {
+      "id": "F053",
+      "name": "Kichererbsen",
+      "state": "gekocht abgetropft",
+      "source_record_id": "H720902",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 136,
+        "protein_g": 7.5,
+        "available_carbs_g": 15.5,
+        "fat_g": 2.7,
+        "fiber_g": 9.8
+      },
+      "mapping_status": "mapped",
+      "allergens_intrinsic_preliminary": [],
+      "source_name": "Kichererbse reif, Konserve, abgetropft",
+      "source_note": "",
+      "source_provenance": {
+        "kcal": {
+          "raw": 136,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 7.5,
+          "origin": "Rezeptberechnung",
+          "reference": "-"
+        },
+        "available_carbs_g": {
+          "raw": 15.5,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 2.7,
+          "origin": "Rezeptberechnung",
+          "reference": "-"
+        },
+        "fiber_g": {
+          "raw": 9.8,
+          "origin": "Rezeptberechnung",
+          "reference": "-"
+        }
+      }
+    },
+    {
+      "id": "F054",
+      "name": "Feta",
+      "state": "verzehrfertig",
+      "source_record_id": "M012200",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 284,
+        "protein_g": 15.68,
+        "available_carbs_g": 0,
+        "fat_g": 24.09,
+        "fiber_g": null
+      },
+      "mapping_status": "provisional",
+      "allergens_intrinsic_preliminary": [
+        "Milch"
+      ],
+      "source_name": "Feta mind. 45 % Fett i. Tr.",
+      "source_note": "Ballaststoffe unter der Nachweisgrenze; kein quantifizierter Wert.",
+      "source_provenance": {
+        "kcal": {
+          "raw": 284,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 15.68,
+          "origin": "Analyse",
+          "reference": "-"
+        },
+        "available_carbs_g": {
+          "raw": 0,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 24.09,
+          "origin": "Analyse",
+          "reference": "-"
+        },
+        "fiber_g": {
+          "raw": "<LOD",
+          "origin": "Analyse",
+          "reference": "-"
+        }
+      }
+    },
+    {
+      "id": "F055",
+      "name": "Champignons",
+      "state": "roh",
+      "source_record_id": "K701100",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 28,
+        "protein_g": 3.66,
+        "available_carbs_g": 2.9,
+        "fat_g": 0.274,
+        "fiber_g": 1.9
+      },
+      "mapping_status": "mapped",
+      "allergens_intrinsic_preliminary": [],
+      "source_name": "Champignon roh",
+      "source_note": "",
+      "source_provenance": {
+        "kcal": {
+          "raw": 28,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 3.66,
+          "origin": "Aggregation",
+          "reference": "Converted value from: Caglarirmak, N.; Determination of nutrients and volatile constituents of Agaricus bisporus (brown) at different stages.; Journal of the Science of Food and Agriculture; 2009; 89; 4#Converted value from: Jaworska, G., et al.; NUTRACEUTICALS AND ANTIOXIDANT ACTIVITY OF PREPARED FOR CONSUMPTION COMMERCIAL MUSHROOMS AGARICUS BISPORUS AND PLEUROTUS OSTREATUS.; Journal of Food Quality; 2015; 28; 2#Converted value from: Di Anibal, C., et al.; Chemical composition and nutritional value of Argentine commercial edible mushrooms.; Journal fur Verbraucherschutz und Lebensmittelsicherheit; 2015; 10; 2#Converted value from: Beluhan, S. and A. Ranogajec; Chemical composition and non-volatile components of Croatian wild edible mushrooms.; Food Chemistry; 2011; 124; 3#Converted value from: Roncero-Ramos, I., et al.; Effect of different cooking methods on nutritional value and antioxidant activity of cultivated mushrooms.; International Journal of Food Sciences and Nutrition; 2017; 68; 3#Converted value from: Reis, F. S., et al.; Chemical composition and nutritional value of the most widely appreciated cultivated mushrooms: An inter-species comparative study.; Food and Chemical Toxicology; 2012; 50; 2#Converted value from: Mattila, P., et al.; Basic composition and amino acid contents of mushrooms cultivated in Finland.; Journal of Agricultural and Food Chemistry; 2002; 50; 22#Converted value from: Simon, R. R., et al.; Vitamin D mushrooms: Comparison of the composition of button mushrooms (Agaricus bisporus) treated postharvest with UVB light or sunlight.; Journal of Agricultural and Food Chemistry; 2011; 59; 16#Converted value from: Pereira, E., et al.; Towards chemical and nutritional inventory of Portuguese wild edible mushrooms in different habitats.; Food Chemistry; 2012; 130; 2#Converted value from: Barros, L., et al.; Fatty acid and sugar compositions, and nutritional value of five wild edible mushrooms from Northeast Portugal.; Food Chemistry; 2007; 105; 1"
+        },
+        "available_carbs_g": {
+          "raw": 2.9,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 0.274,
+          "origin": "Literatur",
+          "reference": "Simon, R. R., et al.; Vitamin D mushrooms: Comparison of the composition of button mushrooms (Agaricus bisporus) treated postharvest with UVB light or sunlight.; Journal of Agricultural and Food Chemistry; 2011; 59; 16"
+        },
+        "fiber_g": {
+          "raw": 1.9,
+          "origin": "Analyse",
+          "reference": "-"
+        }
+      }
+    },
+    {
+      "id": "F056",
+      "name": "Kartoffeln",
+      "state": "gekocht",
+      "source_record_id": "K110132",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 76,
+        "protein_g": 2,
+        "available_carbs_g": 15.832,
+        "fat_g": 0.1,
+        "fiber_g": 2.05
+      },
+      "mapping_status": "mapped",
+      "allergens_intrinsic_preliminary": [],
+      "source_name": "Kartoffel geschält, gekocht",
+      "source_note": "",
+      "source_provenance": {
+        "kcal": {
+          "raw": 76,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 2,
+          "origin": "Analyse",
+          "reference": "-"
+        },
+        "available_carbs_g": {
+          "raw": 15.832,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 0.1,
+          "origin": "Literatur",
+          "reference": "Health, D. o; Nutrient analysis of fruit and vegetables; 2013"
+        },
+        "fiber_g": {
+          "raw": 2.05,
+          "origin": "Literatur",
+          "reference": "Converted value from: Li, B. W. and Andrews, K. W.; Individual sugars, soluble, and insoluble dietary fiber contents of 70 high consumption foods.; Journal of Food Composition and Analysis; 2002; 15"
+        }
+      }
+    },
+    {
+      "id": "F057",
+      "name": "Himbeeren",
+      "state": "roh",
+      "source_record_id": "F302100",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 43,
+        "protein_g": 1,
+        "available_carbs_g": 5.2,
+        "fat_g": 0.3,
+        "fiber_g": 4.7
+      },
+      "mapping_status": "mapped",
+      "allergens_intrinsic_preliminary": [],
+      "source_name": "Himbeere roh",
+      "source_note": "",
+      "source_provenance": {
+        "kcal": {
+          "raw": 43,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 1,
+          "origin": "Nährstoffdatenbank",
+          "reference": "National Food Institute, Food data (frida.fooddata.dk), version 5.2, May 2024"
+        },
+        "available_carbs_g": {
+          "raw": 5.2,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 0.3,
+          "origin": "Nährstoffdatenbank",
+          "reference": "Kirchhoff, E; Souci - Fachmann - Kraut - Die Zusammensetzung der Lebensmittel - Nährwert-Tabellen; 2008; 7"
+        },
+        "fiber_g": {
+          "raw": 4.7,
+          "origin": "Analyse",
+          "reference": "-"
+        }
+      }
+    },
+    {
+      "id": "F058",
+      "name": "Kürbiskerne",
+      "state": "trocken",
+      "source_record_id": "H310100",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 588,
+        "protein_g": 35.49,
+        "available_carbs_g": 2.81,
+        "fat_g": 46.34,
+        "fiber_g": 8.66
+      },
+      "mapping_status": "mapped",
+      "allergens_intrinsic_preliminary": [],
+      "source_name": "Kürbiskern",
+      "source_note": "",
+      "source_provenance": {
+        "kcal": {
+          "raw": 588,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 35.49,
+          "origin": "Analyse",
+          "reference": "-"
+        },
+        "available_carbs_g": {
+          "raw": 2.81,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 46.34,
+          "origin": "Analyse",
+          "reference": "-"
+        },
+        "fiber_g": {
+          "raw": 8.66,
+          "origin": "Analyse",
+          "reference": "-"
+        }
+      }
+    },
+    {
+      "id": "F059",
+      "name": "Tahini",
+      "state": "verzehrfertig",
+      "source_record_id": "Q901000",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 595,
+        "protein_g": 18,
+        "available_carbs_g": 0.7,
+        "fat_g": 56,
+        "fiber_g": 8.2
+      },
+      "mapping_status": "mapped",
+      "allergens_intrinsic_preliminary": [
+        "Sesam"
+      ],
+      "source_name": "Tahin (Sesammus)",
+      "source_note": "",
+      "source_provenance": {
+        "kcal": {
+          "raw": 595,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 18,
+          "origin": "Nährstoffdatenbank",
+          "reference": "Converted value from: US Department of Agriculture, Agricultural Research Service; USDA National Nutrient Database for Standard Reference, Legacy Release; 2019"
+        },
+        "available_carbs_g": {
+          "raw": 0.7,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 56,
+          "origin": "Aggregation",
+          "reference": "US Department of Agriculture, Agricultural Research Service; USDA National Nutrient Database for Standard Reference, Legacy Release; 2019#Public Health England; McCance and Widdowson's The Composition of Foods Integrated Dataset; 2021"
+        },
+        "fiber_g": {
+          "raw": 8.2,
+          "origin": "Nährstoffdatenbank",
+          "reference": "US Department of Agriculture, Agricultural Research Service; USDA National Nutrient Database for Standard Reference, Legacy Release; 2019"
+        }
+      }
+    },
+    {
+      "id": "F060",
+      "name": "Zitronensaft",
+      "state": "verzehrfertig",
+      "source_record_id": "F601600",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 30,
+        "protein_g": 0.63,
+        "available_carbs_g": 1.7,
+        "fat_g": 0.3,
+        "fiber_g": 0.129
+      },
+      "mapping_status": "mapped",
+      "allergens_intrinsic_preliminary": [],
+      "source_name": "Zitronensaft",
+      "source_note": "",
+      "source_provenance": {
+        "kcal": {
+          "raw": 30,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 0.63,
+          "origin": "Rezeptberechnung",
+          "reference": "-"
+        },
+        "available_carbs_g": {
+          "raw": 1.7,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 0.3,
+          "origin": "Rezeptberechnung",
+          "reference": "-"
+        },
+        "fiber_g": {
+          "raw": 0.129,
+          "origin": "Rezeptberechnung",
+          "reference": "-"
+        }
+      }
+    },
+    {
+      "id": "F061",
+      "name": "Avocado",
+      "state": "roh ohne Schale und Kern",
+      "source_record_id": "F502100",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 132,
+        "protein_g": 1.37,
+        "available_carbs_g": 1.37,
+        "fat_g": 12.5,
+        "fiber_g": 4.1
+      },
+      "mapping_status": "mapped",
+      "allergens_intrinsic_preliminary": [],
+      "source_name": "Avocado roh",
+      "source_note": "",
+      "source_provenance": {
+        "kcal": {
+          "raw": 132,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 1.37,
+          "origin": "Analyse",
+          "reference": "-"
+        },
+        "available_carbs_g": {
+          "raw": 1.37,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 12.5,
+          "origin": "Analyse",
+          "reference": "-"
+        },
+        "fiber_g": {
+          "raw": 4.1,
+          "origin": "Analyse",
+          "reference": "-"
+        }
+      }
+    },
+    {
+      "id": "F062",
+      "name": "Knäckebrot Roggen",
+      "state": "verzehrfertig",
+      "source_record_id": "B6A2000",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 334,
+        "protein_g": 9.4,
+        "available_carbs_g": 62,
+        "fat_g": 1.34,
+        "fiber_g": 18.16
+      },
+      "mapping_status": "mapped",
+      "allergens_intrinsic_preliminary": [
+        "Gluten"
+      ],
+      "source_name": "Roggenknäckebrot",
+      "source_note": "",
+      "source_provenance": {
+        "kcal": {
+          "raw": 334,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 9.4,
+          "origin": "Reskalierung",
+          "reference": "-"
+        },
+        "available_carbs_g": {
+          "raw": 62,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 1.34,
+          "origin": "Reskalierung",
+          "reference": "-"
+        },
+        "fiber_g": {
+          "raw": 18.16,
+          "origin": "Reskalierung",
+          "reference": "-"
+        }
+      },
+      "gluten_grain": "Roggen"
+    },
+    {
+      "id": "F063",
+      "name": "Kakaopulver ungesüßt",
+      "state": "trocken",
+      "source_record_id": "S713000",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 311,
+        "protein_g": 25.503,
+        "available_carbs_g": 12.3,
+        "fat_g": 11.2,
+        "fiber_g": 29.688
+      },
+      "mapping_status": "provisional",
+      "allergens_intrinsic_preliminary": [],
+      "source_name": "Kakaopulver stark entölt",
+      "source_note": "stark entölt als Standard",
+      "source_provenance": {
+        "kcal": {
+          "raw": 311,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 25.503,
+          "origin": "Reskalierung",
+          "reference": "-"
+        },
+        "available_carbs_g": {
+          "raw": 12.3,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 11.2,
+          "origin": "Reskalierung",
+          "reference": "-"
+        },
+        "fiber_g": {
+          "raw": 29.688,
+          "origin": "Reskalierung",
+          "reference": "-"
+        }
+      }
+    },
+    {
+      "id": "F064",
+      "name": "Edamame geschält",
+      "state": "tiefgekühlt",
+      "source_record_id": "G750100",
+      "source": "BLS",
+      "nutrients_per_100g": {
+        "kcal": 146,
+        "protein_g": 13,
+        "available_carbs_g": 6.2,
+        "fat_g": 6.8,
+        "fiber_g": 4.2
+      },
+      "mapping_status": "provisional",
+      "allergens_intrinsic_preliminary": [
+        "Soja"
+      ],
+      "source_name": "Sojabohne unreif (Edamame) roh",
+      "source_note": "rohe Edamame als Näherung für TK, vor Verzehr garen",
+      "source_provenance": {
+        "kcal": {
+          "raw": 146,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "protein_g": {
+          "raw": 13,
+          "origin": "Nährstoffdatenbank",
+          "reference": "Converted value from: US Department of Agriculture, Agricultural Research Service; USDA National Nutrient Database for Standard Reference, Legacy Release; 2019"
+        },
+        "available_carbs_g": {
+          "raw": 6.2,
+          "origin": "Formelberechnung",
+          "reference": "-"
+        },
+        "fat_g": {
+          "raw": 6.8,
+          "origin": "Nährstoffdatenbank",
+          "reference": "US Department of Agriculture, Agricultural Research Service; USDA National Nutrient Database for Standard Reference, Legacy Release; 2019"
+        },
+        "fiber_g": {
+          "raw": 4.2,
+          "origin": "Nährstoffdatenbank",
+          "reference": "US Department of Agriculture, Agricultural Research Service; USDA National Nutrient Database for Standard Reference, Legacy Release; 2019"
+        }
+      }
+    },
+    {
+      "id": "F065",
+      "name": "Zimt gemahlen",
+      "state": "trocken",
+      "source_record_id": "02010",
+      "source": "USDA SR28",
+      "nutrients_per_100g": {
+        "kcal": 247,
+        "protein_g": 3.99,
+        "available_carbs_g": 27.49,
+        "fat_g": 1.24,
+        "fiber_g": 53.1
+      },
+      "mapping_status": "provisional",
+      "allergens_intrinsic_preliminary": [],
+      "source_name": "Zimt Cassia, gemahlen",
+      "source_note": "KH näherungsweise Gesamt-KH minus Ballaststoffe",
+      "source_provenance": {
+        "conversion": "USDA total carbohydrate minus fiber"
+      }
+    },
+    {
+      "id": "F066",
+      "name": "Chilipulver rein",
+      "state": "trocken",
+      "source_record_id": "02031",
+      "source": "USDA SR28",
+      "nutrients_per_100g": {
+        "kcal": 318,
+        "protein_g": 12.01,
+        "available_carbs_g": 29.43,
+        "fat_g": 17.27,
+        "fiber_g": 27.2
+      },
+      "mapping_status": "provisional",
+      "allergens_intrinsic_preliminary": [],
+      "source_name": "Roter Pfeffer/Cayenne",
+      "source_note": "reiner Cayenne als Chili-Referenz; KH näherungsweise Gesamt-KH minus Ballaststoffe",
+      "source_provenance": {
+        "conversion": "USDA total carbohydrate minus fiber"
+      }
+    }
+  ]
+}

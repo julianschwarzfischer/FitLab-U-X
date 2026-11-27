@@ -1,0 +1,1718 @@
+{
+  "schema_version": "1.2",
+  "recipes": [
+    {
+      "id": "R001",
+      "name": "Beeren-Hafer-Bowl",
+      "category": "Frühstück",
+      "meal_types": [
+        "frühstück"
+      ],
+      "diet": "vegetarisch",
+      "minutes": 10,
+      "base_servings": 1,
+      "ingredients": [
+        {
+          "food_id": "F001",
+          "grams": 50
+        },
+        {
+          "food_id": "F002",
+          "grams": 200
+        },
+        {
+          "food_id": "F003",
+          "grams": 100
+        },
+        {
+          "food_id": "F004",
+          "grams": 80
+        },
+        {
+          "food_id": "F005",
+          "grams": 10
+        }
+      ],
+      "steps": [
+        "Haferflocken mit Milch und Quark verrühren.",
+        "Beeren waschen und mit Chiasamen darauf anrichten."
+      ],
+      "allergens_declared": [
+        "Milch",
+        "Gluten"
+      ],
+      "allergen_review": "pending",
+      "nutrition_per_serving": {
+        "kcal": 450.1,
+        "protein_g": 35.813,
+        "available_carbs_g": 47.164,
+        "fat_g": 8.796,
+        "fiber_g": 14.4145
+      },
+      "cooked_weight_g": null,
+      "image": "assets/R001.webp",
+      "image_brief": "Beeren-Hafer-Bowl, exakt die angegebenen Zutaten, matte dunkle Keramik, gedecktes Olivgrün, natürliches Seitenlicht, fotorealistische Editorial-Fotografie, keine Schrift",
+      "release_status": "draft",
+      "image_review": "draft_contact_sheet_crop",
+      "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
+      "nutrition_status": "source_based_estimate_pending_review",
+      "nutrition_per_100g": null
+    },
+    {
+      "id": "R002",
+      "name": "Spinat-Rührei auf Vollkornbrot",
+      "category": "Frühstück",
+      "meal_types": [
+        "frühstück"
+      ],
+      "diet": "vegetarisch",
+      "minutes": 15,
+      "base_servings": 1,
+      "ingredients": [
+        {
+          "food_id": "F006",
+          "grams": 120
+        },
+        {
+          "food_id": "F007",
+          "grams": 80
+        },
+        {
+          "food_id": "F008",
+          "grams": 80
+        },
+        {
+          "food_id": "F009",
+          "grams": 100
+        },
+        {
+          "food_id": "F010",
+          "grams": 5
+        }
+      ],
+      "steps": [
+        "Spinat in Öl zusammenfallen lassen.",
+        "Eier verquirlen und vollständig stocken lassen.",
+        "Auf Brot mit Tomaten servieren."
+      ],
+      "allergens_declared": [
+        "Ei",
+        "Gluten"
+      ],
+      "allergen_review": "pending",
+      "nutrition_per_serving": {
+        "kcal": 387.35,
+        "protein_g": 24.4568,
+        "available_carbs_g": 29.922,
+        "fat_g": 16.833000000000002,
+        "fiber_g": 8.2
+      },
+      "cooked_weight_g": null,
+      "image": "assets/R002.webp",
+      "image_brief": "Spinat-Rührei auf Vollkornbrot, exakt die angegebenen Zutaten, matte dunkle Keramik, gedecktes Olivgrün, natürliches Seitenlicht, fotorealistische Editorial-Fotografie, keine Schrift",
+      "release_status": "draft",
+      "image_review": "draft_contact_sheet_crop",
+      "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
+      "nutrition_status": "source_based_estimate_pending_review",
+      "nutrition_per_100g": null
+    },
+    {
+      "id": "R003",
+      "name": "Apfel-Zimt Overnight Oats",
+      "category": "Frühstück",
+      "meal_types": [
+        "frühstück"
+      ],
+      "diet": "vegan",
+      "minutes": 10,
+      "base_servings": 1,
+      "ingredients": [
+        {
+          "food_id": "F001",
+          "grams": 60
+        },
+        {
+          "food_id": "F011",
+          "grams": 180
+        },
+        {
+          "food_id": "F012",
+          "grams": 120
+        },
+        {
+          "food_id": "F013",
+          "grams": 10
+        },
+        {
+          "food_id": "F065",
+          "grams": 1
+        }
+      ],
+      "steps": [
+        "Haferflocken mit Sojadrink und Leinsamen mischen.",
+        "Über Nacht gekühlt ziehen lassen.",
+        "Apfel würfeln und mit Zimt unterheben."
+      ],
+      "allergens_declared": [
+        "Gluten",
+        "Soja"
+      ],
+      "allergen_review": "pending",
+      "nutrition_per_serving": {
+        "kcal": 381.67,
+        "protein_g": 16.503700000000002,
+        "available_carbs_g": 47.1849,
+        "fat_g": 10.587,
+        "fiber_g": 15.1573
+      },
+      "cooked_weight_g": null,
+      "image": "assets/R003.webp",
+      "image_brief": "Apfel-Zimt Overnight Oats, exakt die angegebenen Zutaten, matte dunkle Keramik, gedecktes Olivgrün, natürliches Seitenlicht, fotorealistische Editorial-Fotografie, keine Schrift",
+      "release_status": "draft",
+      "image_review": "draft_contact_sheet_crop",
+      "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
+      "nutrition_status": "source_based_estimate_pending_review",
+      "nutrition_per_100g": null,
+      "passive_time": "über Nacht gekühlt"
+    },
+    {
+      "id": "R004",
+      "name": "Herzhafte Hüttenkäse-Stulle",
+      "category": "Frühstück",
+      "meal_types": [
+        "frühstück"
+      ],
+      "diet": "vegetarisch",
+      "minutes": 10,
+      "base_servings": 1,
+      "ingredients": [
+        {
+          "food_id": "F007",
+          "grams": 100
+        },
+        {
+          "food_id": "F014",
+          "grams": 150
+        },
+        {
+          "food_id": "F015",
+          "grams": 100
+        },
+        {
+          "food_id": "F016",
+          "grams": 60
+        }
+      ],
+      "steps": [
+        "Brot mit Hüttenkäse bestreichen.",
+        "Gurke und Radieschen schneiden und darauflegen."
+      ],
+      "allergens_declared": [
+        "Gluten",
+        "Milch"
+      ],
+      "allergen_review": "pending",
+      "nutrition_per_serving": {
+        "kcal": 370.3,
+        "protein_g": 29.195999999999998,
+        "available_carbs_g": 40.716,
+        "fat_g": 7.594,
+        "fiber_g": 8.625
+      },
+      "cooked_weight_g": null,
+      "image": "assets/R004.webp",
+      "image_brief": "Herzhafte Hüttenkäse-Stulle, exakt die angegebenen Zutaten, matte dunkle Keramik, gedecktes Olivgrün, natürliches Seitenlicht, fotorealistische Editorial-Fotografie, keine Schrift",
+      "release_status": "draft",
+      "image_review": "draft_contact_sheet_crop",
+      "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
+      "nutrition_status": "source_based_estimate_pending_review",
+      "nutrition_per_100g": null
+    },
+    {
+      "id": "R005",
+      "name": "Bananen-Quark-Pancakes",
+      "category": "Frühstück",
+      "meal_types": [
+        "frühstück"
+      ],
+      "diet": "vegetarisch",
+      "minutes": 20,
+      "base_servings": 1,
+      "ingredients": [
+        {
+          "food_id": "F017",
+          "grams": 100
+        },
+        {
+          "food_id": "F006",
+          "grams": 60
+        },
+        {
+          "food_id": "F002",
+          "grams": 150
+        },
+        {
+          "food_id": "F001",
+          "grams": 40
+        },
+        {
+          "food_id": "F018",
+          "grams": 5
+        }
+      ],
+      "steps": [
+        "Banane zerdrücken und mit Ei, Quark und Hafer verrühren.",
+        "Kleine Pancakes in Öl beidseitig durchbacken."
+      ],
+      "allergens_declared": [
+        "Ei",
+        "Milch",
+        "Gluten"
+      ],
+      "allergen_review": "pending",
+      "nutrition_per_serving": {
+        "kcal": 443.2,
+        "protein_g": 32.287,
+        "available_carbs_g": 42.934,
+        "fat_g": 13.73,
+        "fiber_g": 6.3932
+      },
+      "cooked_weight_g": null,
+      "image": "assets/R005.webp",
+      "image_brief": "Bananen-Quark-Pancakes, exakt die angegebenen Zutaten, matte dunkle Keramik, gedecktes Olivgrün, natürliches Seitenlicht, fotorealistische Editorial-Fotografie, keine Schrift",
+      "release_status": "draft",
+      "image_review": "draft_contact_sheet_crop",
+      "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
+      "nutrition_status": "source_based_estimate_pending_review",
+      "nutrition_per_100g": null
+    },
+    {
+      "id": "R006",
+      "name": "Tofu-Frühstückspfanne",
+      "category": "Frühstück",
+      "meal_types": [
+        "frühstück"
+      ],
+      "diet": "vegan",
+      "minutes": 20,
+      "base_servings": 1,
+      "ingredients": [
+        {
+          "food_id": "F019",
+          "grams": 160
+        },
+        {
+          "food_id": "F020",
+          "grams": 100
+        },
+        {
+          "food_id": "F008",
+          "grams": 60
+        },
+        {
+          "food_id": "F007",
+          "grams": 80
+        },
+        {
+          "food_id": "F018",
+          "grams": 5
+        }
+      ],
+      "steps": [
+        "Tofu in kleine Würfel schneiden und in Öl anbraten.",
+        "Paprika und Spinat zugeben und garen.",
+        "Mit Brot servieren."
+      ],
+      "allergens_declared": [
+        "Soja",
+        "Gluten"
+      ],
+      "allergen_review": "pending",
+      "nutrition_per_serving": {
+        "kcal": 419.8,
+        "protein_g": 33.1244,
+        "available_carbs_g": 32.268,
+        "fat_g": 15.075999999999999,
+        "fiber_g": 10.82
+      },
+      "cooked_weight_g": null,
+      "image": "assets/R006.webp",
+      "image_brief": "Tofu-Frühstückspfanne, exakt die angegebenen Zutaten, matte dunkle Keramik, gedecktes Olivgrün, natürliches Seitenlicht, fotorealistische Editorial-Fotografie, keine Schrift",
+      "release_status": "draft",
+      "image_review": "draft_contact_sheet_crop",
+      "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
+      "nutrition_status": "source_based_estimate_pending_review",
+      "nutrition_per_100g": null
+    },
+    {
+      "id": "R007",
+      "name": "Chicken Power Bowl",
+      "category": "Fleisch",
+      "meal_types": [
+        "mittag",
+        "abend"
+      ],
+      "diet": "Mischkost",
+      "minutes": 25,
+      "base_servings": 1,
+      "ingredients": [
+        {
+          "food_id": "F021",
+          "grams": 180
+        },
+        {
+          "food_id": "F022",
+          "grams": 180
+        },
+        {
+          "food_id": "F023",
+          "grams": 120
+        },
+        {
+          "food_id": "F024",
+          "grams": 80
+        },
+        {
+          "food_id": "F025",
+          "grams": 60
+        },
+        {
+          "food_id": "F010",
+          "grams": 5
+        },
+        {
+          "food_id": "F026",
+          "grams": 3
+        }
+      ],
+      "steps": [
+        "180 g bereits gekochten Reis je Basisportion bereitstellen und erhitzen.",
+        "Brokkoli und Edamame garen, Karotten schneiden.",
+        "Hähnchen in Öl vollständig durchgaren.",
+        "In einer Schale anrichten und mit Sesam bestreuen."
+      ],
+      "allergens_declared": [
+        "Soja",
+        "Sesam"
+      ],
+      "allergen_review": "pending",
+      "nutrition_per_serving": {
+        "kcal": 609.9,
+        "protein_g": 60.14728,
+        "available_carbs_g": 54.1252,
+        "fat_g": 14.87104,
+        "fiber_g": 9.173399999999999
+      },
+      "cooked_weight_g": null,
+      "image": "assets/R007.webp",
+      "image_brief": "Chicken Power Bowl, exakt die angegebenen Zutaten, matte dunkle Keramik, gedecktes Olivgrün, natürliches Seitenlicht, fotorealistische Editorial-Fotografie, keine Schrift",
+      "release_status": "draft",
+      "image_review": "previously_approved_original",
+      "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
+      "nutrition_status": "source_based_estimate_pending_review",
+      "nutrition_per_100g": null
+    },
+    {
+      "id": "R008",
+      "name": "Rind & Süßkartoffel",
+      "category": "Fleisch",
+      "meal_types": [
+        "mittag",
+        "abend"
+      ],
+      "diet": "Mischkost",
+      "minutes": 30,
+      "base_servings": 1,
+      "ingredients": [
+        {
+          "food_id": "F027",
+          "grams": 160
+        },
+        {
+          "food_id": "F028",
+          "grams": 220
+        },
+        {
+          "food_id": "F023",
+          "grams": 150
+        },
+        {
+          "food_id": "F010",
+          "grams": 8
+        }
+      ],
+      "steps": [
+        "Süßkartoffel würfeln und mit Öl bei 200 °C weich rösten.",
+        "Brokkoli dämpfen.",
+        "Steak anbraten und nach gewünschtem Gargrad servieren; für Risikogruppen vollständig durchgaren."
+      ],
+      "allergens_declared": [],
+      "allergen_review": "pending",
+      "nutrition_per_serving": {
+        "kcal": 562.22,
+        "protein_g": 44.379,
+        "available_carbs_g": 58.89,
+        "fat_g": 13.96705,
+        "fiber_g": 11.408000000000001
+      },
+      "cooked_weight_g": null,
+      "image": "assets/R008.webp",
+      "image_brief": "Rind & Süßkartoffel, exakt die angegebenen Zutaten, matte dunkle Keramik, gedecktes Olivgrün, natürliches Seitenlicht, fotorealistische Editorial-Fotografie, keine Schrift",
+      "release_status": "draft",
+      "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
+      "image_review": "draft_contact_sheet_crop_pending_approval",
+      "nutrition_status": "source_based_estimate_pending_review",
+      "nutrition_per_100g": null
+    },
+    {
+      "id": "R009",
+      "name": "Puten-Paprika-Reis",
+      "category": "Fleisch",
+      "meal_types": [
+        "mittag",
+        "abend"
+      ],
+      "diet": "Mischkost",
+      "minutes": 25,
+      "base_servings": 1,
+      "ingredients": [
+        {
+          "food_id": "F029",
+          "grams": 170
+        },
+        {
+          "food_id": "F022",
+          "grams": 160
+        },
+        {
+          "food_id": "F020",
+          "grams": 150
+        },
+        {
+          "food_id": "F030",
+          "grams": 40
+        },
+        {
+          "food_id": "F018",
+          "grams": 6
+        }
+      ],
+      "steps": [
+        "Pute würfeln und in Rapsöl vollständig durchgaren.",
+        "Paprika und Zwiebel dazugeben und weich dünsten.",
+        "Reis unterheben und erhitzen."
+      ],
+      "allergens_declared": [],
+      "allergen_review": "pending",
+      "nutrition_per_serving": {
+        "kcal": 487.3,
+        "protein_g": 48.2499,
+        "available_carbs_g": 51.369,
+        "fat_g": 8.603,
+        "fiber_g": 4.836
+      },
+      "cooked_weight_g": null,
+      "image": "assets/R009.webp",
+      "image_brief": "Puten-Paprika-Reis, exakt die angegebenen Zutaten, matte dunkle Keramik, gedecktes Olivgrün, natürliches Seitenlicht, fotorealistische Editorial-Fotografie, keine Schrift",
+      "release_status": "draft",
+      "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
+      "image_review": "draft_contact_sheet_crop_pending_approval",
+      "nutrition_status": "source_based_estimate_pending_review",
+      "nutrition_per_100g": null
+    },
+    {
+      "id": "R010",
+      "name": "Rinderhack-Tomaten-Pasta",
+      "category": "Fleisch",
+      "meal_types": [
+        "mittag",
+        "abend"
+      ],
+      "diet": "Mischkost",
+      "minutes": 30,
+      "base_servings": 1,
+      "ingredients": [
+        {
+          "food_id": "F031",
+          "grams": 150
+        },
+        {
+          "food_id": "F032",
+          "grams": 80
+        },
+        {
+          "food_id": "F033",
+          "grams": 200
+        },
+        {
+          "food_id": "F034",
+          "grams": 120
+        },
+        {
+          "food_id": "F010",
+          "grams": 5
+        }
+      ],
+      "steps": [
+        "Pasta garen.",
+        "Hack in Öl krümelig vollständig durchbraten.",
+        "Zucchini und Tomaten zugeben und köcheln.",
+        "Mit Pasta vermengen."
+      ],
+      "allergens_declared": [
+        "Gluten"
+      ],
+      "allergen_review": "pending",
+      "nutrition_per_serving": {
+        "kcal": 750.15,
+        "protein_g": 44.013000000000005,
+        "available_carbs_g": 61.8,
+        "fat_g": 32.4684,
+        "fiber_g": 13.1
+      },
+      "cooked_weight_g": null,
+      "image": "assets/R010.webp",
+      "image_brief": "Rinderhack-Tomaten-Pasta, exakt die angegebenen Zutaten, matte dunkle Keramik, gedecktes Olivgrün, natürliches Seitenlicht, fotorealistische Editorial-Fotografie, keine Schrift",
+      "release_status": "draft",
+      "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
+      "image_review": "draft_contact_sheet_crop_pending_approval",
+      "nutrition_status": "source_based_estimate_pending_review",
+      "nutrition_per_100g": null
+    },
+    {
+      "id": "R011",
+      "name": "Mediterranes Hähnchenblech",
+      "category": "Fleisch",
+      "meal_types": [
+        "mittag",
+        "abend"
+      ],
+      "diet": "Mischkost",
+      "minutes": 35,
+      "base_servings": 1,
+      "ingredients": [
+        {
+          "food_id": "F021",
+          "grams": 170
+        },
+        {
+          "food_id": "F035",
+          "grams": 220
+        },
+        {
+          "food_id": "F034",
+          "grams": 120
+        },
+        {
+          "food_id": "F020",
+          "grams": 100
+        },
+        {
+          "food_id": "F010",
+          "grams": 8
+        }
+      ],
+      "steps": [
+        "Kartoffeln klein schneiden und mit Öl bei 200 °C vorgaren.",
+        "Gemüse und Hähnchen ergänzen und alles vollständig durchgaren."
+      ],
+      "allergens_declared": [],
+      "allergen_review": "pending",
+      "nutrition_per_serving": {
+        "kcal": 502.22,
+        "protein_g": 46.378,
+        "available_carbs_g": 49.169999999999995,
+        "fat_g": 11.833400000000001,
+        "fiber_g": 6.644
+      },
+      "cooked_weight_g": null,
+      "image": "assets/R011.webp",
+      "image_brief": "Mediterranes Hähnchenblech, exakt die angegebenen Zutaten, matte dunkle Keramik, gedecktes Olivgrün, natürliches Seitenlicht, fotorealistische Editorial-Fotografie, keine Schrift",
+      "release_status": "draft",
+      "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
+      "image_review": "draft_contact_sheet_crop_pending_approval",
+      "nutrition_status": "source_based_estimate_pending_review",
+      "nutrition_per_100g": null
+    },
+    {
+      "id": "R012",
+      "name": "Schweinefilet mit Linsen",
+      "category": "Fleisch",
+      "meal_types": [
+        "mittag",
+        "abend"
+      ],
+      "diet": "Mischkost",
+      "minutes": 30,
+      "base_servings": 1,
+      "ingredients": [
+        {
+          "food_id": "F036",
+          "grams": 160
+        },
+        {
+          "food_id": "F037",
+          "grams": 160
+        },
+        {
+          "food_id": "F025",
+          "grams": 100
+        },
+        {
+          "food_id": "F008",
+          "grams": 80
+        },
+        {
+          "food_id": "F018",
+          "grams": 6
+        }
+      ],
+      "steps": [
+        "Karotten und Spinat in Öl dünsten.",
+        "Linsen unterheben und erhitzen.",
+        "Filet separat vollständig garen und auf Linsen servieren."
+      ],
+      "allergens_declared": [],
+      "allergen_review": "pending",
+      "nutrition_per_serving": {
+        "kcal": 487.6,
+        "protein_g": 53.4904,
+        "available_carbs_g": 32.015,
+        "fat_g": 12.512,
+        "fiber_g": 15.908000000000001
+      },
+      "cooked_weight_g": null,
+      "image": "assets/R012.webp",
+      "image_brief": "Schweinefilet mit Linsen, exakt die angegebenen Zutaten, matte dunkle Keramik, gedecktes Olivgrün, natürliches Seitenlicht, fotorealistische Editorial-Fotografie, keine Schrift",
+      "release_status": "draft",
+      "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
+      "image_review": "draft_contact_sheet_crop_pending_approval",
+      "nutrition_status": "source_based_estimate_pending_review",
+      "nutrition_per_100g": null
+    },
+    {
+      "id": "R013",
+      "name": "Beef-Bohnen-Chili",
+      "category": "Fleisch",
+      "meal_types": [
+        "mittag",
+        "abend"
+      ],
+      "diet": "Mischkost",
+      "minutes": 30,
+      "base_servings": 1,
+      "ingredients": [
+        {
+          "food_id": "F031",
+          "grams": 140
+        },
+        {
+          "food_id": "F038",
+          "grams": 150
+        },
+        {
+          "food_id": "F033",
+          "grams": 200
+        },
+        {
+          "food_id": "F039",
+          "grams": 60
+        },
+        {
+          "food_id": "F030",
+          "grams": 40
+        },
+        {
+          "food_id": "F018",
+          "grams": 5
+        },
+        {
+          "food_id": "F066",
+          "grams": 1
+        }
+      ],
+      "steps": [
+        "Hack und Zwiebel in Rapsöl vollständig durchbraten.",
+        "Tomaten, Bohnen und Mais zugeben.",
+        "Mit Chili würzen und 15 Minuten köcheln."
+      ],
+      "allergens_declared": [],
+      "allergen_review": "pending",
+      "nutrition_per_serving": {
+        "kcal": 672.78,
+        "protein_g": 44.0613,
+        "available_carbs_g": 39.732299999999995,
+        "fat_g": 31.042699999999996,
+        "fiber_g": 23.451
+      },
+      "cooked_weight_g": null,
+      "image": "assets/R013.webp",
+      "image_brief": "Beef-Bohnen-Chili, exakt die angegebenen Zutaten, matte dunkle Keramik, gedecktes Olivgrün, natürliches Seitenlicht, fotorealistische Editorial-Fotografie, keine Schrift",
+      "release_status": "draft",
+      "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
+      "image_review": "draft_contact_sheet_crop_pending_approval",
+      "nutrition_status": "source_based_estimate_pending_review",
+      "nutrition_per_100g": null
+    },
+    {
+      "id": "R014",
+      "name": "Puten-Bulgur-Bowl",
+      "category": "Fleisch",
+      "meal_types": [
+        "mittag",
+        "abend"
+      ],
+      "diet": "Mischkost",
+      "minutes": 25,
+      "base_servings": 1,
+      "ingredients": [
+        {
+          "food_id": "F029",
+          "grams": 160
+        },
+        {
+          "food_id": "F040",
+          "grams": 65
+        },
+        {
+          "food_id": "F015",
+          "grams": 100
+        },
+        {
+          "food_id": "F009",
+          "grams": 120
+        },
+        {
+          "food_id": "F041",
+          "grams": 80
+        },
+        {
+          "food_id": "F010",
+          "grams": 5
+        }
+      ],
+      "steps": [
+        "Bulgur nach Packungsangabe garen.",
+        "Pute in Öl vollständig durchgaren.",
+        "Gemüse schneiden und mit Joghurt auf Bulgur anrichten."
+      ],
+      "allergens_declared": [
+        "Gluten",
+        "Milch"
+      ],
+      "allergen_review": "pending",
+      "nutrition_per_serving": {
+        "kcal": 538.4,
+        "protein_g": 52.006,
+        "available_carbs_g": 53.374,
+        "fat_g": 10.979000000000001,
+        "fiber_g": 6.815
+      },
+      "cooked_weight_g": null,
+      "image": "assets/R014.webp",
+      "image_brief": "Puten-Bulgur-Bowl, exakt die angegebenen Zutaten, matte dunkle Keramik, gedecktes Olivgrün, natürliches Seitenlicht, fotorealistische Editorial-Fotografie, keine Schrift",
+      "release_status": "draft",
+      "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
+      "image_review": "draft_contact_sheet_crop_pending_approval",
+      "nutrition_status": "source_based_estimate_pending_review",
+      "nutrition_per_100g": null
+    },
+    {
+      "id": "R015",
+      "name": "Lachs & grüne Vielfalt",
+      "category": "Fisch",
+      "meal_types": [
+        "mittag",
+        "abend"
+      ],
+      "diet": "pescetarisch",
+      "minutes": 30,
+      "base_servings": 1,
+      "ingredients": [
+        {
+          "food_id": "F042",
+          "grams": 150
+        },
+        {
+          "food_id": "F043",
+          "grams": 130
+        },
+        {
+          "food_id": "F044",
+          "grams": 100
+        },
+        {
+          "food_id": "F045",
+          "grams": 80
+        },
+        {
+          "food_id": "F028",
+          "grams": 100
+        },
+        {
+          "food_id": "F046",
+          "grams": 30
+        },
+        {
+          "food_id": "F010",
+          "grams": 5
+        }
+      ],
+      "steps": [
+        "Süßkartoffel, Rosenkohl und Zwiebel mit Öl bei 200 °C rösten.",
+        "Spargel in den letzten 10–12 Minuten ergänzen.",
+        "130 g bereits gekochte Quinoa je Basisportion bereitstellen und Lachs separat vollständig durchgaren.",
+        "Alles anrichten."
+      ],
+      "allergens_declared": [
+        "Fisch"
+      ],
+      "allergen_review": "pending",
+      "nutrition_per_serving": {
+        "kcal": 639.35,
+        "protein_g": 41.8851,
+        "available_carbs_g": 54.787,
+        "fat_g": 25.208000000000002,
+        "fiber_g": null
+      },
+      "cooked_weight_g": null,
+      "image": "assets/R015.webp",
+      "image_brief": "Lachs & grüne Vielfalt, exakt die angegebenen Zutaten, matte dunkle Keramik, gedecktes Olivgrün, natürliches Seitenlicht, fotorealistische Editorial-Fotografie, keine Schrift",
+      "release_status": "draft",
+      "image_review": "previously_approved_original",
+      "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
+      "nutrition_status": "source_based_estimate_pending_review",
+      "nutrition_per_100g": null
+    },
+    {
+      "id": "R016",
+      "name": "Kabeljau auf Kartoffel-Spinat",
+      "category": "Fisch",
+      "meal_types": [
+        "mittag",
+        "abend"
+      ],
+      "diet": "pescetarisch",
+      "minutes": 30,
+      "base_servings": 1,
+      "ingredients": [
+        {
+          "food_id": "F047",
+          "grams": 180
+        },
+        {
+          "food_id": "F035",
+          "grams": 250
+        },
+        {
+          "food_id": "F008",
+          "grams": 150
+        },
+        {
+          "food_id": "F010",
+          "grams": 8
+        }
+      ],
+      "steps": [
+        "Kartoffeln kochen.",
+        "Spinat in Öl dünsten.",
+        "Kabeljau vollständig garen und mit Kartoffeln anrichten."
+      ],
+      "allergens_declared": [
+        "Fisch"
+      ],
+      "allergen_review": "pending",
+      "nutrition_per_serving": {
+        "kcal": 448.62,
+        "protein_g": 39.9905,
+        "available_carbs_g": 46.145,
+        "fat_g": 10.204,
+        "fiber_g": 6.25
+      },
+      "cooked_weight_g": null,
+      "image": "assets/R016.webp",
+      "image_brief": "Kabeljau auf Kartoffel-Spinat, exakt die angegebenen Zutaten, matte dunkle Keramik, gedecktes Olivgrün, natürliches Seitenlicht, fotorealistische Editorial-Fotografie, keine Schrift",
+      "release_status": "draft",
+      "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
+      "image_review": "draft_contact_sheet_crop",
+      "nutrition_status": "source_based_estimate_pending_review",
+      "nutrition_per_100g": null
+    },
+    {
+      "id": "R017",
+      "name": "Thunfisch-Bohnen-Salat",
+      "category": "Fisch",
+      "meal_types": [
+        "mittag",
+        "abend"
+      ],
+      "diet": "pescetarisch",
+      "minutes": 15,
+      "base_servings": 1,
+      "ingredients": [
+        {
+          "food_id": "F048",
+          "grams": 140
+        },
+        {
+          "food_id": "F049",
+          "grams": 150
+        },
+        {
+          "food_id": "F009",
+          "grams": 150
+        },
+        {
+          "food_id": "F015",
+          "grams": 100
+        },
+        {
+          "food_id": "F010",
+          "grams": 8
+        }
+      ],
+      "steps": [
+        "Bohnen und Thunfisch abtropfen.",
+        "Gemüse schneiden und alles mit Öl mischen."
+      ],
+      "allergens_declared": [
+        "Fisch"
+      ],
+      "allergen_review": "pending",
+      "nutrition_per_serving": {
+        "kcal": 448.92,
+        "protein_g": 48.06245,
+        "available_carbs_g": 33.425,
+        "fat_g": 9.826500000000001,
+        "fiber_g": null
+      },
+      "cooked_weight_g": null,
+      "image": "assets/R017.webp",
+      "image_brief": "Thunfisch-Bohnen-Salat, exakt die angegebenen Zutaten, matte dunkle Keramik, gedecktes Olivgrün, natürliches Seitenlicht, fotorealistische Editorial-Fotografie, keine Schrift",
+      "release_status": "draft",
+      "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
+      "image_review": "draft_contact_sheet_crop",
+      "nutrition_status": "source_based_estimate_pending_review",
+      "nutrition_per_100g": null
+    },
+    {
+      "id": "R018",
+      "name": "Garnelen-Zitronen-Reis",
+      "category": "Fisch",
+      "meal_types": [
+        "mittag",
+        "abend"
+      ],
+      "diet": "pescetarisch",
+      "minutes": 25,
+      "base_servings": 1,
+      "ingredients": [
+        {
+          "food_id": "F050",
+          "grams": 160
+        },
+        {
+          "food_id": "F022",
+          "grams": 180
+        },
+        {
+          "food_id": "F034",
+          "grams": 150
+        },
+        {
+          "food_id": "F020",
+          "grams": 100
+        },
+        {
+          "food_id": "F051",
+          "grams": 20
+        },
+        {
+          "food_id": "F010",
+          "grams": 6
+        }
+      ],
+      "steps": [
+        "Gemüse in Öl braten.",
+        "Garnelen vollständig garen.",
+        "Reis unterheben und mit Zitrone abschmecken."
+      ],
+      "allergens_declared": [
+        "Krebstiere"
+      ],
+      "allergen_review": "pending",
+      "nutrition_per_serving": {
+        "kcal": 478.74,
+        "protein_g": 38.801,
+        "available_carbs_g": 55.67,
+        "fat_g": 9.618500000000001,
+        "fiber_g": 4.9738
+      },
+      "cooked_weight_g": null,
+      "image": "assets/R018.webp",
+      "image_brief": "Garnelen-Zitronen-Reis, exakt die angegebenen Zutaten, matte dunkle Keramik, gedecktes Olivgrün, natürliches Seitenlicht, fotorealistische Editorial-Fotografie, keine Schrift",
+      "release_status": "draft",
+      "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
+      "image_review": "draft_contact_sheet_crop_pending_approval",
+      "nutrition_status": "source_based_estimate_pending_review",
+      "nutrition_per_100g": null
+    },
+    {
+      "id": "R019",
+      "name": "Linsen-Spinat-Dal",
+      "category": "Pflanzlich",
+      "meal_types": [
+        "mittag",
+        "abend"
+      ],
+      "diet": "vegan",
+      "minutes": 30,
+      "base_servings": 1,
+      "ingredients": [
+        {
+          "food_id": "F052",
+          "grams": 80
+        },
+        {
+          "food_id": "F033",
+          "grams": 200
+        },
+        {
+          "food_id": "F008",
+          "grams": 100
+        },
+        {
+          "food_id": "F022",
+          "grams": 120
+        },
+        {
+          "food_id": "F018",
+          "grams": 5
+        }
+      ],
+      "steps": [
+        "Linsen waschen und mit Tomaten und Wasser weich kochen.",
+        "Spinat und Öl unterheben.",
+        "Mit der angegebenen Menge bereits gekochtem Reis servieren."
+      ],
+      "allergens_declared": [],
+      "allergen_review": "pending",
+      "nutrition_per_serving": {
+        "kcal": 528.6,
+        "protein_g": 28.867,
+        "available_carbs_g": 77.61,
+        "fat_g": 7.656,
+        "fiber_g": 12.952
+      },
+      "cooked_weight_g": null,
+      "image": "assets/R019.webp",
+      "image_brief": "Linsen-Spinat-Dal, exakt die angegebenen Zutaten, matte dunkle Keramik, gedecktes Olivgrün, natürliches Seitenlicht, fotorealistische Editorial-Fotografie, keine Schrift",
+      "release_status": "draft",
+      "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
+      "image_review": "draft_contact_sheet_crop",
+      "nutrition_status": "source_based_estimate_pending_review",
+      "nutrition_per_100g": null
+    },
+    {
+      "id": "R020",
+      "name": "Tofu-Edamame-Bowl",
+      "category": "Pflanzlich",
+      "meal_types": [
+        "mittag",
+        "abend"
+      ],
+      "diet": "vegan",
+      "minutes": 25,
+      "base_servings": 1,
+      "ingredients": [
+        {
+          "food_id": "F019",
+          "grams": 160
+        },
+        {
+          "food_id": "F024",
+          "grams": 100
+        },
+        {
+          "food_id": "F022",
+          "grams": 150
+        },
+        {
+          "food_id": "F023",
+          "grams": 150
+        },
+        {
+          "food_id": "F026",
+          "grams": 5
+        },
+        {
+          "food_id": "F018",
+          "grams": 5
+        }
+      ],
+      "steps": [
+        "Tofu würfeln und in Öl anbraten.",
+        "Brokkoli und Edamame garen.",
+        "Auf Reis anrichten und mit Sesam bestreuen."
+      ],
+      "allergens_declared": [
+        "Soja",
+        "Sesam"
+      ],
+      "allergen_review": "pending",
+      "nutrition_per_serving": {
+        "kcal": 579.25,
+        "protein_g": 44.8438,
+        "available_carbs_g": 44.221000000000004,
+        "fat_g": 22.34805,
+        "fiber_g": 11.054
+      },
+      "cooked_weight_g": null,
+      "image": "assets/R020.webp",
+      "image_brief": "Tofu-Edamame-Bowl, exakt die angegebenen Zutaten, matte dunkle Keramik, gedecktes Olivgrün, natürliches Seitenlicht, fotorealistische Editorial-Fotografie, keine Schrift",
+      "release_status": "draft",
+      "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
+      "image_review": "draft_contact_sheet_crop",
+      "nutrition_status": "source_based_estimate_pending_review",
+      "nutrition_per_100g": null
+    },
+    {
+      "id": "R021",
+      "name": "Kichererbsen-Ofengemüse",
+      "category": "Pflanzlich",
+      "meal_types": [
+        "mittag",
+        "abend"
+      ],
+      "diet": "vegan",
+      "minutes": 35,
+      "base_servings": 1,
+      "ingredients": [
+        {
+          "food_id": "F053",
+          "grams": 180
+        },
+        {
+          "food_id": "F028",
+          "grams": 150
+        },
+        {
+          "food_id": "F020",
+          "grams": 120
+        },
+        {
+          "food_id": "F034",
+          "grams": 100
+        },
+        {
+          "food_id": "F010",
+          "grams": 8
+        }
+      ],
+      "steps": [
+        "Gemüse schneiden und mit Kichererbsen und Öl mischen.",
+        "Bei 200 °C weich rösten."
+      ],
+      "allergens_declared": [],
+      "allergen_review": "pending",
+      "nutrition_per_serving": {
+        "kcal": 560.4200000000001,
+        "protein_g": 18.475,
+        "available_carbs_g": 76.128,
+        "fat_g": 14.279000000000002,
+        "fiber_g": 26.09
+      },
+      "cooked_weight_g": null,
+      "image": "assets/R021.webp",
+      "image_brief": "Kichererbsen-Ofengemüse, exakt die angegebenen Zutaten, matte dunkle Keramik, gedecktes Olivgrün, natürliches Seitenlicht, fotorealistische Editorial-Fotografie, keine Schrift",
+      "release_status": "draft",
+      "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
+      "image_review": "draft_contact_sheet_crop",
+      "nutrition_status": "source_based_estimate_pending_review",
+      "nutrition_per_100g": null,
+      "image_source": "Generated editorial illustration; visual approval pending"
+    },
+    {
+      "id": "R022",
+      "name": "Feta-Quinoa-Salat",
+      "category": "Pflanzlich",
+      "meal_types": [
+        "mittag",
+        "abend"
+      ],
+      "diet": "vegetarisch",
+      "minutes": 20,
+      "base_servings": 1,
+      "ingredients": [
+        {
+          "food_id": "F043",
+          "grams": 180
+        },
+        {
+          "food_id": "F054",
+          "grams": 70
+        },
+        {
+          "food_id": "F015",
+          "grams": 120
+        },
+        {
+          "food_id": "F009",
+          "grams": 150
+        },
+        {
+          "food_id": "F010",
+          "grams": 5
+        }
+      ],
+      "steps": [
+        "Die angegebene Menge bereits gekochte Quinoa abkühlen lassen.",
+        "Gemüse schneiden, Feta zerbröseln und alles mit Öl mischen."
+      ],
+      "allergens_declared": [
+        "Milch"
+      ],
+      "allergen_review": "pending",
+      "nutrition_per_serving": {
+        "kcal": 483.15,
+        "protein_g": 19.9592,
+        "available_carbs_g": 37.695,
+        "fat_g": 25.503,
+        "fiber_g": null
+      },
+      "cooked_weight_g": null,
+      "image": "assets/R022.webp",
+      "image_brief": "Feta-Quinoa-Salat, exakt die angegebenen Zutaten, matte dunkle Keramik, gedecktes Olivgrün, natürliches Seitenlicht, fotorealistische Editorial-Fotografie, keine Schrift",
+      "release_status": "draft",
+      "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
+      "image_review": "draft_contact_sheet_crop",
+      "nutrition_status": "source_based_estimate_pending_review",
+      "nutrition_per_100g": null,
+      "image_source": "Generated editorial illustration; visual approval pending",
+      "diet_condition": "Feta mit mikrobiellem Lab verwenden; andernfalls nicht als vegetarisch empfehlen."
+    },
+    {
+      "id": "R023",
+      "name": "Pilz-Linsen-Pasta",
+      "category": "Pflanzlich",
+      "meal_types": [
+        "mittag",
+        "abend"
+      ],
+      "diet": "vegan",
+      "minutes": 30,
+      "base_servings": 1,
+      "ingredients": [
+        {
+          "food_id": "F032",
+          "grams": 75
+        },
+        {
+          "food_id": "F037",
+          "grams": 140
+        },
+        {
+          "food_id": "F055",
+          "grams": 150
+        },
+        {
+          "food_id": "F033",
+          "grams": 180
+        },
+        {
+          "food_id": "F010",
+          "grams": 5
+        }
+      ],
+      "steps": [
+        "Pasta kochen.",
+        "Pilze in Öl anbraten.",
+        "Linsen und Tomaten zugeben, köcheln und mit Pasta servieren."
+      ],
+      "allergens_declared": [
+        "Gluten"
+      ],
+      "allergen_review": "pending",
+      "nutrition_per_serving": {
+        "kcal": 572.75,
+        "protein_g": 31.0552,
+        "available_carbs_g": 80.317,
+        "fat_g": 8.7635,
+        "fiber_g": 23.88
+      },
+      "cooked_weight_g": null,
+      "image": "assets/R023.webp",
+      "image_brief": "Pilz-Linsen-Pasta, exakt die angegebenen Zutaten, matte dunkle Keramik, gedecktes Olivgrün, natürliches Seitenlicht, fotorealistische Editorial-Fotografie, keine Schrift",
+      "release_status": "draft",
+      "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
+      "image_review": "draft_contact_sheet_crop",
+      "nutrition_status": "source_based_estimate_pending_review",
+      "nutrition_per_100g": null,
+      "image_source": "Generated editorial illustration; visual approval pending"
+    },
+    {
+      "id": "R024",
+      "name": "Kartoffel-Brokkoli-Frittata",
+      "category": "Pflanzlich",
+      "meal_types": [
+        "mittag",
+        "abend"
+      ],
+      "diet": "vegetarisch",
+      "minutes": 30,
+      "base_servings": 1,
+      "ingredients": [
+        {
+          "food_id": "F006",
+          "grams": 120
+        },
+        {
+          "food_id": "F056",
+          "grams": 180
+        },
+        {
+          "food_id": "F023",
+          "grams": 150
+        },
+        {
+          "food_id": "F014",
+          "grams": 100
+        },
+        {
+          "food_id": "F018",
+          "grams": 5
+        }
+      ],
+      "steps": [
+        "Brokkoli vorgaren und Kartoffeln schneiden.",
+        "Mit Öl in eine ofenfeste Form geben.",
+        "Eier und Hüttenkäse vermengen, darübergeben und vollständig stocken lassen."
+      ],
+      "allergens_declared": [
+        "Ei",
+        "Milch"
+      ],
+      "allergen_review": "pending",
+      "nutrition_per_serving": {
+        "kcal": 505.3,
+        "protein_g": 38.143,
+        "available_carbs_g": 35.9956,
+        "fat_g": 21.17505,
+        "fiber_g": 8.19
+      },
+      "cooked_weight_g": null,
+      "image": "assets/R024.webp",
+      "image_brief": "Kartoffel-Brokkoli-Frittata, exakt die angegebenen Zutaten, matte dunkle Keramik, gedecktes Olivgrün, natürliches Seitenlicht, fotorealistische Editorial-Fotografie, keine Schrift",
+      "release_status": "draft",
+      "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
+      "image_review": "draft_contact_sheet_crop",
+      "nutrition_status": "source_based_estimate_pending_review",
+      "nutrition_per_100g": null,
+      "image_source": "Generated editorial illustration; visual approval pending"
+    },
+    {
+      "id": "R025",
+      "name": "Beeren-Quark",
+      "category": "Snack",
+      "meal_types": [
+        "snack"
+      ],
+      "diet": "vegetarisch",
+      "minutes": 5,
+      "base_servings": 1,
+      "ingredients": [
+        {
+          "food_id": "F002",
+          "grams": 200
+        },
+        {
+          "food_id": "F057",
+          "grams": 100
+        },
+        {
+          "food_id": "F001",
+          "grams": 15
+        }
+      ],
+      "steps": [
+        "Quark glatt rühren.",
+        "Beeren und Hafer daraufgeben."
+      ],
+      "allergens_declared": [
+        "Milch",
+        "Gluten"
+      ],
+      "allergen_review": "pending",
+      "nutrition_per_serving": {
+        "kcal": 227.2,
+        "protein_g": 26.683,
+        "available_carbs_g": 20.555,
+        "fat_g": 1.6575,
+        "fiber_g": 6.34745
+      },
+      "cooked_weight_g": null,
+      "image": "assets/R025.webp",
+      "image_brief": "Beeren-Quark, exakt die angegebenen Zutaten, matte dunkle Keramik, gedecktes Olivgrün, natürliches Seitenlicht, fotorealistische Editorial-Fotografie, keine Schrift",
+      "release_status": "draft",
+      "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
+      "image_review": "draft_visual_match_pending_owner_review",
+      "nutrition_status": "source_based_estimate_pending_review",
+      "nutrition_per_100g": null
+    },
+    {
+      "id": "R026",
+      "name": "Apfel-Hüttenkäse-Crunch",
+      "category": "Snack",
+      "meal_types": [
+        "snack"
+      ],
+      "diet": "vegetarisch",
+      "minutes": 5,
+      "base_servings": 1,
+      "ingredients": [
+        {
+          "food_id": "F014",
+          "grams": 150
+        },
+        {
+          "food_id": "F012",
+          "grams": 120
+        },
+        {
+          "food_id": "F058",
+          "grams": 10
+        }
+      ],
+      "steps": [
+        "Apfel würfeln.",
+        "Mit Hüttenkäse und Kürbiskernen anrichten."
+      ],
+      "allergens_declared": [
+        "Milch"
+      ],
+      "allergen_review": "pending",
+      "nutrition_per_serving": {
+        "kcal": 291.9,
+        "protein_g": 24.0078,
+        "available_carbs_g": 19.781,
+        "fat_g": 11.684000000000001,
+        "fiber_g": 3.596
+      },
+      "cooked_weight_g": null,
+      "image": "assets/R026.webp",
+      "image_brief": "Apfel-Hüttenkäse-Crunch, exakt die angegebenen Zutaten, matte dunkle Keramik, gedecktes Olivgrün, natürliches Seitenlicht, fotorealistische Editorial-Fotografie, keine Schrift",
+      "release_status": "draft",
+      "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
+      "image_review": "draft_visual_match_pending_owner_review",
+      "nutrition_status": "source_based_estimate_pending_review",
+      "nutrition_per_100g": null
+    },
+    {
+      "id": "R027",
+      "name": "Hummus-Gemüse-Box",
+      "category": "Snack",
+      "meal_types": [
+        "snack"
+      ],
+      "diet": "vegan",
+      "minutes": 10,
+      "base_servings": 1,
+      "ingredients": [
+        {
+          "food_id": "F053",
+          "grams": 100
+        },
+        {
+          "food_id": "F059",
+          "grams": 10
+        },
+        {
+          "food_id": "F060",
+          "grams": 15
+        },
+        {
+          "food_id": "F025",
+          "grams": 100
+        },
+        {
+          "food_id": "F015",
+          "grams": 100
+        }
+      ],
+      "steps": [
+        "Kichererbsen, Tahini und Zitrone mit etwas Wasser pürieren.",
+        "Gemüse in Stifte schneiden und dazu servieren."
+      ],
+      "allergens_declared": [
+        "Sesam"
+      ],
+      "allergen_review": "pending",
+      "nutrition_per_serving": {
+        "kcal": 256.0,
+        "protein_g": 11.2965,
+        "available_carbs_g": 24.266000000000002,
+        "fat_g": 8.945,
+        "fiber_g": 14.439350000000001
+      },
+      "cooked_weight_g": null,
+      "image": "assets/R027.webp",
+      "image_brief": "Hummus-Gemüse-Box, exakt die angegebenen Zutaten, matte dunkle Keramik, gedecktes Olivgrün, natürliches Seitenlicht, fotorealistische Editorial-Fotografie, keine Schrift",
+      "release_status": "draft",
+      "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
+      "image_review": "draft_visual_match_pending_owner_review",
+      "nutrition_status": "source_based_estimate_pending_review",
+      "nutrition_per_100g": null
+    },
+    {
+      "id": "R028",
+      "name": "Ei & Avocado auf Knäckebrot",
+      "category": "Snack",
+      "meal_types": [
+        "snack"
+      ],
+      "diet": "vegetarisch",
+      "minutes": 15,
+      "base_servings": 1,
+      "ingredients": [
+        {
+          "food_id": "F006",
+          "grams": 60
+        },
+        {
+          "food_id": "F061",
+          "grams": 60
+        },
+        {
+          "food_id": "F062",
+          "grams": 30
+        }
+      ],
+      "steps": [
+        "Ein Ei in der Schale hart kochen, abschrecken und schälen; 60 g essbarer Anteil sind die Rechengrundlage.",
+        "Avocado zerdrücken und auf Brot streichen.",
+        "Mit Ei belegen."
+      ],
+      "allergens_declared": [
+        "Ei",
+        "Gluten"
+      ],
+      "allergen_review": "pending",
+      "nutrition_per_serving": {
+        "kcal": 260.4,
+        "protein_g": 11.547,
+        "available_carbs_g": 19.626,
+        "fat_g": 13.302,
+        "fiber_g": 7.9079999999999995
+      },
+      "cooked_weight_g": null,
+      "image": "assets/R028.webp",
+      "image_brief": "Ei & Avocado auf Knäckebrot, exakt die angegebenen Zutaten, matte dunkle Keramik, gedecktes Olivgrün, natürliches Seitenlicht, fotorealistische Editorial-Fotografie, keine Schrift",
+      "release_status": "draft",
+      "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
+      "image_review": "draft_visual_match_pending_owner_review",
+      "nutrition_status": "source_based_estimate_pending_review",
+      "nutrition_per_100g": null
+    },
+    {
+      "id": "R029",
+      "name": "Kakao-Bananen-Quark",
+      "category": "Snack",
+      "meal_types": [
+        "snack"
+      ],
+      "diet": "vegetarisch",
+      "minutes": 5,
+      "base_servings": 1,
+      "ingredients": [
+        {
+          "food_id": "F002",
+          "grams": 200
+        },
+        {
+          "food_id": "F017",
+          "grams": 100
+        },
+        {
+          "food_id": "F063",
+          "grams": 5
+        },
+        {
+          "food_id": "F004",
+          "grams": 50
+        }
+      ],
+      "steps": [
+        "Banane zerdrücken.",
+        "Quark, Kakao und Milch unterrühren."
+      ],
+      "allergens_declared": [
+        "Milch"
+      ],
+      "allergen_review": "pending",
+      "nutrition_per_serving": {
+        "kcal": 248.55,
+        "protein_g": 28.03915,
+        "available_carbs_g": 25.795,
+        "fat_g": 2.09,
+        "fiber_g": 3.4844
+      },
+      "cooked_weight_g": null,
+      "image": "assets/R029.webp",
+      "image_brief": "Kakao-Bananen-Quark, exakt die angegebenen Zutaten, matte dunkle Keramik, gedecktes Olivgrün, natürliches Seitenlicht, fotorealistische Editorial-Fotografie, keine Schrift",
+      "release_status": "draft",
+      "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
+      "image_review": "draft_visual_match_pending_owner_review",
+      "nutrition_status": "source_based_estimate_pending_review",
+      "nutrition_per_100g": null
+    },
+    {
+      "id": "R030",
+      "name": "Edamame mit Zitrone",
+      "category": "Snack",
+      "meal_types": [
+        "snack"
+      ],
+      "diet": "vegan",
+      "minutes": 10,
+      "base_servings": 1,
+      "ingredients": [
+        {
+          "food_id": "F064",
+          "grams": 150
+        },
+        {
+          "food_id": "F060",
+          "grams": 15
+        },
+        {
+          "food_id": "F026",
+          "grams": 5
+        }
+      ],
+      "steps": [
+        "Edamame nach Packungsangabe vollständig garen.",
+        "Mit Zitrone und Sesam mischen."
+      ],
+      "allergens_declared": [
+        "Soja",
+        "Sesam"
+      ],
+      "allergen_review": "pending",
+      "nutrition_per_serving": {
+        "kcal": 251.75,
+        "protein_g": 20.6393,
+        "available_carbs_g": 9.626000000000001,
+        "fat_g": 12.764999999999999,
+        "fiber_g": 6.87835
+      },
+      "cooked_weight_g": null,
+      "image": "assets/R030.webp",
+      "image_brief": "Edamame mit Zitrone, exakt die angegebenen Zutaten, matte dunkle Keramik, gedecktes Olivgrün, natürliches Seitenlicht, fotorealistische Editorial-Fotografie, keine Schrift",
+      "release_status": "draft",
+      "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
+      "image_review": "draft_visual_match_pending_owner_review",
+      "nutrition_status": "source_based_estimate_pending_review",
+      "nutrition_per_100g": null
+    }
+  ]
+}
