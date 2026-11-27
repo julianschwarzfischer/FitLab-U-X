@@ -10,7 +10,7 @@
  const facts=(recipe,portion,tag='b')=>`<div class="facts">${engine.nutrients.map((key,i)=>`<div><${tag}>${format(key,recipe.values[key]===null?null:recipe.values[key]*portion)}</${tag}><span>${labels[i]}</span></div>`).join('')}</div>`;
  let collectionPromise;
  function load(){
-  return collectionPromise??=Promise.all(['recipes','foods','allergen-matrix'].map(name=>fetch('nutrition/'+name+'.json?v=390').then(response=>{
+  return collectionPromise??=Promise.all(['recipes','foods','allergen-matrix'].map(name=>fetch('nutrition/'+name+'.json?v=391').then(response=>{
    if(!response.ok)throw Error('Rezeptdaten fehlen');
    return response.json();
   }))).then(([r,f,matrix])=>safety.attachMatrix(engine.enrich(r.recipes,f.foods),matrix)).catch(error=>{collectionPromise=null;throw error});
@@ -18,13 +18,15 @@
  function prefsMarkup(profile,recipes,protection){
   const unknown=[...(profile.exclusions||[]).filter(id=>!safety.knownIds.includes(id)),
    ...['allergy','intolerance'].flatMap(key=>(Array.isArray(protection.selection?.[key])?protection.selection[key]:[]).filter(group=>!safety.groups.includes(group)))];
-  const options=(values,selected)=>values.map(value=>`<option ${value===selected?'selected':''}>${escape(value)}</option>`).join('');
-  const checks=(key,list)=>list.map(value=>`<label><input type="checkbox" name="${key}" value="${escape(value)}" ${profile[key].includes(value)?'checked':''}> ${escape(value)}</label>`).join('');
+  const choices=(name,items,selected)=>items.map(([value,label])=>`<label><input type="radio" name="${name}" value="${escape(value)}" ${value===selected?'checked':''}><span>${escape(label)}</span></label>`).join('');
+  const checks=(key,list)=>list.map(value=>`<label><input type="checkbox" name="${key}" value="${escape(value)}" ${profile[key].includes(value)?'checked':''}><span>${escape(value)}</span></label>`).join('');
   const foods=[...new Map(recipes.flatMap(r=>r.rows.map(({food})=>[food.id,food.name]))).entries()].sort((a,b)=>a[1].localeCompare(b[1],'de'));
-  return `<form class="profile-food"><h2>Meine Ernährung</h2><label>Ernährungsform <select name="diet">${options(engine.diets,profile.diet)}</select></label>
-   <label>Zubereitungszeit <select name="minutes">${[[0,'Keine Einschränkung'],[15,'Maximal 15 Minuten'],[30,'Maximal 30 Minuten'],[60,'Bis zu 60 Minuten']].map(([value,label])=>`<option value="${value}" ${value===profile.minutes?'selected':''}>${label}</option>`).join('')}</select></label>
+  return `<form class="profile-food"><div class="eyebrow">Personal Nutrition · Fine-Tuning</div><h2>So isst du.</h2>
+   <p>Deine Vorlieben beeinflussen, was wir dir vorschlagen. Deine Ernährungseinschränkungen haben Vorrang.</p>
+   <fieldset><legend>Deine Ernährungsform</legend>${choices('diet',engine.diets.map(diet=>[diet,diet]),profile.diet)}</fieldset>
    <p class="preference-label">Vorlieben · optional</p><fieldset><legend>Bevorzugte Lebensmittel</legend>${checks('foods',Object.keys(engine.foodGroups))}</fieldset>
    <fieldset><legend>Bevorzugte Gerichte</legend>${checks('dishes',engine.dishes)}</fieldset>
+   <fieldset><legend>Zeit zum Kochen</legend>${choices('minutes',[[0,'Egal'],[15,'15 Min.'],[30,'30 Min.'],[60,'60 Min.']],profile.minutes)}</fieldset>
    <p class="preference-label">Ausschlüsse · verbindlich</p><fieldset><legend>Allergien</legend>${checks('allergy',engine.allergens)}</fieldset>
    <fieldset><legend>Unverträglichkeiten</legend>${checks('intolerance',engine.allergens)}</fieldset>
    <label>Ausgeschlossene Katalogzutaten <select name="excluded" size="5" multiple>${foods.map(([id,name])=>`<option value="${id}" ${profile.exclusions.includes(id)?'selected':''}>${escape(name)}</option>`).join('')}</select></label>
@@ -33,8 +35,8 @@
  }
  function show(api){
   const host=document.createElement('fitlab-nutrition'),root=host.attachShadow({mode:'open'});
-  root.innerHTML=`<link rel="stylesheet" href="nutrition/reference.css?v=390"><div class="recipe-scene" aria-hidden="true"></div><div class="shell"><header><span class="brand"><b>╫</b> FITNESS LAB</span><a href="#tagebuch" data-action="diary">Tagebuch ↗</a></header>
-   <main><div class="wrap intro"><div class="eyebrow">FITNESS LAB · PERSONAL NUTRITION</div><h1>Deine Rezeptwelt.</h1><div class="tabs"><button data-action="personal">Für mich</button><button data-action="all">Alle Rezepte</button><button data-action="profile">Fine-Tuning</button></div><div id="context"></div></div>
+  root.innerHTML=`<link rel="stylesheet" href="nutrition/reference.css?v=391"><div class="recipe-scene" aria-hidden="true"></div><div class="shell"><header><span class="brand"><b>╫</b> FITNESS LAB</span><a href="#tagebuch" data-action="diary">Tagebuch ↗</a></header>
+   <main><div class="wrap intro"><div class="eyebrow">FITNESS LAB · PERSONAL NUTRITION</div><h1>Deine <br>Rezeptwelt.</h1><div class="tabs"><button data-action="personal">Für mich</button><button data-action="all">Alle Rezepte</button></div><div id="context"></div></div>
    <div id="protection-status" class="wrap" hidden><p></p><button class="primary" data-action="profile">Meine Ernährung prüfen</button></div><div id="hero"></div><div id="recommendation"></div><div id="catalog" class="collection" hidden></div><div class="wrap"><label>Mahlzeit <select class="goal" id="meal">${Object.entries(meals).map(([id,name])=>`<option value="${id}">${name}</option>`).join('')}</select></label>
    <details id="preferences"><summary>Meine Ernährung</summary><div></div></details></div></main>
    <div id="booking-status" role="status" class="wrap" hidden></div><footer class="foot"><button data-action="back">Zurück zum Dashboard ↑</button></footer></div>`;
@@ -81,7 +83,7 @@
    recommendations=engine.rank(recipes,{...model,profile,meal,protection}).slice(0,8);
    active=Math.min(active,Math.max(0,recommendations.length-1));
    const current=recommendations[active];
-   $('context').innerHTML=`<p>Abgestimmt auf deine persönlichen Ziele.</p>${model.goals.map(goal=>`<small class="pill">${escape(goal)}</small>`).join(' ')}`;
+   $('context').innerHTML=`<div><div class="eyebrow">Deine Ziele</div><p>${model.goals.length?model.goals.map(goal=>`<span>${escape(goal)}</span>`).join(' · '):'Keine Ziele verfügbar'}</p></div><button type="button" data-action="profile">Fine-Tuning</button>`;
    if(!current){
     root.querySelector('.recipe-scene').style.backgroundImage='';
     $('hero').innerHTML='<div class="wrap"><p>Für deine aktuellen Angaben gibt es keine passende persönliche Empfehlung.</p><small>Ein fehlender Vorschlag ist keine Empfehlung, eine Mahlzeit auszulassen.</small></div>';
@@ -91,8 +93,8 @@
    const track=$('hero').querySelector('.slider');
    const ids=recommendations.map(item=>item.recipe.id).join(',');
    if(track?.dataset.recipes!==ids){
-    $('hero').innerHTML=`<div class="slider" tabindex="0" aria-label="Rezeptauswahl" data-recipes="${ids}">${recommendations.map(({recipe},i)=>`<section class="slide"><button tabindex="-1" data-action="slide" data-value="${i}" aria-label="${escape(recipe.name)}">${image(recipe)}</button></section>`).join('')}</div>
-     <div class="dots">${recommendations.map(({recipe},i)=>`<button data-action="slide" data-value="${i}" aria-label="${escape(recipe.name)}">○</button>`).join('')}</div><div class="wrap" id="slide-copy"></div>`;
+    $('hero').innerHTML=`<div class="slider" tabindex="0" aria-label="Rezeptauswahl" data-recipes="${ids}">${recommendations.map(({recipe},i)=>`<section class="slide"><button class="slide-image" tabindex="-1" data-action="slide" data-value="${i}" aria-label="${escape(recipe.name)}">${image(recipe)}</button><div class="slide-caption"><div class="eyebrow">${i===0?'Dein Vorschlag':'Alternative'}</div><h2>${escape(recipe.name)}</h2><p></p><button class="primary" data-action="detail" data-value="${i}">Rezept entdecken ↗</button></div></section>`).join('')}</div>
+     <div class="dots">${recommendations.map(({recipe},i)=>`<button data-action="slide" data-value="${i}" aria-label="${escape(recipe.name)}">○</button>`).join('')}</div><div class="wrap" id="slide-reason"></div>`;
     const slider=$('hero').querySelector('.slider');
     let scrollFrame;
     slider.addEventListener('keydown',event=>{
@@ -125,7 +127,13 @@
    $('hero').querySelectorAll('.dots button').forEach((button,i)=>{
     button.setAttribute('aria-current',String(i===active));button.textContent=i===active?'●':'○';
    });
-   $('slide-copy').innerHTML=`<div class="eyebrow">Empfehlung ${active+1} / ${recommendations.length}</div><h2>${escape(recipe.name)}</h2><p>${number(recipe.values.kcal*current.portion)} kcal · ${number(recipe.values.protein_g*current.portion,1)} g Protein · ${recipe.minutes} Min.</p><p><small>Vorschlag: ${number(current.portion,1)} Portion(en). ${escape(reason)}</small></p>${recipe.special_population_notice?`<p class="warning">${escape(recipe.special_population_notice)}</p>`:''}<button class="primary" data-action="detail">Rezept entdecken ↓</button>`;
+   $('hero').querySelectorAll('.slide-caption').forEach((caption,i)=>{
+    const item=recommendations[i],show=i===active;
+    caption.id=show?'slide-copy':'';
+    caption.querySelector('button').tabIndex=show?0:-1;
+    caption.querySelector('p').textContent=`${number(item.recipe.values.kcal*item.portion)} kcal · ${number(item.recipe.values.protein_g*item.portion,1)} g Protein · ${item.recipe.minutes} Min.`;
+   });
+   $('slide-reason').innerHTML=`<p><small>Vorschlag: ${number(current.portion,1)} Portion(en). ${escape(reason)}</small></p>${recipe.special_population_notice?`<p class="warning">${escape(recipe.special_population_notice)}</p>`:''}`;
    $('recommendation').innerHTML=`<section class="budgetbox"><div class="wrap"><div class="eyebrow">Heute noch verfügbar</div><div class="daystats">${escape(model.budget)}</div></div></section>
     <article class="recipe" id="recipe-detail"><div class="wrap"><div class="eyebrow">Rezept im Detail</div><h2>${escape(recipe.name)}</h2><small>${recipe.minutes} Min. · ${escape(recipe.category)}</small>${detail(recipe,portion(recipe))}</div></article>`;
   }
@@ -136,7 +144,7 @@
     dialog.setAttribute('aria-labelledby','booking-title');
     dialog.innerHTML=`<form method="dialog">${image(recipe)}<div class="dialog-body"><h2 id="booking-title">Rezept eintragen</h2><p>${escape(recipe.name)} · ${number(quantity,1)} Portion(en) · ${escape(bookingMeal)}</p>
      ${facts(recipe,quantity)}${recipe.special_population_notice?`<p class="warning">${escape(recipe.special_population_notice)}</p>`:''}
-     <details><summary>Zutaten und Hinweise</summary>${warnings(recipe).map(warning=>`<p>${escape(warning)}</p>`).join('')}</details>
+     <p>Allergene nach Standardzutaten: ${escape(recipe.declared.join(', ')||'keine der 14 Gruppen als enthalten ermittelt')}. Konkrete Etiketten und Kreuzkontakte sind nicht bestätigt.</p>${warnings(recipe).map(warning=>`<p class="warning">${escape(warning)}</p>`).join('')}
      <div class="tabs"><button value="cancel" autofocus>Abbrechen</button><button class="primary" value="book">Bestätigen</button></div></div></form>`;
     dialog.addEventListener('close',()=>{const accepted=dialog.returnValue==='book';dialog.remove();resolve(accepted)},{once:true});
     root.append(dialog);
@@ -179,7 +187,10 @@
    if(!recipes.length)return;
    if(action==='personal'||action==='all'){view=action;render();return;}
    if(action==='profile'){$('preferences').open=true;$('preferences').scrollIntoView({behavior:'instant'});return;}
-   if(action==='detail'){$('recipe-detail').scrollIntoView({behavior:'instant'});return;}
+   if(action==='detail'){
+    if(value!==undefined&&active!==Number(value)){active=Number(value);scrollToRecipe();displayCurrent(api.model(meal));}
+    const detail=$('recipe-detail');detail.tabIndex=-1;detail.focus({preventScroll:true});detail.scrollIntoView({behavior:'instant'});return;
+   }
    if(action==='slide'){active=Number(value);scrollToRecipe();displayCurrent(api.model(meal));return;}
    const recipe=recipes.find(item=>item.id===id);
    if(!recipe)return;

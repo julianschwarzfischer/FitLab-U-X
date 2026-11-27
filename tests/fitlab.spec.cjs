@@ -185,7 +185,7 @@ test('real QA5 application automatically migrates into current IndexedDB', async
   expect(legacy).toEqual(saved);
   await page.unroute(root,oldRoute);
   await page.reload();
-  await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3.9 UNIFIED PREMIUM EXPERIENCE');
+  await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3.9.1 DESIGN FIDELITY');
   await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0,{timeout:20000});
   const migrated=await canonical(page);
   expect(migrated.p.age).toBe(41);
@@ -288,8 +288,8 @@ test('unchanged own backup round-trips after normal profile edit',async({page})=
   const fromApp=JSON.parse(content);
   expect(fromApp.p.age).toBe(41);
   expect(fromApp.log).toEqual(durable.log);
-  page.once('dialog',dialog=>dialog.accept());
   await page.locator('#import').setInputFiles({name:'own-backup.json',mimeType:'application/json',buffer:Buffer.from(content)});
+  await page.getByRole('dialog',{name:'Sicherung wiederherstellen'}).getByRole('button',{name:'Sicherung übernehmen'}).click();
   await expect(page.locator('#importstatus')).toContainText('Sicherung erfolgreich',{timeout:20000});
   await page.reload();
   await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0,{timeout:20000});
@@ -302,10 +302,11 @@ test('invalid nested backup cannot replace the confirmed IndexedDB record',async
   const before=await canonical(page);
   const damaged=structuredClone(before);
   damaged.coach={...(damaged.coach||{}),days:null};
-  let alertText='';
-  page.once('dialog',async dialog=>{alertText=dialog.message();await dialog.accept()});
+
   await page.locator('#import').setInputFiles({name:'damaged-backup.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(damaged))});
-  await expect.poll(()=>alertText,{timeout:10000}).toContain('nicht übernommen');
+  const rejected=page.getByRole('dialog',{name:'Sicherung nicht übernommen'});
+  await expect(rejected).toContainText('Der bisherige gespeicherte Stand bleibt erhalten');
+  await rejected.getByRole('button',{name:'Schließen'}).click();
   await page.reload();
   await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0,{timeout:20000});
   expect(await canonical(page)).toEqual(before);
@@ -369,7 +370,7 @@ test('training prioritizes one set, retains timer and technique, and persists a 
   await enterCheckIn(page);
   await startPlannedWorkout(page);
   const card = page.locator('#trainingout .workFocus:visible');
-  let current = card.locator(':scope > .setline');
+  let current = card.locator(':scope > .setline.next63');
   await expect(current).toHaveCount(1);
   await expect(current.getByRole('button')).toHaveText('Satz 1 abschließen');
   const technique = card.locator('summary').filter({hasText:'Technik & Übungsanimation'});
@@ -386,13 +387,12 @@ test('training prioritizes one set, retains timer and technique, and persists a 
   await expect(page.locator('#pauseDisplay')).toBeVisible();
   await page.locator('#pauseDisplay').getByRole('button',{name:'Weiter'}).click();
   await expect(page.locator('#pauseDisplay')).toBeHidden();
-  await expect(card.locator(':scope > .setline').getByRole('button')).toHaveText('Satz 2 abschließen');
+  await expect(card.locator(':scope > .setline.next63').getByRole('button')).toHaveText('Satz 2 abschließen');
 
   await page.reload();
   await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
   await mobileNav(page, 'Training').click();
-  await expect(card.locator(':scope > .setline').getByRole('button')).toHaveText('Satz 2 abschließen');
-  await card.locator('summary').filter({hasText:'Weitere Sätze'}).click();
+  await expect(card.locator(':scope > .setline.next63').getByRole('button')).toHaveText('Satz 2 abschließen');
   await expect(card.getByRole('button',{name:'✓ Abgeschlossen · ändern'})).toBeVisible();
   await page.locator('#trainingout .xpEvoFinish > summary').click();
   const duration=page.getByLabel('Tatsächliche Trainingsdauer (Minuten)');
@@ -905,8 +905,8 @@ test('Evolution 2.2 freezes historic goals through profile changes, midnight, ba
   await page.locator('#export').click();
   const json=require('node:fs').readFileSync(await (await pending).path());
   expect(JSON.parse(json).dayTargets[date]).toEqual(original);
-  page.once('dialog',dialog=>dialog.accept());
   await page.locator('#import').setInputFiles({name:'evolution22.json',mimeType:'application/json',buffer:json});
+  await page.getByRole('dialog',{name:'Sicherung wiederherstellen'}).getByRole('button',{name:'Sicherung übernehmen'}).click();
   await expect(page.locator('#importstatus')).toContainText('Sicherung erfolgreich');
   await page.reload();
   await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
@@ -936,8 +936,8 @@ test('Evolution 2.2 distinguishes missing, zero, partial and confirmed and reope
   expect((await canonical(page)).coach.days[day].complete).toBe(false);
   await quality.getByRole('button',{name:'Tag als vollständig bestätigen'}).click();
   await expect(quality).toContainText('Vollständig bestätigt');
-  page.once('dialog',dialog=>dialog.accept());
   await page.locator('[data-nutdelete]').last().click();
+  await page.getByRole('dialog',{name:'Tagebucheintrag löschen'}).getByRole('button',{name:'Löschen',exact:true}).click();
   await expect(quality).toContainText('Teilweise erfasst');
   expect((await canonical(page)).coach.days[day].complete).toBe(false);
   await page.reload();
@@ -1216,15 +1216,15 @@ test(`Atlas V2 real service worker update from ${previousVersion} keeps data and
     await page.waitForFunction(()=>window.testControllerChanged);
     await page.waitForFunction(async previous=>{
       const keys=await caches.keys();
-      return keys.some(key=>key.endsWith('evolution-3-9-unified-premium-experience'))&&!keys.some(key=>key.endsWith('evolution-'+previous.toLowerCase().replace(/[. ]/g,'-')));
+      return keys.some(key=>key.endsWith('evolution-3-9-1-design-fidelity'))&&!keys.some(key=>key.endsWith('evolution-'+previous.toLowerCase().replace(/[. ]/g,'-')));
     },previousVersion);
     await page.reload();
-    await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3.9 UNIFIED PREMIUM EXPERIENCE');
+    await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3.9.1 DESIGN FIDELITY');
     await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
     expect(await canonical(page)).toEqual(prior);
     await context.setOffline(true);
     await page.reload();
-    await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3.9 UNIFIED PREMIUM EXPERIENCE');
+    await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3.9.1 DESIGN FIDELITY');
     await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
     if(previousVersion.startsWith('3.5')){
       await page.getByRole('button',{name:/Erlebnis entdecken/}).click();
@@ -2041,7 +2041,7 @@ test('Recipe world persists allergies and leaves the full warning-marked catalog
  await page.locator('fitlab-personal-dashboard .nutrition .photo').click();
  let nutrition=page.locator('fitlab-nutrition');
  await nutrition.locator('#preferences > summary').click();
- await nutrition.locator('input[name=allergy][value=Milch]').check();
+ await nutrition.locator('label:has(input[name=allergy][value=Milch])').click();
  await nutrition.getByRole('button',{name:'Speichern',exact:true}).click();
  await expect(nutrition.getByText('Für deine aktuellen Angaben gibt es keine passende persönliche Empfehlung.')).toBeVisible();
  await nutrition.getByRole('button',{name:'Alle Rezepte'}).click();
@@ -2119,6 +2119,7 @@ test('Intelligent Safety fails closed on damaged canonical and legacy protection
   await save();
  });
  await page.reload();
+ await page.waitForFunction(()=>xpIDBReady);
  expect(await page.evaluate(()=>xpNutritionProfile().status)).toBe('damaged');
 });
 
@@ -2136,8 +2137,8 @@ test('Intelligent Safety restores protection in a fresh installation and retains
   await restored.waitForFunction(()=>xpIDBReady);
   expect(await restored.evaluate(()=>xpNutritionProfile().status)).toBe('setup');
   const importRecord=async(buffer)=>{
-   restored.once('dialog', dialog=>dialog.accept());
    await restored.locator('#import').setInputFiles({name:'backup.json',buffer,mimeType:'application/json'});
+   await restored.getByRole('dialog',{name:'Sicherung wiederherstellen'}).getByRole('button',{name:'Sicherung übernehmen'}).click();
    await expect(restored.locator('#importstatus')).toContainText('Sicherung erfolgreich gespeichert');
   };
   await importRecord(exported);
@@ -2332,7 +2333,7 @@ test('Recipe Release checks 174 real bookings and six holds with no release over
  await ready(page,'m',false);
  await confirmNutrition(page);
  const result=await page.evaluate(async()=>{
-  const json=async name=>(await fetch('nutrition/'+name+'.json?v=390')).json();
+  const json=async name=>(await fetch('nutrition/'+name+'.json?v=391')).json();
   const [r,f,matrix]=await Promise.all(['recipes','foods','allergen-matrix'].map(json));
   const engine=fitLabNutritionEngine,safety=fitLabNutritionSafety;
   const recipes=safety.attachMatrix(engine.enrich(r.recipes,f.foods),matrix);
@@ -2537,4 +2538,101 @@ test('Unified Premium workout uses the actual exercise and preserves draft on ho
  await expect.poll(()=>page.evaluate(()=>focus63)).toBe(1);
  await expect(page.locator('body')).toHaveAttribute('data-premium-exercise',before.items[1].id);
  expect((await canonical(page)).trainingDraft).toEqual(before);
+});
+
+test('Design Fidelity diary has one focal ring and uses the dark studio for active inputs',async({page})=>{
+ await page.setViewportSize({width:320,height:812});
+ await ready(page,'m',false);
+ await addMeal(page,'Studio balance',100);
+ const rings=page.locator('#xpPremiumDiary .ring-meter');
+ expect(await rings.count()).toBe(4);
+ const sizes=await rings.evaluateAll(elements=>elements.map(el=>el.offsetWidth));
+ expect(sizes[0]).toBeGreaterThan(2*sizes[1]);
+ expect(sizes.slice(1)).toEqual([sizes[1],sizes[1],sizes[1]]);
+ await expect(page.locator('#date')).toHaveCSS('color-scheme','dark');
+ await expect(page.locator('#xpCQuick')).toHaveCSS('background-color','rgb(32, 42, 32)');
+});
+
+test('Design Fidelity training and recovery show only recorded and planned values',async({page})=>{
+ await ready(page,'m',false);
+ await page.evaluate(()=>tab('training'));
+ const ring=page.locator('#xpPremiumTraining .ring-meter');
+ const planned=await page.evaluate(()=>makePlan(state.p).length);
+ await expect(ring).toHaveText('0 / '+planned);
+ await expect(page.locator('.training-avatar svg')).toBeVisible();
+ await page.evaluate(()=>{tab('today');xpOpen('coach')});
+ const signals=page.locator('.recovery-rings .ring-meter');
+ await expect(signals).toHaveText(['–','–','–']);
+ await page.evaluate(async()=>{
+  coachData().days[dateKey()]={sleep:5,energy:2,soreness:3,complete:false};
+  await save();render();xpOpen('coach');
+ });
+ await expect(signals).toHaveText(['5 h','2/5','3/4']);
+ await expect(page.locator('.recovery-guidance')).toContainText('Heute Erholung priorisieren');
+ expect(await page.evaluate(()=>xpBTrainingState().canStart)).toBe(false);
+});
+
+test('Design Fidelity goal chart requires a confirmed goal and removes the path on a live safety pause',async({page})=>{
+ await ready(page,'m',false);
+ await page.evaluate(async()=>{
+  Object.assign(state.p,{weight:88,goals:[0,2]});
+  const measured=weight=>({weight,waist:null,fat:null,sleep:7.5,energy:4,soreness:1,complete:false});
+  coachData().days[coachDate(-7)]=measured(89);
+  coachData().days[dateKey()]=measured(88);
+  if(!await save())throw new Error('Could not persist synthetic measurements');
+  xpGoalOpen();
+ });
+ const goal=page.locator('fitlab-goal');
+ await expect(goal.locator('.goal-path')).toHaveCount(0);
+ await goal.locator('#target').fill('85');
+ await goal.locator('#days').fill('84');
+ await goal.locator('#evaluate').click();
+ await goal.locator('#confirm').click();
+ await expect(goal.locator('.goal-path')).toBeVisible();
+ await expect(goal.locator('.goal-path-legend')).toContainText('Keine Vorhersage');
+ await page.evaluate(async()=>{
+  Object.assign(coachData().days[dateKey()],{sleep:4,soreness:4,energy:1});
+  await save();render();
+ });
+ await expect(goal.locator('#goal-chart circle')).toHaveCount(2);
+ await expect(goal.locator('.goal-path')).toHaveCount(0);
+});
+
+test('Design Fidelity import dialog cancels and rejects a stale confirmation across tabs',async({page,context})=>{
+ await ready(page,'m',false);
+ const original=await canonical(page);
+ const payload={name:'other-backup.json',mimeType:'application/json',
+  buffer:Buffer.from(JSON.stringify({...original,waterGoal:2750}))};
+ const dialog=page.getByRole('dialog',{name:'Sicherung wiederherstellen'});
+ await page.locator('#import').setInputFiles(payload);
+ await expect(dialog.getByRole('button',{name:'Abbrechen'})).toBeFocused();
+ await page.keyboard.press('Escape');
+ await expect(dialog).toHaveCount(0);
+ expect(await canonical(page)).toEqual(original);
+ await page.locator('#import').setInputFiles(payload);
+ await expect(dialog).toBeVisible();
+ const other=await context.newPage();
+ try{
+  await other.goto(page.url());await other.waitForFunction(()=>xpIDBReady);
+  await other.evaluate(async()=>{state.waterGoal=3050;await save()});
+  await expect.poll(()=>page.evaluate(()=>state.waterGoal)).toBe(3050);
+  await dialog.getByRole('button',{name:'Sicherung übernehmen'}).click();
+  const stale=page.getByRole('dialog',{name:'Daten geändert'});
+  await expect(stale).toContainText('Die Daten wurden inzwischen geändert');
+  expect((await canonical(page)).waterGoal).toBe(3050);
+  await stale.getByRole('button',{name:'Schließen'}).click();
+ }finally{await other.close()}
+});
+
+test('Design Fidelity chips stay operable with keyboard and keep protection fields separate',async({page})=>{
+ await ready(page,'m',false);await confirmNutrition(page);
+ await page.evaluate(()=>xpNutritionOpen());
+ const form=page.locator('fitlab-nutrition .profile-food');
+ await page.locator('fitlab-nutrition #preferences > summary').click();
+ const chip=form.getByRole('checkbox',{name:'Milch',exact:true}).first();
+ await expect(chip).toHaveCSS('clip-path','inset(50%)');
+ await chip.focus();await page.keyboard.press('Space');
+ await expect(chip).toBeChecked();
+ await form.getByRole('button',{name:'Speichern'}).click();
+ await expect.poll(async()=> (await canonical(page)).nutritionProtection.selection.allergy).toContain('Milch');
 });

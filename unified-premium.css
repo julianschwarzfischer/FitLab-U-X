@@ -43,3 +43,85 @@ body[data-premium-area] :is(input:not([type=checkbox]):not([type=radio]),select,
 #xpPremiumTraining progress{width:100%;height:12px;accent-color:#b7d39c}
 #training:has(.xpEvoWorkout) #xpPremiumTraining{display:none}
 body[data-premium-area="diary"] #date{background:#202b22;color:#f7f4e9;border-color:#677961;color-scheme:dark}
+/* Palette and controls from the approved olive studio surfaces. */
+body[data-premium-area] {
+ --text:#f5f4ed;--muted:#c9d3c2;--surface:#202a20;--surface-soft:#263326;--tint:#273628;
+ --line:#64745f;--primary:#dce7d7;--primary-text:#dce7d7;--primary-dark:#b7d39c;--green:#b7d39c;
+ color-scheme:dark;
+}
+body[data-premium-area]>main{padding-inline:max(14px,env(safe-area-inset-left)) max(14px,env(safe-area-inset-right))}
+body[data-premium-area]>header{padding-inline:max(16px,env(safe-area-inset-left)) max(16px,env(safe-area-inset-right))}
+body[data-premium-area]>header #brandTag{color:#d2dece}
+body[data-premium-area]>.nav{background:#182219f5;border-color:#596754;color:#f5f4ed}
+body[data-premium-area]>.nav button{background:transparent;color:#e4ebe0;min-height:44px}
+body[data-premium-area]>.nav button.active{background:#344734;color:#fff}
+body[data-premium-area] :is(#nutrition,#training,#xpDeep,#xpCheck) :is(section,details,.xpCard,.workHero,.trainingmeta,.xp24StartNow,.xp15Coach,.entry,.nutdate input,.workSteps,.xpChoice,.xpChoices,.xp12DetailHero){
+ background-color:var(--surface);color:var(--text);border-color:var(--line)
+}
+body[data-premium-area] :is(#nutrition,#training,#xpDeep,#xpCheck) :is(input:not([type=checkbox]):not([type=radio]),select,textarea){background:var(--surface-soft);color:var(--text);border-color:var(--line)}
+body[data-premium-area] :is(#nutrition,#training,#xpDeep,#xpCheck) button:not(.danger):not([aria-pressed="true"]){background:#dce7d7;color:#172218}
+body[data-premium-area] :is(#nutrition,#training,#xpDeep,#xpCheck) button:is(.secondary,.meal-save141):not([aria-pressed="true"]){background:#293829;color:#f5f4ed;border-color:#64745f}
+body[data-premium-area] :is(#nutrition,#training,#xpDeep,#xpCheck) button[aria-pressed="true"]{background:#dce7d7;color:#172218}
+body[data-premium-area] :is(#nutrition,#training,#xpDeep,#xpCheck) :is(.muted,small,label){color:#d0d8ca}
+body[data-premium-area] :is(input,textarea,select):focus-visible,body[data-premium-area] button:focus-visible{outline:2px solid #c5dfb4;outline-offset:2px}
+body[data-premium-area] main :is(input,textarea,select){scroll-margin-block:12px 85px}
+@media(max-width:600px){
+ body[data-premium-area]:has(main :is(input:not([type=checkbox],[type=radio],[type=file],[type=date],[type=range]),textarea):focus)>.nav{visibility:hidden;pointer-events:none}
+}
+body[data-premium-area] :is(#nutrition,#training)>.xp12Hero{padding:42px 18px 8px!important;min-height:0;background:none!important}
+body[data-premium-area] :is(#nutrition,#training)>.xp12Hero h2,#xpPremiumRecovery>h2,#xpPremiumWorkout>h2{font-size:clamp(32px,9vw,48px);line-height:1.02;letter-spacing:-.045em;margin:5px 0}
+#xpPremiumDiary{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px 5px;background:transparent!important;border:0;box-shadow:none;padding:4px 0 16px!important}
+#xpPremiumDiary h3{position:absolute;clip-path:inset(50%);width:1px;height:1px;overflow:hidden}
+#xpPremiumDiary .macro-ring:first-of-type{grid-column:1/-1}
+#xpPremiumDiary .macro-ring:first-of-type .ring-meter{width:min(66vw,200px)}
+#xpPremiumDiary .macro-ring:first-of-type .ring-meter span{font-size:clamp(23px,7vw,33px);font-weight:800}
+#xpPremiumDiary .macro-ring small{min-height:2.8em;font-size:11px;line-height:1.35}
+#xpPremiumDiary .ring-meter{width:min(100%,70px)}
+#xpPremiumDiary .budget-copy{text-align:center;justify-self:center;padding:5px 12px;background:#283628;border-radius:24px;color:#e4eddb}
+#xpCQuick .xpCQuickShortcuts button{min-height:44px}
+#xpPremiumTraining{padding:0 4px 12px!important;background:transparent!important;border:0;box-shadow:none}
+.training-overview{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:end;min-height:138px}
+.training-avatar .xpAvatarStage{width:54px;padding:0;margin:0 0 0 8px;background:transparent!important;border:0}
+.training-avatar svg.xpBody{display:block;max-height:138px}
+.training-week{text-align:center;display:grid;justify-items:center;gap:4px}
+.training-week h3{position:absolute;clip-path:inset(50%);width:1px;height:1px;overflow:hidden}
+.training-week .ring-meter,.recovery-rings .ring-meter{--value:0%;display:grid;place-items:center;width:min(100%,91px);aspect-ratio:1;border-radius:50%;background:radial-gradient(closest-side,#203025 80%,transparent 82%),conic-gradient(#b7d39c var(--value),#4b604b 0);font-size:18px;font-weight:750}
+.training-totals{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin:15px 0 0;padding:8px 0;border-block:1px solid #64745f}
+.training-totals div{display:flex;min-width:0;flex-direction:column-reverse;text-align:center}
+.training-totals dt{font-size:11px;color:#d0d8ca}
+.training-totals dd{font-weight:750;margin:0}
+body[data-premium-area=workout] #trainingout{background:transparent!important;border:0;box-shadow:none;padding-inline:0}
+#xpPremiumWorkout{background:transparent!important;border:0;box-shadow:none;margin:0;padding:36px 4px 8px!important;touch-action:pan-y}
+#trainingout.xpEvoWorkout .workHero{margin-top:4px}
+#trainingout.xpEvoWorkout .stickyPause{position:static}
+#trainingout .workFocus .setline{padding:5px 1px;gap:4px}
+#trainingout .workFocus .setline input{min-height:48px;min-width:0}
+#xpPremiumRecovery{padding:32px 0 0!important;margin:0;background:transparent!important;border:0;box-shadow:none}
+#xpPremiumRecovery>p{color:#e2ebdd}
+body[data-premium-area=recovery] #xpDeep .xp12DetailHero .xpHero{display:none}
+.recovery-rings{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;text-align:center}
+.recovery-rings>div{display:grid;justify-items:center;align-content:start;gap:5px;min-width:0;font-size:12px}
+.recovery-rings .ring-meter{width:min(100%,70px)}
+.recovery-rings .ring-meter[data-unset]{--value:0%}
+#xpPremiumRecovery .recovery-guidance button{min-height:44px;width:100%;margin-top:8px}
+.premium-kicker{font-size:11px;font-weight:750;letter-spacing:.14em;text-transform:uppercase}
+#fitlab-confirmation,#xpWorkoutDialog{
+ width:min(calc(100% - 32px),440px);max-height:calc(100dvh - 32px);overflow:auto;
+ padding:20px;border:1px solid #64745f;border-radius:20px;background:#222c20;color:#f5f4ed;color-scheme:dark
+}
+#fitlab-confirmation::backdrop,#xpWorkoutDialog::backdrop{background:#090d0bd9}
+#fitlab-confirmation h2{line-height:1.12;margin-top:0}
+#fitlab-confirmation p{line-height:1.45}
+#fitlab-confirmation input{color:inherit;background:#293829;border-color:#64745f;min-height:44px;font-size:16px}
+.fitlab-dialog-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+#fitlab-confirmation button,#xpWorkoutDialog button{min-height:44px;background:#dce7d7;color:#172218}
+#fitlab-confirmation button.secondary,#xpWorkoutDialog button.secondary{background:#293829;color:#f5f4ed;border-color:#64745f}
+#fitlab-confirmation button.danger,#xpWorkoutDialog button.danger{background:#772f28;color:#fff}
+body[data-premium-area=diary] #nutrition label:has(+.nutdate){color:#dce7d7}
+body[data-premium-area=diary] .nutdate{margin:4px 0 14px}
+#xpPremiumWorkout>p{margin:6px 0;color:#e2ebdd}
+body[data-premium-area=workout] #training>.xp12Hero{display:none!important}
+body[data-premium-area=training] #fitlab-scene{background-position:center top;background-size:auto max(510px,85vh)}
+body[data-premium-area=training] #fitlab-scene::after{background:linear-gradient(180deg,#1119124d,#141c1473 37%,#111911fa 77%)}
+
+body[data-premium-area=diary] #xpCQuick button.xpEvoFoodPrimary{background:#dce7d7!important;color:#172218!important}

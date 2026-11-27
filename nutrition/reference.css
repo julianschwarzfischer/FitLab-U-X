@@ -14,7 +14,7 @@ header{padding-bottom:18px}.intro{padding:10px 24px 12px}.intro h1{font-size:36p
 .recipe-scene{position:fixed;inset:0;z-index:-1;background:center 32%/cover no-repeat;pointer-events:none}
 .recipe-scene::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,#151b15ed 0%,#151b15c9 55%,#151b15f4 100%)}
 header{background:#151b15dc;padding-inline:max(20px,env(safe-area-inset-left))}
-.intro .tabs{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.intro .tabs{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
 .intro .tabs button{padding-inline:6px;min-height:44px}
 .slider{position:relative;gap:12px;padding-inline:18px;scroll-padding-inline:18px;scroll-snap-type:x mandatory;touch-action:auto;overscroll-behavior-inline:contain}
 .slider::after{content:'';flex:0 0 calc(14% - 12px)}
@@ -22,8 +22,6 @@ header{background:#151b15dc;padding-inline:max(20px,env(safe-area-inset-left))}
 .slide button{display:block;appearance:none;width:100%;padding:0;border:0;background:transparent}
 .slide button img{aspect-ratio:4/3;object-fit:cover;margin:0}
 .dots button{min-width:34px;min-height:44px}
-#slide-copy{padding-block:0 18px}
-#slide-copy .primary{margin-top:12px}
 .recipe,.collection,.budgetbox{background:#242c21ee}
 .profile-food fieldset{border-radius:12px;padding:8px}
 .profile-food fieldset label{display:inline-flex;align-items:center;min-height:44px;gap:6px;padding:6px 10px;border-radius:24px;border:1px solid #71816b}
@@ -37,3 +35,28 @@ header{background:#151b15dc;padding-inline:max(20px,env(safe-area-inset-left))}
 .dialog-body h2{font-size:28px}
 .dialog-body .tabs button{min-height:44px}
 #booking-status{position:fixed;z-index:2;bottom:calc(12px + env(safe-area-inset-bottom));inset-inline:12px;max-width:500px;border-radius:10px;background:#263322;color:#fff;padding:12px}
+.slide{position:relative;background:#1c2619}
+.slide .slide-image img{min-height:295px;aspect-ratio:4/5}
+.slide-caption{position:absolute;inset:auto 0 0;padding:48px 16px 16px;color:#f5f4ed;background:linear-gradient(transparent,#162016eb 43%,#162016)}
+.slide-caption h2{font-size:clamp(18px,5vw,30px);line-height:1.1;margin:5px 0;overflow-wrap:anywhere}
+.slide-caption p{margin:6px 0;font-size:13px}
+.slide .slide-caption .primary{min-height:44px;width:auto;margin:5px 0 0;padding:9px 15px;background:#dce7d7;color:#182318}
+#slide-reason{padding-bottom:12px}
+.profile-food fieldset label{position:relative;cursor:pointer}
+.profile-food fieldset input{position:absolute;width:1px;height:1px;opacity:0;clip-path:inset(50%);padding:0;margin:0}
+.profile-food fieldset label:focus-within{outline:2px solid #dce7d7;outline-offset:2px}
+.profile-food fieldset label:has(:checked){font-weight:700}
+.profile-food :is(textarea,select){color-scheme:dark}
+#preferences[open]{background:#1c291fed;border-radius:18px;padding:10px 14px}
+.booking-dialog button:focus-visible,.slide-caption button:focus-visible{outline:2px solid #b7d39c;outline-offset:3px}
+.intro h1{font-size:clamp(38px,11vw,58px);line-height:.99;margin-block:10px 17px}
+#context:not([hidden]){display:flex;align-items:center;justify-content:space-between;gap:8px;border:1px solid #64745f;background:#253125ce;border-radius:14px;padding:7px 10px;margin-top:10px}
+#context p{margin:3px 0 0;font-size:12px}
+#context button{min-height:44px;flex:none}
+#context button{padding:7px 12px;border:1px solid #64745f;border-radius:24px;background:#293829;color:#f5f4ed}
+.profile-food :is(fieldset,label,select,textarea){min-inline-size:0;max-inline-size:100%}
+.profile-food label:has(select,textarea){display:block}
+.profile-food select{width:100%}
+.profile-food fieldset{border:0;margin-inline:0;padding-inline:0}
+.profile-food legend{font-weight:750;padding-inline:0}
+.profile-food fieldset label{margin:4px 3px 4px 0}

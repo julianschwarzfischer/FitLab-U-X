@@ -7,8 +7,8 @@
   host.setAttribute('role','dialog');
   host.setAttribute('aria-label','Persönliches Ziel prüfen');
   host.setAttribute('aria-modal','true');
-  view.innerHTML=`<link rel="stylesheet" href="nutrition/goal.css?v=390"><div class="goal-scene" aria-hidden="true"></div><main>
-   <small>FITNESS LAB · GOAL INTELLIGENCE</small><h1>Dein Ziel.<br>Dein Weg.</h1>
+  view.innerHTML=`<link rel="stylesheet" href="nutrition/goal.css?v=391"><div class="goal-scene" aria-hidden="true"></div><main>
+   <header><b>FITNESS LAB</b><button id="close" class="secondary" type="button" aria-label="Zielansicht schließen">Zurück</button></header><small>VISUAL GOAL INTELLIGENCE</small><h1>Dein Ziel.<br>Dein Weg.</h1>
    <p id="context"></p><section id="goal-chart" aria-label="Dokumentierter Gewichtsverlauf"></section><div class="grid"><div><label for="weight">Aktuelles Gewicht (kg)</label><input id="weight" type="number" readonly></div>
    <div><label for="target">Zielgewicht (kg)</label><input id="target" type="number" step="0.1"></div></div>
    <label for="days">Gewünschter Zeitraum (Tage)</label><input id="days" type="number" step="1">
@@ -48,20 +48,37 @@
     const empty=document.createElement('p');empty.textContent='Noch keine dokumentierten Gewichte. Neue Messwerte erscheinen nach dem Check-in.';
     container.append(empty);return;
    }
-   const goal=active.state==='confirmed'?active.goal?.target:null;
-   const values=records.map(point=>point.weight).concat(goal??[]);
+   const goal=active.state==='confirmed'?active.goal:null;
+   const measuredEnd=Date.parse(records.at(-1).date);
+   const goalEnd=goal?Date.parse(active.confirmedOn)+goal.days*86400000:null;
+   const hasPath=Number.isFinite(goalEnd)&&goalEnd>measuredEnd;
+   const values=records.map(point=>point.weight).concat(hasPath?[goal.target]:[]);
    const low=Math.min(...values)-.5,high=Math.max(...values)+.5;
-   const tMin=Date.parse(records[0].date),tMax=Date.parse(records.at(-1).date);
-   const coords=records.map(point=>[32+238*(Date.parse(point.date)-tMin)/Math.max(tMax-tMin,86400000),110-95*(point.weight-low)/(high-low)]);
-   const y=goal==null?null:110-95*(goal-low)/(high-low);
+   const tMin=Date.parse(records[0].date),tMax=Math.max(tMin+86400000,measuredEnd,hasPath?goalEnd:0);
+   const x=time=>40+222*(time-tMin)/(tMax-tMin);
+   const y=weight=>109-92*(weight-low)/(high-low);
+   const coords=records.map(point=>[x(Date.parse(point.date)),y(point.weight)]);
    const chart=document.createElementNS('http://www.w3.org/2000/svg','svg');
-   chart.setAttribute('viewBox','0 0 280 128');
+   chart.setAttribute('viewBox','0 0 280 133');
    chart.setAttribute('role','img');
-   chart.setAttribute('aria-label','Gemessener Gewichtsverlauf in kg'+(goal==null?'':', bestätigtes Ziel '+goal+' kg'));
-   chart.innerHTML=`<path d="M32 12V110H273" fill="none" stroke="#829480"/><text x="0" y="16" fill="#e3ebdc" font-size="11">${high.toFixed(1)}</text><text x="0" y="112" fill="#e3ebdc" font-size="11">${low.toFixed(1)}</text>${y==null?'':`<path d="M32 ${y}H273" stroke="#d5be85" stroke-dasharray="4 4"/>`}<polyline points="${coords.map(p=>p.join(',')).join(' ')}" fill="none" stroke="#b4d29d" stroke-width="2"/>${coords.map(([x,y])=>`<circle cx="${x}" cy="${y}" r="3" fill="#e2ecdd"/>`).join('')}`;
-   const description=document.createElement('p');
+   chart.setAttribute('aria-label','Gemessener Gewichtsverlauf in kg'+(hasPath?', mit illustrativem Zielpfad':''));
+   const axisDate=new Intl.DateTimeFormat('de-DE',{day:'2-digit',month:'2-digit',timeZone:'UTC'});
    const number=new Intl.NumberFormat('de-DE',{maximumFractionDigits:1});
-   description.textContent=records[0].date+' bis '+records.at(-1).date+' · Zuletzt '+number.format(records.at(-1).weight)+' kg'+(goal==null?'':' · Ziel '+number.format(goal)+' kg');
+   const ticks=[high,(high+low)/2,low];
+   chart.innerHTML=`<path d="M40 12V109H265" fill="none" stroke="#829480"/>${ticks.map(value=>`<text x="0" y="${y(value)+3}" fill="#e3ebdc" font-size="10">${number.format(value)}</text>`).join('')}
+    <text x="8" y="126" fill="#e3ebdc" font-size="10">kg</text><text x="40" y="126" fill="#e3ebdc" font-size="10">${axisDate.format(tMin)}</text>
+    ${tMin===measuredEnd&&!hasPath?'':`<text x="265" y="126" text-anchor="end" fill="#e3ebdc" font-size="10">${axisDate.format(hasPath?goalEnd:measuredEnd)}</text>`}
+    ${hasPath?`<path class="goal-path" d="M${coords.at(-1).join(' ')} L${x(goalEnd)} ${y(goal.target)}" fill="none" stroke="#d5be85" stroke-width="2" stroke-dasharray="4 4"/>`:''}
+    <polyline points="${coords.map(p=>p.join(',')).join(' ')}" fill="none" stroke="#b4d29d" stroke-width="2"/>
+    ${coords.map(([x,y])=>`<circle cx="${x}" cy="${y}" r="3" fill="#e2ecdd"/>`).join('')}`;
+   const description=document.createElement('p');
+   description.textContent='Zuletzt gemessen: '+number.format(records.at(-1).weight)+' kg am '+axisDate.format(measuredEnd);
+   if(hasPath){
+    const legend=document.createElement('p');
+    legend.className='goal-path-legend';
+    legend.textContent='Illustrativer Zielpfad zum bestätigten Ziel von '+number.format(goal.target)+' kg. Keine Vorhersage.';
+    container.append(legend);
+   }
    container.append(chart,description);
   }
   drawWeights(measurements,current);
@@ -114,6 +131,7 @@
   };
   const close=()=>{if(!pending){host.remove();previous?.focus()}};
   $('back').onclick=close;
+  $('close').onclick=close;
   host.addEventListener('keydown',event=>{
    if(event.key==='Escape'){close();return}
    if(event.key!=='Tab')return;
@@ -121,7 +139,7 @@
    if(event.shiftKey&&view.activeElement===focusable[0]){event.preventDefault();focusable.at(-1)?.focus()}
    else if(!event.shiftKey&&view.activeElement===focusable.at(-1)){event.preventDefault();focusable[0]?.focus()}
   });
-  requestAnimationFrame(()=>$('target').focus());
+  requestAnimationFrame(()=>$('target').focus({preventScroll:true}));
   return host;
  };
 })(window);
