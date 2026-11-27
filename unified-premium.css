@@ -1,0 +1,44 @@
+/* Shared premium surfaces. The regular app document remains the scroll container. */
+html,body{max-inline-size:100%}
+header h1,header h1 #appVersion{min-inline-size:0;overflow-wrap:anywhere}
+header h1 #appVersion{max-inline-size:100%;word-break:normal;white-space:normal}
+.nav [data-tab]{min-inline-size:0;overflow-wrap:anywhere}
+#xpHome .heroStory h2,#xpHome .xpFirstHero h2{min-inline-size:0;overflow-wrap:anywhere}
+#fitlab-scene{position:fixed;inset:0;isolation:isolate;z-index:-1;background:#172018 center 31%/cover no-repeat;pointer-events:none}
+#fitlab-scene::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#1119122b 0%,#141c14a6 44%,#111911f5 94%)}
+body[data-premium-area]{isolation:isolate;background:transparent}
+body[data-premium-area="diary"] #fitlab-scene{background-image:url('media/premium/food-studio.webp')}
+body[data-premium-area="training"][data-premium-avatar="m"] #fitlab-scene,
+body[data-premium-area="workout"][data-premium-exercise="gs"][data-premium-avatar="m"] #fitlab-scene{background-image:url('media/premium/training-male.webp')}
+body[data-premium-area="training"][data-premium-avatar="f"] #fitlab-scene,
+body[data-premium-area="workout"][data-premium-exercise="gs"][data-premium-avatar="f"] #fitlab-scene{background-image:url('media/premium/training-female.webp')}
+body[data-premium-area="workout"]:not([data-premium-exercise="gs"]) #fitlab-scene{background-image:radial-gradient(ellipse at 70% 12%,#59412d,#263125 45%,#141a14 80%)}
+body[data-premium-area="recovery"] #fitlab-scene{background-image:url('media/premium/recovery.webp')}
+body[data-premium-area] > header{background:#182219;color:#f6f3e7}
+body[data-premium-area] > header #appVersion{color:#d2dece}
+body[data-premium-area] :is(#nutrition,#training,#xpCheck,#xpDeep){color:#f5f4ee}
+body[data-premium-area] :is(#nutrition,#training,#xpCheck,#xpDeep) :is(section,details,.workHero,.xpEvoDaily,.xp15Coach,.xpCard){color:var(--text)}
+body[data-premium-area] :is(#nutrition,#training)>.xp12Hero,
+body[data-premium-area="recovery"] #xpDeep .xp12DetailHero .xpHero{background:linear-gradient(180deg,#1621181a,#192319e8)!important;box-shadow:none}
+#xpPremiumDiary{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;padding:20px!important;background:#1c291ff2;color:#f5f4ed!important;border:1px solid #667763}
+#xpPremiumDiary h3,#xpPremiumDiary .budget-copy{grid-column:1/-1;margin:0;color:inherit}
+#xpPremiumDiary .macro-ring{display:grid;gap:6px;justify-items:center;text-align:center;color:#f5f4ed}
+#xpPremiumDiary .ring-meter{--value:0%;display:grid;place-items:center;inline-size: min(100%,88px);aspect-ratio:1;border-radius:50%;background:radial-gradient(closest-side,#203025 77%,transparent 79%),conic-gradient(#b7d39c var(--value),#4b604b 0)}
+#xpPremiumDiary .ring-meter[data-unset]{background:#29382a;border:3px solid #516552}
+#xpPremiumDiary .ring-meter span{max-width:95%;font-size:13px}
+body[data-premium-area] :is(input:not([type=checkbox]):not([type=radio]),select,textarea){font-size:16px;min-height:44px}
+#trainingout.xpEvoWorkout .workHero{margin-top:clamp(92px,22vh,240px);background:#1a2520ed;color:#f5f4ed}
+#trainingout.xpEvoWorkout .workHero :is(.dashcaps,.workPlanRow,.muted){color:#e1ead8}
+#trainingout .workFocus .setline input{min-height:48px;font-size:16px}
+@media(min-width:600px){#xpPremiumDiary{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(prefers-reduced-motion:reduce){#fitlab-scene{transition:none!important}}
+#trainingout .workHero{touch-action:pan-y}
+@property --value{syntax:'<percentage>';inherits:false;initial-value:0%}
+@media(prefers-reduced-motion:no-preference){
+ #xpPremiumDiary .ring-meter:not([data-unset]){animation:fitlab-ring .35s ease-out both}
+ @keyframes fitlab-ring{from{--value:0%}}
+}
+#xpPremiumTraining{background:#1a2520ed;color:#f5f4ed!important;border:1px solid #60735f}
+#xpPremiumTraining h3{margin:0 0 6px}
+#xpPremiumTraining progress{width:100%;height:12px;accent-color:#b7d39c}
+#training:has(.xpEvoWorkout) #xpPremiumTraining{display:none}

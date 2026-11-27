@@ -10,7 +10,7 @@
  const facts=(recipe,portion,tag='b')=>`<div class="facts">${engine.nutrients.map((key,i)=>`<div><${tag}>${format(key,recipe.values[key]===null?null:recipe.values[key]*portion)}</${tag}><span>${labels[i]}</span></div>`).join('')}</div>`;
  let collectionPromise;
  function load(){
-  return collectionPromise??=Promise.all(['recipes','foods','allergen-matrix'].map(name=>fetch('nutrition/'+name+'.json?v=3816').then(response=>{
+  return collectionPromise??=Promise.all(['recipes','foods','allergen-matrix'].map(name=>fetch('nutrition/'+name+'.json?v=390').then(response=>{
    if(!response.ok)throw Error('Rezeptdaten fehlen');
    return response.json();
   }))).then(([r,f,matrix])=>safety.attachMatrix(engine.enrich(r.recipes,f.foods),matrix)).catch(error=>{collectionPromise=null;throw error});
@@ -23,9 +23,9 @@
   const foods=[...new Map(recipes.flatMap(r=>r.rows.map(({food})=>[food.id,food.name]))).entries()].sort((a,b)=>a[1].localeCompare(b[1],'de'));
   return `<form class="profile-food"><h2>Meine Ernährung</h2><label>Ernährungsform <select name="diet">${options(engine.diets,profile.diet)}</select></label>
    <label>Zubereitungszeit <select name="minutes">${[[0,'Keine Einschränkung'],[15,'Maximal 15 Minuten'],[30,'Maximal 30 Minuten'],[60,'Bis zu 60 Minuten']].map(([value,label])=>`<option value="${value}" ${value===profile.minutes?'selected':''}>${label}</option>`).join('')}</select></label>
-   <fieldset><legend>Bevorzugte Lebensmittel</legend>${checks('foods',Object.keys(engine.foodGroups))}</fieldset>
+   <p class="preference-label">Vorlieben · optional</p><fieldset><legend>Bevorzugte Lebensmittel</legend>${checks('foods',Object.keys(engine.foodGroups))}</fieldset>
    <fieldset><legend>Bevorzugte Gerichte</legend>${checks('dishes',engine.dishes)}</fieldset>
-   <fieldset><legend>Allergien</legend>${checks('allergy',engine.allergens)}</fieldset>
+   <p class="preference-label">Ausschlüsse · verbindlich</p><fieldset><legend>Allergien</legend>${checks('allergy',engine.allergens)}</fieldset>
    <fieldset><legend>Unverträglichkeiten</legend>${checks('intolerance',engine.allergens)}</fieldset>
    <label>Ausgeschlossene Katalogzutaten <select name="excluded" size="5" multiple>${foods.map(([id,name])=>`<option value="${id}" ${profile.exclusions.includes(id)?'selected':''}>${escape(name)}</option>`).join('')}</select></label>
    <label>Weitere Ausschlüsse oder ungeklärte Angaben, durch Kommas getrennt<textarea name="other">${escape(unknown.join(', '))}</textarea></label>
@@ -33,11 +33,11 @@
  }
  function show(api){
   const host=document.createElement('fitlab-nutrition'),root=host.attachShadow({mode:'open'});
-  root.innerHTML=`<link rel="stylesheet" href="nutrition/reference.css?v=3816"><div class="shell"><header><span class="brand"><b>╫</b> FITNESS LAB</span><a href="#tagebuch" data-action="diary">Tagebuch ↗</a></header>
-   <main><div class="wrap intro"><div class="eyebrow">FITNESS LAB · PERSONAL NUTRITION</div><h1>Deine Rezeptwelt.</h1><div class="tabs"><button data-action="personal">Für mich</button><button data-action="all">Alle Rezepte</button></div><div id="context"></div></div>
+  root.innerHTML=`<link rel="stylesheet" href="nutrition/reference.css?v=390"><div class="recipe-scene" aria-hidden="true"></div><div class="shell"><header><span class="brand"><b>╫</b> FITNESS LAB</span><a href="#tagebuch" data-action="diary">Tagebuch ↗</a></header>
+   <main><div class="wrap intro"><div class="eyebrow">FITNESS LAB · PERSONAL NUTRITION</div><h1>Deine Rezeptwelt.</h1><div class="tabs"><button data-action="personal">Für mich</button><button data-action="all">Alle Rezepte</button><button data-action="profile">Fine-Tuning</button></div><div id="context"></div></div>
    <div id="protection-status" class="wrap" hidden><p></p><button class="primary" data-action="profile">Meine Ernährung prüfen</button></div><div id="hero"></div><div id="recommendation"></div><div id="catalog" class="collection" hidden></div><div class="wrap"><label>Mahlzeit <select class="goal" id="meal">${Object.entries(meals).map(([id,name])=>`<option value="${id}">${name}</option>`).join('')}</select></label>
    <details id="preferences"><summary>Meine Ernährung</summary><div></div></details></div></main>
-   <footer class="foot"><button data-action="back">Zurück zum Dashboard ↑</button></footer></div>`;
+   <div id="booking-status" role="status" class="wrap" hidden></div><footer class="foot"><button data-action="back">Zurück zum Dashboard ↑</button></footer></div>`;
   const $=id=>root.getElementById(id);
   let protection=api.preferences(),profile=engine.defaults(protection.selection??{}),saving=false;
   let recipes=[],recommendations=[],active=0,view='personal',busy=false,booked=false;
@@ -83,16 +83,65 @@
    const current=recommendations[active];
    $('context').innerHTML=`<p>Abgestimmt auf deine persönlichen Ziele.</p>${model.goals.map(goal=>`<small class="pill">${escape(goal)}</small>`).join(' ')}`;
    if(!current){
+    root.querySelector('.recipe-scene').style.backgroundImage='';
     $('hero').innerHTML='<div class="wrap"><p>Für deine aktuellen Angaben gibt es keine passende persönliche Empfehlung.</p><small>Ein fehlender Vorschlag ist keine Empfehlung, eine Mahlzeit auszulassen.</small></div>';
     $('recommendation').replaceChildren();
     return;
    }
-   const {recipe,reason}=current;
-   $('hero').innerHTML=`<div class="slider" aria-label="Rezeptauswahl"><section class="slide">${image(recipe)}<div class="wrap"><div class="eyebrow">Empfehlung ${active+1} / ${recommendations.length}</div><h2>${escape(recipe.name)}</h2><p>${number(recipe.values.kcal*current.portion)} kcal · ${number(recipe.values.protein_g*current.portion,1)} g Protein · ${recipe.minutes} Min.</p><p><small>Vorschlag: ${number(current.portion,1)} Portion(en). ${escape(reason)}</small></p>${recipe.special_population_notice?`<p class="warning">${escape(recipe.special_population_notice)}</p>`:''}<button class="primary" data-action="detail">Rezept entdecken ↓</button></div></section></div>
-    <div class="dots">${recommendations.map(({recipe},i)=>`<button data-action="slide" data-value="${i}" aria-label="${escape(recipe.name)}" aria-current="${i===active}">${i===active?'●':'○'}</button>`).join('')}<br><small>Weitere Gerichte durch Wischen entdecken</small></div>`;
+   const track=$('hero').querySelector('.slider');
+   const ids=recommendations.map(item=>item.recipe.id).join(',');
+   if(track?.dataset.recipes!==ids){
+    $('hero').innerHTML=`<div class="slider" tabindex="0" aria-label="Rezeptauswahl" data-recipes="${ids}">${recommendations.map(({recipe},i)=>`<section class="slide"><button tabindex="-1" data-action="slide" data-value="${i}" aria-label="${escape(recipe.name)}">${image(recipe)}</button></section>`).join('')}</div>
+     <div class="dots">${recommendations.map(({recipe},i)=>`<button data-action="slide" data-value="${i}" aria-label="${escape(recipe.name)}">○</button>`).join('')}</div><div class="wrap" id="slide-copy"></div>`;
+    const slider=$('hero').querySelector('.slider');
+    let scrollFrame;
+    slider.addEventListener('keydown',event=>{
+     if(!['ArrowLeft','ArrowRight'].includes(event.key))return;
+     event.preventDefault();
+     active=Math.min(recommendations.length-1,Math.max(0,active+(event.key==='ArrowRight'?1:-1)));
+     scrollToRecipe();displayCurrent(api.model(meal));
+    });
+    slider.addEventListener('scroll',()=>{
+     cancelAnimationFrame(scrollFrame);
+     scrollFrame=requestAnimationFrame(()=>{
+      if(!slider.isConnected)return;
+      const first=slider.firstElementChild.offsetLeft;
+      const closest=[...slider.children].reduce((best,child,i)=>
+       Math.abs(child.offsetLeft-first-slider.scrollLeft)<Math.abs(slider.children[best].offsetLeft-first-slider.scrollLeft)?i:best,0);
+      if(active!==closest){active=closest;displayCurrent(api.model(meal));}
+     });
+    },{passive:true});
+    scrollToRecipe();
+   }
+   displayCurrent(model);
+  }
+  function scrollToRecipe(){
+   const track=$('hero').querySelector('.slider'),card=track?.children[active];
+   if(card)track.scrollLeft=card.offsetLeft-track.firstElementChild.offsetLeft;
+  }
+  function displayCurrent(model){
+   const current=recommendations[active],{recipe,reason}=current;
+   root.querySelector('.recipe-scene').style.backgroundImage=`url("nutrition/recipes/${recipe.id}.webp")`;
+   $('hero').querySelectorAll('.dots button').forEach((button,i)=>{
+    button.setAttribute('aria-current',String(i===active));button.textContent=i===active?'●':'○';
+   });
+   $('slide-copy').innerHTML=`<div class="eyebrow">Empfehlung ${active+1} / ${recommendations.length}</div><h2>${escape(recipe.name)}</h2><p>${number(recipe.values.kcal*current.portion)} kcal · ${number(recipe.values.protein_g*current.portion,1)} g Protein · ${recipe.minutes} Min.</p><p><small>Vorschlag: ${number(current.portion,1)} Portion(en). ${escape(reason)}</small></p>${recipe.special_population_notice?`<p class="warning">${escape(recipe.special_population_notice)}</p>`:''}<button class="primary" data-action="detail">Rezept entdecken ↓</button>`;
    $('recommendation').innerHTML=`<section class="budgetbox"><div class="wrap"><div class="eyebrow">Heute noch verfügbar</div><div class="daystats">${escape(model.budget)}</div></div></section>
-    <div class="wrap selector" id="recipe-detail"><div class="eyebrow">Dein Rezept</div><div class="tabs">${recommendations.map(({recipe},i)=>`<button class="${active===i?'active':''}" data-action="slide" data-value="${i}">${escape(recipe.name)}</button>`).join('')}</div></div>
-    <article class="recipe"><div class="wrap"><div class="eyebrow">Rezept im Detail</div><h2>${escape(recipe.name)}</h2><small>${recipe.minutes} Min. · ${escape(recipe.category)}</small>${detail(recipe,portion(recipe))}</div></article>`;
+    <article class="recipe" id="recipe-detail"><div class="wrap"><div class="eyebrow">Rezept im Detail</div><h2>${escape(recipe.name)}</h2><small>${recipe.minutes} Min. · ${escape(recipe.category)}</small>${detail(recipe,portion(recipe))}</div></article>`;
+  }
+  function bookingDialog(recipe,quantity,bookingMeal){
+   return new Promise(resolve=>{
+    const dialog=document.createElement('dialog');
+    dialog.className='booking-dialog';
+    dialog.setAttribute('aria-labelledby','booking-title');
+    dialog.innerHTML=`<form method="dialog">${image(recipe)}<div class="dialog-body"><h2 id="booking-title">Rezept eintragen</h2><p>${escape(recipe.name)} · ${number(quantity,1)} Portion(en) · ${escape(bookingMeal)}</p>
+     ${facts(recipe,quantity)}${recipe.special_population_notice?`<p class="warning">${escape(recipe.special_population_notice)}</p>`:''}
+     <details><summary>Zutaten und Hinweise</summary>${warnings(recipe).map(warning=>`<p>${escape(warning)}</p>`).join('')}</details>
+     <div class="tabs"><button value="cancel" autofocus>Abbrechen</button><button class="primary" value="book">Bestätigen</button></div></div></form>`;
+    dialog.addEventListener('close',()=>{const accepted=dialog.returnValue==='book';dialog.remove();resolve(accepted)},{once:true});
+    root.append(dialog);
+    dialog.showModal();
+   });
   }
   function displayCollection(){
    const query=engine.normalize($('search').value).split(/\s+/).filter(Boolean);
@@ -121,22 +170,9 @@
    const recipe=recipes.find(item=>item.id===section.dataset.id);
    if(recipe)section.querySelector('.recipe-tools').innerHTML=image(recipe)+detail(recipe,portion(recipe));
   }
-  let touch;
-  root.addEventListener('touchstart',event=>{
-   if(event.target.closest('.slider'))touch=[event.changedTouches[0].clientX,event.changedTouches[0].clientY];
-  },{passive:true});
-  root.addEventListener('touchcancel',()=>{touch=null},{passive:true});
-  root.addEventListener('touchend',event=>{
-   if(!touch)return;
-   const {clientX,clientY}=event.changedTouches[0];
-   const dx=clientX-touch[0],dy=clientY-touch[1];touch=null;
-   if(Math.abs(dx)>45&&Math.abs(dx)>Math.abs(dy)*1.3&&recommendations.length>1){
-    active=(active+(dx<0?1:-1)+recommendations.length)%recommendations.length;render();
-   }
-  },{passive:true});
   root.addEventListener('click',async event=>{
    const control=event.target.closest('[data-action]');
-   if(!control)return;
+   if(!control||control.closest('dialog'))return;
    event.preventDefault();
    const {action,value,id}=control.dataset;
    if(action==='diary'||action==='back'){api.navigate(action);return;}
@@ -144,7 +180,7 @@
    if(action==='personal'||action==='all'){view=action;render();return;}
    if(action==='profile'){$('preferences').open=true;$('preferences').scrollIntoView({behavior:'instant'});return;}
    if(action==='detail'){$('recipe-detail').scrollIntoView({behavior:'instant'});return;}
-   if(action==='slide'){active=Number(value);render();return;}
+   if(action==='slide'){active=Number(value);scrollToRecipe();displayCurrent(api.model(meal));return;}
    const recipe=recipes.find(item=>item.id===id);
    if(!recipe)return;
    if(action==='portion'){
@@ -154,19 +190,20 @@
    }
    if(action!=='book'||busy||booked||gate(recipe).status!=='checked')return;
    const revision=protection.revision,confirmedDate=api.date(),quantity=portion(recipe),bookingMeal=meals[meal];
-   const notice=recipe.special_population_notice?'\n\n'+recipe.special_population_notice:'';
-   if(!confirm(`${recipe.name} · ${number(quantity,1)} Portion(en) als einzelne Zutaten in „${bookingMeal}“ erfassen?${notice}`))return;
-   busy=true;control.disabled=true;
-   const message=control.nextElementSibling;
+   busy=true;
+   const message=$('booking-status');
+   message.hidden=true;
    try{
+    if(!await bookingDialog(recipe,quantity,bookingMeal))return;
+    if(!host.isConnected)return;
     booked=await api.book(recipe,quantity,bookingMeal,revision,confirmedDate);
     if(booked){
      render();
      const notice=document.createElement('p');notice.className='wrap message';notice.textContent='Zutaten im Tagebuch gespeichert.';notice.setAttribute('role','status');
      $(view==='all'?'catalog':'recommendation').prepend(notice);
      setTimeout(()=>{booked=false},800);
-    }else message.textContent='Buchung konnte nicht bestätigt werden. Prüfe dein Tagebuch.';
-   }catch(error){message.textContent=error.message;}
+    }else{message.hidden=false;message.textContent='Buchung konnte nicht bestätigt werden. Prüfe dein Tagebuch.';}
+   }catch(error){message.hidden=false;message.textContent=error.message;}
    finally{busy=false;if(control.isConnected)control.disabled=false;}
   });
   $('meal').addEventListener('change',()=>{meal=$('meal').value;active=0;render();});

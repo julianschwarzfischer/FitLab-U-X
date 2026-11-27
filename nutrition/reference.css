@@ -8,3 +8,32 @@ header{padding-bottom:18px}.intro{padding:10px 24px 12px}.intro h1{font-size:36p
 .slide .wrap button{font:inherit}.wrap nav{margin:0}.facts{margin-bottom:8px}.portion-options button{border:1px solid #71816b;border-radius:24px;padding:8px 12px;cursor:pointer;background:transparent}.portion-options [aria-pressed=true]{background:#dce7d7;color:#182318;font-weight:700}
 .profile-food fieldset{margin:12px 0;border:1px solid #71816b}.profile-food label{display:inline-block;margin:5px}.profile-food input{accent-color:#83caa0}.profile-food select{background:#202820}.profile-food textarea{width:100%;min-height:50px;background:#202820;color:inherit}
 .collection .recipe-tools{padding-top:1px}.collection .track{margin:0}.warning{color:#ffe2ac}.dots button{background:none;color:#c4e0c6;border:0;min-width:33px;min-height:35px}.dots [aria-current=true]{color:#fff;text-decoration:underline}.summary-actions{display:flex;gap:8px;flex-wrap:wrap}
+
+/* Evolution 3.9 · native recipe rail; vertical movement stays with the document. */
+:host{isolation:isolate;position:relative;background:#171e16}
+.recipe-scene{position:fixed;inset:0;z-index:-1;background:center 32%/cover no-repeat;pointer-events:none}
+.recipe-scene::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,#151b15ed 0%,#151b15c9 55%,#151b15f4 100%)}
+header{background:#151b15dc;padding-inline:max(20px,env(safe-area-inset-left))}
+.intro .tabs{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.intro .tabs button{padding-inline:6px;min-height:44px}
+.slider{position:relative;gap:12px;padding-inline:18px;scroll-padding-inline:18px;scroll-snap-type:x mandatory;touch-action:auto;overscroll-behavior-inline:contain}
+.slider::after{content:'';flex:0 0 calc(14% - 12px)}
+.slide{flex:0 0 86%;scroll-snap-align:start;border-radius:16px;overflow:hidden}
+.slide button{display:block;appearance:none;width:100%;padding:0;border:0;background:transparent}
+.slide button img{aspect-ratio:4/3;object-fit:cover;margin:0}
+.dots button{min-width:34px;min-height:44px}
+#slide-copy{padding-block:0 18px}
+#slide-copy .primary{margin-top:12px}
+.recipe,.collection,.budgetbox{background:#242c21ee}
+.profile-food fieldset{border-radius:12px;padding:8px}
+.profile-food fieldset label{display:inline-flex;align-items:center;min-height:44px;gap:6px;padding:6px 10px;border-radius:24px;border:1px solid #71816b}
+.profile-food fieldset label:has(:checked){background:#dce7d7;color:#182318}
+.preference-label{font-weight:700;margin-top:18px}
+.profile-food select,.profile-food textarea,.goal,.collection input,.collection select{font-size:16px;min-height:44px}
+.booking-dialog{background:#222c20;color:#f5f4ed;border:1px solid #62745c;border-radius:22px;width:min(calc(100% - 24px),480px);max-height:min(86dvh,720px);padding:0;overflow:auto}
+.booking-dialog::backdrop{background:#090d0bd9}
+.booking-dialog img{display:block;width:100%;max-height:145px;object-fit:cover}
+.dialog-body{padding:20px}
+.dialog-body h2{font-size:28px}
+.dialog-body .tabs button{min-height:44px}
+#booking-status{position:fixed;z-index:2;bottom:calc(12px + env(safe-area-inset-bottom));inset-inline:12px;max-width:500px;border-radius:10px;background:#263322;color:#fff;padding:12px}
