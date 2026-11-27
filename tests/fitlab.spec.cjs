@@ -1158,6 +1158,9 @@ test(`Atlas V2 real service worker update from ${previousVersion} keeps data and
   for(const name of ['head-to-toe','food','training','recovery','cockpit','head-to-toe-male','training-male','head-to-toe-neutral','training-neutral'])assets['/media/hero/'+name+'.webp']='image/webp';
   assets['/design-story.js']=assets['/personal-dashboard.js']=assets['/unified-premium.js']='text/javascript';
   assets['/unified-premium.css']='text/css';
+  assets['/premium/diary-port.js']=assets['/premium/food-studio.js']='text/javascript';
+  assets['/premium/food-studio.css']='text/css';
+  assets['/premium/food-studio.html']='text/html';
   for(const name of fs.readdirSync('media/premium'))assets['/media/premium/'+name]='image/webp';
   for(const name of ['safety.js','goal.js','goal-view.js','goal.css','allergen-matrix.json','engine.js','experience.js','reference.css','foods.json','recipes.json']){
     assets['/nutrition/'+name]=name.endsWith('.js')?'text/javascript':name.endsWith('.css')?'text/css':'application/json';

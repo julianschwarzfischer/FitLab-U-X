@@ -231,7 +231,7 @@ button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid 
 .xpHero>*{position:relative}
 .xpEvoFocus .xpSafetyContext{margin:5px 0 0;font-size:.9rem;line-height:1.35;color:var(--text)}
 @media(max-width:480px){.xp23Coverage span{display:block}.xp22Focus button{min-height:44px;margin-top:6px}}
-</style><style>@media(prefers-reduced-motion:reduce){.visual64 .play64{display:none}}.xpAvatarStage:has(.xpBody){background:#202020}.xpBody .xpMuscle.selected path{stroke:white;stroke-width:.8}.xpBody .xpMuscle:focus-visible path{stroke:#fff;stroke-width:2}.visual64 svg[data-pose]{background:#202020;border-radius:12px;overflow:hidden}</style><link rel="stylesheet" href="premium-ux.css"><link rel="stylesheet" href="cinematic.css"><link rel="stylesheet" href="first-impression.css"><link rel="stylesheet" href="unified-premium.css?v=391"><script src="unified-premium.js?v=391"></script><style>html:has(fitlab-design-story),body:has(> fitlab-design-story){background:#141b13;scroll-behavior:auto;overflow-anchor:none}body:has(> fitlab-design-story)>:not(fitlab-design-story){display:none!important}</style><style>html:has(fitlab-personal-dashboard),body:has(> fitlab-personal-dashboard){background:#141b13;scroll-behavior:auto;overflow-anchor:none}body:has(> fitlab-personal-dashboard)>:not(fitlab-personal-dashboard,fitlab-goal,#xp131Update,#fitlab-confirmation){display:none!important}</style><style>html:has(fitlab-nutrition),body:has(> fitlab-nutrition){background:#141b13;scroll-behavior:auto}body:has(> fitlab-nutrition)>:not(fitlab-nutrition,fitlab-goal,#xp131Update,#fitlab-confirmation){display:none!important}</style></head><body><header><div><h1><img id="brandLogo" hidden alt=""><span id="brandName">FITNESS LAB</span><small id="appVersion">EXP 1.6.2 EVOLUTION 3.9.1 DESIGN FIDELITY</small></h1><small id="brandTag">Dein Körper. Dein Ziel. Dein Plan.</small></div></header><main><div id="today"></div><div id="nutrition" class="hidden"><h2>Ernährungstagebuch</h2><label>Datum</label><input type="date" id="date"><div id="daily"></div><section><h3>Lebensmittel hinzufügen</h3><label for="query">Name des Lebensmittels</label><input id="query" type="search" placeholder="z. B. Haferflocken" autocomplete="off"><div id="results"></div><hr><label>Verpackte Lebensmittel · Barcode oder Online-Suche</label><input id="barcode" inputmode="numeric" placeholder="EAN / Barcode"><div class="actions" style="margin-top:9px"><button id="lookup">Barcode suchen</button><button class="secondary" id="scan">Kamera</button><button class="secondary" id="online">Online-Suche</button></div><video id="video" class="hidden" playsinline muted></video><button id="stop" class="hidden secondary">Kamera schließen</button><p id="status" role="status" class="muted"></p><label>Barcode-Foto (alternativ zur Live-Kamera)</label><input id="barcodePhoto" type="file" accept="image/*" capture="environment"><small>Barcode waagerecht und scharf fotografieren. Fotos werden lokal verarbeitet. Die Erkennung fertiger Gerichte ist nicht enthalten.</small><small>Online-Abfrage: Open Food Facts. Produktdaten können fehlen oder fehlerhaft sein. Bitte Etikett prüfen. <a href="https://world.openfoodfacts.org/">Quelle / ODbL</a></small></section><section id="foodform"><h3>Lebensmittel / eigene Mahlzeit</h3><div id="productmeta" class="productmeta"></div><label>Name</label><input id="foodname"><div class="grid"><div><label>kcal je 100 g</label><input id="fk" type="number" min="0" step="any"></div><div><label>Protein je 100 g</label><input id="fp" type="number" min="0" step="any"></div><div><label>Kohlenhydrate je 100 g</label><input id="fc" type="number" min="0" step="any"></div><div><label>Fett je 100 g</label><input id="ff" type="number" min="0" step="any"></div><div><label for="fiber14">Ballaststoffe je 100 g (optional)</label><input id="fiber14" type="number" min="0" max="100" step="any" placeholder="Unbekannt"></div><div><label>Menge (g)</label><input id="grams" type="number" min="1" max="10000" value="100"></div><div><label>Mahlzeit</label><select id="meal"><option>Frühstück</option><option>Mittagessen</option><option>Abendessen</option><option>Snacks</option></select></div></div><div id="portionbuttons" class="actions"></div><div id="preview" class="portion" aria-live="polite"></div><label><input id="favorite" type="checkbox"> Als eigenes Lebensmittel speichern</label><button id="add">Eintragen</button><p id="fooderror" role="status"></p></section><section><h3>Rezepte & gespeicherte Mahlzeiten</h3><p class="muted">Zutaten aus dem Eingabefeld übernehmen. Bei gekochten Gerichten das tatsächliche Gesamtgewicht nach dem Garen angeben.</p><button class="secondary" id="ingredient">Aktuelles Lebensmittel als Zutat übernehmen</button><div id="ingredients"></div><label>Rezeptname</label><input id="recipeName"><label>Gesamtgewicht des fertigen Rezepts (g)</label><input id="recipeWeight" type="number" min="1" step="any"><button id="saveRecipe" style="margin-top:10px">Rezept speichern</button><p id="recipeStatus" role="status"></p><div id="recipes"></div></section><section><h3>Meine Favoriten</h3><div id="favlist"></div></section><div id="entries"></div><section id="waterpanel"></section><button class="secondary" id="copyday">Mahlzeiten vom Vortag übernehmen</button></div><div id="profile" class="hidden"><h2>Dein Profil</h2><section><h3>01 · Ziele</h3><div id="goals" class="chips"></div><label>Priorität</label><select id="priority"><option value="auto">Automatisch</option><option value="loss">Fettabbau</option><option value="gain">Aufbau</option><option value="maintain">Gewicht halten</option></select></section><section><h3>02 · Körperdaten</h3><div class="grid" id="bodyfields"></div><label for="sex">Geschlecht für die Kalorienberechnung</label><select id="sex" aria-describedby="xpCalculationSexHint"><option value="">Bitte auswählen</option><option value="m">Männlich</option><option value="f">Weiblich</option></select><small id="xpCalculationSexHint">Diese Angabe fließt in dein Kalorienziel ein. Deine Avatarfigur stellst du separat ein.</small><label><input type="checkbox" id="restricted"> Schwangerschaft, Stillzeit oder Erkrankung / Essstörung mit individuellem Ernährungsbedarf</label></section><section><h3>03 · Alltag und Training</h3><div id="selectfields"></div><div class="grid"><div><label>Einheiten pro Woche</label><input id="days" type="number" min="0" max="7"></div><div><label>Minuten pro Einheit</label><input id="minutes" type="number" min="15" max="180"></div></div><div id="equipmentSettings66"><h3>Trainingsgeräte</h3><div id="equipment" class="chips"></div><label>Sonstige Geräte</label><input id="extra"></div><label>Einschränkungen (optional)</label><textarea id="limits"></textarea></section><section id="calorieSettings66"><h3>04 · Kalorienziel</h3><label for="adjust">Kalorienziel anpassen (kcal pro Tag)</label><input type="range" id="adjust" min="-300" max="500" step="50"><div id="adjustlabel"></div><button class="secondary" id="resetadjust">Empfehlung wiederherstellen</button><div id="profileout"></div></section><section id="brandPanel" class="brandsettings"></section><section><h3>Datensicherung</h3><p class="muted">Deine Daten bleiben lokal in dieser App. Safari und die installierte App können getrennte Speicher verwenden. Exportiere regelmäßig eine Sicherung; beim Löschen von Websitedaten können Einträge verloren gehen. Sicherungen enthalten persönliche Daten.</p><button id="export">JSON exportieren</button><button id="xpDiagExport" class="secondary" type="button">Speicherdiagnose exportieren (QA)</button><small>QA-Diagnose: enthält technische IDs und Zeitpunkte der Speichervorgänge, keine Mahlzeitnamen. Nur mit künstlichen Testdaten verwenden.</small><label>Sicherung wiederherstellen (ersetzt lokale Daten)</label><input id="import" type="file" accept="application/json,.json"><p id="importstatus" role="status"></p></section></div><div id="training" class="hidden"><h2>Training</h2><section id="trainingout"></section></div></main><nav class="nav"><button data-tab="today" class="active">Heute</button><button data-tab="nutrition">Ernährung</button><button data-tab="training">Training</button><button data-tab="profile">Profil</button></nav><script src="nutrition/safety.js?v=391"></script><script src="nutrition/goal.js?v=391"></script><script>
+</style><style>@media(prefers-reduced-motion:reduce){.visual64 .play64{display:none}}.xpAvatarStage:has(.xpBody){background:#202020}.xpBody .xpMuscle.selected path{stroke:white;stroke-width:.8}.xpBody .xpMuscle:focus-visible path{stroke:#fff;stroke-width:2}.visual64 svg[data-pose]{background:#202020;border-radius:12px;overflow:hidden}</style><link rel="stylesheet" href="premium-ux.css"><link rel="stylesheet" href="cinematic.css"><link rel="stylesheet" href="first-impression.css"><link rel="stylesheet" href="unified-premium.css?v=391"><script src="unified-premium.js?v=391"></script><script src="premium/diary-port.js"></script><script src="premium/food-studio.js"></script><style>body:has(> fitlab-food-studio){background:#10160f}body:has(> fitlab-food-studio)>:not(fitlab-food-studio,#fitlab-confirmation,#xp131Update,#xpAStorageAlert){display:none!important}</style><style>html:has(fitlab-design-story),body:has(> fitlab-design-story){background:#141b13;scroll-behavior:auto;overflow-anchor:none}body:has(> fitlab-design-story)>:not(fitlab-design-story){display:none!important}</style><style>html:has(fitlab-personal-dashboard),body:has(> fitlab-personal-dashboard){background:#141b13;scroll-behavior:auto;overflow-anchor:none}body:has(> fitlab-personal-dashboard)>:not(fitlab-personal-dashboard,fitlab-goal,#xp131Update,#fitlab-confirmation){display:none!important}</style><style>html:has(fitlab-nutrition),body:has(> fitlab-nutrition){background:#141b13;scroll-behavior:auto}body:has(> fitlab-nutrition)>:not(fitlab-nutrition,fitlab-goal,#xp131Update,#fitlab-confirmation){display:none!important}</style></head><body><header><div><h1><img id="brandLogo" hidden alt=""><span id="brandName">FITNESS LAB</span><small id="appVersion">EXP 1.6.2 EVOLUTION 3.9.1 DESIGN FIDELITY</small></h1><small id="brandTag">Dein Körper. Dein Ziel. Dein Plan.</small></div></header><main><div id="today"></div><div id="nutrition" class="hidden"><h2>Ernährungstagebuch</h2><label>Datum</label><input type="date" id="date"><div id="daily"></div><section><h3>Lebensmittel hinzufügen</h3><label for="query">Name des Lebensmittels</label><input id="query" type="search" placeholder="z. B. Haferflocken" autocomplete="off"><div id="results"></div><hr><label>Verpackte Lebensmittel · Barcode oder Online-Suche</label><input id="barcode" inputmode="numeric" placeholder="EAN / Barcode"><div class="actions" style="margin-top:9px"><button id="lookup">Barcode suchen</button><button class="secondary" id="scan">Kamera</button><button class="secondary" id="online">Online-Suche</button></div><video id="video" class="hidden" playsinline muted></video><button id="stop" class="hidden secondary">Kamera schließen</button><p id="status" role="status" class="muted"></p><label>Barcode-Foto (alternativ zur Live-Kamera)</label><input id="barcodePhoto" type="file" accept="image/*" capture="environment"><small>Barcode waagerecht und scharf fotografieren. Fotos werden lokal verarbeitet. Die Erkennung fertiger Gerichte ist nicht enthalten.</small><small>Online-Abfrage: Open Food Facts. Produktdaten können fehlen oder fehlerhaft sein. Bitte Etikett prüfen. <a href="https://world.openfoodfacts.org/">Quelle / ODbL</a></small></section><section id="foodform"><h3>Lebensmittel / eigene Mahlzeit</h3><div id="productmeta" class="productmeta"></div><label>Name</label><input id="foodname"><div class="grid"><div><label>kcal je 100 g</label><input id="fk" type="number" min="0" step="any"></div><div><label>Protein je 100 g</label><input id="fp" type="number" min="0" step="any"></div><div><label>Kohlenhydrate je 100 g</label><input id="fc" type="number" min="0" step="any"></div><div><label>Fett je 100 g</label><input id="ff" type="number" min="0" step="any"></div><div><label for="fiber14">Ballaststoffe je 100 g (optional)</label><input id="fiber14" type="number" min="0" max="100" step="any" placeholder="Unbekannt"></div><div><label>Menge (g)</label><input id="grams" type="number" min="1" max="10000" value="100"></div><div><label>Mahlzeit</label><select id="meal"><option>Frühstück</option><option>Mittagessen</option><option>Abendessen</option><option>Snacks</option></select></div></div><div id="portionbuttons" class="actions"></div><div id="preview" class="portion" aria-live="polite"></div><label><input id="favorite" type="checkbox"> Als eigenes Lebensmittel speichern</label><button id="add">Eintragen</button><p id="fooderror" role="status"></p></section><section><h3>Rezepte & gespeicherte Mahlzeiten</h3><p class="muted">Zutaten aus dem Eingabefeld übernehmen. Bei gekochten Gerichten das tatsächliche Gesamtgewicht nach dem Garen angeben.</p><button class="secondary" id="ingredient">Aktuelles Lebensmittel als Zutat übernehmen</button><div id="ingredients"></div><label>Rezeptname</label><input id="recipeName"><label>Gesamtgewicht des fertigen Rezepts (g)</label><input id="recipeWeight" type="number" min="1" step="any"><button id="saveRecipe" style="margin-top:10px">Rezept speichern</button><p id="recipeStatus" role="status"></p><div id="recipes"></div></section><section><h3>Meine Favoriten</h3><div id="favlist"></div></section><div id="entries"></div><section id="waterpanel"></section><button class="secondary" id="copyday">Mahlzeiten vom Vortag übernehmen</button></div><div id="profile" class="hidden"><h2>Dein Profil</h2><section><h3>01 · Ziele</h3><div id="goals" class="chips"></div><label>Priorität</label><select id="priority"><option value="auto">Automatisch</option><option value="loss">Fettabbau</option><option value="gain">Aufbau</option><option value="maintain">Gewicht halten</option></select></section><section><h3>02 · Körperdaten</h3><div class="grid" id="bodyfields"></div><label for="sex">Geschlecht für die Kalorienberechnung</label><select id="sex" aria-describedby="xpCalculationSexHint"><option value="">Bitte auswählen</option><option value="m">Männlich</option><option value="f">Weiblich</option></select><small id="xpCalculationSexHint">Diese Angabe fließt in dein Kalorienziel ein. Deine Avatarfigur stellst du separat ein.</small><label><input type="checkbox" id="restricted"> Schwangerschaft, Stillzeit oder Erkrankung / Essstörung mit individuellem Ernährungsbedarf</label></section><section><h3>03 · Alltag und Training</h3><div id="selectfields"></div><div class="grid"><div><label>Einheiten pro Woche</label><input id="days" type="number" min="0" max="7"></div><div><label>Minuten pro Einheit</label><input id="minutes" type="number" min="15" max="180"></div></div><div id="equipmentSettings66"><h3>Trainingsgeräte</h3><div id="equipment" class="chips"></div><label>Sonstige Geräte</label><input id="extra"></div><label>Einschränkungen (optional)</label><textarea id="limits"></textarea></section><section id="calorieSettings66"><h3>04 · Kalorienziel</h3><label for="adjust">Kalorienziel anpassen (kcal pro Tag)</label><input type="range" id="adjust" min="-300" max="500" step="50"><div id="adjustlabel"></div><button class="secondary" id="resetadjust">Empfehlung wiederherstellen</button><div id="profileout"></div></section><section id="brandPanel" class="brandsettings"></section><section><h3>Datensicherung</h3><p class="muted">Deine Daten bleiben lokal in dieser App. Safari und die installierte App können getrennte Speicher verwenden. Exportiere regelmäßig eine Sicherung; beim Löschen von Websitedaten können Einträge verloren gehen. Sicherungen enthalten persönliche Daten.</p><button id="export">JSON exportieren</button><button id="xpDiagExport" class="secondary" type="button">Speicherdiagnose exportieren (QA)</button><small>QA-Diagnose: enthält technische IDs und Zeitpunkte der Speichervorgänge, keine Mahlzeitnamen. Nur mit künstlichen Testdaten verwenden.</small><label>Sicherung wiederherstellen (ersetzt lokale Daten)</label><input id="import" type="file" accept="application/json,.json"><p id="importstatus" role="status"></p></section></div><div id="training" class="hidden"><h2>Training</h2><section id="trainingout"></section></div></main><nav class="nav"><button data-tab="today" class="active">Heute</button><button data-tab="nutrition">Ernährung</button><button data-tab="training">Training</button><button data-tab="profile">Profil</button></nav><script src="nutrition/safety.js?v=391"></script><script src="nutrition/goal.js?v=391"></script><script>
 const fmt=(v,d=1)=>Number(v).toLocaleString("de-DE",{maximumFractionDigits:d,minimumFractionDigits:d});const $=id=>document.getElementById(id), esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])), num=(v)=>Number(v), rnd=v=>Math.round(v), dateKey=(d=new Date())=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
 const goals=['Fett reduzieren','Bauchfett verlieren','Muskelaufbau','Fitter werden','Cardio / Ausdauer','Kraft steigern','Gewicht halten','Gewicht zunehmen','Beweglichkeit verbessern'], equipment=['Keine Geräte','Kurzhanteln','Langhantel','Hantelbank','Klimmzugstange','Kettlebells','Widerstandsbänder','Trainingsmatte','Kabelzug','Kraftstation','Fitnessgeräte im Studio','Laufband','Walkingpad','Fahrrad / Ergometer','Crosstrainer','Rudergerät','Springseil','TRX / Schlingentrainer','Dip-Barren','Faszienrolle','Sonstige'];
 // 1.6.1 – Data isolation. Each deployment path uses its own key namespace; the original Experience path retains its existing data.
@@ -748,8 +748,18 @@ function xpAFormWarning(){
 
 function resetFood(){$('fiber14').value='';editEntry=null;selectedFood=null;$('add').textContent='Eintragen';$('foodname').value='';if($('xp21FoodTitle'))$('xp21FoodTitle').hidden=true;for(const k of ['k','p','c','f'])$('f'+k).value='';$('grams').value=100;const extras=$('xp21Nutrients');if(extras)extras.open=true;$('favorite').checked=false;$('foodform').dataset.source='Eigene Angabe';$('productmeta').replaceChildren();$('portionbuttons').replaceChildren();$('fooderror').textContent='';preview()}
 function fill(x){resetFood();selectedFood=x;$('fiber14').value=fiberValid14(x.fiber)?x.fiber:'';$('foodname').value=x.n;for(const f of ['k','p','c','f'])$('f'+f).value=Number(x[f].toFixed(2));$('foodform').dataset.source=x.source||'Eigene Angabe';$('grams').value=x.yieldGrams||100;let root=$('productmeta');if(x.brand){let t=document.createElement('b');t.textContent=x.brand;root.append(t)}if(x.image&&/^https:\/\/images\.openfoodfacts\.org\//.test(x.image)){let img=document.createElement('img');img.src=x.image;img.alt='Produktbild';img.loading='lazy';root.append(img)}for(const [n,g] of (x.yieldGrams?[['¼ Rezept',x.yieldGrams/4],['½ Rezept',x.yieldGrams/2],['Ganzes Rezept',x.yieldGrams]]:[['100 g',100],...(x.servingGrams?[['Portion',x.servingGrams]]:[]),...(x.packGrams?[['Packung',x.packGrams]]:[])])){let b=document.createElement('button');b.className='secondary';b.textContent=n;b.onclick=()=>{$('grams').value=g;preview()};$('portionbuttons').append(b)}const extras=$('xp21Nutrients');if(extras)extras.open=false;preview();$('nutform').scrollIntoView({behavior:'instant',block:'start'});$('grams').focus({preventScroll:true})}
-function results(items){$('results').replaceChildren();for(const x of items.slice(0,25)){let b=document.createElement('button');b.className='secondary result';b.textContent=x.n+' · '+x.k+' kcal/100 g';b.onclick=()=>fill(x);$('results').append(b)}}$('query').oninput=()=>{let q=$('query').value.toLowerCase().trim();results(q?[...state.favorites,...state.recipes,...base].filter(x=>x.n.toLowerCase().includes(q)):state.favorites)};
-let busy=false,lastOnline=0;async function fetchFood(search){if(busy)return;if(Date.now()-lastOnline<(search?6500:4500)){$('status').textContent='Bitte kurz warten, bevor du erneut suchst.';return}let q=(search?$('query'):$('barcode')).value.trim();if(!q||(!search&&!/^\d{8,14}$/.test(q))){$('status').textContent='Bitte gültigen Suchbegriff oder Barcode eingeben.';return}busy=true;lastOnline=Date.now();$('status').textContent='Online-Suche läuft …';try{let fields='product_name,nutriments,code,brands,image_front_small_url,product_quantity,product_quantity_unit,serving_quantity,serving_quantity_unit';let url=search?`https://de.openfoodfacts.org/cgi/search.pl?search_terms=${encodeURIComponent(q)}&search_simple=1&action=process&json=1&page_size=20&fields=${fields}`:`https://world.openfoodfacts.org/api/v2/product/${encodeURIComponent(q)}.json?fields=${fields}`;let resp;try{resp=await fetch(url,{signal:AbortSignal.timeout(15000)});}catch(err){if(!search||!(err instanceof TypeError||['TimeoutError','AbortError'].includes(err.name)))throw err;$('status').textContent='Verbindung unterbrochen. Ein erneuter Versuch läuft …';await new Promise(resolve=>setTimeout(resolve,6500));lastOnline=Date.now();resp=await fetch(url,{signal:AbortSignal.timeout(15000)});}if(!resp.ok)throw Error(resp.status);let j=await resp.json(),items=(search?j.products||[]:j.product?[j.product]:[]).map(x=>({n:x.product_name,k:x.nutriments?.['energy-kcal_100g'],p:x.nutriments?.proteins_100g,c:x.nutriments?.carbohydrates_100g,f:x.nutriments?.fat_100g,fiber:fiberValid14(x.nutriments?.fiber_100g)?x.nutriments.fiber_100g:null,source:'Open Food Facts · '+x.code,brand:x.brands||'',image:x.image_front_small_url||'',packGrams:x.product_quantity_unit==='g'&&+x.product_quantity>0?+x.product_quantity:null,servingGrams:x.serving_quantity_unit==='g'&&+x.serving_quantity>0?+x.serving_quantity:null})).filter(x=>validFood(x)&&nutritionCheck141(x).level!=='block');if(search)items=items.filter(x=>q.toLowerCase().split(/\s+/).every(t=>(x.n+' '+x.brand).toLowerCase().includes(t)));if(items.length){results(items);if(!search)fill(items[0]);$('status').textContent=items.length+' Produkt(e) mit vollständigen Makros gefunden. Etikett prüfen.'}else $('status').textContent='Keine vollständigen Produktdaten gefunden. Bitte Etikett manuell eintragen.'}catch(e){let status=$('status');status.textContent='Online-Abfrage nicht verfügbar'+(e.message==='429'?' (Suchlimit erreicht)':/^\d{3}$/.test(e.message)?' (HTTP '+e.message+')':e.name==='TimeoutError'||e.name==='AbortError'?' (Zeitüberschreitung)':' (Netzwerk oder Browserfreigabe)')+'. Lokale Suche, Barcode oder manuelle Eingabe nutzen. ';if(search){let a=document.createElement('a');a.href='https://world.openfoodfacts.org/cgi/search.pl?search_terms='+encodeURIComponent(q)+'&search_simple=1&action=process';a.target='_blank';a.rel='noopener noreferrer';a.textContent='Bei Open Food Facts suchen';status.append(a);}}finally{busy=false}}
+function results(items){$('results').replaceChildren();for(const x of items.slice(0,25)){let b=document.createElement('button');b.className='secondary result';b.textContent=x.n+' · '+x.k+' kcal/100 g';b.onclick=()=>fill(x);$('results').append(b)}}function xpDiarySearch(query){
+ const text=query.toLowerCase().trim();
+ return (text?[...state.favorites,...state.recipes,...base].filter(x=>x.n.toLowerCase().includes(text)):state.favorites).slice(0,25);
+}
+$('query').oninput=()=>results(xpDiarySearch($('query').value));
+let busy=false,lastOnline=0;async function xpDiaryLookup(search,q,{status,items:display,choose,external}){if(busy)return;if(Date.now()-lastOnline<(search?6500:4500)){status('Bitte kurz warten, bevor du erneut suchst.');return}q=q.trim();if(!q||(!search&&!/^\d{8,14}$/.test(q))){status('Bitte gültigen Suchbegriff oder Barcode eingeben.');return}busy=true;lastOnline=Date.now();status('Online-Suche läuft …');try{let fields='product_name,nutriments,code,brands,image_front_small_url,product_quantity,product_quantity_unit,serving_quantity,serving_quantity_unit';let url=search?`https://de.openfoodfacts.org/cgi/search.pl?search_terms=${encodeURIComponent(q)}&search_simple=1&action=process&json=1&page_size=20&fields=${fields}`:`https://world.openfoodfacts.org/api/v2/product/${encodeURIComponent(q)}.json?fields=${fields}`;let resp;try{resp=await fetch(url,{signal:AbortSignal.timeout(15000)});}catch(err){if(!search||!(err instanceof TypeError||['TimeoutError','AbortError'].includes(err.name)))throw err;status('Verbindung unterbrochen. Ein erneuter Versuch läuft …');await new Promise(resolve=>setTimeout(resolve,6500));lastOnline=Date.now();resp=await fetch(url,{signal:AbortSignal.timeout(15000)});}if(!resp.ok)throw Error(resp.status);let j=await resp.json(),items=(search?j.products||[]:j.product?[j.product]:[]).map(x=>({n:x.product_name,k:x.nutriments?.['energy-kcal_100g'],p:x.nutriments?.proteins_100g,c:x.nutriments?.carbohydrates_100g,f:x.nutriments?.fat_100g,fiber:fiberValid14(x.nutriments?.fiber_100g)?x.nutriments.fiber_100g:null,source:'Open Food Facts · '+x.code,brand:x.brands||'',image:x.image_front_small_url||'',packGrams:x.product_quantity_unit==='g'&&+x.product_quantity>0?+x.product_quantity:null,servingGrams:x.serving_quantity_unit==='g'&&+x.serving_quantity>0?+x.serving_quantity:null})).filter(x=>validFood(x)&&nutritionCheck141(x).level!=='block');if(search)items=items.filter(x=>q.toLowerCase().split(/\s+/).every(t=>(x.n+' '+x.brand).toLowerCase().includes(t)));if(items.length){display(items);if(!search)choose(items[0]);status(items.length+' Produkt(e) mit vollständigen Makros gefunden. Etikett prüfen.')}else status('Keine vollständigen Produktdaten gefunden. Bitte Etikett manuell eintragen.')}catch(e){status('Online-Abfrage nicht verfügbar'+(e.message==='429'?' (Suchlimit erreicht)':/^\d{3}$/.test(e.message)?' (HTTP '+e.message+')':e.name==='TimeoutError'||e.name==='AbortError'?' (Zeitüberschreitung)':' (Netzwerk oder Browserfreigabe)')+'. Lokale Suche, Barcode oder manuelle Eingabe nutzen. ');if(search)external(q);}finally{busy=false}}
+function fetchFood(search){
+ return xpDiaryLookup(search,(search?$('query'):$('barcode')).value,{
+  status:message=>$('status').textContent=message,items:results,choose:fill,
+  external:term=>{const link=document.createElement('a');link.href='https://world.openfoodfacts.org/cgi/search.pl?search_terms='+encodeURIComponent(term)+'&search_simple=1&action=process';link.target='_blank';link.rel='noopener noreferrer';link.textContent='Bei Open Food Facts suchen';$('status').append(link);}
+ });
+}
 $('lookup').onclick=()=>fetchFood(false);$('online').onclick=()=>fetchFood(true);let stream=null,scanTimer=null;async function stopScan(){if(scanTimer)clearInterval(scanTimer);scanTimer=null;if(stream)stream.getTracks().forEach(t=>t.stop());stream=null;$('video').classList.add('hidden');$('stop').classList.add('hidden')};$('stop').onclick=stopScan;$('scan').onclick=async()=>{if(!('BarcodeDetector'in window)){return fallbackCamera()}try{let detector=new BarcodeDetector({formats:['ean_13','ean_8','upc_a','upc_e']});stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'}}});$('video').srcObject=stream;$('video').classList.remove('hidden');$('stop').classList.remove('hidden');await $('video').play();let scanning=false;scanTimer=setInterval(async()=>{if(scanning||!stream)return;scanning=true;try{let codes=await detector.detect($('video'));if(codes.length&&stream){$('barcode').value=codes[0].rawValue;await stopScan();fetchFood(false)}}catch{}finally{scanning=false}},350)}catch{stopScan();$('status').textContent='Kamera nicht verfügbar. Barcode manuell eingeben.'}};
 function foodValue(k){let v=+$('f'+k).value;return selectedFood&&Number(selectedFood[k].toFixed(2))===v?selectedFood[k]:v}
 function preview(){let g=+$('grams').value;let ok=g>0&&['k','p','c','f'].every(k=>$('f'+k).value!==''&&Number.isFinite(foodValue(k)));$('preview').innerHTML=ok?`<small>Deine Portion · ${fmt(g,1)} g</small><div class="stat">${fmt(foodValue('k')*g/100,1)} kcal</div><div class="grid">${[['Protein','p'],['Kohlenhydrate','c'],['Fett','f']].map(([n,k])=>`<div><small>${n}</small><b>${fmt(foodValue(k)*g/100)} g</b></div>`).join('')}</div><small>Ballaststoffe: ${fiberValid14(fiberInput14())?fmt(fiberInput14()*g/100)+' g':'unbekannt'}</small>`:'<small>Lebensmittel und Menge eingeben, um die Portionswerte zu sehen.</small>';
@@ -758,34 +768,58 @@ function preview(){let g=+$('grams').value;let ok=g>0&&['k','p','c','f'].every(k
  xp22RememberPortion();
 }for(const id of ['grams','fk','fp','fc','ff','fiber14','foodname'])$(id).addEventListener('input',preview);
  for(const id of ['meal','favorite'])$(id).addEventListener('change',xp22RememberPortion);
-$('add').onclick=async()=>{let n=$('foodname').value.trim(),g=+$('grams').value,x={n,g,meal:$('meal').value,source:$('foodform').dataset.source||'Eigene Angabe'};for(const key of ['k','p','c','f'])x[key]=foodValue(key);x.fiber=fiberInput14();if(selectedFood&&image14(selectedFood.image))x.image=selectedFood.image;if(!n||['k','p','c','f'].some(key=>$('f'+key).value==='')||!validFood(x,true)){$('fooderror').textContent='Bitte vollständige plausible Werte je 100 g und Menge eingeben.';return}const d=$('date').value;
- if(!d||!await acceptNutrition141(x,'fooderror')||$('date').value!==d)return;let diaryIntent=null;if(editEntry){
- if(editEntry.date!==d||xpAOpenFormConflict||xpAEntryConflict()){
-  xpAFormWarning();return;
+// The classic form and the reference-based view share the canonical diary write.
+async function xpDiaryWrite({date,row,edit,favorite,product},ask,onPending){
+ if(!xpADate(date)||!validFood(row,true))return {status:'invalid',message:'Bitte vollständige plausible Werte je 100 g und Menge eingeben.'};
+ const validation=nutritionCheck141(row);
+ if(validation.level==='block')return {status:'invalid',message:validation.message};
+ if(validation.level==='warn'&&!await ask(validation.message))return {status:'cancelled',message:'Bitte Nährwerte überprüfen.'};
+ if(xpABlocked||!xpIDBReady)return {status:'blocked',message:'Tagebuchspeicherung ist aktuell nicht verfügbar.'};
+ const list=state.log[date]||[];
+ const index=edit?list.findIndex(item=>item._fid===edit.id):-1;
+ if(edit&&(edit.date!==date||index<0||!xpAEqual(list[index],edit.original)))return {status:'conflict',message:'Eintrag wurde geändert oder gelöscht. Bitte erneut öffnen.'};
+ const x={...row,_fid:edit?.id??xpAId()};
+ const intent={type:edit?'edit':'add',date,row:xpAClone(x),...(edit?{original:xpAClone(edit.original)}:{})};
+ if(edit)list[index]=x;else (state.log[date]||=[]).push(x);
+ if(favorite){
+  state.favorites=state.favorites.filter(item=>item.n!==x.n);
+  state.favorites.push({...product,n:x.n,k:x.k,p:x.p,c:x.c,f:x.f,fiber:x.fiber,source:x.source});
  }
- const index=state.log[d].findIndex(row=>row._fid===editEntry.id);
- if(index<0){xpAFormWarning();return;}
- x._fid=editEntry.id;diaryIntent={type:'edit',date:d,row:xpAClone(x),original:xpAClone(editEntry.original)};
- state.log[d][index]=x;
- }else{x._fid=xpAId();diaryIntent={type:'add',date:d,row:xpAClone(x)};(state.log[d]||=[]).push(x);}if($('favorite').checked){state.favorites=state.favorites.filter(f=>f.n!==x.n);state.favorites.push({...selectedFood,n:x.n,k:x.k,p:x.p,c:x.c,f:x.f,fiber:x.fiber,source:x.source})}const pendingPortion=diaryIntent.type==='add'&&xp22ReadPortion();
- const pendingSave=save('merge',null,diaryIntent);resetFood();
- if(pendingPortion)xp22WritePortion({...pendingPortion,bookingId:x._fid});
- render();$('fooderror').textContent='Speichern läuft …';pendingSave.then(ok=>{
- if(ok){
-  if(xp22ReadPortion()?.bookingId===x._fid)xp22WritePortion(null);
-  render();
- }
- const msg=$('fooderror');
- if(msg)msg.textContent=ok?'Gespeichert.':'Nicht gespeichert – Konflikt oder Schreibfehler. Bitte Eintrag prüfen.';
- const diaryStatus=$('xp21DiaryStatus');
- if(ok&&diaryStatus&&$('date').value===d&&!$('foodname').value&&!$('nutsearch').contains(document.activeElement)&&!$('nutrition').classList.contains('hidden')){
-  $('nutform').open=false;$('nutsearch').open=false;
-  diaryStatus.textContent=`${x.n} · ${fmt(x.g,0)} g · ${diaryIntent.type==='edit'?'Korrektur gespeichert':'Gespeichert'}`;
-  diaryStatus.focus({preventScroll:true});$('xpEvoDaily').scrollIntoView({block:'start',behavior:'instant'});
- }
-});};
+ const pending=save('merge',null,intent);
+ onPending?.(x._fid);
+ const ok=await pending;
+ render();
+ return ok?{status:'ok',id:x._fid}:{status:'conflict',message:'Nicht gespeichert – Konflikt oder Schreibfehler. Bitte Eintrag prüfen.'};
+}
+async function xpDiaryDelete(date,original){
+ if(!xpADate(date)||!original||xpABlocked||!xpIDBReady)return {status:'invalid'};
+ const list=state.log[date]||[],index=list.findIndex(row=>row._fid===original._fid);
+ if(index<0||!xpAEqual(list[index],original))return {status:'conflict',message:'Eintrag wurde geändert oder gelöscht.'};
+ list.splice(index,1);
+ const ok=await save('merge',null,{type:'delete',date,row:original,original});
+ render();
+ return {status:ok?'ok':'conflict'};
+}
+$('add').onclick=async()=>{let n=$('foodname').value.trim(),g=+$('grams').value,x={n,g,meal:$('meal').value,source:$('foodform').dataset.source||'Eigene Angabe'};for(const key of ['k','p','c','f'])x[key]=foodValue(key);x.fiber=fiberInput14();if(selectedFood&&image14(selectedFood.image))x.image=selectedFood.image;if(['k','p','c','f'].some(key=>$('f'+key).value==='')){$('fooderror').textContent='Bitte vollständige plausible Werte je 100 g und Menge eingeben.';return}
+ const date=$('date').value,editing=!!editEntry,portion=!editing&&xp22ReadPortion();
+ const button=$('add');
+ button.disabled=true;
+ try{
+  const result=await xpDiaryWrite({date,row:x,edit:editEntry,favorite:$('favorite').checked,product:selectedFood},message=>xpConfirm(message,{title:'Nährwerte bestätigen',action:'Nährwerte übernehmen'}),id=>{if(portion)xp22WritePortion({...portion,bookingId:id})});
+  if(result.status!=='ok'){$('fooderror').textContent=result.message??'Nicht gespeichert.';return;}
+  resetFood();
+  if(portion)xp22WritePortion(null);
+  $('fooderror').textContent='Gespeichert.';
+  const status=$('xp21DiaryStatus');
+  if(status&&$('date').value===date&&!$('nutrition').classList.contains('hidden')){
+   $('nutform').open=false;$('nutsearch').open=false;
+   status.textContent=`${x.n} · ${fmt(x.g,0)} g · ${editing?'Korrektur gespeichert':'Gespeichert'}`;
+   status.focus({preventScroll:true});$('xpEvoDaily').scrollIntoView({block:'start',behavior:'instant'});
+  }
+ }finally{button.disabled=false}
+};
 function waterMarkup(d){let v=state.water[d]||0,goal=state.waterGoal||2500;return `<h3>Flüssigkeitszufuhr</h3><div class="row"><b>${v.toLocaleString('de-DE')} ml</b><small>Ziel: ${goal.toLocaleString('de-DE')} ml</small></div><div class="bar"><i style="background:#548bd4;width:${Math.min(100,v/goal*100)}%"></i></div><div class="watercontrols">${[200,250,300,500,750].map(n=>`<button class="secondary" onclick="changeWater('${d}',${n})">+${n} ml</button>`).join('')}</div><label>Individuelle Menge (ml)</label><div class="row"><input type="number" min="1" max="5000" value="330" class="wateramount"><button onclick="customWater(this,'${d}',1)">+</button><button class="secondary" onclick="customWater(this,'${d}',-1)">−</button></div><label>Persönliches Trinkziel (ml)</label><input type="number" min="250" max="10000" step="50" value="${goal}" onchange="setWaterGoal(this)">`}
-function changeWater(d,n){if(!Number.isFinite(n)||Math.abs(n)>5000||!xpADate(d))return;state.water[d]=Math.max(0,(state.water[d]||0)+n);save('merge',{id:xpAOpId(),date:d,delta:n});render()}
+function changeWater(d,n){if(!Number.isFinite(n)||Math.abs(n)>5000||!xpADate(d))return;state.water[d]=Math.max(0,(state.water[d]||0)+n);const pending=save('merge',{id:xpAOpId(),date:d,delta:n});render();return pending}
 function customWater(b,d,sign){let n=+b.parentElement.querySelector('input').value;if(n>0&&n<=5000)changeWater(d,n*sign)}function setWaterGoal(el){let n=+el.value;if(n>=250&&n<=10000){state.waterGoal=n;save();render()}else el.value=state.waterGoal}
 $('copyday').onclick=async()=>{let d=$('date').value;if(!d)return;let old=new Date(d+'T12:00:00');old.setDate(old.getDate()-1);let src=state.log[dateKey(old)]||[];if(src.length&&await xpConfirm(src.length+' Einträge zusätzlich übernehmen?',{title:'Vortag übernehmen',action:'Übernehmen'})){(state.log[d]||=[]).push(...structuredClone(src).map(x=>({...x,_fid:xpAId()})));save();render()}else if(!src.length)alert('Keine Einträge am Vortag.')};$('resetadjust').onclick=()=>{state.p.adjust=0;$('adjust').value=0;save();render()};$('export').onclick=async()=>{
  let copy,kind=(xpABlocked||xpAPending)?'letzter-bestätigter-stand':'gespeichert';
@@ -1086,7 +1120,7 @@ function recoveryHTML(){
 }
 function weeklyHTML(){return `<details><summary>Dein Wochenbericht</summary>${xp22WeekMarkup()}</details>`;}
 function adaptiveTrainingHTML(){const gate=xp161aRecoveryGate();if(gate.locked)return '<p>'+esc(gate.reason)+'</p>';let a=coachAnalysis(),p=state.p,plan=makePlan(p),items=new Map();for(let session of plan)for(let item of (session.items||[])){let ex=exBy(item.id);if(ex)items.set(item.id,{item,ex})}return `<details><summary>Adaptive Trainingshinweise</summary><p>${a.poor?'Heute keine Steigerung: Erholung priorisieren.':'Trainingsanpassungen sind Vorschläge, keine automatischen Planänderungen.'}</p>${[...items.values()].map(({item,ex})=>{let prior=latest(ex[0]);let hint=a.poor?'Belastung heute nicht steigern.':suggestion(prior,item,ex);return hint?`<p><b>${esc(ex[1])}</b><br>${esc(hint)}</p>`:''}).join('')||'<p>Noch keine geeigneten Vergleichsdaten für konkrete Übungsempfehlungen.</p>'}</details>`}
-async function markNutrition(d,checked){if(!xpADate(d)||d>dateKey()||(checked&&!coachDayValid16(state,d)))return;let days=coachData().days,x=days[d]||Object.fromEntries(coachFields.map(([k])=>[k,null]));x.complete=checked;days[d]=x;let ok=await save();if(!ok)x.complete=!checked;render()}
+async function markNutrition(d,checked){if(!xpADate(d)||d>dateKey()||(checked&&!coachDayValid16(state,d)))return;let days=coachData().days,x=days[d]||Object.fromEntries(coachFields.map(([k])=>[k,null]));x.complete=checked;days[d]=x;let ok=await save();if(!ok)x.complete=!checked;render();return ok}
 
 
 function recordDecision(kind,change,reason){let c=coachData();if(!Array.isArray(c.decisions))c.decisions=[];c.decisions.push({date:new Date().toISOString(),kind,change,reason});c.decisions=c.decisions.slice(-100)}
@@ -1185,7 +1219,7 @@ const fill61=fill;fill=function(x){$('nutform').open=true;fill61(x)};
 const results61=results;results=function(items){results61(items);for(let b of $('results').children)b.classList.add('nutresult')};
 function nutRender(){let d=$('date').value||dateKey(),r=xp22Target(d),t=totals(d),list=state.log[d]||[];let detail=$('daily').querySelector('details')?.open||false;let left=r?r.k-Math.round(t.k):null;$('daily').innerHTML=`<section><div class="dashcaps">Tagesbilanz</div><div class="nutsummary"><div><small>Gegessen</small><b>${dashNumber(t.k)} kcal</b></div><div><small>${r?(left>=0?'Noch übrig':'Über Tagesziel'):'Tagesziel'}</small><b>${r?dashNumber(Math.abs(left))+' kcal':'–'}</b></div></div>${r?`<div class="bar"><i style="background:var(--primary);width:${Math.min(100,t.k/r.k*100)}%"></i></div><div class="dashmacros">${[['Protein','p',r.protein],['Kohlenhydr.','c',r.carbs],['Fett','f',r.fat]].map(([n,k,v])=>`<div><small>${n}</small><b>${fmt(t[k],0)} / ${v} g</b><div class="bar"><i style="background:var(--primary);width:${Math.min(100,t[k]/Math.max(1,v)*100)}%"></i></div></div>`).join('')}</div>`:''}<details class="dashdetails" ${detail?'open':''}><summary>Kalorienbedarf & Makrodetails</summary>${r?macro(r,t):'<p>Kein belegtes Tagesziel verfügbar.</p>'}</details></section>`;
 let fast=$('nutfast');fast.innerHTML='<div class="row"><h3>Schnellauswahl</h3><button class="secondary" style="font-size:12px" onclick="nutReveal(\'nutfavorites\')">Verwalten</button></div><div class="nutfav"></div>';let choices=fast.querySelector('.nutfav'),seen=new Set();let addChoice=(x,label,g)=>{let b=document.createElement('button');b.className='secondary';b.textContent=label;b.onclick=()=>{fill(x);if(g){$('grams').value=g;preview()}};choices.append(b)};for(let x of state.favorites.slice(-6).reverse()){seen.add(x.n);addChoice(x,'★ '+x.n)}for(let day of Object.keys(state.log).filter(x=>x<=d).sort().reverse()){for(let x of [...state.log[day]].reverse()){if(choices.children.length>=10)break;if(seen.has(x.n))continue;seen.add(x.n);addChoice(x,x.n+' · '+fmt(x.g,0)+' g',x.g)}if(choices.children.length>=10)break}if(!choices.children.length)choices.textContent='Hier erscheinen Favoriten und zuletzt verwendete Lebensmittel.';
-let root=$('entries');root.innerHTML=meals.map((m,j)=>{let rows=list.map((x,i)=>({x,i})).filter(o=>o.x.meal===m),sum=rows.reduce((a,o)=>a+o.x.k*o.x.g/100,0);return `<section class="nutmeal"><div class="row"><h3>${m}</h3><b>${dashNumber(sum)} kcal</b></div><div class="nutcaption">${rows.length} ${rows.length===1?'Eintrag':'Einträge'}</div>${rows.length?rows.map(({x,i})=>`<div class="entry row"><div><b>${esc(x.n)}</b><br><small>${fmt(x.g,1)} g · ${rnd(x.k*x.g/100)} kcal<br>P ${fmt(x.p*x.g/100)} · KH ${fmt(x.c*x.g/100)} · F ${fmt(x.f*x.g/100)} g · Ballaststoffe ${fiberValid14(x.fiber)?fmt(x.fiber*x.g/100)+' g':'unbekannt'}</small><br><small>${esc(x.source||'Eigene Angabe')}</small></div><div class="actions"><button class="secondary" data-nutedit="${i}" aria-label="Eintrag ändern">Ändern</button><button class="danger" data-nutdelete="${i}" aria-label="Eintrag löschen">×</button></div></div>`).join(''):'<div class="nutempty">Noch nichts eingetragen.</div>'}<div class="nutquick"><button class="secondary" onclick="nutSelectMeal(${j})">+ Hinzufügen</button><button class="secondary" onclick="nutCopy(${j})">Vom Vortag</button>${rows.length?`<button class="meal-save141" onclick="mealSave14(${j})">★ Ganze Mahlzeit als Favorit speichern</button>`:''}</div></section>`}).join('');root.querySelectorAll('[data-nutedit]').forEach(b=>b.onclick=()=>{let i=+b.dataset.nutedit,x=list[i];fill(x);$('grams').value=x.g;$('meal').value=x.meal;editEntry={date:d,id:x._fid,original:xpAClone(x)};xpAOpenFormConflict=false;$('add').textContent='Änderung speichern';preview()});root.querySelectorAll('[data-nutdelete]').forEach(b=>b.onclick=async()=>{const item=xpAClone(list[+b.dataset.nutdelete]);if(!item||!await xpConfirm('Eintrag löschen?',{title:'Tagebucheintrag löschen',action:'Löschen',danger:true}))return;const current=state.log[d],index=current?.findIndex(row=>row._fid===item._fid)??-1;if(index<0||!xpAEqual(current[index],item))return;current.splice(index,1);if(editEntry)resetFood();await save('merge',null,{type:'delete',date:d,row:item,original:item});render()});}
+let root=$('entries');root.innerHTML=meals.map((m,j)=>{let rows=list.map((x,i)=>({x,i})).filter(o=>o.x.meal===m),sum=rows.reduce((a,o)=>a+o.x.k*o.x.g/100,0);return `<section class="nutmeal"><div class="row"><h3>${m}</h3><b>${dashNumber(sum)} kcal</b></div><div class="nutcaption">${rows.length} ${rows.length===1?'Eintrag':'Einträge'}</div>${rows.length?rows.map(({x,i})=>`<div class="entry row"><div><b>${esc(x.n)}</b><br><small>${fmt(x.g,1)} g · ${rnd(x.k*x.g/100)} kcal<br>P ${fmt(x.p*x.g/100)} · KH ${fmt(x.c*x.g/100)} · F ${fmt(x.f*x.g/100)} g · Ballaststoffe ${fiberValid14(x.fiber)?fmt(x.fiber*x.g/100)+' g':'unbekannt'}</small><br><small>${esc(x.source||'Eigene Angabe')}</small></div><div class="actions"><button class="secondary" data-nutedit="${i}" aria-label="Eintrag ändern">Ändern</button><button class="danger" data-nutdelete="${i}" aria-label="Eintrag löschen">×</button></div></div>`).join(''):'<div class="nutempty">Noch nichts eingetragen.</div>'}<div class="nutquick"><button class="secondary" onclick="nutSelectMeal(${j})">+ Hinzufügen</button><button class="secondary" onclick="nutCopy(${j})">Vom Vortag</button>${rows.length?`<button class="meal-save141" onclick="mealSave14(${j})">★ Ganze Mahlzeit als Favorit speichern</button>`:''}</div></section>`}).join('');root.querySelectorAll('[data-nutedit]').forEach(b=>b.onclick=()=>{let i=+b.dataset.nutedit,x=list[i];fill(x);$('grams').value=x.g;$('meal').value=x.meal;editEntry={date:d,id:x._fid,original:xpAClone(x)};xpAOpenFormConflict=false;$('add').textContent='Änderung speichern';preview()});root.querySelectorAll('[data-nutdelete]').forEach(b=>b.onclick=async()=>{const item=xpAClone(list[+b.dataset.nutdelete]);if(!item||!await xpConfirm('Eintrag löschen?',{title:'Tagebucheintrag löschen',action:'Löschen',danger:true}))return;if(editEntry)resetFood();await xpDiaryDelete(d,item)});}
 nutInit();const render61=render;render=function(){let open=$('daily').querySelector('details')?.open;render61();nutRender();if(open)$('daily').querySelector('details').open=true};
 
 
@@ -2967,7 +3001,135 @@ if(xpPremiumSurface){
  render=update(views.render);nutRender=update(views.nutRender);renderTraining=update(views.renderTraining);
  showExercise63=update(views.showExercise63);tab=update(views.tab);xpSetView=update(views.xpSetView);
 }
+// The pilot is explicit until parity has been verified. Production routing is unchanged.
+const studioPilot=new URLSearchParams(location.search).get('pilot')==='food-studio';
+const studioListeners=new Set();
+const studioResult=ok=>({status:ok?'ok':'conflict'});
+let studioScreen;
+function studioRead(date){
+ if(!xpADate(date))throw new TypeError('Ungültiges Tagebuchdatum');
+ const day=xp22Day(date),rows=state.log[date]||[],draft=xp22ReadPortion();
+ return {date,today:dateKey(),day,rows,target:xp22Target(date),used:totals(date),fiber:fiberStats14(rows),
+  fiberTarget:fiberGoal14(),water:state.water[date]||0,waterGoal:state.waterGoal||2500,meals,
+  favorites:state.favorites,recipes:state.recipes,savedMeals:state.mealFavorites14||[],draft:draft?.date===date&&!draft.bookingId?draft:null};
+}
+const studioCommands={
+ 'food.search'({query}){
+  return typeof query==='string'?{status:'ok',items:xpDiarySearch(query.slice(0,500))}:{status:'invalid'};
+ },
+ 'food.online'({query,search}){
+  if(typeof query!=='string'||typeof search!=='boolean')return {status:'invalid'};
+  return new Promise(resolve=>{
+   let items=[],message='',term='';
+   xpDiaryLookup(search,query.slice(0,500),{
+    items:value=>{items=value},status:value=>{message=value},choose:()=>{},external:value=>{term=value}
+   }).then(()=>resolve({status:'ok',items,message,term}));
+  });
+ },
+ 'draft.store'({date,fields,source,food,favorite}){
+  if(!xpADate(date)||!fields||typeof fields.foodname!=='string')return {status:'invalid'};
+  xp22WritePortion(fields.foodname?{date,fields,source,food,favorite}:null);
+  return {status:'ok'};
+ },
+ async 'food.save'(payload){
+  const draft=!payload.edit&&xp22ReadPortion();
+  const answer=await xpDiaryWrite(payload,message=>xpConfirm(message,{title:'Nährwerte bestätigen',action:'Nährwerte übernehmen'}),id=>{
+   if(draft?.date===payload.date)xp22WritePortion({...draft,bookingId:id});
+  });
+  if(answer.status==='ok'&&draft?.date===payload.date)xp22WritePortion(null);
+  else if(answer.status!=='ok'&&draft?.date===payload.date)xp22WritePortion(draft);
+  return answer;
+ },
+ 'food.delete'({date,row}){return xpDiaryDelete(date,row);},
+ async 'saved.delete'({key,item}){
+  if(!['favorites','recipes','mealFavorites14'].includes(key)||!item)return {status:'invalid'};
+  const items=state[key]||[];
+  if(!items.some(candidate=>xpAEqual(candidate,item)))return {status:'conflict'};
+  if(!await xpConfirm('Gespeicherten Eintrag löschen?',{title:'Eintrag löschen',action:'Löschen',danger:true}))return {status:'cancelled'};
+  const latest=state[key]||[],index=latest.findIndex(candidate=>xpAEqual(candidate,item));
+  if(index<0)return {status:'conflict'};
+  latest.splice(index,1);const ok=await save();render();return studioResult(ok);
+ },
+ async 'recipe.save'({name,weight,items}){
+  if(typeof name!=='string'||!Array.isArray(items)||!items.every(item=>validFood(item,true)&&nutritionCheck141(item).level!=='block'))return {status:'invalid'};
+  const recipe=recipeValues(name.trim(),weight,items);
+  if(!recipe)return {status:'invalid',message:'Name, Zutaten und plausibles Endgewicht erforderlich.'};
+  const check=nutritionCheck141(recipe);
+  if(check.level==='block')return {status:'invalid',message:check.message};
+  if(check.level==='warn'&&!await xpConfirm(check.message))return {status:'cancelled'};
+  if(state.recipes.some(item=>item.n===recipe.n)&&!await xpConfirm('Rezept ersetzen?'))return {status:'cancelled'};
+  state.recipes=state.recipes.filter(item=>item.n!==recipe.n);state.recipes.push(recipe);
+  const ok=await save();render();return studioResult(ok);
+ },
+ async 'meal.save'({date,meal,name}){
+  if(!xpADate(date)||!meals.includes(meal)||typeof name!=='string'||!name.trim()||name.length>80)return {status:'invalid'};
+  const rows=(state.log[date]||[]).filter(item=>item.meal===meal);
+  if(!rows.length||rows.some(item=>nutritionCheck141(item).level==='block'))return {status:'invalid'};
+  if(state.mealFavorites14?.some(item=>item.name===name)&&!await xpConfirm('Gespeicherte Mahlzeit ersetzen?'))return {status:'cancelled'};
+  state.mealFavorites14=[...(state.mealFavorites14||[]).filter(item=>item.name!==name),{name,items:xpAClone(rows)}];
+  const ok=await save();render();return studioResult(ok);
+ },
+ async 'meal.book'({date,item}){
+  if(!xpADate(date)||!item||!state.mealFavorites14?.some(candidate=>xpAEqual(item,candidate)))return {status:'invalid'};
+  if(item.items.some(row=>nutritionCheck141(row).level==='block'))return {status:'blocked'};
+  if(!await xpConfirm(item.name+' zusätzlich in das Tagebuch übernehmen?'))return {status:'cancelled'};
+  (state.log[date]||=[]).push(...xpAClone(item.items).map(row=>({...row,_fid:xpAId()})));
+  const ok=await save();render();return studioResult(ok);
+ },
+ async 'fiber.goal'({goal}){
+  if(!Number.isFinite(goal)||goal<5||goal>100)return {status:'invalid'};
+  state.fiberGoal=goal;const ok=await save();render();return studioResult(ok);
+ },
+ async 'water.change'({date,delta}){return xpADate(date)&&Number.isFinite(delta)&&delta!==0&&Math.abs(delta)<=5000?studioResult(await changeWater(date,delta)):{status:'invalid'};},
+ async 'water.goal'({goal}){
+  if(!Number.isFinite(goal)||goal<250||goal>10000)return {status:'invalid'};
+  state.waterGoal=goal;const ok=await save();render();return studioResult(ok);
+ },
+ async 'day.confirm'({date,checked}){
+  return xpADate(date)&&typeof checked==='boolean'?studioResult(await markNutrition(date,checked)):{status:'invalid'};
+ },
+ async 'food.copy'({date,meal}){
+  if(!xpADate(date)||(meal!==null&&!meals.includes(meal)))return {status:'invalid'};
+  const previous=new Date(date+'T12:00:00');previous.setDate(previous.getDate()-1);
+  const items=(state.log[dateKey(previous)]||[]).filter(row=>meal===null||row.meal===meal);
+  if(!items.length)return {status:'invalid',message:'Keine Einträge am Vortag.'};
+  if(items.some(row=>nutritionCheck141(row).level==='block'))return {status:'blocked',message:'Bitte widersprüchliche Nährwerte am Vortag zuerst korrigieren.'};
+  if(!await xpConfirm(items.length+' Einträge zusätzlich übernehmen?'))return {status:'cancelled'};
+  (state.log[date]||=[]).push(...xpAClone(items).map(row=>({...row,_fid:xpAId()})));
+  const ok=await save();render();return studioResult(ok);
+ }
+};
+function studioNavigate(destination){
+ if(destination==='recipes')xpNutritionOpen();
+ else if(destination==='coach'){tab('today');xpOpen('coach');}
+ else tab(destination);
+}
+function studioSync(){
+ if(!studioPilot||!window.fitLabFoodStudio)return;
+ const eligible=xpIDBReady&&!$('nutrition').classList.contains('hidden')&&!document.querySelector('fitlab-nutrition');
+ if(!eligible){studioScreen?.remove();return;}
+ if(!studioScreen){
+  const commands=Object.fromEntries(Object.entries(studioCommands).map(([name,execute])=>[name,payload=>{
+   if(xpABlocked&&!['food.search','food.online','draft.store'].includes(name))return {status:'blocked',message:'Speicherung ist gesperrt. Bitte Datenstand prüfen.'};
+   return execute(payload);
+  }]));
+  const port=createDiaryPort({read:studioRead,commands,subscribe(listener){
+   studioListeners.add(listener);return ()=>studioListeners.delete(listener);
+  }});
+  studioScreen=fitLabFoodStudio.create(port,{navigate:studioNavigate,decodeImage,date:()=> $('date').value||dateKey()});
+ }
+ if(!studioScreen.isConnected)document.body.append(studioScreen);
+ for(const listener of studioListeners)listener();
+}
+if(studioPilot){
+ const classicTab=tab,classicRender=render,classicNutrition=xpNutritionOpen;
+ tab=function(...args){const result=classicTab.apply(this,args);studioSync();return result};
+ render=function(...args){const result=classicRender.apply(this,args);studioSync();return result};
+ xpNutritionOpen=function(...args){const result=classicNutrition.apply(this,args);studioSync();return result};
+}
+
 void xpIDBBoot().then(()=>{
+ if(studioPilot){tab('nutrition');return;}
  const destination=xpPersonalQuery.get('bereich');
  if(xpProfileReady()&&['nutrition','training','check','progress','coach'].includes(destination))xpPersonalNavigate(destination);
  else xpPersonalSchedule();
