@@ -31,7 +31,11 @@
    const anchor=document.getElementById('xpEvoDaily');
    if(!anchor)return;
    let card=document.getElementById('xpPremiumDiary');
-   if(!card){card=document.createElement('section');card.id='xpPremiumDiary';anchor.before(card);}
+   if(!card){
+    card=document.createElement('section');card.id='xpPremiumDiary';
+    const quick=document.getElementById('xpCQuick');
+    if(quick)quick.after(card);else anchor.before(card);
+   }
    const {used,target}=api.diary();
    const markup='<h3>Dein Ernährungstag</h3>'+[
     ['Kalorien (kcal)','k','k'],['Protein (g)','p','protein'],['Kohlenhydrate (g)','c','carbs'],['Fett (g)','f','fat']

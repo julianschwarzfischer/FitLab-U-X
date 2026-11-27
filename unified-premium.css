@@ -42,3 +42,4 @@ body[data-premium-area] :is(input:not([type=checkbox]):not([type=radio]),select,
 #xpPremiumTraining h3{margin:0 0 6px}
 #xpPremiumTraining progress{width:100%;height:12px;accent-color:#b7d39c}
 #training:has(.xpEvoWorkout) #xpPremiumTraining{display:none}
+body[data-premium-area="diary"] #date{background:#202b22;color:#f7f4e9;border-color:#677961;color-scheme:dark}
