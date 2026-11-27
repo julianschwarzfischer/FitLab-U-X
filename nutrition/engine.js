@@ -32,7 +32,7 @@
    const styles=groupDish(recipe,ids);
    const values=Object.fromEntries(nutrients.map(key=>[key,rows.some(({food})=>!Number.isFinite(food.nutrients_per_100g[key]))?null:rows.reduce((sum,{grams,food})=>sum+food.nutrients_per_100g[key]*grams/100,0)/recipe.base_servings]));
    const declared=[...new Set([...recipe.allergens_declared,...rows.flatMap(({food})=>food.allergens_intrinsic_preliminary||[])])];
-   return {...recipe,index,rows,groups,styles,values,declared,search:normalize([recipe.name,recipe.category,recipe.diet,...recipe.meal_types,...groups,...styles,...rows.map(({food})=>food.name)].join(' '))};
+   return {...recipe,index,rows,groups,styles,values,declared,search:normalize([recipe.name,recipe.category,recipe.diet,...recipe.meal_types,...groups,...styles,...rows.flatMap(({food})=>[food.name,...(food.id==='F042'?['Wildlachs']:[])])].join(' '))};
   });
  }
  function restrictions(recipe,profile){
@@ -47,7 +47,7 @@
   if(profile.allergy.length)warnings.push('Konkrete Produktetiketten und Kreuzkontakte sind nicht verifiziert.');
   return warnings;
  }
- function rank(recipes,{profile,target,used,blocked,meal,recent=[]}){
+ function rank(recipes,{profile,target,used,blocked,meal,protection,recent=[]}){
   if(blocked||!target||!used)return [];
   const remaining=nutrients.map(key=>Number.isFinite(target[key])&&Number.isFinite(used[key])?target[key]-used[key]:null);
   if(!remaining.slice(0,4).every(Number.isFinite)||remaining[0]<=0)return [];
@@ -56,7 +56,7 @@
   const ideals=remaining.map(value=>Math.max(0,value??0)*fraction);
   const floors=[150,15,20,10,5],weights=[3,3,1,1,.5];
   return recipes.flatMap(recipe=>{
-   if(restrictions(recipe,profile).length||!recipe.meal_types.includes(meal)||recipe.passive_time||(profile.minutes&&recipe.minutes>profile.minutes))return [];
+   if((protection?root.fitLabNutritionSafety.recipeGate(recipe,protection).status!=='checked':restrictions(recipe,profile).length)||!recipe.meal_types.includes(meal)||recipe.passive_time||(profile.minutes&&recipe.minutes>profile.minutes))return [];
    const scored=portions.slice(0,3).flatMap(portion=>{
     const values=nutrients.map(key=>recipe.values[key]===null?null:recipe.values[key]*portion);
     if(values[0]>remaining[0]||!values.slice(0,4).every(Number.isFinite))return [];

@@ -1,4 +1,5 @@
 const { test, expect } = require('@playwright/test');
+const {syntheticReviewedRecipes,confirmNutrition}=require('./nutrition-fixture.cjs');
 
 // All tests use a fresh browser context and entirely synthetic fitness records.
 // Give returning-user scenarios an isolated, valid synthetic profile. Keep the
@@ -184,7 +185,7 @@ test('real QA5 application automatically migrates into current IndexedDB', async
   expect(legacy).toEqual(saved);
   await page.unroute(root,oldRoute);
   await page.reload();
-  await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3.8 PERSONAL NUTRITION');
+  await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3.8.14 INTELLIGENT SAFETY');
   await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0,{timeout:20000});
   const migrated=await canonical(page);
   expect(migrated.p.age).toBe(41);
@@ -1156,7 +1157,7 @@ test(`Atlas V2 real service worker update from ${previousVersion} keeps data and
   for(const name of ['path','strength'])assets['/media/scenes/'+name+'.webp']='image/webp';
   for(const name of ['head-to-toe','food','training','recovery','cockpit','head-to-toe-male','training-male','head-to-toe-neutral','training-neutral'])assets['/media/hero/'+name+'.webp']='image/webp';
   assets['/design-story.js']=assets['/personal-dashboard.js']='text/javascript';
-  for(const name of ['engine.js','experience.js','reference.css','foods.json','recipes.json']){
+  for(const name of ['safety.js','goal.js','goal-view.js','goal.css','allergen-matrix.json','engine.js','experience.js','reference.css','foods.json','recipes.json']){
     assets['/nutrition/'+name]=name.endsWith('.js')?'text/javascript':name.endsWith('.css')?'text/css':'application/json';
   }
   for(const name of fs.readdirSync('nutrition/recipes'))assets['/nutrition/recipes/'+name]='image/webp';
@@ -1213,15 +1214,15 @@ test(`Atlas V2 real service worker update from ${previousVersion} keeps data and
     await page.waitForFunction(()=>window.testControllerChanged);
     await page.waitForFunction(async previous=>{
       const keys=await caches.keys();
-      return keys.some(key=>key.endsWith('evolution-3-8-personal-nutrition'))&&!keys.some(key=>key.endsWith('evolution-'+previous.toLowerCase().replace(/[. ]/g,'-')));
+      return keys.some(key=>key.endsWith('evolution-3-8-14-intelligent-safety'))&&!keys.some(key=>key.endsWith('evolution-'+previous.toLowerCase().replace(/[. ]/g,'-')));
     },previousVersion);
     await page.reload();
-    await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3.8 PERSONAL NUTRITION');
+    await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3.8.14 INTELLIGENT SAFETY');
     await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
     expect(await canonical(page)).toEqual(prior);
     await context.setOffline(true);
     await page.reload();
-    await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3.8 PERSONAL NUTRITION');
+    await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3.8.14 INTELLIGENT SAFETY');
     await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
     if(previousVersion.startsWith('3.5')){
       await page.getByRole('button',{name:/Erlebnis entdecken/}).click();
@@ -1989,7 +1990,9 @@ test('Personal Dashboard preserves its approved styling against outer rules',asy
 });
 
 test('Recipe world starts from Dashboard, synchronizes portions and files a deliberate offline booking',async({page,context})=>{
+ await syntheticReviewedRecipes(page);
  await ready(page,'m',false);
+ await confirmNutrition(page);
  await page.waitForFunction(()=>!!navigator.serviceWorker.controller);
  await context.setOffline(true);
  const dashboard=page.locator('fitlab-personal-dashboard');
@@ -2030,7 +2033,9 @@ test('Recipe world starts from Dashboard, synchronizes portions and files a deli
 });
 
 test('Recipe world persists allergies and leaves the full warning-marked catalogue available',async({page})=>{
+ await syntheticReviewedRecipes(page);
  await ready(page,'f',false);
+ await confirmNutrition(page);
  await page.locator('fitlab-personal-dashboard .nutrition .photo').click();
  let nutrition=page.locator('fitlab-nutrition');
  await nutrition.locator('#preferences > summary').click();
@@ -2048,7 +2053,9 @@ test('Recipe world persists allergies and leaves the full warning-marked catalog
 });
 
 test('Recipe ranking uses the actual combined-goal targets and changes with the day intake',async({page})=>{
+ await syntheticReviewedRecipes(page);
  await ready(page,'m',false);
+ await confirmNutrition(page);
  await page.evaluate(()=>{state.p.goals=[0,2];state.p.priority='auto';state.p.kind='strength';premiumDashboard()});
  const target=await page.evaluate(()=>({actual:xpNutritionModel().target,calculated:calc(state.p)}));
  expect(target.actual).toMatchObject({kcal:target.calculated.k,protein_g:target.calculated.protein,available_carbs_g:target.calculated.carbs,fat_g:target.calculated.fat});
@@ -2085,4 +2092,207 @@ test('Recipe ranking uses the actual combined-goal targets and changes with the 
   return ids.map(id=>d.recipes.find(r=>r.id===id).minutes);
  },ids);
  expect(times).toEqual([...times].sort((a,b)=>a-b));
+});
+
+test('Intelligent Safety fails closed on damaged canonical and legacy protection while retaining the catalog',async({page})=>{
+ await syntheticReviewedRecipes(page);
+ await ready(page,'m',false);
+ await confirmNutrition(page,{diet:'Vegan',allergy:['Milch'],exclusions:['F002']});
+ await page.evaluate(async()=>{
+  state.nutritionProtection.selection.allergy.push('UNKNOWN');
+  await save();
+ });
+ await page.reload();
+ const dash=page.locator('fitlab-personal-dashboard');
+ await dash.locator('.nutrition .action').click();
+ const n=page.locator('fitlab-nutrition');
+ await expect(n.getByText(/unvollständig oder nicht lesbar/).first()).toBeVisible();
+ await n.getByRole('button',{name:'Alle Rezepte'}).click();
+ await expect(n.locator('#catalog-list > details')).toHaveCount(30);
+ await n.locator('[data-id=R001] summary').click();
+ await expect(n.getByRole('button',{name:'Ins Tagebuch übernehmen'})).toBeDisabled();
+ expect(await page.evaluate(()=>xpNutritionModel().blocked)).toBe(true);
+ expect(Object.values((await canonical(page)).log).flat()).toEqual([]);
+
+ await page.evaluate(async()=>{
+  delete state.nutritionProtection;
+  fitStore161.setItem(xpNutritionPreferenceKey,'{"diet":"Vegan","allergy":');
+  await save();
+ });
+ await page.reload();
+ expect(await page.evaluate(()=>xpNutritionProfile().status)).toBe('damaged');
+});
+
+test('Intelligent Safety restores protection in a fresh installation and retains it on old imports',async({page,browser})=>{
+ await ready(page,'m',false);
+ await confirmNutrition(page,{diet:'Vegan',allergy:['Milch'],exclusions:['F002']});
+ const exportEvent=page.waitForEvent('download');
+ await page.evaluate(()=>$('export').click());
+ const fs=require('node:fs/promises');
+ const exported=await fs.readFile(await (await exportEvent).path());
+ const context=await browser.newContext({baseURL:new URL(page.url()).origin});
+ try{
+  const restored=await context.newPage();
+  await restored.goto('/');
+  await restored.waitForFunction(()=>xpIDBReady);
+  expect(await restored.evaluate(()=>xpNutritionProfile().status)).toBe('setup');
+  const importRecord=async(buffer)=>{
+   restored.once('dialog', dialog=>dialog.accept());
+   await restored.locator('#import').setInputFiles({name:'backup.json',buffer,mimeType:'application/json'});
+   await expect(restored.locator('#importstatus')).toContainText('Sicherung erfolgreich gespeichert');
+  };
+  await importRecord(exported);
+  await expect.poll(async()=> (await canonical(restored)).nutritionProtection.selection.allergy).toEqual(['Milch']);
+  const first=await canonical(restored);
+  const older=JSON.parse(exported.toString('utf8'));delete older.nutritionProtection;older.waterGoal=3000;
+  await importRecord(Buffer.from(JSON.stringify(older)));
+  await expect.poll(async()=> (await canonical(restored)).waterGoal).toBe(3000);
+  const next=await canonical(restored);
+  expect(next.nutritionProtection.selection).toEqual(first.nutritionProtection.selection);
+  expect(next.nutritionProtection.revision).not.toBe(first.nutritionProtection.revision);
+ }finally{await context.close()}
+});
+
+test('Intelligent Safety invalidates a pending recipe confirmation inside the canonical cross-tab transaction',async({page,context})=>{
+ await syntheticReviewedRecipes(page);
+ await ready(page,'m',false);
+ await confirmNutrition(page);
+ await page.locator('fitlab-personal-dashboard .nutrition .action').click();
+ const n=page.locator('fitlab-nutrition');
+ await n.getByRole('button',{name:'Alle Rezepte'}).click();
+ await n.locator('[data-id=R001] summary').click();
+ await expect(n.getByRole('button',{name:'Ins Tagebuch übernehmen'})).toBeEnabled();
+
+ const other=await context.newPage();
+ await other.goto('/');
+ await other.waitForFunction(()=>xpIDBReady);
+ // Simulate a delayed BroadcastChannel message while the confirmation is pending.
+ await page.evaluate(()=>{
+  if(xpIDBChannel)xpIDBChannel.onmessage=null;
+  window.confirm=()=>true;
+ });
+ // Keep the first view stale even if its visibility triggers a normal sync.
+ await page.evaluate(()=>{xpIDBSynchronize=async()=>{}});
+ await confirmNutrition(other,{diet:'Vegan',allergy:['Milch']});
+ await n.getByRole('button',{name:'Ins Tagebuch übernehmen'}).click();
+ await expect(n.getByText(/Ernährungsprofil, Rezeptfreigabe oder Datum hat sich geändert/)).toBeVisible();
+ const saved=await canonical(other);
+ expect(saved.nutritionProtection.selection.allergy).toEqual(['Milch']);
+ expect(Object.values(saved.log).flat()).toEqual([]);
+ await other.close();
+});
+
+test('Intelligent Safety serializes competing profile updates as whole revisions',async({page,context})=>{
+ await ready(page,'m',false);
+ await confirmNutrition(page);
+ const other=await context.newPage();await other.goto('/');await other.waitForFunction(()=>xpIDBReady);
+ for(const tab of [page,other])await tab.evaluate(()=>{xpIDBSynchronize=async()=>{};if(xpIDBChannel)xpIDBChannel.onmessage=null});
+ const attempts=await Promise.allSettled([confirmNutrition(page,{allergy:['Milch']}),confirmNutrition(other,{allergy:['Ei']})]);
+ expect(attempts.filter(x=>x.status==='fulfilled')).toHaveLength(1);
+ const saved=await canonical(page);
+ expect([['Milch'],['Ei']]).toContainEqual(saved.nutritionProtection.selection.allergy);
+ await other.close();
+});
+
+test('Intelligent Safety holds unknown exclusions and every production draft while distinguishing product checks',async({page})=>{
+ await ready(page,'m',false);
+ await confirmNutrition(page,{allergy:['Milch']});
+ await page.locator('fitlab-personal-dashboard .nutrition .action').click();
+ const n=page.locator('fitlab-nutrition');
+ await n.getByRole('button',{name:'Alle Rezepte'}).click();
+ await expect(n.locator('[data-id=R001] summary')).toContainText('Enthält Milch');
+ await expect(n.locator('[data-id=R002] summary')).toContainText('Produktprüfung erforderlich für Milch');
+ await n.getByRole('button',{name:/Zurück zum Dashboard/}).click();
+ await confirmNutrition(page);
+ await page.locator('fitlab-personal-dashboard .nutrition .action').click();
+ await n.getByRole('button',{name:'Alle Rezepte'}).click();
+ await expect(n.locator('#catalog-list summary')).toHaveCount(30);
+ expect((await n.locator('#catalog-list summary').allTextContents()).every(text=>text.includes('Fachliche Rezeptfreigabe offen'))).toBe(true);
+ await page.evaluate(()=>xpNutritionStore({...xpNutritionProfile().selection,exclusions:['F999']},xpNutritionProfile().revision));
+ expect(await page.evaluate(()=>xpNutritionProfile().status)).toBe('damaged');
+});
+
+test('Intelligent Safety validates goal wishes, requires confirmation, and pauses after protected changes',async({page})=>{
+ await ready(page,'m',false);
+ await page.evaluate(async()=>{Object.assign(state.p,{weight:90,goals:[0,2]});await save();xpGoalOpen()});
+ const goal=page.locator('fitlab-goal');
+ const check=async(target,days)=>{
+  await goal.locator('#target').fill(String(target));await goal.locator('#days').fill(String(days));
+  await goal.getByRole('button',{name:'Ziel prüfen',exact:true}).click();
+ };
+ await check(40,90);
+ await expect(goal.locator('#reason')).toContainText('Untergewichtsbereich');
+ await expect(goal.locator('#confirm')).toBeDisabled();
+ for(const days of [1,7]){
+  await check(85,days);
+  await expect(goal.locator('#reason')).toContainText('Zeitraum zu kurz');
+  await expect(goal.locator('#confirm')).toBeDisabled();
+ }
+ expect((await canonical(page)).goalIntelligence).toBeUndefined();
+ await goal.locator('#adopt').click();
+ expect(Number(await goal.locator('#days').inputValue())).toBeGreaterThan(7);
+ await expect(goal.locator('#confirm')).toBeEnabled();
+ await goal.locator('#muscle').fill('10');
+ await goal.locator('#evaluate').click();
+ await expect(goal.locator('#reason')).toContainText('Muskelzuwachs');
+ await goal.locator('#muscle').clear();
+ await check(85,98);
+ await goal.locator('#confirm').click();
+ await expect(goal.locator('#status')).toContainText('Ziel bestätigt');
+ const accepted=(await canonical(page)).goalIntelligence;
+ expect(accepted.goal.kinds).toEqual(['fatLoss','muscleGain']);
+ const effects=await page.evaluate(()=>({goal:xpGoalCurrent().state,kcal:xpNutritionModel().target?.kcal,plan:makePlan(state.p).length,gate:xpBTrainingState().canStart}));
+ expect(effects.goal).toBe('confirmed');expect(effects.kcal).toBeGreaterThan(0);expect(effects.plan).toBeGreaterThan(0);expect(effects.gate).toBe(true);
+ await check(84,120);
+ await goal.locator('#confirm').click();
+ await expect(goal.locator('#status')).toContainText('Ziel bestätigt');
+ expect((await canonical(page)).goalIntelligence.revision).not.toBe(accepted.revision);
+ await page.evaluate(async()=>{state.p.minutes=70;await save()});
+ expect(await page.evaluate(()=>[xpGoalCurrent().state,xpNutritionModel().target,xpBTrainingState().canStart])).toEqual(['paused',null,false]);
+});
+
+test('Intelligent Safety goal uses load, confirmed low intake, incomplete profile and recovery guards',async({page})=>{
+ await ready(page,'m',false);
+ const result=await page.evaluate(()=>{
+  const engine=fitLabGoalIntelligence;
+  const input={target:85,days:110,kinds:['fatLoss','muscleGain'],muscleKg:null};
+  const base=structuredClone(state);base.p.weight=90;base.p.goals=[0,2];
+  const status=state=>engine.evaluate(xpGoalContext(state),input).state;
+  const high=structuredClone(base);Object.assign(high.p,{days:7,minutes:180,intensity:'7',adjust:-300});
+  const incomplete=structuredClone(base);incomplete.p.age='';
+  const low=structuredClone(high);const date=dateKey();
+  low.log[date]=[{n:'Synthetisch',k:100,p:3,c:13,f:4,g:325,meal:'Mittagessen'}];low.coach={days:{[date]:{complete:true}}};
+  const recovery=structuredClone(base);recovery.coach={days:{[date]:{sleep:4}}};
+  const existing=state;state=recovery;
+  try{return [status(base),status(high),status(incomplete),status(low),status(recovery),xpBTrainingState().canStart]}
+  finally{state=existing}
+ });
+ expect(result).toEqual(['candidate','revise','blocked','blocked','blocked',false]);
+});
+
+test('Intelligent Safety books every recipe and supported portion via the guarded transaction in synthetic reviewed data',async({page})=>{
+ test.setTimeout(120000);
+ await syntheticReviewedRecipes(page);
+ await ready(page,'m',false);
+ await confirmNutrition(page);
+ const failures=await page.evaluate(async()=>{
+  const json=async name=>(await fetch('nutrition/'+name+'.json')).json();
+  const [r,f,matrix]=await Promise.all(['recipes','foods','allergen-matrix'].map(json));
+  const engine=fitLabNutritionEngine;
+  const recipes=fitLabNutritionSafety.attachMatrix(engine.enrich(r.recipes,f.foods),matrix);
+  const attributes={kcal:'k',protein_g:'p',available_carbs_g:'c',fat_g:'f',fiber_g:'fiber'};
+  const errors=[],date=dateKey(),revision=xpNutritionProfile().revision;
+  for(const recipe of recipes)for(const portion of engine.portions){
+   const start=(state.log[date]||[]).length;
+   const booked=await xpNutritionBook(recipe,portion,'Mittagessen',revision,date);
+   const rows=(await xpIDBRead()).log[date]?.slice(start)||[];
+   if(!booked||rows.length!==recipe.rows.length||!engine.nutrients.every(key=>recipe.values[key]==null
+    ?rows.some(row=>row[attributes[key]]===null)
+    :Math.abs(rows.reduce((sum,row)=>sum+row[attributes[key]]*row.g/100,0)-recipe.values[key]*portion)<1e-7)){
+    errors.push([recipe.id,portion,booked,rows.length]);
+   }
+  }
+  return errors;
+ });
+ expect(failures).toEqual([]);
 });

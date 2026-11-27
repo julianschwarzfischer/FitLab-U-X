@@ -38,10 +38,10 @@
         "Beeren waschen und mit Chiasamen darauf anrichten."
       ],
       "allergens_declared": [
-        "Milch",
-        "Gluten"
+        "Gluten",
+        "Milch"
       ],
-      "allergen_review": "pending",
+      "allergen_review": "ingredient_matrix_reviewed_labels_pending",
       "nutrition_per_serving": {
         "kcal": 450.1,
         "protein_g": 35.813,
@@ -55,8 +55,9 @@
       "release_status": "draft",
       "image_review": "draft_contact_sheet_crop",
       "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
-      "nutrition_status": "source_based_estimate_pending_review",
-      "nutrition_per_100g": null
+      "nutrition_status": "source_based_estimate",
+      "nutrition_per_100g": null,
+      "safety_revision": "3.8.14-reference"
     },
     {
       "id": "R002",
@@ -99,12 +100,12 @@
         "Ei",
         "Gluten"
       ],
-      "allergen_review": "pending",
+      "allergen_review": "ingredient_matrix_reviewed_labels_pending",
       "nutrition_per_serving": {
         "kcal": 387.35,
         "protein_g": 24.4568,
         "available_carbs_g": 29.922,
-        "fat_g": 16.833000000000002,
+        "fat_g": 16.833,
         "fiber_g": 8.2
       },
       "cooked_weight_g": null,
@@ -113,8 +114,9 @@
       "release_status": "draft",
       "image_review": "draft_contact_sheet_crop",
       "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
-      "nutrition_status": "source_based_estimate_pending_review",
-      "nutrition_per_100g": null
+      "nutrition_status": "source_based_estimate",
+      "nutrition_per_100g": null,
+      "safety_revision": "3.8.14-reference"
     },
     {
       "id": "R003",
@@ -157,10 +159,10 @@
         "Gluten",
         "Soja"
       ],
-      "allergen_review": "pending",
+      "allergen_review": "ingredient_matrix_reviewed_labels_pending",
       "nutrition_per_serving": {
         "kcal": 381.67,
-        "protein_g": 16.503700000000002,
+        "protein_g": 16.5037,
         "available_carbs_g": 47.1849,
         "fat_g": 10.587,
         "fiber_g": 15.1573
@@ -171,9 +173,10 @@
       "release_status": "draft",
       "image_review": "draft_contact_sheet_crop",
       "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
-      "nutrition_status": "source_based_estimate_pending_review",
+      "nutrition_status": "source_based_estimate",
       "nutrition_per_100g": null,
-      "passive_time": "über Nacht gekühlt"
+      "passive_time": "über Nacht gekühlt",
+      "safety_revision": "3.8.14-reference"
     },
     {
       "id": "R004",
@@ -211,10 +214,10 @@
         "Gluten",
         "Milch"
       ],
-      "allergen_review": "pending",
+      "allergen_review": "ingredient_matrix_reviewed_labels_pending",
       "nutrition_per_serving": {
         "kcal": 370.3,
-        "protein_g": 29.195999999999998,
+        "protein_g": 29.196,
         "available_carbs_g": 40.716,
         "fat_g": 7.594,
         "fiber_g": 8.625
@@ -225,8 +228,9 @@
       "release_status": "draft",
       "image_review": "draft_contact_sheet_crop",
       "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
-      "nutrition_status": "source_based_estimate_pending_review",
-      "nutrition_per_100g": null
+      "nutrition_status": "source_based_estimate",
+      "nutrition_per_100g": null,
+      "safety_revision": "3.8.14-reference"
     },
     {
       "id": "R005",
@@ -266,10 +270,10 @@
       ],
       "allergens_declared": [
         "Ei",
-        "Milch",
-        "Gluten"
+        "Gluten",
+        "Milch"
       ],
-      "allergen_review": "pending",
+      "allergen_review": "ingredient_matrix_reviewed_labels_pending",
       "nutrition_per_serving": {
         "kcal": 443.2,
         "protein_g": 32.287,
@@ -283,8 +287,9 @@
       "release_status": "draft",
       "image_review": "draft_contact_sheet_crop",
       "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
-      "nutrition_status": "source_based_estimate_pending_review",
-      "nutrition_per_100g": null
+      "nutrition_status": "source_based_estimate",
+      "nutrition_per_100g": null,
+      "safety_revision": "3.8.14-reference"
     },
     {
       "id": "R006",
@@ -324,15 +329,15 @@
         "Mit Brot servieren."
       ],
       "allergens_declared": [
-        "Soja",
-        "Gluten"
+        "Gluten",
+        "Soja"
       ],
-      "allergen_review": "pending",
+      "allergen_review": "ingredient_matrix_reviewed_labels_pending",
       "nutrition_per_serving": {
         "kcal": 419.8,
         "protein_g": 33.1244,
         "available_carbs_g": 32.268,
-        "fat_g": 15.075999999999999,
+        "fat_g": 15.076,
         "fiber_g": 10.82
       },
       "cooked_weight_g": null,
@@ -341,8 +346,9 @@
       "release_status": "draft",
       "image_review": "draft_contact_sheet_crop",
       "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
-      "nutrition_status": "source_based_estimate_pending_review",
-      "nutrition_per_100g": null
+      "nutrition_status": "source_based_estimate",
+      "nutrition_per_100g": null,
+      "safety_revision": "3.8.14-reference"
     },
     {
       "id": "R007",
@@ -387,21 +393,21 @@
       ],
       "steps": [
         "180 g bereits gekochten Reis je Basisportion bereitstellen und erhitzen.",
-        "Brokkoli und Edamame garen, Karotten schneiden.",
+        "Brokkoli garen. Edamame aus der Konserve abtropfen, nach Packungsangabe verzehrfertig machen und bei Bedarf erhitzen. Karotten schneiden.",
         "Hähnchen in Öl vollständig durchgaren.",
         "In einer Schale anrichten und mit Sesam bestreuen."
       ],
       "allergens_declared": [
-        "Soja",
-        "Sesam"
+        "Sesam",
+        "Soja"
       ],
-      "allergen_review": "pending",
+      "allergen_review": "ingredient_matrix_reviewed_labels_pending",
       "nutrition_per_serving": {
         "kcal": 609.9,
         "protein_g": 60.14728,
         "available_carbs_g": 54.1252,
         "fat_g": 14.87104,
-        "fiber_g": 9.173399999999999
+        "fiber_g": 9.1734
       },
       "cooked_weight_g": null,
       "image": "assets/R007.webp",
@@ -409,8 +415,9 @@
       "release_status": "draft",
       "image_review": "previously_approved_original",
       "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
-      "nutrition_status": "source_based_estimate_pending_review",
-      "nutrition_per_100g": null
+      "nutrition_status": "source_based_estimate",
+      "nutrition_per_100g": null,
+      "safety_revision": "3.8.14-reference"
     },
     {
       "id": "R008",
@@ -447,13 +454,13 @@
         "Steak anbraten und nach gewünschtem Gargrad servieren; für Risikogruppen vollständig durchgaren."
       ],
       "allergens_declared": [],
-      "allergen_review": "pending",
+      "allergen_review": "ingredient_matrix_reviewed_labels_pending",
       "nutrition_per_serving": {
         "kcal": 562.22,
         "protein_g": 44.379,
         "available_carbs_g": 58.89,
         "fat_g": 13.96705,
-        "fiber_g": 11.408000000000001
+        "fiber_g": 11.408
       },
       "cooked_weight_g": null,
       "image": "assets/R008.webp",
@@ -461,8 +468,9 @@
       "release_status": "draft",
       "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
       "image_review": "draft_contact_sheet_crop_pending_approval",
-      "nutrition_status": "source_based_estimate_pending_review",
-      "nutrition_per_100g": null
+      "nutrition_status": "source_based_estimate",
+      "nutrition_per_100g": null,
+      "safety_revision": "3.8.14-reference"
     },
     {
       "id": "R009",
@@ -503,7 +511,7 @@
         "Reis unterheben und erhitzen."
       ],
       "allergens_declared": [],
-      "allergen_review": "pending",
+      "allergen_review": "ingredient_matrix_reviewed_labels_pending",
       "nutrition_per_serving": {
         "kcal": 487.3,
         "protein_g": 48.2499,
@@ -517,8 +525,9 @@
       "release_status": "draft",
       "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
       "image_review": "draft_contact_sheet_crop_pending_approval",
-      "nutrition_status": "source_based_estimate_pending_review",
-      "nutrition_per_100g": null
+      "nutrition_status": "source_based_estimate",
+      "nutrition_per_100g": null,
+      "safety_revision": "3.8.14-reference"
     },
     {
       "id": "R010",
@@ -562,10 +571,10 @@
       "allergens_declared": [
         "Gluten"
       ],
-      "allergen_review": "pending",
+      "allergen_review": "ingredient_matrix_reviewed_labels_pending",
       "nutrition_per_serving": {
         "kcal": 750.15,
-        "protein_g": 44.013000000000005,
+        "protein_g": 44.013,
         "available_carbs_g": 61.8,
         "fat_g": 32.4684,
         "fiber_g": 13.1
@@ -576,8 +585,9 @@
       "release_status": "draft",
       "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
       "image_review": "draft_contact_sheet_crop_pending_approval",
-      "nutrition_status": "source_based_estimate_pending_review",
-      "nutrition_per_100g": null
+      "nutrition_status": "source_based_estimate",
+      "nutrition_per_100g": null,
+      "safety_revision": "3.8.14-reference"
     },
     {
       "id": "R011",
@@ -617,12 +627,12 @@
         "Gemüse und Hähnchen ergänzen und alles vollständig durchgaren."
       ],
       "allergens_declared": [],
-      "allergen_review": "pending",
+      "allergen_review": "ingredient_matrix_reviewed_labels_pending",
       "nutrition_per_serving": {
         "kcal": 502.22,
         "protein_g": 46.378,
-        "available_carbs_g": 49.169999999999995,
-        "fat_g": 11.833400000000001,
+        "available_carbs_g": 49.17,
+        "fat_g": 11.8334,
         "fiber_g": 6.644
       },
       "cooked_weight_g": null,
@@ -631,8 +641,9 @@
       "release_status": "draft",
       "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
       "image_review": "draft_contact_sheet_crop_pending_approval",
-      "nutrition_status": "source_based_estimate_pending_review",
-      "nutrition_per_100g": null
+      "nutrition_status": "source_based_estimate",
+      "nutrition_per_100g": null,
+      "safety_revision": "3.8.14-reference"
     },
     {
       "id": "R012",
@@ -673,13 +684,13 @@
         "Filet separat vollständig garen und auf Linsen servieren."
       ],
       "allergens_declared": [],
-      "allergen_review": "pending",
+      "allergen_review": "ingredient_matrix_reviewed_labels_pending",
       "nutrition_per_serving": {
         "kcal": 487.6,
         "protein_g": 53.4904,
         "available_carbs_g": 32.015,
         "fat_g": 12.512,
-        "fiber_g": 15.908000000000001
+        "fiber_g": 15.908
       },
       "cooked_weight_g": null,
       "image": "assets/R012.webp",
@@ -687,8 +698,9 @@
       "release_status": "draft",
       "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
       "image_review": "draft_contact_sheet_crop_pending_approval",
-      "nutrition_status": "source_based_estimate_pending_review",
-      "nutrition_per_100g": null
+      "nutrition_status": "source_based_estimate",
+      "nutrition_per_100g": null,
+      "safety_revision": "3.8.14-reference"
     },
     {
       "id": "R013",
@@ -737,12 +749,12 @@
         "Mit Chili würzen und 15 Minuten köcheln."
       ],
       "allergens_declared": [],
-      "allergen_review": "pending",
+      "allergen_review": "ingredient_matrix_reviewed_labels_pending",
       "nutrition_per_serving": {
         "kcal": 672.78,
         "protein_g": 44.0613,
-        "available_carbs_g": 39.732299999999995,
-        "fat_g": 31.042699999999996,
+        "available_carbs_g": 39.7323,
+        "fat_g": 31.0427,
         "fiber_g": 23.451
       },
       "cooked_weight_g": null,
@@ -751,8 +763,9 @@
       "release_status": "draft",
       "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
       "image_review": "draft_contact_sheet_crop_pending_approval",
-      "nutrition_status": "source_based_estimate_pending_review",
-      "nutrition_per_100g": null
+      "nutrition_status": "source_based_estimate",
+      "nutrition_per_100g": null,
+      "safety_revision": "3.8.14-reference"
     },
     {
       "id": "R014",
@@ -800,12 +813,12 @@
         "Gluten",
         "Milch"
       ],
-      "allergen_review": "pending",
+      "allergen_review": "ingredient_matrix_reviewed_labels_pending",
       "nutrition_per_serving": {
         "kcal": 538.4,
         "protein_g": 52.006,
         "available_carbs_g": 53.374,
-        "fat_g": 10.979000000000001,
+        "fat_g": 10.979,
         "fiber_g": 6.815
       },
       "cooked_weight_g": null,
@@ -814,8 +827,9 @@
       "release_status": "draft",
       "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
       "image_review": "draft_contact_sheet_crop_pending_approval",
-      "nutrition_status": "source_based_estimate_pending_review",
-      "nutrition_per_100g": null
+      "nutrition_status": "source_based_estimate",
+      "nutrition_per_100g": null,
+      "safety_revision": "3.8.14-reference"
     },
     {
       "id": "R015",
@@ -867,12 +881,12 @@
       "allergens_declared": [
         "Fisch"
       ],
-      "allergen_review": "pending",
+      "allergen_review": "ingredient_matrix_reviewed_labels_pending",
       "nutrition_per_serving": {
         "kcal": 639.35,
         "protein_g": 41.8851,
         "available_carbs_g": 54.787,
-        "fat_g": 25.208000000000002,
+        "fat_g": 25.208,
         "fiber_g": null
       },
       "cooked_weight_g": null,
@@ -881,8 +895,9 @@
       "release_status": "draft",
       "image_review": "previously_approved_original",
       "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
-      "nutrition_status": "source_based_estimate_pending_review",
-      "nutrition_per_100g": null
+      "nutrition_status": "source_based_estimate",
+      "nutrition_per_100g": null,
+      "safety_revision": "3.8.14-reference"
     },
     {
       "id": "R016",
@@ -921,7 +936,7 @@
       "allergens_declared": [
         "Fisch"
       ],
-      "allergen_review": "pending",
+      "allergen_review": "ingredient_matrix_reviewed_labels_pending",
       "nutrition_per_serving": {
         "kcal": 448.62,
         "protein_g": 39.9905,
@@ -935,8 +950,9 @@
       "release_status": "draft",
       "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
       "image_review": "draft_contact_sheet_crop",
-      "nutrition_status": "source_based_estimate_pending_review",
-      "nutrition_per_100g": null
+      "nutrition_status": "source_based_estimate",
+      "nutrition_per_100g": null,
+      "safety_revision": "3.8.14-reference"
     },
     {
       "id": "R017",
@@ -978,12 +994,12 @@
       "allergens_declared": [
         "Fisch"
       ],
-      "allergen_review": "pending",
+      "allergen_review": "ingredient_matrix_reviewed_labels_pending",
       "nutrition_per_serving": {
         "kcal": 448.92,
         "protein_g": 48.06245,
         "available_carbs_g": 33.425,
-        "fat_g": 9.826500000000001,
+        "fat_g": 9.8265,
         "fiber_g": null
       },
       "cooked_weight_g": null,
@@ -992,8 +1008,9 @@
       "release_status": "draft",
       "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
       "image_review": "draft_contact_sheet_crop",
-      "nutrition_status": "source_based_estimate_pending_review",
-      "nutrition_per_100g": null
+      "nutrition_status": "source_based_estimate",
+      "nutrition_per_100g": null,
+      "safety_revision": "3.8.14-reference"
     },
     {
       "id": "R018",
@@ -1040,12 +1057,12 @@
       "allergens_declared": [
         "Krebstiere"
       ],
-      "allergen_review": "pending",
+      "allergen_review": "ingredient_matrix_reviewed_labels_pending",
       "nutrition_per_serving": {
         "kcal": 478.74,
         "protein_g": 38.801,
         "available_carbs_g": 55.67,
-        "fat_g": 9.618500000000001,
+        "fat_g": 9.6185,
         "fiber_g": 4.9738
       },
       "cooked_weight_g": null,
@@ -1054,8 +1071,9 @@
       "release_status": "draft",
       "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
       "image_review": "draft_contact_sheet_crop_pending_approval",
-      "nutrition_status": "source_based_estimate_pending_review",
-      "nutrition_per_100g": null
+      "nutrition_status": "source_based_estimate",
+      "nutrition_per_100g": null,
+      "safety_revision": "3.8.14-reference"
     },
     {
       "id": "R019",
@@ -1096,7 +1114,7 @@
         "Mit der angegebenen Menge bereits gekochtem Reis servieren."
       ],
       "allergens_declared": [],
-      "allergen_review": "pending",
+      "allergen_review": "ingredient_matrix_reviewed_labels_pending",
       "nutrition_per_serving": {
         "kcal": 528.6,
         "protein_g": 28.867,
@@ -1110,8 +1128,9 @@
       "release_status": "draft",
       "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
       "image_review": "draft_contact_sheet_crop",
-      "nutrition_status": "source_based_estimate_pending_review",
-      "nutrition_per_100g": null
+      "nutrition_status": "source_based_estimate",
+      "nutrition_per_100g": null,
+      "safety_revision": "3.8.14-reference"
     },
     {
       "id": "R020",
@@ -1152,18 +1171,18 @@
       ],
       "steps": [
         "Tofu würfeln und in Öl anbraten.",
-        "Brokkoli und Edamame garen.",
+        "Brokkoli garen. Edamame aus der Konserve abtropfen und nach Packungsangabe verzehrfertig machen; bei Bedarf erhitzen.",
         "Auf Reis anrichten und mit Sesam bestreuen."
       ],
       "allergens_declared": [
-        "Soja",
-        "Sesam"
+        "Sesam",
+        "Soja"
       ],
-      "allergen_review": "pending",
+      "allergen_review": "ingredient_matrix_reviewed_labels_pending",
       "nutrition_per_serving": {
         "kcal": 579.25,
         "protein_g": 44.8438,
-        "available_carbs_g": 44.221000000000004,
+        "available_carbs_g": 44.221,
         "fat_g": 22.34805,
         "fiber_g": 11.054
       },
@@ -1173,8 +1192,9 @@
       "release_status": "draft",
       "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
       "image_review": "draft_contact_sheet_crop",
-      "nutrition_status": "source_based_estimate_pending_review",
-      "nutrition_per_100g": null
+      "nutrition_status": "source_based_estimate",
+      "nutrition_per_100g": null,
+      "safety_revision": "3.8.14-reference"
     },
     {
       "id": "R021",
@@ -1214,12 +1234,12 @@
         "Bei 200 °C weich rösten."
       ],
       "allergens_declared": [],
-      "allergen_review": "pending",
+      "allergen_review": "ingredient_matrix_reviewed_labels_pending",
       "nutrition_per_serving": {
-        "kcal": 560.4200000000001,
+        "kcal": 560.42,
         "protein_g": 18.475,
         "available_carbs_g": 76.128,
-        "fat_g": 14.279000000000002,
+        "fat_g": 14.279,
         "fiber_g": 26.09
       },
       "cooked_weight_g": null,
@@ -1228,9 +1248,10 @@
       "release_status": "draft",
       "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
       "image_review": "draft_contact_sheet_crop",
-      "nutrition_status": "source_based_estimate_pending_review",
+      "nutrition_status": "source_based_estimate",
       "nutrition_per_100g": null,
-      "image_source": "Generated editorial illustration; visual approval pending"
+      "image_source": "Generated editorial illustration; visual approval pending",
+      "safety_revision": "3.8.14-reference"
     },
     {
       "id": "R022",
@@ -1267,12 +1288,12 @@
       ],
       "steps": [
         "Die angegebene Menge bereits gekochte Quinoa abkühlen lassen.",
-        "Gemüse schneiden, Feta zerbröseln und alles mit Öl mischen."
+        "Gemüse schneiden, Feta zerbröseln und alles mit Öl mischen. Für vegetarische Ernährung ausschließlich Feta mit nachweislich mikrobiellem Lab verwenden."
       ],
       "allergens_declared": [
         "Milch"
       ],
-      "allergen_review": "pending",
+      "allergen_review": "ingredient_matrix_reviewed_labels_pending",
       "nutrition_per_serving": {
         "kcal": 483.15,
         "protein_g": 19.9592,
@@ -1286,10 +1307,11 @@
       "release_status": "draft",
       "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
       "image_review": "draft_contact_sheet_crop",
-      "nutrition_status": "source_based_estimate_pending_review",
+      "nutrition_status": "source_based_estimate",
       "nutrition_per_100g": null,
       "image_source": "Generated editorial illustration; visual approval pending",
-      "diet_condition": "Feta mit mikrobiellem Lab verwenden; andernfalls nicht als vegetarisch empfehlen."
+      "diet_condition": "Feta mit mikrobiellem Lab verwenden; andernfalls nicht als vegetarisch empfehlen.",
+      "safety_revision": "3.8.14-reference"
     },
     {
       "id": "R023",
@@ -1332,7 +1354,7 @@
       "allergens_declared": [
         "Gluten"
       ],
-      "allergen_review": "pending",
+      "allergen_review": "ingredient_matrix_reviewed_labels_pending",
       "nutrition_per_serving": {
         "kcal": 572.75,
         "protein_g": 31.0552,
@@ -1346,9 +1368,10 @@
       "release_status": "draft",
       "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
       "image_review": "draft_contact_sheet_crop",
-      "nutrition_status": "source_based_estimate_pending_review",
+      "nutrition_status": "source_based_estimate",
       "nutrition_per_100g": null,
-      "image_source": "Generated editorial illustration; visual approval pending"
+      "image_source": "Generated editorial illustration; visual approval pending",
+      "safety_revision": "3.8.14-reference"
     },
     {
       "id": "R024",
@@ -1392,7 +1415,7 @@
         "Ei",
         "Milch"
       ],
-      "allergen_review": "pending",
+      "allergen_review": "ingredient_matrix_reviewed_labels_pending",
       "nutrition_per_serving": {
         "kcal": 505.3,
         "protein_g": 38.143,
@@ -1406,9 +1429,10 @@
       "release_status": "draft",
       "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
       "image_review": "draft_contact_sheet_crop",
-      "nutrition_status": "source_based_estimate_pending_review",
+      "nutrition_status": "source_based_estimate",
       "nutrition_per_100g": null,
-      "image_source": "Generated editorial illustration; visual approval pending"
+      "image_source": "Generated editorial illustration; visual approval pending",
+      "safety_revision": "3.8.14-reference"
     },
     {
       "id": "R025",
@@ -1439,10 +1463,10 @@
         "Beeren und Hafer daraufgeben."
       ],
       "allergens_declared": [
-        "Milch",
-        "Gluten"
+        "Gluten",
+        "Milch"
       ],
-      "allergen_review": "pending",
+      "allergen_review": "ingredient_matrix_reviewed_labels_pending",
       "nutrition_per_serving": {
         "kcal": 227.2,
         "protein_g": 26.683,
@@ -1456,8 +1480,9 @@
       "release_status": "draft",
       "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
       "image_review": "draft_visual_match_pending_owner_review",
-      "nutrition_status": "source_based_estimate_pending_review",
-      "nutrition_per_100g": null
+      "nutrition_status": "source_based_estimate",
+      "nutrition_per_100g": null,
+      "safety_revision": "3.8.14-reference"
     },
     {
       "id": "R026",
@@ -1490,12 +1515,12 @@
       "allergens_declared": [
         "Milch"
       ],
-      "allergen_review": "pending",
+      "allergen_review": "ingredient_matrix_reviewed_labels_pending",
       "nutrition_per_serving": {
         "kcal": 291.9,
         "protein_g": 24.0078,
         "available_carbs_g": 19.781,
-        "fat_g": 11.684000000000001,
+        "fat_g": 11.684,
         "fiber_g": 3.596
       },
       "cooked_weight_g": null,
@@ -1504,8 +1529,9 @@
       "release_status": "draft",
       "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
       "image_review": "draft_visual_match_pending_owner_review",
-      "nutrition_status": "source_based_estimate_pending_review",
-      "nutrition_per_100g": null
+      "nutrition_status": "source_based_estimate",
+      "nutrition_per_100g": null,
+      "safety_revision": "3.8.14-reference"
     },
     {
       "id": "R027",
@@ -1546,13 +1572,13 @@
       "allergens_declared": [
         "Sesam"
       ],
-      "allergen_review": "pending",
+      "allergen_review": "ingredient_matrix_reviewed_labels_pending",
       "nutrition_per_serving": {
         "kcal": 256.0,
         "protein_g": 11.2965,
-        "available_carbs_g": 24.266000000000002,
+        "available_carbs_g": 24.266,
         "fat_g": 8.945,
-        "fiber_g": 14.439350000000001
+        "fiber_g": 14.43935
       },
       "cooked_weight_g": null,
       "image": "assets/R027.webp",
@@ -1560,8 +1586,9 @@
       "release_status": "draft",
       "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
       "image_review": "draft_visual_match_pending_owner_review",
-      "nutrition_status": "source_based_estimate_pending_review",
-      "nutrition_per_100g": null
+      "nutrition_status": "source_based_estimate",
+      "nutrition_per_100g": null,
+      "safety_revision": "3.8.14-reference"
     },
     {
       "id": "R028",
@@ -1596,13 +1623,13 @@
         "Ei",
         "Gluten"
       ],
-      "allergen_review": "pending",
+      "allergen_review": "ingredient_matrix_reviewed_labels_pending",
       "nutrition_per_serving": {
         "kcal": 260.4,
         "protein_g": 11.547,
         "available_carbs_g": 19.626,
         "fat_g": 13.302,
-        "fiber_g": 7.9079999999999995
+        "fiber_g": 7.908
       },
       "cooked_weight_g": null,
       "image": "assets/R028.webp",
@@ -1610,8 +1637,9 @@
       "release_status": "draft",
       "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
       "image_review": "draft_visual_match_pending_owner_review",
-      "nutrition_status": "source_based_estimate_pending_review",
-      "nutrition_per_100g": null
+      "nutrition_status": "source_based_estimate",
+      "nutrition_per_100g": null,
+      "safety_revision": "3.8.14-reference"
     },
     {
       "id": "R029",
@@ -1648,7 +1676,7 @@
       "allergens_declared": [
         "Milch"
       ],
-      "allergen_review": "pending",
+      "allergen_review": "ingredient_matrix_reviewed_labels_pending",
       "nutrition_per_serving": {
         "kcal": 248.55,
         "protein_g": 28.03915,
@@ -1662,8 +1690,9 @@
       "release_status": "draft",
       "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
       "image_review": "draft_visual_match_pending_owner_review",
-      "nutrition_status": "source_based_estimate_pending_review",
-      "nutrition_per_100g": null
+      "nutrition_status": "source_based_estimate",
+      "nutrition_per_100g": null,
+      "safety_revision": "3.8.14-reference"
     },
     {
       "id": "R030",
@@ -1677,7 +1706,7 @@
       "base_servings": 1,
       "ingredients": [
         {
-          "food_id": "F064",
+          "food_id": "F024",
           "grams": 150
         },
         {
@@ -1690,20 +1719,20 @@
         }
       ],
       "steps": [
-        "Edamame nach Packungsangabe vollständig garen.",
+        "Edamame aus der Konserve abtropfen, 150 g je Basisportion abwiegen und nach Packungsangabe verzehrfertig machen.",
         "Mit Zitrone und Sesam mischen."
       ],
       "allergens_declared": [
-        "Soja",
-        "Sesam"
+        "Sesam",
+        "Soja"
       ],
-      "allergen_review": "pending",
+      "allergen_review": "ingredient_matrix_reviewed_labels_pending",
       "nutrition_per_serving": {
-        "kcal": 251.75,
-        "protein_g": 20.6393,
-        "available_carbs_g": 9.626000000000001,
-        "fat_g": 12.764999999999999,
-        "fiber_g": 6.87835
+        "kcal": 173.75,
+        "protein_g": 14.0393,
+        "available_carbs_g": 5.576,
+        "fat_g": 9.165,
+        "fiber_g": 5.07835
       },
       "cooked_weight_g": null,
       "image": "assets/R030.webp",
@@ -1711,8 +1740,9 @@
       "release_status": "draft",
       "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
       "image_review": "draft_visual_match_pending_owner_review",
-      "nutrition_status": "source_based_estimate_pending_review",
-      "nutrition_per_100g": null
+      "nutrition_status": "source_based_estimate",
+      "nutrition_per_100g": null,
+      "safety_revision": "3.8.14-reference"
     }
   ]
 }

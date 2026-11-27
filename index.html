@@ -231,7 +231,7 @@ button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid 
 .xpHero>*{position:relative}
 .xpEvoFocus .xpSafetyContext{margin:5px 0 0;font-size:.9rem;line-height:1.35;color:var(--text)}
 @media(max-width:480px){.xp23Coverage span{display:block}.xp22Focus button{min-height:44px;margin-top:6px}}
-</style><style>@media(prefers-reduced-motion:reduce){.visual64 .play64{display:none}}.xpAvatarStage:has(.xpBody){background:#202020}.xpBody .xpMuscle.selected path{stroke:white;stroke-width:.8}.xpBody .xpMuscle:focus-visible path{stroke:#fff;stroke-width:2}.visual64 svg[data-pose]{background:#202020;border-radius:12px;overflow:hidden}</style><link rel="stylesheet" href="premium-ux.css"><link rel="stylesheet" href="cinematic.css"><link rel="stylesheet" href="first-impression.css"><style>html:has(fitlab-design-story),body:has(> fitlab-design-story){background:#141b13;scroll-behavior:auto;overflow-anchor:none}body:has(> fitlab-design-story)>:not(fitlab-design-story){display:none!important}</style><style>html:has(fitlab-personal-dashboard),body:has(> fitlab-personal-dashboard){background:#141b13;scroll-behavior:auto;overflow-anchor:none}body:has(> fitlab-personal-dashboard)>:not(fitlab-personal-dashboard,#xp131Update){display:none!important}</style><style>html:has(fitlab-nutrition),body:has(> fitlab-nutrition){background:#141b13;scroll-behavior:auto}body:has(> fitlab-nutrition)>:not(fitlab-nutrition,#xp131Update){display:none!important}</style></head><body><header><div><h1><img id="brandLogo" hidden alt=""><span id="brandName">FITNESS LAB</span><small id="appVersion">EXP 1.6.2 EVOLUTION 3.8 PERSONAL NUTRITION</small></h1><small id="brandTag">Dein Körper. Dein Ziel. Dein Plan.</small></div></header><main><div id="today"></div><div id="nutrition" class="hidden"><h2>Ernährungstagebuch</h2><label>Datum</label><input type="date" id="date"><div id="daily"></div><section><h3>Lebensmittel hinzufügen</h3><label for="query">Name des Lebensmittels</label><input id="query" type="search" placeholder="z. B. Haferflocken" autocomplete="off"><div id="results"></div><hr><label>Verpackte Lebensmittel · Barcode oder Online-Suche</label><input id="barcode" inputmode="numeric" placeholder="EAN / Barcode"><div class="actions" style="margin-top:9px"><button id="lookup">Barcode suchen</button><button class="secondary" id="scan">Kamera</button><button class="secondary" id="online">Online-Suche</button></div><video id="video" class="hidden" playsinline muted></video><button id="stop" class="hidden secondary">Kamera schließen</button><p id="status" role="status" class="muted"></p><label>Barcode-Foto (alternativ zur Live-Kamera)</label><input id="barcodePhoto" type="file" accept="image/*" capture="environment"><small>Barcode waagerecht und scharf fotografieren. Fotos werden lokal verarbeitet. Die Erkennung fertiger Gerichte ist nicht enthalten.</small><small>Online-Abfrage: Open Food Facts. Produktdaten können fehlen oder fehlerhaft sein. Bitte Etikett prüfen. <a href="https://world.openfoodfacts.org/">Quelle / ODbL</a></small></section><section id="foodform"><h3>Lebensmittel / eigene Mahlzeit</h3><div id="productmeta" class="productmeta"></div><label>Name</label><input id="foodname"><div class="grid"><div><label>kcal je 100 g</label><input id="fk" type="number" min="0" step="any"></div><div><label>Protein je 100 g</label><input id="fp" type="number" min="0" step="any"></div><div><label>Kohlenhydrate je 100 g</label><input id="fc" type="number" min="0" step="any"></div><div><label>Fett je 100 g</label><input id="ff" type="number" min="0" step="any"></div><div><label for="fiber14">Ballaststoffe je 100 g (optional)</label><input id="fiber14" type="number" min="0" max="100" step="any" placeholder="Unbekannt"></div><div><label>Menge (g)</label><input id="grams" type="number" min="1" max="10000" value="100"></div><div><label>Mahlzeit</label><select id="meal"><option>Frühstück</option><option>Mittagessen</option><option>Abendessen</option><option>Snacks</option></select></div></div><div id="portionbuttons" class="actions"></div><div id="preview" class="portion" aria-live="polite"></div><label><input id="favorite" type="checkbox"> Als eigenes Lebensmittel speichern</label><button id="add">Eintragen</button><p id="fooderror" role="status"></p></section><section><h3>Rezepte & gespeicherte Mahlzeiten</h3><p class="muted">Zutaten aus dem Eingabefeld übernehmen. Bei gekochten Gerichten das tatsächliche Gesamtgewicht nach dem Garen angeben.</p><button class="secondary" id="ingredient">Aktuelles Lebensmittel als Zutat übernehmen</button><div id="ingredients"></div><label>Rezeptname</label><input id="recipeName"><label>Gesamtgewicht des fertigen Rezepts (g)</label><input id="recipeWeight" type="number" min="1" step="any"><button id="saveRecipe" style="margin-top:10px">Rezept speichern</button><p id="recipeStatus" role="status"></p><div id="recipes"></div></section><section><h3>Meine Favoriten</h3><div id="favlist"></div></section><div id="entries"></div><section id="waterpanel"></section><button class="secondary" id="copyday">Mahlzeiten vom Vortag übernehmen</button></div><div id="profile" class="hidden"><h2>Dein Profil</h2><section><h3>01 · Ziele</h3><div id="goals" class="chips"></div><label>Priorität</label><select id="priority"><option value="auto">Automatisch</option><option value="loss">Fettabbau</option><option value="gain">Aufbau</option><option value="maintain">Gewicht halten</option></select></section><section><h3>02 · Körperdaten</h3><div class="grid" id="bodyfields"></div><label for="sex">Geschlecht für die Kalorienberechnung</label><select id="sex" aria-describedby="xpCalculationSexHint"><option value="">Bitte auswählen</option><option value="m">Männlich</option><option value="f">Weiblich</option></select><small id="xpCalculationSexHint">Diese Angabe fließt in dein Kalorienziel ein. Deine Avatarfigur stellst du separat ein.</small><label><input type="checkbox" id="restricted"> Schwangerschaft, Stillzeit oder Erkrankung / Essstörung mit individuellem Ernährungsbedarf</label></section><section><h3>03 · Alltag und Training</h3><div id="selectfields"></div><div class="grid"><div><label>Einheiten pro Woche</label><input id="days" type="number" min="0" max="7"></div><div><label>Minuten pro Einheit</label><input id="minutes" type="number" min="15" max="180"></div></div><div id="equipmentSettings66"><h3>Trainingsgeräte</h3><div id="equipment" class="chips"></div><label>Sonstige Geräte</label><input id="extra"></div><label>Einschränkungen (optional)</label><textarea id="limits"></textarea></section><section id="calorieSettings66"><h3>04 · Kalorienziel</h3><label for="adjust">Kalorienziel anpassen (kcal pro Tag)</label><input type="range" id="adjust" min="-300" max="500" step="50"><div id="adjustlabel"></div><button class="secondary" id="resetadjust">Empfehlung wiederherstellen</button><div id="profileout"></div></section><section id="brandPanel" class="brandsettings"></section><section><h3>Datensicherung</h3><p class="muted">Deine Daten bleiben lokal in dieser App. Safari und die installierte App können getrennte Speicher verwenden. Exportiere regelmäßig eine Sicherung; beim Löschen von Websitedaten können Einträge verloren gehen. Sicherungen enthalten persönliche Daten.</p><button id="export">JSON exportieren</button><button id="xpDiagExport" class="secondary" type="button">Speicherdiagnose exportieren (QA)</button><small>QA-Diagnose: enthält technische IDs und Zeitpunkte der Speichervorgänge, keine Mahlzeitnamen. Nur mit künstlichen Testdaten verwenden.</small><label>Sicherung wiederherstellen (ersetzt lokale Daten)</label><input id="import" type="file" accept="application/json,.json"><p id="importstatus" role="status"></p></section></div><div id="training" class="hidden"><h2>Training</h2><section id="trainingout"></section></div></main><nav class="nav"><button data-tab="today" class="active">Heute</button><button data-tab="nutrition">Ernährung</button><button data-tab="training">Training</button><button data-tab="profile">Profil</button></nav><script>
+</style><style>@media(prefers-reduced-motion:reduce){.visual64 .play64{display:none}}.xpAvatarStage:has(.xpBody){background:#202020}.xpBody .xpMuscle.selected path{stroke:white;stroke-width:.8}.xpBody .xpMuscle:focus-visible path{stroke:#fff;stroke-width:2}.visual64 svg[data-pose]{background:#202020;border-radius:12px;overflow:hidden}</style><link rel="stylesheet" href="premium-ux.css"><link rel="stylesheet" href="cinematic.css"><link rel="stylesheet" href="first-impression.css"><style>html:has(fitlab-design-story),body:has(> fitlab-design-story){background:#141b13;scroll-behavior:auto;overflow-anchor:none}body:has(> fitlab-design-story)>:not(fitlab-design-story){display:none!important}</style><style>html:has(fitlab-personal-dashboard),body:has(> fitlab-personal-dashboard){background:#141b13;scroll-behavior:auto;overflow-anchor:none}body:has(> fitlab-personal-dashboard)>:not(fitlab-personal-dashboard,fitlab-goal,#xp131Update){display:none!important}</style><style>html:has(fitlab-nutrition),body:has(> fitlab-nutrition){background:#141b13;scroll-behavior:auto}body:has(> fitlab-nutrition)>:not(fitlab-nutrition,fitlab-goal,#xp131Update){display:none!important}</style></head><body><header><div><h1><img id="brandLogo" hidden alt=""><span id="brandName">FITNESS LAB</span><small id="appVersion">EXP 1.6.2 EVOLUTION 3.8.14 INTELLIGENT SAFETY</small></h1><small id="brandTag">Dein Körper. Dein Ziel. Dein Plan.</small></div></header><main><div id="today"></div><div id="nutrition" class="hidden"><h2>Ernährungstagebuch</h2><label>Datum</label><input type="date" id="date"><div id="daily"></div><section><h3>Lebensmittel hinzufügen</h3><label for="query">Name des Lebensmittels</label><input id="query" type="search" placeholder="z. B. Haferflocken" autocomplete="off"><div id="results"></div><hr><label>Verpackte Lebensmittel · Barcode oder Online-Suche</label><input id="barcode" inputmode="numeric" placeholder="EAN / Barcode"><div class="actions" style="margin-top:9px"><button id="lookup">Barcode suchen</button><button class="secondary" id="scan">Kamera</button><button class="secondary" id="online">Online-Suche</button></div><video id="video" class="hidden" playsinline muted></video><button id="stop" class="hidden secondary">Kamera schließen</button><p id="status" role="status" class="muted"></p><label>Barcode-Foto (alternativ zur Live-Kamera)</label><input id="barcodePhoto" type="file" accept="image/*" capture="environment"><small>Barcode waagerecht und scharf fotografieren. Fotos werden lokal verarbeitet. Die Erkennung fertiger Gerichte ist nicht enthalten.</small><small>Online-Abfrage: Open Food Facts. Produktdaten können fehlen oder fehlerhaft sein. Bitte Etikett prüfen. <a href="https://world.openfoodfacts.org/">Quelle / ODbL</a></small></section><section id="foodform"><h3>Lebensmittel / eigene Mahlzeit</h3><div id="productmeta" class="productmeta"></div><label>Name</label><input id="foodname"><div class="grid"><div><label>kcal je 100 g</label><input id="fk" type="number" min="0" step="any"></div><div><label>Protein je 100 g</label><input id="fp" type="number" min="0" step="any"></div><div><label>Kohlenhydrate je 100 g</label><input id="fc" type="number" min="0" step="any"></div><div><label>Fett je 100 g</label><input id="ff" type="number" min="0" step="any"></div><div><label for="fiber14">Ballaststoffe je 100 g (optional)</label><input id="fiber14" type="number" min="0" max="100" step="any" placeholder="Unbekannt"></div><div><label>Menge (g)</label><input id="grams" type="number" min="1" max="10000" value="100"></div><div><label>Mahlzeit</label><select id="meal"><option>Frühstück</option><option>Mittagessen</option><option>Abendessen</option><option>Snacks</option></select></div></div><div id="portionbuttons" class="actions"></div><div id="preview" class="portion" aria-live="polite"></div><label><input id="favorite" type="checkbox"> Als eigenes Lebensmittel speichern</label><button id="add">Eintragen</button><p id="fooderror" role="status"></p></section><section><h3>Rezepte & gespeicherte Mahlzeiten</h3><p class="muted">Zutaten aus dem Eingabefeld übernehmen. Bei gekochten Gerichten das tatsächliche Gesamtgewicht nach dem Garen angeben.</p><button class="secondary" id="ingredient">Aktuelles Lebensmittel als Zutat übernehmen</button><div id="ingredients"></div><label>Rezeptname</label><input id="recipeName"><label>Gesamtgewicht des fertigen Rezepts (g)</label><input id="recipeWeight" type="number" min="1" step="any"><button id="saveRecipe" style="margin-top:10px">Rezept speichern</button><p id="recipeStatus" role="status"></p><div id="recipes"></div></section><section><h3>Meine Favoriten</h3><div id="favlist"></div></section><div id="entries"></div><section id="waterpanel"></section><button class="secondary" id="copyday">Mahlzeiten vom Vortag übernehmen</button></div><div id="profile" class="hidden"><h2>Dein Profil</h2><section><h3>01 · Ziele</h3><div id="goals" class="chips"></div><label>Priorität</label><select id="priority"><option value="auto">Automatisch</option><option value="loss">Fettabbau</option><option value="gain">Aufbau</option><option value="maintain">Gewicht halten</option></select></section><section><h3>02 · Körperdaten</h3><div class="grid" id="bodyfields"></div><label for="sex">Geschlecht für die Kalorienberechnung</label><select id="sex" aria-describedby="xpCalculationSexHint"><option value="">Bitte auswählen</option><option value="m">Männlich</option><option value="f">Weiblich</option></select><small id="xpCalculationSexHint">Diese Angabe fließt in dein Kalorienziel ein. Deine Avatarfigur stellst du separat ein.</small><label><input type="checkbox" id="restricted"> Schwangerschaft, Stillzeit oder Erkrankung / Essstörung mit individuellem Ernährungsbedarf</label></section><section><h3>03 · Alltag und Training</h3><div id="selectfields"></div><div class="grid"><div><label>Einheiten pro Woche</label><input id="days" type="number" min="0" max="7"></div><div><label>Minuten pro Einheit</label><input id="minutes" type="number" min="15" max="180"></div></div><div id="equipmentSettings66"><h3>Trainingsgeräte</h3><div id="equipment" class="chips"></div><label>Sonstige Geräte</label><input id="extra"></div><label>Einschränkungen (optional)</label><textarea id="limits"></textarea></section><section id="calorieSettings66"><h3>04 · Kalorienziel</h3><label for="adjust">Kalorienziel anpassen (kcal pro Tag)</label><input type="range" id="adjust" min="-300" max="500" step="50"><div id="adjustlabel"></div><button class="secondary" id="resetadjust">Empfehlung wiederherstellen</button><div id="profileout"></div></section><section id="brandPanel" class="brandsettings"></section><section><h3>Datensicherung</h3><p class="muted">Deine Daten bleiben lokal in dieser App. Safari und die installierte App können getrennte Speicher verwenden. Exportiere regelmäßig eine Sicherung; beim Löschen von Websitedaten können Einträge verloren gehen. Sicherungen enthalten persönliche Daten.</p><button id="export">JSON exportieren</button><button id="xpDiagExport" class="secondary" type="button">Speicherdiagnose exportieren (QA)</button><small>QA-Diagnose: enthält technische IDs und Zeitpunkte der Speichervorgänge, keine Mahlzeitnamen. Nur mit künstlichen Testdaten verwenden.</small><label>Sicherung wiederherstellen (ersetzt lokale Daten)</label><input id="import" type="file" accept="application/json,.json"><p id="importstatus" role="status"></p></section></div><div id="training" class="hidden"><h2>Training</h2><section id="trainingout"></section></div></main><nav class="nav"><button data-tab="today" class="active">Heute</button><button data-tab="nutrition">Ernährung</button><button data-tab="training">Training</button><button data-tab="profile">Profil</button></nav><script src="nutrition/safety.js?v=3814"></script><script src="nutrition/goal.js?v=3814"></script><script>
 const fmt=(v,d=1)=>Number(v).toLocaleString("de-DE",{maximumFractionDigits:d,minimumFractionDigits:d});const $=id=>document.getElementById(id), esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])), num=(v)=>Number(v), rnd=v=>Math.round(v), dateKey=(d=new Date())=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
 const goals=['Fett reduzieren','Bauchfett verlieren','Muskelaufbau','Fitter werden','Cardio / Ausdauer','Kraft steigern','Gewicht halten','Gewicht zunehmen','Beweglichkeit verbessern'], equipment=['Keine Geräte','Kurzhanteln','Langhantel','Hantelbank','Klimmzugstange','Kettlebells','Widerstandsbänder','Trainingsmatte','Kabelzug','Kraftstation','Fitnessgeräte im Studio','Laufband','Walkingpad','Fahrrad / Ergometer','Crosstrainer','Rudergerät','Springseil','TRX / Schlingentrainer','Dip-Barren','Faszienrolle','Sonstige'];
 // 1.6.1 – Data isolation. Each deployment path uses its own key namespace; the original Experience path retains its existing data.
@@ -284,12 +284,21 @@ async function xpIDBInit(){
   const tx=xpIDBDatabase.transaction(xpIDBStore,'readwrite'),store=tx.objectStore(xpIDBStore);
   let canonical=null,migrated=false,settled=false;
   const fail=err=>{if(settled)return;settled=true;try{tx.abort()}catch{}reject(err)};
+  function migrateNutrition(first){
+   if(Object.hasOwn(canonical,'nutritionProtection'))return;
+   let raw;
+   try{raw=fitStore161.getItem(xpNutritionPreferenceKey)}catch{raw='invalid'}
+   if(raw===null&&!first)return; // Older records and imports remain explicitly unresolved.
+   canonical.nutritionProtection=fitLabNutritionSafety.migrate(raw,first,crypto.randomUUID());
+   store.put(xpAClone(canonical),xpAKey);
+  }
   const get=store.get(xpAKey);
   get.onsuccess=()=>{
    try{
     if(get.result!==undefined){
      canonical=get.result;
      if(!validBackup(canonical)||!xpAValidDomain(canonical))throw Error('Gespeicherter Datenbestand ist beschädigt. Kein Ersetzen.');
+     migrateNutrition(false);
      return;
     }
     let legacy=null;
@@ -300,6 +309,7 @@ async function xpIDBInit(){
     }else source=xpAClone(state);
     canonical=xpAEnsureIds(xpNextNormalizeBackup(source));
     if(!validBackup(canonical)||!xpAValidDomain(canonical))throw Error('Alter Datenbestand ungültig. Migration abgebrochen, ohne Daten zu ersetzen.');
+    migrateNutrition(legacy===null);
     store.put(xpAClone(canonical),xpAKey);
     migrated=true;
    }catch(err){fail(err)}
@@ -319,7 +329,7 @@ async function xpIDBSynchronize(){
   state=xpAEnsureIds(remote);xpABaseline=xpAClone(state);xpAQueuedBaseline=xpAClone(state);
   if(editEntry&&xpAEntryConflict()){xpAOpenFormConflict=true;}
   else if(!editEntry){const active=document.activeElement;if(active?.matches('#profile input,#profile select,#profile textarea'))xpAAlert('Profil wurde in einem anderen Tab geändert. Eingabe prüfen.');else initProfile()}
-  render();if(xpAOpenFormConflict)xpAFormWarning();
+  render();xpNutritionRefresh();if(xpAOpenFormConflict)xpAFormWarning();
  }catch(err){xpABlocked=true;xpAAlert('Synchronisierung fehlgeschlagen: '+(err.message||err))}
 }
 if(xpIDBChannel)xpIDBChannel.onmessage=e=>{if(e.data?.type==='committed'&&e.data.tab!==xpDiagTab)void xpIDBSynchronize()};
@@ -382,7 +392,7 @@ function xpAEntryConflict(){
 
 function xpADiff(before,after,path=[],out=[]){
  if(xpAEqual(before,after))return out;
- if(xpAPlain(before)&&xpAPlain(after)){
+ if(!['nutritionProtection','goalIntelligence'].includes(path[0])&&xpAPlain(before)&&xpAPlain(after)){
   for(const k of new Set([...Object.keys(before),...Object.keys(after)])){
    if(!Object.hasOwn(after,k))out.push({path:[...path,k],before:before[k],missing:true});
    else if(!Object.hasOwn(before,k))out.push({path:[...path,k],after:after[k],before:undefined,absentBefore:true});
@@ -473,7 +483,10 @@ async function xpACommit(snapshot,baseline,mode,waterOperation,diaryOperation=nu
   const changes=allChanges.filter(c=>!(c.path[0]==='log'&&c.path.length===2)&&!(waterOperation&&c.path.length===2&&c.path[0]==='water'&&c.path[1]===waterOperation.date));
   if(mode==='replace'){
     if(!xpAEqual(remote,baseline))throw Error('Ein anderer Tab hat Daten seit Beginn des Imports geändert. Import abgebrochen.');
-    if(!validBackup(snapshot)||!xpAValidDomain(snapshot))throw Error('Importdaten haben die Inhaltsprüfung nicht bestanden.');
+    if(!Object.hasOwn(snapshot,'nutritionProtection')&&Object.hasOwn(remote,'nutritionProtection')){
+    snapshot.nutritionProtection=xpAClone(remote.nutritionProtection);
+   }
+   if(!validBackup(snapshot)||!xpAValidDomain(snapshot))throw Error('Importdaten haben die Inhaltsprüfung nicht bestanden.');
   }else{
    const conflicts=[];
     for(const c of changes){
@@ -496,13 +509,23 @@ async function xpACommit(snapshot,baseline,mode,waterOperation,diaryOperation=nu
     throw Error('Mahlzeiten wurden in einem anderen Tab verändert. Bitte prüfe den Tag nach dem Neuladen.');
   }
   merged=mode==='replace'?snapshot:xpAPatch(xpAClone(remote),changes);
+  if(mode!=='replace'&&changes.some(change=>change.path[0]==='goalIntelligence')&&xpGoalCurrent(merged).state!=='confirmed'){
+   throw Error('Zielbestätigung veraltet. Prüfe Profil und Schutzsignale erneut.');
+  }
   if(mode!=='replace'){
    for(const add of additions)xpAApplyDiaryIntent(merged,{type:'add',date:add.date,row:add.row});
-   if(diaryOperation)xpAApplyDiaryIntent(merged,diaryOperation);
+   if(diaryOperation?.type==='recipe'){
+    const {recipe,revision,date,rows}=diaryOperation;
+    const protection=fitLabNutritionSafety.readProtection(remote.nutritionProtection);
+    if(protection.revision!==revision||date!==dateKey()||fitLabNutritionSafety.recipeGate(recipe,protection).status!=='checked'){
+     throw Object.assign(Error('Ernährungsprofil, Rezeptfreigabe oder Datum hat sich geändert. Bitte prüfe die Auswahl erneut.'),{name:'RecipeGuardError'});
+    }
+    for(const row of rows)xpAApplyDiaryIntent(merged,{type:'add',date,row});
+   }else if(diaryOperation)xpAApplyDiaryIntent(merged,diaryOperation);
    // Every new row asserted by this particular write must be present, regardless
    // of whether an unrelated tab has changed the rest of the day.
    for(const add of additions){if(!merged.log[add.date]?.some(x=>x._fid===add.row._fid&&xpAEqual(x,add.row)))throw Error('Neue Mahlzeit konnte nicht dauerhaft übernommen werden');}
-   if(diaryOperation){let r=merged.log[diaryOperation.date]?.find(x=>x._fid===diaryOperation.row._fid);
+   if(diaryOperation&&diaryOperation.type!=='recipe'){let r=merged.log[diaryOperation.date]?.find(x=>x._fid===diaryOperation.row._fid);
     if(diaryOperation.type==='delete'?!!r:!r||!xpAEqual(r,diaryOperation.row))throw Error('Tagebuchoperation nicht im Schreibstand enthalten');}
   }
   if(waterOperation){
@@ -538,7 +561,8 @@ function save(mode='merge',waterOperation=null,diaryOperation=null){
    if(xpAPending===1){xpAQueuedBaseline=xpAClone(merged);if(xpAEqual(state,snapshot))state=xpAClone(merged);}
    xpDiagEvent('save-success',txn,{storageHash:xpDiagDigest(merged),rows:xpDiagRows(merged)});xpIDBSignal();
    return true;
-  }catch(err){xpDiagEvent('save-failure',txn,{message:String(err.message||err)});xpABlocked=true;xpAAlert(err.message||'Schreibfehler');return false}
+  }catch(err){xpDiagEvent('save-failure',txn,{message:String(err.message||err)});if(err.name==='RecipeGuardError'){if(xpAPending===1)xpAQueuedBaseline=xpAClone(xpABaseline);throw err}
+    xpABlocked=true;xpAAlert(err.message||'Schreibfehler');return false}
   finally{xpAPending--}
  };
  const result=xpAQueue.then(work,work);xpAQueue=result.then(()=>{},()=>{});return result;
@@ -569,6 +593,11 @@ function nutritionReview(s){
  return {invalid,low,count:new Set([...veryLow,...(relative.length>=3?relative:[])].map(day=>day.date)).size};
 }
 function calc(p,s=state){
+ if(fitLabGoalIntelligence.fingerprint(p)===fitLabGoalIntelligence.fingerprint(s.p)){
+  const current=xpGoalCurrent(s);
+  if(current.state==='paused')return null;
+  if(current.goal)p=fitLabGoalIntelligence.effectiveProfile(p,current.goal);
+ }
  const r=estimateTargets(p);
  if(profileBoundary(p,r))return null;
  if((r.delta<0||+p.adjust<0||r.balance< -50)&&nutritionReview(s).low)return null;
@@ -606,6 +635,8 @@ function safetyAdvice(s=state){
  if(profile)return {summary:profile,title:'Profil und Ziel prüfen',body:profile,why:'Alter, Körperangaben, Zielwahl und manuelle Anpassungen begrenzen automatische Empfehlungen. Ein BMI allein erlaubt keine Diagnose.',action:"tab('profile')",label:'Profil prüfen',hold:true};
  const {invalid,low,count}=nutritionReview(s);
  if(low)return {summary:dateDE(low.date)+' · '+fmt(low.sum.k,0)+' kcal als vollständiger Tag bestätigt.',title:'Ernährung vor dem Training prüfen',body:dateDE(low.date)+' ist als vollständig bestätigt. Prüfe Portionen und fehlende Mahlzeiten. Falls die geringe Zufuhr zutrifft, hole ernährungsfachlichen oder ärztlichen Rat ein.',why:count+' auffällige bestätigte Tage im Zeitraum von heute und sieben Vortagen. Am '+dateDE(low.date)+' sind '+fmt(low.sum.k,0)+' kcal und '+fmt(low.sum.p,0)+' g Protein dokumentiert. Intensive Trainingsimpulse und Defizitziele pausieren.',label:brand.modules.nutrition?'Ernährungstag prüfen':'Profil und Modulzugang prüfen',action:action('food',low.date),hold:true};
+ const goal=xpGoalCurrent(s);
+ if(goal.state==='paused')return {summary:goal.reason,title:'Persönliches Ziel erneut prüfen',body:goal.reason,why:'Änderungen oder neue Schutzsignale erfordern eine neue Bestätigung.',action:'xpGoalOpen()',label:'Ziel prüfen',hold:true};
  if(invalid)return {title:'Ernährungsdaten prüfen',body:'Am '+dateDE(invalid.date)+' passen die Nährwertangaben nicht zusammen. Dieser Tag zählt nicht zur Auswertung.',why:'Eine Korrektur verbessert die Grundlage für den Vergleich mit deinem persönlichen Ziel.',action:action('food',invalid.date),label:brand.modules.nutrition?'Einträge prüfen':'Profil und Modulzugang prüfen',hold:false};
  return null;
 }
@@ -716,7 +747,15 @@ $('copyday').onclick=()=>{let d=$('date').value;if(!d)return;let old=new Date(d+
  try{if(!xpAPending&&!xpABlocked)await xpAQueue;copy=await xpIDBRead();if(!copy)throw Error('Kein gespeicherter Bestand');copy=xpNextNormalizeBackup(copy)}
  catch(err){alert('Der dauerhaft gespeicherte Bestand konnte nicht gelesen werden: '+(err.message||err));return}
  let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(copy,null,2)],{type:'application/json'}));a.download='fitness-lab-'+kind+'-backup.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)
-};$('import').onchange=async e=>{let previous=null;try{const file=e.target.files?.[0];if(!file)return;if(file.size>12*1024*1024)throw Error('Sicherung zu groß');let candidate=xpNextNormalizeBackup(JSON.parse(await file.text()));xpAEnsureIds(candidate);if(!confirm('Lokale Daten durch geprüfte Sicherung ersetzen?'))return;previous=state;state=candidate;if(!await save('replace')){state=previous;throw Error('Speicherung konnte nicht bestätigt werden')}resetFood();ingredients=[];$('date').value=dateKey();initProfile();render();$('importstatus').textContent='Sicherung erfolgreich gespeichert: '+Object.values(state.log).reduce((n,l)=>n+l.length,0)+' Ernährungseinträge.';}catch(err){if(previous)state=previous;alert('Sicherung nicht übernommen: '+(err.message||'Ungültige Eingaben')+'. Der bisherige gespeicherte Stand bleibt erhalten.');}finally{e.target.value=''}};// Recipe builder: draft is separate from the daily diary.
+};$('import').onchange=async e=>{let previous=null;try{const file=e.target.files?.[0];if(!file)return;if(file.size>12*1024*1024)throw Error('Sicherung zu groß');let candidate=xpNextNormalizeBackup(JSON.parse(await file.text()));xpAEnsureIds(candidate);if(!confirm('Lokale Daten durch geprüfte Sicherung ersetzen?'))return;
+ if(Object.hasOwn(candidate,'nutritionProtection')){
+  const p=fitLabNutritionSafety.readProtection(candidate.nutritionProtection);
+  candidate.nutritionProtection=fitLabNutritionSafety.envelope(p.status,crypto.randomUUID(),p.selection);
+ }else if(Object.hasOwn(state,'nutritionProtection')){
+  const p=fitLabNutritionSafety.readProtection(state.nutritionProtection);
+  candidate.nutritionProtection=fitLabNutritionSafety.envelope(p.status,crypto.randomUUID(),p.selection);
+ }
+ previous=state;state=candidate;if(!await save('replace')){state=previous;throw Error('Speicherung konnte nicht bestätigt werden')}resetFood();ingredients=[];$('date').value=dateKey();initProfile();render();$('importstatus').textContent='Sicherung erfolgreich gespeichert: '+Object.values(state.log).reduce((n,l)=>n+l.length,0)+' Ernährungseinträge.';}catch(err){if(previous)state=previous;alert('Sicherung nicht übernommen: '+(err.message||'Ungültige Eingaben')+'. Der bisherige gespeicherte Stand bleibt erhalten.');}finally{e.target.value=''}};// Recipe builder: draft is separate from the daily diary.
 let ingredients=[];
 const meals=['Frühstück','Mittagessen','Abendessen','Snacks'];
 function nutritionCheck141(x){
@@ -758,7 +797,7 @@ const timed=x=>['cardio','mobility'].includes(x[2])||x[0]==='pk';
 const unit=x=>['cardio','mobility'].includes(x[2])?'Minuten':x[0]==='pk'?'Sekunden':'Wdh.';
 const loadLabel=x=>['bp','bb','oh','row'].includes(x[0])?'kg je Hantel':x[0]==='br'?'Bandstärke (1–5)':x[0]==='gs'?'kg gesamt':x[0]==='rd'?'kg gesamt':x[3].length?'kg Zusatzlast':'kg Zusatzlast (optional)';
 function planDays(p){let n=+p.days;let custom=p.trainDays;return Array.isArray(custom)&&custom.length===n&&new Set(custom).size===n&&custom.every(x=>Number.isInteger(x)&&x>=0&&x<=6)?custom.slice().sort((a,b)=>a-b):[[],[0],[0,3],[0,2,4],[0,1,3,5],[0,1,2,4,5],[0,1,2,3,4,5],[0,1,2,3,4,5,6]][n]||[]}
-function makePlan(p){if(!calc(p)||p.limits.trim()||p.restricted)return [];let n=+p.days,mins=+p.minutes,days=planDays(p);let strength=p.kind==='strength'||p.kind==='mix'&&!(p.goals.includes(4)&&!p.goals.includes(2)&&!p.goals.includes(5)),cardio=p.kind==='cardio'||p.kind==='mix'||p.goals.includes(4);return days.map((day,i)=>{let type=p.kind==='mobility'?'mobility':!strength?'cardio':n>=5&&i>=4?(cardio?'cardio':'mobility'):n>=4?(i%2?'lower':'upper'):'full';let groups=type==='upper'?['push','pull','shoulder','core']:type==='lower'?['legs','hinge','legs','core']:type==='full'?['legs','push','pull','hinge','core']:[type];let sets=p.experience==='beginner'||+p.sleep<7?2:3,pause=p.goals.includes(5)?120:90,used=new Set();let budget=mins-5;let items=[];for(let j=0;j<groups.length;j++){let group=groups[j],pool=available(p,group),withEq=pool.filter(x=>x[3].length),options=group==='cardio'?[...withEq,...pool.filter(x=>!x[3].length)]:withEq.length?withEq:pool;if(!options.length)continue;let fresh=options.filter(x=>!used.has(x[0]));if(fresh.length)options=fresh;else{fresh=pool.filter(x=>!used.has(x[0]));if(fresh.length)options=fresh;else continue}let ex=options[(i+j)%options.length],duration=['cardio','mobility'].includes(group),cost=duration?budget:sets*(1+pause/60)+1;if(cost>budget&&items.length)break;let actualSets=duration?1:Math.max(1,Math.min(sets,Math.floor((budget-1)/(1+pause/60))));if(!duration&&budget<2)break;used.add(ex[0]);items.push({id:ex[0],group,sets:actualSets,reps:duration?`${Math.max(5,mins-5)} Min.`:ex[0]==='pk'?'20–40 Sek.':p.goals.includes(5)&&p.experience!=='beginner'?'6–10':'8–12',pause:duration?0:pause});budget-=duration?budget:actualSets*(1+pause/60)+1;}return {day,type,items,duration:Math.min(mins,Math.ceil(mins-budget))}})}
+function makePlan(p){if(!calc(p)||p.limits.trim()||p.restricted)return [];const active=xpGoalCurrent();if(p===state.p&&active.goal)p=fitLabGoalIntelligence.effectiveProfile(p,active.goal);let n=+p.days,mins=+p.minutes,days=planDays(p);let strength=p.kind==='strength'||p.kind==='mix'&&!(p.goals.includes(4)&&!p.goals.includes(2)&&!p.goals.includes(5)),cardio=p.kind==='cardio'||p.kind==='mix'||p.goals.includes(4);return days.map((day,i)=>{let type=p.kind==='mobility'?'mobility':!strength?'cardio':n>=5&&i>=4?(cardio?'cardio':'mobility'):n>=4?(i%2?'lower':'upper'):'full';let groups=type==='upper'?['push','pull','shoulder','core']:type==='lower'?['legs','hinge','legs','core']:type==='full'?['legs','push','pull','hinge','core']:[type];let sets=p.experience==='beginner'||+p.sleep<7?2:3,pause=p.goals.includes(5)?120:90,used=new Set();let budget=mins-5;let items=[];for(let j=0;j<groups.length;j++){let group=groups[j],pool=available(p,group),withEq=pool.filter(x=>x[3].length),options=group==='cardio'?[...withEq,...pool.filter(x=>!x[3].length)]:withEq.length?withEq:pool;if(!options.length)continue;let fresh=options.filter(x=>!used.has(x[0]));if(fresh.length)options=fresh;else{fresh=pool.filter(x=>!used.has(x[0]));if(fresh.length)options=fresh;else continue}let ex=options[(i+j)%options.length],duration=['cardio','mobility'].includes(group),cost=duration?budget:sets*(1+pause/60)+1;if(cost>budget&&items.length)break;let actualSets=duration?1:Math.max(1,Math.min(sets,Math.floor((budget-1)/(1+pause/60))));if(!duration&&budget<2)break;used.add(ex[0]);items.push({id:ex[0],group,sets:actualSets,reps:duration?`${Math.max(5,mins-5)} Min.`:ex[0]==='pk'?'20–40 Sek.':p.goals.includes(5)&&p.experience!=='beginner'?'6–10':'8–12',pause:duration?0:pause});budget-=duration?budget:actualSets*(1+pause/60)+1;}return {day,type,items,duration:Math.min(mins,Math.ceil(mins-budget))}})}
 let selectedTrainingDay=null,timerEnd=0,timerHandle=null,audioCtx=null;
 function history(){return Array.isArray(state.trainingHistory)?state.trainingHistory:[]}
 function trainingKey(){return JSON.stringify([state.p.goals,state.p.kind,state.p.days,state.p.minutes,state.p.experience,state.p.sleep,state.p.equipment,state.p.limits,state.p.restricted,planDays(state.p)])}
@@ -996,8 +1035,12 @@ trainingProposal=function(item,ex){let v=oldProposal503(item,ex);if(!v)return nu
 applyTraining=function(id){if(state.trainingDraft)return openDraft504();let item=makePlan(state.p).flatMap(s=>s.items).find(x=>x.id===id),ex=exBy(id),v=item&&ex&&trainingProposal(item,ex),scope=$('scope-'+id)?.value||'today';if(!v||v.poor||v.scopeLimited&&scope!=='today'||!['today','next','permanent'].includes(scope))return;if(!confirm('Trainingsvorschlag übernehmen?'))return;let c=coachData();c.presets||={};c.presets[id]={weight:v.weight,reps:v.reps,sets:v.sets,pause:v.pause,date:dateKey(),scope};recordDecision('Training',ex[1]+': '+fmt(v.weight,1)+' kg / '+v.reps+' Wdh. / '+v.sets+(v.sets===1?' Satz / ':' Sätze / ')+v.pause+' s ('+({today:'heute',next:'nächste Einheit',permanent:'dauerhaft'}[scope])+')',v.reason);save();render()};
 function undoPreset503(id){if(state.trainingDraft)return openDraft504();if(!confirm('Gespeicherte Startwerte entfernen?'))return;delete coachData().presets[id];recordDecision('Training',exBy(id)[1]+': Startwerte zurückgesetzt','Standardplan und letzte Trainingswerte gelten wieder.');save();render()}
 adaptiveTrainingHTML=function(){let items=new Map();for(let session of makePlan(state.p))for(let item of session.items)items.set(item.id,item);let rows=[...items.values()].map(item=>{let ex=exBy(item.id),v=trainingProposal(item,ex);if(!v)return '';let saved=coachData().presets?.[ex[0]];return `<div class="coachproposal"><b>${esc(ex[1])}</b><p>${esc(v.reason)}</p>${v.poor?'':`<p>Vorschlag: ${fmt(v.weight,1)} kg · ${v.reps} Wdh. · ${v.sets} ${v.sets===1?'Satz':'Sätze'} · ${v.pause} s Pause (${esc(loadLabel(ex))})</p>`}${v.poor?'<p>Heute keine Startwerte übernehmen. Erholung geht vor.</p>':`<label>Gültigkeit<select id="scope-${ex[0]}"><option value="today">Nur heute</option>${v.scopeLimited?'':'<option value="next">Nächste Einheit</option><option value="permanent">Dauerhaft</option>'}</select></label><button onclick="applyTraining('${ex[0]}')">Startwerte übernehmen</button>`}${saved?`<p><small>Gespeicherte Anpassung: ${({today:'Nur heute',next:'Nächste Einheit',permanent:'Dauerhaft'})[saved.scope||'today']||'Nur heute'} · ${fmt(saved.weight,1)} kg / ${saved.reps} Wdh.</small></p><button class="secondary" onclick="undoPreset503('${ex[0]}')">Anpassung zurücksetzen</button>`:''}</div>`}).join('');return `<details open><summary>Adaptive Trainingshinweise</summary><small>Startwerte sind Vorschläge und bleiben frei änderbar. Bei schlechter Erholung werden gespeicherte Coach-Vorgaben nicht angewendet.</small>${rows||'<p>Noch keine geeigneten Vergleichsdaten.</p>'}</details>`};
-function saveTargets503(){let t={};for(let k of ['weight','waist']){let raw=$('target-'+k).value,n=Number(raw);if(raw&&( !Number.isFinite(n)||n<(k==='weight'?35:40)||n>(k==='weight'?300:250)))return alert('Zielwert prüfen.');t[k]=raw?n:null}coachData().targets=t;save();render()}
-function targetsHTML503(){if(safetyAdvice()?.hold||trendAdvice())return '<p>Persönliche Projektionen pausieren, bis die Angaben überprüft sind.</p>';let t=coachData().targets||{},a=coachAnalysis(),rows=Object.entries(coachData().days).filter(([d])=>d<dateKey()&&d>=coachDate(-28)).sort(([a],[b])=>a.localeCompare(b));let out=['weight','waist'].map(k=>{let r=rows.filter(([d,x])=>Number.isFinite(x[k]));let current=r.at(-1)?.[1][k],goal=t[k];if(!Number.isFinite(current)||!goal)return '';return `<p>${k==='weight'?'Gewicht':'Bauchumfang'}: ${fmt(current,1)} → ${fmt(goal,1)} ${k==='weight'?'kg':'cm'} · Abstand ${fmt(Math.abs(goal-current),1)} ${k==='weight'?'kg':'cm'}.</p>`}).join('');let counts=[-28,-21,-14,-7].map(n=>rows.filter(([d,x])=>d>=coachDate(n)&&d<coachDate(n+7)&&Number.isFinite(x.weight)).length);let projection='Für eine längerfristige Orientierung sind vier Wochen mit jeweils mindestens vier Gewichtsmessungen erforderlich.';if(a.poor)projection='Bei eingeschränkter Erholung wird die Projektion vorübergehend ausgesetzt.';else if(counts.every(n=>n>=4)&&a.trend!==null&&a.scored>=12&&!a.invalidDays&&!a.poor&&Math.abs(a.trend)<=1.5){let means=[-28,-21,-14,-7].map(n=>median(rows.filter(([d,x])=>d>=coachDate(n)&&d<coachDate(n+7)&&Number.isFinite(x.weight)).map(([d,x])=>x.weight)));let rates=means.slice(1).map((w,i)=>(w-means[i])/means[i]*100);if(rates.every(x=>Math.abs(x)<=1.5)&&(rates.every(x=>x>=0)||rates.every(x=>x<=0))){let w=means.at(-1),end=rates.map(x=>w*Math.pow(1+x/100,4));projection='Vier-Wochen-Szenario bei unverändertem Verlauf: '+(fmt(Math.min(...end),1)===fmt(Math.max(...end),1)?fmt(Math.min(...end),1):fmt(Math.min(...end),1)+'–'+fmt(Math.max(...end),1))+' kg. Rechnerische Fortschreibung, kein statistisches Prognoseintervall und keine Zielgarantie.'}else projection='Der Verlauf schwankt zu stark für eine längerfristige Orientierung.'}return `<details><summary>Persönliche Ziele & Entwicklung</summary><label>Zielgewicht (kg, optional)<input id="target-weight" type="number" min="35" max="300" step="0.1" value="${esc(t.weight??'')}"></label><label>Zielbauchumfang (cm, optional)<input id="target-waist" type="number" min="40" max="250" step="0.1" value="${esc(t.waist??'')}"></label><button onclick="saveTargets503()">Zielwerte speichern</button>${out}<p>${esc(projection)}</p><small>Zielwerte ändern nicht automatisch das Kalorienziel.</small></details>`}
+function saveTargets503(){
+ const raw=$('target-waist').value,n=Number(raw);
+ if(raw&&(!Number.isFinite(n)||n<40||n>250))return alert('Zielwert prüfen.');
+ coachData().targets={...coachData().targets,waist:raw?n:null};save();render();
+}
+function targetsHTML503(){if(safetyAdvice()?.hold||trendAdvice())return '<p>Persönliche Projektionen pausieren, bis die Angaben überprüft sind.</p>';let t=coachData().targets||{},a=coachAnalysis(),rows=Object.entries(coachData().days).filter(([d])=>d<dateKey()&&d>=coachDate(-28)).sort(([a],[b])=>a.localeCompare(b));let out=['weight','waist'].map(k=>{let r=rows.filter(([d,x])=>Number.isFinite(x[k]));let current=r.at(-1)?.[1][k],goal=k==='weight'?xpGoalCurrent().goal?.target:t[k];if(!Number.isFinite(current)||!goal)return '';return `<p>${k==='weight'?'Gewicht':'Bauchumfang'}: ${fmt(current,1)} → ${fmt(goal,1)} ${k==='weight'?'kg':'cm'} · Abstand ${fmt(Math.abs(goal-current),1)} ${k==='weight'?'kg':'cm'}.</p>`}).join('');let counts=[-28,-21,-14,-7].map(n=>rows.filter(([d,x])=>d>=coachDate(n)&&d<coachDate(n+7)&&Number.isFinite(x.weight)).length);let projection='Für eine längerfristige Orientierung sind vier Wochen mit jeweils mindestens vier Gewichtsmessungen erforderlich.';if(a.poor)projection='Bei eingeschränkter Erholung wird die Projektion vorübergehend ausgesetzt.';else if(counts.every(n=>n>=4)&&a.trend!==null&&a.scored>=12&&!a.invalidDays&&!a.poor&&Math.abs(a.trend)<=1.5){let means=[-28,-21,-14,-7].map(n=>median(rows.filter(([d,x])=>d>=coachDate(n)&&d<coachDate(n+7)&&Number.isFinite(x.weight)).map(([d,x])=>x.weight)));let rates=means.slice(1).map((w,i)=>(w-means[i])/means[i]*100);if(rates.every(x=>Math.abs(x)<=1.5)&&(rates.every(x=>x>=0)||rates.every(x=>x<=0))){let w=means.at(-1),end=rates.map(x=>w*Math.pow(1+x/100,4));projection='Vier-Wochen-Szenario bei unverändertem Verlauf: '+(fmt(Math.min(...end),1)===fmt(Math.max(...end),1)?fmt(Math.min(...end),1):fmt(Math.min(...end),1)+'–'+fmt(Math.max(...end),1))+' kg. Rechnerische Fortschreibung, kein statistisches Prognoseintervall und keine Zielgarantie.'}else projection='Der Verlauf schwankt zu stark für eine längerfristige Orientierung.'}return `<details><summary>Persönliche Ziele & Entwicklung</summary><button class="secondary" onclick="xpGoalOpen()">Persönliches Ziel prüfen</button><label>Zielbauchumfang (cm, optional)<input id="target-waist" type="number" min="40" max="250" step="0.1" value="${esc(t.waist??'')}"></label><button onclick="saveTargets503()">Zielwerte speichern</button>${out}<p>${esc(projection)}</p><small>Zielwerte ändern nicht automatisch das Kalorienziel.</small></details>`}
 const oldCoachHTML503=coachHTML;coachHTML=function(){return oldCoachHTML503().replace('</section>',targetsHTML503()+'</section>')};
 
 // 5.0.4: temporary week-wide deload, explicit consent and recovery guard.
@@ -2217,6 +2260,7 @@ function xp22Target(date,s=state){
  if(date!==dateKey())return snapshot||null;
  const current=calc(s.p,s);
  if(!current)return null;
+ if(xpGoalCurrent(s).goal)return current;
  if(snapshot){
   if(profileBoundary(s.p,snapshot))return null;
   if((snapshot.delta<0||snapshot.balance< -50)&&nutritionReview(s).low)return null;
@@ -2652,6 +2696,10 @@ tab=function(id){
  if(id!=='today')xpPersonalHide();
  if(id==='today')xpPersonalClassic=false;
  const result=xpPersonalTabBase(id);
+ if(id==='profile'&&!$('xpGoalSettings')){
+  const entry=document.createElement('button');entry.id='xpGoalSettings';entry.className='secondary';
+  entry.textContent='Persönliches Ziel prüfen';entry.onclick=xpGoalOpen;$('profile').append(entry);
+ }
  if(id==='profile'&&brand.modules.nutrition&&!$('xpNutritionSettings')){
   const button=document.createElement('button');
   button.id='xpNutritionSettings';
@@ -2677,10 +2725,76 @@ premiumDashboard=function(){
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)xpPersonalSchedule()});
 
 // The recipe experience is isolated from the established diary and profile UI.
+function xpGoalContext(record){
+ const profileWarning=profileBoundary(record.p,estimateTargets(record.p));
+ const energyWarning=!!nutritionReview(record).low;
+ const recovery=recovery504(record);
+ return {p:record.p,profileWarning,energyWarning,recoveryWarning:recovery.today||recovery.repeated||loadReview(record)};
+}
+function xpGoalCurrent(record=state){
+ const active=record.goalIntelligence;
+ if(active===undefined)return {state:'baseline'};
+ const pause=reason=>({state:'paused',reason});
+ const engine=fitLabGoalIntelligence;
+ if(active?.version!==1||active.profile!==engine.fingerprint(record.p)||!xpADate(active.reviewOn)||dateKey()>=active.reviewOn){
+  return pause('Dein bestätigtes Ziel muss mit den aktuellen Profilangaben erneut geprüft werden.');
+ }
+ const result=engine.evaluate(xpGoalContext(record),active.goal);
+ if(result.state!=='candidate')return pause(result.reason);
+ const goal=active.goal;
+ const latest=Object.entries(record.coach?.days||{}).filter(([day,value])=>day>=active.confirmedOn&&day<=dateKey()&&Number.isFinite(value.weight)).sort().slice(-3);
+ if(latest.length===3&&goal.target<Number(record.p.weight)&&latest.every(([,value])=>value.weight<=goal.target)){
+  return pause('Drei aktuelle Messungen liegen am Ziel oder darunter. Prüfe jetzt dein nächstes Ziel.');
+ }
+ return {state:'confirmed',goal,reviewOn:active.reviewOn};
+}
+let xpGoalSaving=false;
+async function xpGoalConfirm(wish,expected){
+ if(xpGoalSaving||xpABlocked||!xpIDBReady)return false;
+ xpGoalSaving=true;
+ try{
+  const engine=fitLabGoalIntelligence;
+  const remote=await xpIDBRead();
+  if(!remote||!xpAEqual(remote.goalIntelligence,state.goalIntelligence)||engine.fingerprint(remote.p)!==expected)return false;
+  const result=engine.evaluate(xpGoalContext(remote),wish);
+  if(result.state!=='candidate')return false;
+  const before=state.goalIntelligence;
+  state.goalIntelligence={version:1,revision:crypto.randomUUID(),profile:expected,goal:result.goal,
+   confirmedOn:dateKey(),reviewOn:coachDate(Math.min(result.goal.days,engine.daysUntilReview))};
+  if(!await save()){
+   if(before===undefined)delete state.goalIntelligence;else state.goalIntelligence=before;
+   return false;
+  }
+  render();xpNutritionRefresh();
+  return true;
+ }finally{xpGoalSaving=false}
+}
+function xpGoalOpen(){
+ if(!window.fitLabGoalView||document.querySelector('fitlab-goal'))return;
+ const host=window.fitLabGoalView({
+  model:()=>({profile:state.p,current:xpGoalCurrent(),wish:state.goalIntelligence?.goal,legacyWeight:state.coach?.targets?.weight}),
+  evaluate:wish=>fitLabGoalIntelligence.evaluate(xpGoalContext(state),wish),
+  confirm:xpGoalConfirm
+ });
+ document.body.append(host);
+}
+
 const xpNutritionPreferenceKey='fitlab-nutrition-preferences-v1';
 let xpNutritionBooking=false;
 function xpNutritionProfile(){
- try{return JSON.parse(fitStore161.getItem(xpNutritionPreferenceKey))||{}}catch{return {}}
+ return fitLabNutritionSafety.readProtection(state.nutritionProtection);
+}
+function xpNutritionRefresh(){
+ document.querySelector('fitlab-nutrition')?.refreshProtection?.();
+}
+async function xpNutritionStore(selection,revision){
+ if(xpABlocked||!xpIDBReady||xpNutritionProfile().revision!==revision)return false;
+ const protection=fitLabNutritionSafety;
+ const before=state.nutritionProtection;
+ state.nutritionProtection=protection.envelope(protection.validSelection(selection)?'confirmed':'damaged',crypto.randomUUID(),selection);
+ if(await save())return true;
+ if(before===undefined)delete state.nutritionProtection;else state.nutritionProtection=before;
+ return false;
 }
 function xpNutritionDefaultMeal(){
  const hour=new Date().getHours();
@@ -2692,16 +2806,18 @@ function xpNutritionModel(){
  const used=rows.length&&!day.valid?null:{kcal:day.sum.k,protein_g:day.sum.p,available_carbs_g:day.sum.c,fat_g:day.sum.f,fiber_g:fiber.unknown?null:fiber.g};
  const remaining=target&&used?target.kcal-used.kcal:null;
  return {
-  target,used,blocked:!xpProfileReady()||!goal||!!safetyAdvice()?.hold||xpABlocked,
+  target,used,blocked:xpNutritionProfile().status!=='confirmed'||!xpProfileReady()||!goal||!!safetyAdvice()?.hold||xpABlocked,
   goals:[...new Set([...(state.p.goals||[]).map(index=>goals[index]).filter(Boolean),...(target&&used&&target.protein_g>used.protein_g?['Offener Proteinbedarf']:[])])],
   recent:Object.entries(state.log).filter(([day])=>day>=coachDate(-3)&&day<=date).flatMap(([,entries])=>entries.map(row=>row.source?.match(/^FITLAB (R\d+) ·/)?.[1])).filter(Boolean),
   budget:remaining===null?'Tagesbedarf nicht verfügbar':remaining<=0?'Kalorienziel erreicht oder überschritten':`${fmt(remaining,0)} kcal im Tagesbudget · ${fmt(Math.max(0,target.protein_g-used.protein_g),0)} g Protein offen`
  };
 }
-async function xpNutritionBook(recipe,portion,meal){
- if(xpNutritionBooking||xpABlocked||!xpIDBReady||!brand.modules.nutrition)return false;
+async function xpNutritionBook(recipe,portion,meal,revision,confirmedDate=dateKey()){
+ if(confirmedDate!==dateKey()||xpNutritionBooking||xpABlocked||!xpIDBReady||!brand.modules.nutrition)return false;
  const engine=window.fitLabNutritionEngine;
- if(!engine.portions.includes(portion)||engine.restrictions(recipe,engine.defaults(xpNutritionProfile())).length)return false;
+ const protection=xpNutritionProfile();
+ if(!engine.portions.includes(portion)||protection.revision!==revision
+  ||fitLabNutritionSafety.recipeGate(recipe,protection).status!=='checked')return false;
  xpNutritionBooking=true;
  try{
   const date=dateKey(), group=crypto.randomUUID();
@@ -2711,10 +2827,7 @@ async function xpNutritionBook(recipe,portion,meal){
     fiber:n.fiber_g,source:`FITLAB ${recipe.id} · ${food.source} ${food.source_record_id} · ${group}`,_fid:xpAId()};
   });
   if(additions.some(row=>!validFood(row,true)||nutritionCheck141(row).level==='block'))throw Error('Mindestens eine Zutat hat unvollständige oder unplausible Nährwerte.');
-  (state.log[date]||=[]).push(...additions);
-  render();
-  const saved=await save();
-  if(!saved)state.log[date]=state.log[date].filter(row=>!additions.some(x=>x._fid===row._fid));
+  const saved=await save('merge',null,{type:'recipe',date,recipe,revision,rows:additions});
   render();
   return saved;
  }finally{xpNutritionBooking=false}
@@ -2723,8 +2836,8 @@ function xpNutritionOpen(settings=false){
  if(!window.fitLabNutrition||!brand.modules.nutrition||document.querySelector('fitlab-nutrition'))return;
  xpPersonalHide();
  const host=window.fitLabNutrition.show({
-  model:xpNutritionModel,meal:xpNutritionDefaultMeal,preferences:xpNutritionProfile,book:xpNutritionBook,
-  store(profile){try{fitStore161.setItem(xpNutritionPreferenceKey,JSON.stringify(profile));return true}catch{return false}},
+  model:xpNutritionModel,date:dateKey,meal:xpNutritionDefaultMeal,preferences:xpNutritionProfile,book:xpNutritionBook,
+  store:xpNutritionStore,
   navigate(destination){
    host.remove();
    tab(destination==='diary'?'nutrition':settings?'profile':'today');
@@ -2743,4 +2856,4 @@ void xpIDBBoot().then(()=>{
  if(xpProfileReady()&&['nutrition','training','check','progress','coach'].includes(destination))xpPersonalNavigate(destination);
  else xpPersonalSchedule();
 });if('serviceWorker'in navigator&&location.protocol.startsWith('http')){let hadController=!!navigator.serviceWorker.controller;navigator.serviceWorker.addEventListener('controllerchange',()=>{if(hadController)xp131UpdateNotice();hadController=true;});navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(reg=>{reg.update().catch(()=>{});document.addEventListener('visibilitychange',()=>{if(!document.hidden)reg.update().catch(()=>{})});}).catch(()=>{});}
-</script><script src="exercise-atlas.js"></script><script src="cinematic.js" defer></script><script src="design-story.js" defer></script><script src="personal-dashboard.js" defer onload="xpPersonalSchedule()"></script><script src="nutrition/engine.js" defer></script><script src="nutrition/experience.js" defer></script></body></html>
+</script><script src="exercise-atlas.js"></script><script src="cinematic.js" defer></script><script src="design-story.js" defer></script><script src="personal-dashboard.js" defer onload="xpPersonalSchedule()"></script><script src="nutrition/engine.js?v=3814" defer></script><script src="nutrition/goal-view.js?v=3814" defer></script><script src="nutrition/experience.js?v=3814" defer></script></body></html>

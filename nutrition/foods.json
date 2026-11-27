@@ -601,7 +601,7 @@
     },
     {
       "id": "F014",
-      "name": "Hüttenkäse",
+      "name": "Hüttenkäse, mindestens 20 % Fett i. Tr.",
       "state": "verzehrfertig",
       "source_record_id": "M711300",
       "source": "BLS",
@@ -612,12 +612,12 @@
         "fat_g": 4.3,
         "fiber_g": 0
       },
-      "mapping_status": "provisional",
+      "mapping_status": "specified_standard",
       "allergens_intrinsic_preliminary": [
         "Milch"
       ],
       "source_name": "Körniger Frischkäse mind. 20 % Fett i. Tr.",
-      "source_note": "Körniger Frischkäse 20 % Fett i.Tr. als Standard",
+      "source_note": "Rezeptstandard laut Abnahmebericht; abweichende Produkte nach Etikett bewerten.",
       "source_provenance": {
         "kcal": {
           "raw": 109,
@@ -875,7 +875,7 @@
     },
     {
       "id": "F020",
-      "name": "Paprika",
+      "name": "Rote Gemüsepaprika",
       "state": "roh",
       "source_record_id": "G543100",
       "source": "BLS",
@@ -886,10 +886,10 @@
         "fat_g": 0.2,
         "fiber_g": 2.2
       },
-      "mapping_status": "provisional",
+      "mapping_status": "specified_standard",
       "allergens_intrinsic_preliminary": [],
       "source_name": "Gemüsepaprika rot, roh",
-      "source_note": "rote Paprika als Standard",
+      "source_note": "Rezeptstandard laut Abnahmebericht; abweichende Produkte nach Etikett bewerten.",
       "source_provenance": {
         "kcal": {
           "raw": 36,
@@ -965,8 +965,8 @@
     },
     {
       "id": "F022",
-      "name": "Reis",
-      "state": "gekocht",
+      "name": "Reis, poliert",
+      "state": "gekocht gewogen",
       "source_record_id": "C352032",
       "source": "BLS",
       "nutrients_per_100g": {
@@ -976,10 +976,10 @@
         "fat_g": 0.35,
         "fiber_g": 0.61
       },
-      "mapping_status": "provisional",
+      "mapping_status": "specified_standard",
       "allergens_intrinsic_preliminary": [],
       "source_name": "Reis poliert, gekocht",
-      "source_note": "polierter Reis als Standard",
+      "source_note": "Rezeptstandard laut Abnahmebericht; abweichende Produkte nach Etikett bewerten.",
       "source_provenance": {
         "kcal": {
           "raw": 117,
@@ -1055,8 +1055,8 @@
     },
     {
       "id": "F024",
-      "name": "Edamame geschält",
-      "state": "gegart",
+      "name": "Edamame geschält aus der Konserve",
+      "state": "abgetropft gewogen",
       "source_record_id": "G750902",
       "source": "BLS",
       "nutrients_per_100g": {
@@ -1066,12 +1066,12 @@
         "fat_g": 4.4,
         "fiber_g": 3
       },
-      "mapping_status": "provisional",
+      "mapping_status": "specified_standard",
       "allergens_intrinsic_preliminary": [
         "Soja"
       ],
       "source_name": "Sojabohne unreif (Edamame) Konserve, abgetropft",
-      "source_note": "Konserve abgetropft als Näherung für gegart",
+      "source_note": "Rezeptstandard laut Abnahmebericht; abweichende Produkte nach Etikett bewerten.",
       "source_provenance": {
         "kcal": {
           "raw": 94,
@@ -1830,7 +1830,7 @@
     },
     {
       "id": "F041",
-      "name": "Naturjoghurt",
+      "name": "Naturjoghurt 3,5 % Fett",
       "state": "verzehrfertig",
       "source_record_id": "M141300",
       "source": "BLS",
@@ -1841,12 +1841,12 @@
         "fat_g": 3.46,
         "fiber_g": 0
       },
-      "mapping_status": "provisional",
+      "mapping_status": "specified_standard",
       "allergens_intrinsic_preliminary": [
         "Milch"
       ],
       "source_name": "Joghurt mild, mind. 3,5 % Fett",
-      "source_note": "Naturjoghurt 3,5 % als Standard",
+      "source_note": "Rezeptstandard laut Abnahmebericht; abweichende Produkte nach Etikett bewerten.",
       "source_provenance": {
         "kcal": {
           "raw": 67,
@@ -1893,7 +1893,7 @@
         "Fisch"
       ],
       "source_name": "Lachs roh",
-      "source_note": "Ballaststoffe unter der Nachweisgrenze; kein quantifizierter Wert.",
+      "source_note": "Ballaststoffe unter Nachweisgrenze; nicht quantifiziert.",
       "source_provenance": {
         "kcal": {
           "raw": 180,
@@ -1924,8 +1924,8 @@
     },
     {
       "id": "F043",
-      "name": "Quinoa",
-      "state": "gekocht",
+      "name": "Weiße Quinoa",
+      "state": "gekocht gewogen",
       "source_record_id": "C118032",
       "source": "BLS",
       "nutrients_per_100g": {
@@ -1935,10 +1935,10 @@
         "fat_g": 1.8,
         "fiber_g": 3.08
       },
-      "mapping_status": "provisional",
+      "mapping_status": "specified_standard",
       "allergens_intrinsic_preliminary": [],
       "source_name": "Quinoa weiß, gekocht",
-      "source_note": "weiße Quinoa als Standard",
+      "source_note": "Rezeptstandard laut Abnahmebericht; abweichende Produkte nach Etikett bewerten.",
       "source_provenance": {
         "kcal": {
           "raw": 104,
@@ -1980,7 +1980,7 @@
         "fat_g": 0.156,
         "fiber_g": 1.4
       },
-      "mapping_status": "provisional",
+      "mapping_status": "documented_proxy",
       "allergens_intrinsic_preliminary": [],
       "source_name": "Spargel roh",
       "source_note": "Spargel allgemein statt grün",
@@ -2070,7 +2070,7 @@
         "fat_g": 0.15,
         "fiber_g": 1.4
       },
-      "mapping_status": "provisional",
+      "mapping_status": "documented_proxy",
       "allergens_intrinsic_preliminary": [],
       "source_name": "Speisezwiebel roh",
       "source_note": "Speisezwiebel statt rot",
@@ -2167,7 +2167,7 @@
         "Fisch"
       ],
       "source_name": "Thunfisch im eigenen Saft, Konserve, abgetropft",
-      "source_note": "Ballaststoffe unter der Nachweisgrenze; kein quantifizierter Wert.",
+      "source_note": "Ballaststoffe unter Nachweisgrenze; nicht quantifiziert.",
       "source_provenance": {
         "kcal": {
           "raw": 95,
@@ -2198,8 +2198,8 @@
     },
     {
       "id": "F049",
-      "name": "Weiße Bohnen",
-      "state": "gekocht abgetropft",
+      "name": "Weiße Bohnen aus der Konserve",
+      "state": "abgetropft gewogen",
       "source_record_id": "H740902",
       "source": "BLS",
       "nutrients_per_100g": {
@@ -2209,10 +2209,10 @@
         "fat_g": 0.597,
         "fiber_g": 7.136
       },
-      "mapping_status": "provisional",
+      "mapping_status": "documented_proxy",
       "allergens_intrinsic_preliminary": [],
       "source_name": "Gartenbohne reif, Konserve, abgetropft",
-      "source_note": "Gartenbohne allgemein statt weiß",
+      "source_note": "Rezeptstandard laut Abnahmebericht; generische Gartenbohnenreferenz, Näherung.",
       "source_provenance": {
         "kcal": {
           "raw": 130,
@@ -2441,7 +2441,7 @@
         "Milch"
       ],
       "source_name": "Feta mind. 45 % Fett i. Tr.",
-      "source_note": "Ballaststoffe unter der Nachweisgrenze; kein quantifizierter Wert.",
+      "source_note": "Ballaststoffe unter Nachweisgrenze; nicht quantifiziert.",
       "source_provenance": {
         "kcal": {
           "raw": 284,
@@ -2837,7 +2837,7 @@
     },
     {
       "id": "F063",
-      "name": "Kakaopulver ungesüßt",
+      "name": "Kakaopulver ungesüßt, stark entölt",
       "state": "trocken",
       "source_record_id": "S713000",
       "source": "BLS",
@@ -2848,10 +2848,10 @@
         "fat_g": 11.2,
         "fiber_g": 29.688
       },
-      "mapping_status": "provisional",
+      "mapping_status": "specified_standard",
       "allergens_intrinsic_preliminary": [],
       "source_name": "Kakaopulver stark entölt",
-      "source_note": "stark entölt als Standard",
+      "source_note": "Rezeptstandard laut Abnahmebericht; abweichende Produkte nach Etikett bewerten.",
       "source_provenance": {
         "kcal": {
           "raw": 311,
@@ -2893,7 +2893,7 @@
         "fat_g": 6.8,
         "fiber_g": 4.2
       },
-      "mapping_status": "provisional",
+      "mapping_status": "unused_unverified_tk_alternative",
       "allergens_intrinsic_preliminary": [
         "Soja"
       ],

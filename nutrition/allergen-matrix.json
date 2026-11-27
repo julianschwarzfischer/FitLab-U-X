@@ -1,0 +1,1157 @@
+{
+  "groups": [
+    "Gluten",
+    "Krebstiere",
+    "Ei",
+    "Fisch",
+    "Erdnüsse",
+    "Soja",
+    "Milch",
+    "Schalenfrüchte",
+    "Sellerie",
+    "Senf",
+    "Sesam",
+    "Sulfite",
+    "Lupinen",
+    "Weichtiere"
+  ],
+  "recipes": {
+    "R001": {
+      "declared": [
+        "Gluten",
+        "Milch"
+      ],
+      "groups": {
+        "Gluten": "present",
+        "Krebstiere": "not_intrinsic_label_crosscontact_unverified",
+        "Ei": "not_intrinsic_label_crosscontact_unverified",
+        "Fisch": "not_intrinsic_label_crosscontact_unverified",
+        "Erdnüsse": "not_intrinsic_label_crosscontact_unverified",
+        "Soja": "not_intrinsic_label_crosscontact_unverified",
+        "Milch": "present",
+        "Schalenfrüchte": "not_intrinsic_label_crosscontact_unverified",
+        "Sellerie": "not_intrinsic_label_crosscontact_unverified",
+        "Senf": "not_intrinsic_label_crosscontact_unverified",
+        "Sesam": "not_intrinsic_label_crosscontact_unverified",
+        "Sulfite": "not_intrinsic_label_crosscontact_unverified",
+        "Lupinen": "not_intrinsic_label_crosscontact_unverified",
+        "Weichtiere": "not_intrinsic_label_crosscontact_unverified"
+      },
+      "label_food_ids": [
+        "F001",
+        "F002",
+        "F004",
+        "F005"
+      ],
+      "all_food_ids": [
+        "F001",
+        "F002",
+        "F003",
+        "F004",
+        "F005"
+      ],
+      "vegetarian_requires_microbial_rennet": false,
+      "diet": "vegetarisch",
+      "release_status": "draft",
+      "cross_contact": "unknown",
+      "recipeId": "R001",
+      "revision": "3.8.14-reference"
+    },
+    "R002": {
+      "declared": [
+        "Ei",
+        "Gluten"
+      ],
+      "groups": {
+        "Gluten": "present",
+        "Krebstiere": "not_intrinsic_label_crosscontact_unverified",
+        "Ei": "present",
+        "Fisch": "not_intrinsic_label_crosscontact_unverified",
+        "Erdnüsse": "not_intrinsic_label_crosscontact_unverified",
+        "Soja": "not_intrinsic_label_crosscontact_unverified",
+        "Milch": "not_intrinsic_label_crosscontact_unverified",
+        "Schalenfrüchte": "not_intrinsic_label_crosscontact_unverified",
+        "Sellerie": "not_intrinsic_label_crosscontact_unverified",
+        "Senf": "not_intrinsic_label_crosscontact_unverified",
+        "Sesam": "not_intrinsic_label_crosscontact_unverified",
+        "Sulfite": "not_intrinsic_label_crosscontact_unverified",
+        "Lupinen": "not_intrinsic_label_crosscontact_unverified",
+        "Weichtiere": "not_intrinsic_label_crosscontact_unverified"
+      },
+      "label_food_ids": [
+        "F007"
+      ],
+      "all_food_ids": [
+        "F006",
+        "F007",
+        "F008",
+        "F009",
+        "F010"
+      ],
+      "vegetarian_requires_microbial_rennet": false,
+      "diet": "vegetarisch",
+      "release_status": "draft",
+      "cross_contact": "unknown",
+      "recipeId": "R002",
+      "revision": "3.8.14-reference"
+    },
+    "R003": {
+      "declared": [
+        "Gluten",
+        "Soja"
+      ],
+      "groups": {
+        "Gluten": "present",
+        "Krebstiere": "not_intrinsic_label_crosscontact_unverified",
+        "Ei": "not_intrinsic_label_crosscontact_unverified",
+        "Fisch": "not_intrinsic_label_crosscontact_unverified",
+        "Erdnüsse": "not_intrinsic_label_crosscontact_unverified",
+        "Soja": "present",
+        "Milch": "not_intrinsic_label_crosscontact_unverified",
+        "Schalenfrüchte": "not_intrinsic_label_crosscontact_unverified",
+        "Sellerie": "not_intrinsic_label_crosscontact_unverified",
+        "Senf": "not_intrinsic_label_crosscontact_unverified",
+        "Sesam": "not_intrinsic_label_crosscontact_unverified",
+        "Sulfite": "not_intrinsic_label_crosscontact_unverified",
+        "Lupinen": "not_intrinsic_label_crosscontact_unverified",
+        "Weichtiere": "not_intrinsic_label_crosscontact_unverified"
+      },
+      "label_food_ids": [
+        "F001",
+        "F011",
+        "F013",
+        "F065"
+      ],
+      "all_food_ids": [
+        "F001",
+        "F011",
+        "F012",
+        "F013",
+        "F065"
+      ],
+      "vegetarian_requires_microbial_rennet": false,
+      "diet": "vegan",
+      "release_status": "draft",
+      "cross_contact": "unknown",
+      "recipeId": "R003",
+      "revision": "3.8.14-reference"
+    },
+    "R004": {
+      "declared": [
+        "Gluten",
+        "Milch"
+      ],
+      "groups": {
+        "Gluten": "present",
+        "Krebstiere": "not_intrinsic_label_crosscontact_unverified",
+        "Ei": "not_intrinsic_label_crosscontact_unverified",
+        "Fisch": "not_intrinsic_label_crosscontact_unverified",
+        "Erdnüsse": "not_intrinsic_label_crosscontact_unverified",
+        "Soja": "not_intrinsic_label_crosscontact_unverified",
+        "Milch": "present",
+        "Schalenfrüchte": "not_intrinsic_label_crosscontact_unverified",
+        "Sellerie": "not_intrinsic_label_crosscontact_unverified",
+        "Senf": "not_intrinsic_label_crosscontact_unverified",
+        "Sesam": "not_intrinsic_label_crosscontact_unverified",
+        "Sulfite": "not_intrinsic_label_crosscontact_unverified",
+        "Lupinen": "not_intrinsic_label_crosscontact_unverified",
+        "Weichtiere": "not_intrinsic_label_crosscontact_unverified"
+      },
+      "label_food_ids": [
+        "F007",
+        "F014"
+      ],
+      "all_food_ids": [
+        "F007",
+        "F014",
+        "F015",
+        "F016"
+      ],
+      "vegetarian_requires_microbial_rennet": false,
+      "diet": "vegetarisch",
+      "release_status": "draft",
+      "cross_contact": "unknown",
+      "recipeId": "R004",
+      "revision": "3.8.14-reference"
+    },
+    "R005": {
+      "declared": [
+        "Ei",
+        "Gluten",
+        "Milch"
+      ],
+      "groups": {
+        "Gluten": "present",
+        "Krebstiere": "not_intrinsic_label_crosscontact_unverified",
+        "Ei": "present",
+        "Fisch": "not_intrinsic_label_crosscontact_unverified",
+        "Erdnüsse": "not_intrinsic_label_crosscontact_unverified",
+        "Soja": "not_intrinsic_label_crosscontact_unverified",
+        "Milch": "present",
+        "Schalenfrüchte": "not_intrinsic_label_crosscontact_unverified",
+        "Sellerie": "not_intrinsic_label_crosscontact_unverified",
+        "Senf": "not_intrinsic_label_crosscontact_unverified",
+        "Sesam": "not_intrinsic_label_crosscontact_unverified",
+        "Sulfite": "not_intrinsic_label_crosscontact_unverified",
+        "Lupinen": "not_intrinsic_label_crosscontact_unverified",
+        "Weichtiere": "not_intrinsic_label_crosscontact_unverified"
+      },
+      "label_food_ids": [
+        "F002",
+        "F001"
+      ],
+      "all_food_ids": [
+        "F017",
+        "F006",
+        "F002",
+        "F001",
+        "F018"
+      ],
+      "vegetarian_requires_microbial_rennet": false,
+      "diet": "vegetarisch",
+      "release_status": "draft",
+      "cross_contact": "unknown",
+      "recipeId": "R005",
+      "revision": "3.8.14-reference"
+    },
+    "R006": {
+      "declared": [
+        "Gluten",
+        "Soja"
+      ],
+      "groups": {
+        "Gluten": "present",
+        "Krebstiere": "not_intrinsic_label_crosscontact_unverified",
+        "Ei": "not_intrinsic_label_crosscontact_unverified",
+        "Fisch": "not_intrinsic_label_crosscontact_unverified",
+        "Erdnüsse": "not_intrinsic_label_crosscontact_unverified",
+        "Soja": "present",
+        "Milch": "not_intrinsic_label_crosscontact_unverified",
+        "Schalenfrüchte": "not_intrinsic_label_crosscontact_unverified",
+        "Sellerie": "not_intrinsic_label_crosscontact_unverified",
+        "Senf": "not_intrinsic_label_crosscontact_unverified",
+        "Sesam": "not_intrinsic_label_crosscontact_unverified",
+        "Sulfite": "not_intrinsic_label_crosscontact_unverified",
+        "Lupinen": "not_intrinsic_label_crosscontact_unverified",
+        "Weichtiere": "not_intrinsic_label_crosscontact_unverified"
+      },
+      "label_food_ids": [
+        "F019",
+        "F007"
+      ],
+      "all_food_ids": [
+        "F019",
+        "F020",
+        "F008",
+        "F007",
+        "F018"
+      ],
+      "vegetarian_requires_microbial_rennet": false,
+      "diet": "vegan",
+      "release_status": "draft",
+      "cross_contact": "unknown",
+      "recipeId": "R006",
+      "revision": "3.8.14-reference"
+    },
+    "R007": {
+      "declared": [
+        "Sesam",
+        "Soja"
+      ],
+      "groups": {
+        "Gluten": "not_intrinsic_label_crosscontact_unverified",
+        "Krebstiere": "not_intrinsic_label_crosscontact_unverified",
+        "Ei": "not_intrinsic_label_crosscontact_unverified",
+        "Fisch": "not_intrinsic_label_crosscontact_unverified",
+        "Erdnüsse": "not_intrinsic_label_crosscontact_unverified",
+        "Soja": "present",
+        "Milch": "not_intrinsic_label_crosscontact_unverified",
+        "Schalenfrüchte": "not_intrinsic_label_crosscontact_unverified",
+        "Sellerie": "not_intrinsic_label_crosscontact_unverified",
+        "Senf": "not_intrinsic_label_crosscontact_unverified",
+        "Sesam": "present",
+        "Sulfite": "not_intrinsic_label_crosscontact_unverified",
+        "Lupinen": "not_intrinsic_label_crosscontact_unverified",
+        "Weichtiere": "not_intrinsic_label_crosscontact_unverified"
+      },
+      "label_food_ids": [
+        "F022",
+        "F024",
+        "F026"
+      ],
+      "all_food_ids": [
+        "F021",
+        "F022",
+        "F023",
+        "F024",
+        "F025",
+        "F010",
+        "F026"
+      ],
+      "vegetarian_requires_microbial_rennet": false,
+      "diet": "Mischkost",
+      "release_status": "draft",
+      "cross_contact": "unknown",
+      "recipeId": "R007",
+      "revision": "3.8.14-reference"
+    },
+    "R008": {
+      "declared": [],
+      "groups": {
+        "Gluten": "not_intrinsic_label_crosscontact_unverified",
+        "Krebstiere": "not_intrinsic_label_crosscontact_unverified",
+        "Ei": "not_intrinsic_label_crosscontact_unverified",
+        "Fisch": "not_intrinsic_label_crosscontact_unverified",
+        "Erdnüsse": "not_intrinsic_label_crosscontact_unverified",
+        "Soja": "not_intrinsic_label_crosscontact_unverified",
+        "Milch": "not_intrinsic_label_crosscontact_unverified",
+        "Schalenfrüchte": "not_intrinsic_label_crosscontact_unverified",
+        "Sellerie": "not_intrinsic_label_crosscontact_unverified",
+        "Senf": "not_intrinsic_label_crosscontact_unverified",
+        "Sesam": "not_intrinsic_label_crosscontact_unverified",
+        "Sulfite": "not_intrinsic_label_crosscontact_unverified",
+        "Lupinen": "not_intrinsic_label_crosscontact_unverified",
+        "Weichtiere": "not_intrinsic_label_crosscontact_unverified"
+      },
+      "label_food_ids": [],
+      "all_food_ids": [
+        "F027",
+        "F028",
+        "F023",
+        "F010"
+      ],
+      "vegetarian_requires_microbial_rennet": false,
+      "diet": "Mischkost",
+      "release_status": "draft",
+      "cross_contact": "unknown",
+      "recipeId": "R008",
+      "revision": "3.8.14-reference"
+    },
+    "R009": {
+      "declared": [],
+      "groups": {
+        "Gluten": "not_intrinsic_label_crosscontact_unverified",
+        "Krebstiere": "not_intrinsic_label_crosscontact_unverified",
+        "Ei": "not_intrinsic_label_crosscontact_unverified",
+        "Fisch": "not_intrinsic_label_crosscontact_unverified",
+        "Erdnüsse": "not_intrinsic_label_crosscontact_unverified",
+        "Soja": "not_intrinsic_label_crosscontact_unverified",
+        "Milch": "not_intrinsic_label_crosscontact_unverified",
+        "Schalenfrüchte": "not_intrinsic_label_crosscontact_unverified",
+        "Sellerie": "not_intrinsic_label_crosscontact_unverified",
+        "Senf": "not_intrinsic_label_crosscontact_unverified",
+        "Sesam": "not_intrinsic_label_crosscontact_unverified",
+        "Sulfite": "not_intrinsic_label_crosscontact_unverified",
+        "Lupinen": "not_intrinsic_label_crosscontact_unverified",
+        "Weichtiere": "not_intrinsic_label_crosscontact_unverified"
+      },
+      "label_food_ids": [
+        "F022"
+      ],
+      "all_food_ids": [
+        "F029",
+        "F022",
+        "F020",
+        "F030",
+        "F018"
+      ],
+      "vegetarian_requires_microbial_rennet": false,
+      "diet": "Mischkost",
+      "release_status": "draft",
+      "cross_contact": "unknown",
+      "recipeId": "R009",
+      "revision": "3.8.14-reference"
+    },
+    "R010": {
+      "declared": [
+        "Gluten"
+      ],
+      "groups": {
+        "Gluten": "present",
+        "Krebstiere": "not_intrinsic_label_crosscontact_unverified",
+        "Ei": "not_intrinsic_label_crosscontact_unverified",
+        "Fisch": "not_intrinsic_label_crosscontact_unverified",
+        "Erdnüsse": "not_intrinsic_label_crosscontact_unverified",
+        "Soja": "not_intrinsic_label_crosscontact_unverified",
+        "Milch": "not_intrinsic_label_crosscontact_unverified",
+        "Schalenfrüchte": "not_intrinsic_label_crosscontact_unverified",
+        "Sellerie": "not_intrinsic_label_crosscontact_unverified",
+        "Senf": "not_intrinsic_label_crosscontact_unverified",
+        "Sesam": "not_intrinsic_label_crosscontact_unverified",
+        "Sulfite": "not_intrinsic_label_crosscontact_unverified",
+        "Lupinen": "not_intrinsic_label_crosscontact_unverified",
+        "Weichtiere": "not_intrinsic_label_crosscontact_unverified"
+      },
+      "label_food_ids": [
+        "F031",
+        "F032",
+        "F033"
+      ],
+      "all_food_ids": [
+        "F031",
+        "F032",
+        "F033",
+        "F034",
+        "F010"
+      ],
+      "vegetarian_requires_microbial_rennet": false,
+      "diet": "Mischkost",
+      "release_status": "draft",
+      "cross_contact": "unknown",
+      "recipeId": "R010",
+      "revision": "3.8.14-reference"
+    },
+    "R011": {
+      "declared": [],
+      "groups": {
+        "Gluten": "not_intrinsic_label_crosscontact_unverified",
+        "Krebstiere": "not_intrinsic_label_crosscontact_unverified",
+        "Ei": "not_intrinsic_label_crosscontact_unverified",
+        "Fisch": "not_intrinsic_label_crosscontact_unverified",
+        "Erdnüsse": "not_intrinsic_label_crosscontact_unverified",
+        "Soja": "not_intrinsic_label_crosscontact_unverified",
+        "Milch": "not_intrinsic_label_crosscontact_unverified",
+        "Schalenfrüchte": "not_intrinsic_label_crosscontact_unverified",
+        "Sellerie": "not_intrinsic_label_crosscontact_unverified",
+        "Senf": "not_intrinsic_label_crosscontact_unverified",
+        "Sesam": "not_intrinsic_label_crosscontact_unverified",
+        "Sulfite": "not_intrinsic_label_crosscontact_unverified",
+        "Lupinen": "not_intrinsic_label_crosscontact_unverified",
+        "Weichtiere": "not_intrinsic_label_crosscontact_unverified"
+      },
+      "label_food_ids": [],
+      "all_food_ids": [
+        "F021",
+        "F035",
+        "F034",
+        "F020",
+        "F010"
+      ],
+      "vegetarian_requires_microbial_rennet": false,
+      "diet": "Mischkost",
+      "release_status": "draft",
+      "cross_contact": "unknown",
+      "recipeId": "R011",
+      "revision": "3.8.14-reference"
+    },
+    "R012": {
+      "declared": [],
+      "groups": {
+        "Gluten": "not_intrinsic_label_crosscontact_unverified",
+        "Krebstiere": "not_intrinsic_label_crosscontact_unverified",
+        "Ei": "not_intrinsic_label_crosscontact_unverified",
+        "Fisch": "not_intrinsic_label_crosscontact_unverified",
+        "Erdnüsse": "not_intrinsic_label_crosscontact_unverified",
+        "Soja": "not_intrinsic_label_crosscontact_unverified",
+        "Milch": "not_intrinsic_label_crosscontact_unverified",
+        "Schalenfrüchte": "not_intrinsic_label_crosscontact_unverified",
+        "Sellerie": "not_intrinsic_label_crosscontact_unverified",
+        "Senf": "not_intrinsic_label_crosscontact_unverified",
+        "Sesam": "not_intrinsic_label_crosscontact_unverified",
+        "Sulfite": "not_intrinsic_label_crosscontact_unverified",
+        "Lupinen": "not_intrinsic_label_crosscontact_unverified",
+        "Weichtiere": "not_intrinsic_label_crosscontact_unverified"
+      },
+      "label_food_ids": [
+        "F037"
+      ],
+      "all_food_ids": [
+        "F036",
+        "F037",
+        "F025",
+        "F008",
+        "F018"
+      ],
+      "vegetarian_requires_microbial_rennet": false,
+      "diet": "Mischkost",
+      "release_status": "draft",
+      "cross_contact": "unknown",
+      "recipeId": "R012",
+      "revision": "3.8.14-reference"
+    },
+    "R013": {
+      "declared": [],
+      "groups": {
+        "Gluten": "not_intrinsic_label_crosscontact_unverified",
+        "Krebstiere": "not_intrinsic_label_crosscontact_unverified",
+        "Ei": "not_intrinsic_label_crosscontact_unverified",
+        "Fisch": "not_intrinsic_label_crosscontact_unverified",
+        "Erdnüsse": "not_intrinsic_label_crosscontact_unverified",
+        "Soja": "not_intrinsic_label_crosscontact_unverified",
+        "Milch": "not_intrinsic_label_crosscontact_unverified",
+        "Schalenfrüchte": "not_intrinsic_label_crosscontact_unverified",
+        "Sellerie": "not_intrinsic_label_crosscontact_unverified",
+        "Senf": "not_intrinsic_label_crosscontact_unverified",
+        "Sesam": "not_intrinsic_label_crosscontact_unverified",
+        "Sulfite": "not_intrinsic_label_crosscontact_unverified",
+        "Lupinen": "not_intrinsic_label_crosscontact_unverified",
+        "Weichtiere": "not_intrinsic_label_crosscontact_unverified"
+      },
+      "label_food_ids": [
+        "F031",
+        "F038",
+        "F033",
+        "F039",
+        "F066"
+      ],
+      "all_food_ids": [
+        "F031",
+        "F038",
+        "F033",
+        "F039",
+        "F030",
+        "F018",
+        "F066"
+      ],
+      "vegetarian_requires_microbial_rennet": false,
+      "diet": "Mischkost",
+      "release_status": "draft",
+      "cross_contact": "unknown",
+      "recipeId": "R013",
+      "revision": "3.8.14-reference"
+    },
+    "R014": {
+      "declared": [
+        "Gluten",
+        "Milch"
+      ],
+      "groups": {
+        "Gluten": "present",
+        "Krebstiere": "not_intrinsic_label_crosscontact_unverified",
+        "Ei": "not_intrinsic_label_crosscontact_unverified",
+        "Fisch": "not_intrinsic_label_crosscontact_unverified",
+        "Erdnüsse": "not_intrinsic_label_crosscontact_unverified",
+        "Soja": "not_intrinsic_label_crosscontact_unverified",
+        "Milch": "present",
+        "Schalenfrüchte": "not_intrinsic_label_crosscontact_unverified",
+        "Sellerie": "not_intrinsic_label_crosscontact_unverified",
+        "Senf": "not_intrinsic_label_crosscontact_unverified",
+        "Sesam": "not_intrinsic_label_crosscontact_unverified",
+        "Sulfite": "not_intrinsic_label_crosscontact_unverified",
+        "Lupinen": "not_intrinsic_label_crosscontact_unverified",
+        "Weichtiere": "not_intrinsic_label_crosscontact_unverified"
+      },
+      "label_food_ids": [
+        "F040",
+        "F041"
+      ],
+      "all_food_ids": [
+        "F029",
+        "F040",
+        "F015",
+        "F009",
+        "F041",
+        "F010"
+      ],
+      "vegetarian_requires_microbial_rennet": false,
+      "diet": "Mischkost",
+      "release_status": "draft",
+      "cross_contact": "unknown",
+      "recipeId": "R014",
+      "revision": "3.8.14-reference"
+    },
+    "R015": {
+      "declared": [
+        "Fisch"
+      ],
+      "groups": {
+        "Gluten": "not_intrinsic_label_crosscontact_unverified",
+        "Krebstiere": "not_intrinsic_label_crosscontact_unverified",
+        "Ei": "not_intrinsic_label_crosscontact_unverified",
+        "Fisch": "present",
+        "Erdnüsse": "not_intrinsic_label_crosscontact_unverified",
+        "Soja": "not_intrinsic_label_crosscontact_unverified",
+        "Milch": "not_intrinsic_label_crosscontact_unverified",
+        "Schalenfrüchte": "not_intrinsic_label_crosscontact_unverified",
+        "Sellerie": "not_intrinsic_label_crosscontact_unverified",
+        "Senf": "not_intrinsic_label_crosscontact_unverified",
+        "Sesam": "not_intrinsic_label_crosscontact_unverified",
+        "Sulfite": "not_intrinsic_label_crosscontact_unverified",
+        "Lupinen": "not_intrinsic_label_crosscontact_unverified",
+        "Weichtiere": "not_intrinsic_label_crosscontact_unverified"
+      },
+      "label_food_ids": [
+        "F043"
+      ],
+      "all_food_ids": [
+        "F042",
+        "F043",
+        "F044",
+        "F045",
+        "F028",
+        "F046",
+        "F010"
+      ],
+      "vegetarian_requires_microbial_rennet": false,
+      "diet": "pescetarisch",
+      "release_status": "draft",
+      "cross_contact": "unknown",
+      "recipeId": "R015",
+      "revision": "3.8.14-reference"
+    },
+    "R016": {
+      "declared": [
+        "Fisch"
+      ],
+      "groups": {
+        "Gluten": "not_intrinsic_label_crosscontact_unverified",
+        "Krebstiere": "not_intrinsic_label_crosscontact_unverified",
+        "Ei": "not_intrinsic_label_crosscontact_unverified",
+        "Fisch": "present",
+        "Erdnüsse": "not_intrinsic_label_crosscontact_unverified",
+        "Soja": "not_intrinsic_label_crosscontact_unverified",
+        "Milch": "not_intrinsic_label_crosscontact_unverified",
+        "Schalenfrüchte": "not_intrinsic_label_crosscontact_unverified",
+        "Sellerie": "not_intrinsic_label_crosscontact_unverified",
+        "Senf": "not_intrinsic_label_crosscontact_unverified",
+        "Sesam": "not_intrinsic_label_crosscontact_unverified",
+        "Sulfite": "not_intrinsic_label_crosscontact_unverified",
+        "Lupinen": "not_intrinsic_label_crosscontact_unverified",
+        "Weichtiere": "not_intrinsic_label_crosscontact_unverified"
+      },
+      "label_food_ids": [],
+      "all_food_ids": [
+        "F047",
+        "F035",
+        "F008",
+        "F010"
+      ],
+      "vegetarian_requires_microbial_rennet": false,
+      "diet": "pescetarisch",
+      "release_status": "draft",
+      "cross_contact": "unknown",
+      "recipeId": "R016",
+      "revision": "3.8.14-reference"
+    },
+    "R017": {
+      "declared": [
+        "Fisch"
+      ],
+      "groups": {
+        "Gluten": "not_intrinsic_label_crosscontact_unverified",
+        "Krebstiere": "not_intrinsic_label_crosscontact_unverified",
+        "Ei": "not_intrinsic_label_crosscontact_unverified",
+        "Fisch": "present",
+        "Erdnüsse": "not_intrinsic_label_crosscontact_unverified",
+        "Soja": "not_intrinsic_label_crosscontact_unverified",
+        "Milch": "not_intrinsic_label_crosscontact_unverified",
+        "Schalenfrüchte": "not_intrinsic_label_crosscontact_unverified",
+        "Sellerie": "not_intrinsic_label_crosscontact_unverified",
+        "Senf": "not_intrinsic_label_crosscontact_unverified",
+        "Sesam": "not_intrinsic_label_crosscontact_unverified",
+        "Sulfite": "not_intrinsic_label_crosscontact_unverified",
+        "Lupinen": "not_intrinsic_label_crosscontact_unverified",
+        "Weichtiere": "not_intrinsic_label_crosscontact_unverified"
+      },
+      "label_food_ids": [
+        "F048",
+        "F049"
+      ],
+      "all_food_ids": [
+        "F048",
+        "F049",
+        "F009",
+        "F015",
+        "F010"
+      ],
+      "vegetarian_requires_microbial_rennet": false,
+      "diet": "pescetarisch",
+      "release_status": "draft",
+      "cross_contact": "unknown",
+      "recipeId": "R017",
+      "revision": "3.8.14-reference"
+    },
+    "R018": {
+      "declared": [
+        "Krebstiere"
+      ],
+      "groups": {
+        "Gluten": "not_intrinsic_label_crosscontact_unverified",
+        "Krebstiere": "present",
+        "Ei": "not_intrinsic_label_crosscontact_unverified",
+        "Fisch": "not_intrinsic_label_crosscontact_unverified",
+        "Erdnüsse": "not_intrinsic_label_crosscontact_unverified",
+        "Soja": "not_intrinsic_label_crosscontact_unverified",
+        "Milch": "not_intrinsic_label_crosscontact_unverified",
+        "Schalenfrüchte": "not_intrinsic_label_crosscontact_unverified",
+        "Sellerie": "not_intrinsic_label_crosscontact_unverified",
+        "Senf": "not_intrinsic_label_crosscontact_unverified",
+        "Sesam": "not_intrinsic_label_crosscontact_unverified",
+        "Sulfite": "not_intrinsic_label_crosscontact_unverified",
+        "Lupinen": "not_intrinsic_label_crosscontact_unverified",
+        "Weichtiere": "not_intrinsic_label_crosscontact_unverified"
+      },
+      "label_food_ids": [
+        "F022"
+      ],
+      "all_food_ids": [
+        "F050",
+        "F022",
+        "F034",
+        "F020",
+        "F051",
+        "F010"
+      ],
+      "vegetarian_requires_microbial_rennet": false,
+      "diet": "pescetarisch",
+      "release_status": "draft",
+      "cross_contact": "unknown",
+      "recipeId": "R018",
+      "revision": "3.8.14-reference"
+    },
+    "R019": {
+      "declared": [],
+      "groups": {
+        "Gluten": "not_intrinsic_label_crosscontact_unverified",
+        "Krebstiere": "not_intrinsic_label_crosscontact_unverified",
+        "Ei": "not_intrinsic_label_crosscontact_unverified",
+        "Fisch": "not_intrinsic_label_crosscontact_unverified",
+        "Erdnüsse": "not_intrinsic_label_crosscontact_unverified",
+        "Soja": "not_intrinsic_label_crosscontact_unverified",
+        "Milch": "not_intrinsic_label_crosscontact_unverified",
+        "Schalenfrüchte": "not_intrinsic_label_crosscontact_unverified",
+        "Sellerie": "not_intrinsic_label_crosscontact_unverified",
+        "Senf": "not_intrinsic_label_crosscontact_unverified",
+        "Sesam": "not_intrinsic_label_crosscontact_unverified",
+        "Sulfite": "not_intrinsic_label_crosscontact_unverified",
+        "Lupinen": "not_intrinsic_label_crosscontact_unverified",
+        "Weichtiere": "not_intrinsic_label_crosscontact_unverified"
+      },
+      "label_food_ids": [
+        "F052",
+        "F033",
+        "F022"
+      ],
+      "all_food_ids": [
+        "F052",
+        "F033",
+        "F008",
+        "F022",
+        "F018"
+      ],
+      "vegetarian_requires_microbial_rennet": false,
+      "diet": "vegan",
+      "release_status": "draft",
+      "cross_contact": "unknown",
+      "recipeId": "R019",
+      "revision": "3.8.14-reference"
+    },
+    "R020": {
+      "declared": [
+        "Sesam",
+        "Soja"
+      ],
+      "groups": {
+        "Gluten": "not_intrinsic_label_crosscontact_unverified",
+        "Krebstiere": "not_intrinsic_label_crosscontact_unverified",
+        "Ei": "not_intrinsic_label_crosscontact_unverified",
+        "Fisch": "not_intrinsic_label_crosscontact_unverified",
+        "Erdnüsse": "not_intrinsic_label_crosscontact_unverified",
+        "Soja": "present",
+        "Milch": "not_intrinsic_label_crosscontact_unverified",
+        "Schalenfrüchte": "not_intrinsic_label_crosscontact_unverified",
+        "Sellerie": "not_intrinsic_label_crosscontact_unverified",
+        "Senf": "not_intrinsic_label_crosscontact_unverified",
+        "Sesam": "present",
+        "Sulfite": "not_intrinsic_label_crosscontact_unverified",
+        "Lupinen": "not_intrinsic_label_crosscontact_unverified",
+        "Weichtiere": "not_intrinsic_label_crosscontact_unverified"
+      },
+      "label_food_ids": [
+        "F019",
+        "F024",
+        "F022",
+        "F026"
+      ],
+      "all_food_ids": [
+        "F019",
+        "F024",
+        "F022",
+        "F023",
+        "F026",
+        "F018"
+      ],
+      "vegetarian_requires_microbial_rennet": false,
+      "diet": "vegan",
+      "release_status": "draft",
+      "cross_contact": "unknown",
+      "recipeId": "R020",
+      "revision": "3.8.14-reference"
+    },
+    "R021": {
+      "declared": [],
+      "groups": {
+        "Gluten": "not_intrinsic_label_crosscontact_unverified",
+        "Krebstiere": "not_intrinsic_label_crosscontact_unverified",
+        "Ei": "not_intrinsic_label_crosscontact_unverified",
+        "Fisch": "not_intrinsic_label_crosscontact_unverified",
+        "Erdnüsse": "not_intrinsic_label_crosscontact_unverified",
+        "Soja": "not_intrinsic_label_crosscontact_unverified",
+        "Milch": "not_intrinsic_label_crosscontact_unverified",
+        "Schalenfrüchte": "not_intrinsic_label_crosscontact_unverified",
+        "Sellerie": "not_intrinsic_label_crosscontact_unverified",
+        "Senf": "not_intrinsic_label_crosscontact_unverified",
+        "Sesam": "not_intrinsic_label_crosscontact_unverified",
+        "Sulfite": "not_intrinsic_label_crosscontact_unverified",
+        "Lupinen": "not_intrinsic_label_crosscontact_unverified",
+        "Weichtiere": "not_intrinsic_label_crosscontact_unverified"
+      },
+      "label_food_ids": [
+        "F053"
+      ],
+      "all_food_ids": [
+        "F053",
+        "F028",
+        "F020",
+        "F034",
+        "F010"
+      ],
+      "vegetarian_requires_microbial_rennet": false,
+      "diet": "vegan",
+      "release_status": "draft",
+      "cross_contact": "unknown",
+      "recipeId": "R021",
+      "revision": "3.8.14-reference"
+    },
+    "R022": {
+      "declared": [
+        "Milch"
+      ],
+      "groups": {
+        "Gluten": "not_intrinsic_label_crosscontact_unverified",
+        "Krebstiere": "not_intrinsic_label_crosscontact_unverified",
+        "Ei": "not_intrinsic_label_crosscontact_unverified",
+        "Fisch": "not_intrinsic_label_crosscontact_unverified",
+        "Erdnüsse": "not_intrinsic_label_crosscontact_unverified",
+        "Soja": "not_intrinsic_label_crosscontact_unverified",
+        "Milch": "present",
+        "Schalenfrüchte": "not_intrinsic_label_crosscontact_unverified",
+        "Sellerie": "not_intrinsic_label_crosscontact_unverified",
+        "Senf": "not_intrinsic_label_crosscontact_unverified",
+        "Sesam": "not_intrinsic_label_crosscontact_unverified",
+        "Sulfite": "not_intrinsic_label_crosscontact_unverified",
+        "Lupinen": "not_intrinsic_label_crosscontact_unverified",
+        "Weichtiere": "not_intrinsic_label_crosscontact_unverified"
+      },
+      "label_food_ids": [
+        "F043",
+        "F054"
+      ],
+      "all_food_ids": [
+        "F043",
+        "F054",
+        "F015",
+        "F009",
+        "F010"
+      ],
+      "vegetarian_requires_microbial_rennet": true,
+      "diet": "vegetarisch",
+      "release_status": "draft",
+      "cross_contact": "unknown",
+      "recipeId": "R022",
+      "revision": "3.8.14-reference"
+    },
+    "R023": {
+      "declared": [
+        "Gluten"
+      ],
+      "groups": {
+        "Gluten": "present",
+        "Krebstiere": "not_intrinsic_label_crosscontact_unverified",
+        "Ei": "not_intrinsic_label_crosscontact_unverified",
+        "Fisch": "not_intrinsic_label_crosscontact_unverified",
+        "Erdnüsse": "not_intrinsic_label_crosscontact_unverified",
+        "Soja": "not_intrinsic_label_crosscontact_unverified",
+        "Milch": "not_intrinsic_label_crosscontact_unverified",
+        "Schalenfrüchte": "not_intrinsic_label_crosscontact_unverified",
+        "Sellerie": "not_intrinsic_label_crosscontact_unverified",
+        "Senf": "not_intrinsic_label_crosscontact_unverified",
+        "Sesam": "not_intrinsic_label_crosscontact_unverified",
+        "Sulfite": "not_intrinsic_label_crosscontact_unverified",
+        "Lupinen": "not_intrinsic_label_crosscontact_unverified",
+        "Weichtiere": "not_intrinsic_label_crosscontact_unverified"
+      },
+      "label_food_ids": [
+        "F032",
+        "F037",
+        "F033"
+      ],
+      "all_food_ids": [
+        "F032",
+        "F037",
+        "F055",
+        "F033",
+        "F010"
+      ],
+      "vegetarian_requires_microbial_rennet": false,
+      "diet": "vegan",
+      "release_status": "draft",
+      "cross_contact": "unknown",
+      "recipeId": "R023",
+      "revision": "3.8.14-reference"
+    },
+    "R024": {
+      "declared": [
+        "Ei",
+        "Milch"
+      ],
+      "groups": {
+        "Gluten": "not_intrinsic_label_crosscontact_unverified",
+        "Krebstiere": "not_intrinsic_label_crosscontact_unverified",
+        "Ei": "present",
+        "Fisch": "not_intrinsic_label_crosscontact_unverified",
+        "Erdnüsse": "not_intrinsic_label_crosscontact_unverified",
+        "Soja": "not_intrinsic_label_crosscontact_unverified",
+        "Milch": "present",
+        "Schalenfrüchte": "not_intrinsic_label_crosscontact_unverified",
+        "Sellerie": "not_intrinsic_label_crosscontact_unverified",
+        "Senf": "not_intrinsic_label_crosscontact_unverified",
+        "Sesam": "not_intrinsic_label_crosscontact_unverified",
+        "Sulfite": "not_intrinsic_label_crosscontact_unverified",
+        "Lupinen": "not_intrinsic_label_crosscontact_unverified",
+        "Weichtiere": "not_intrinsic_label_crosscontact_unverified"
+      },
+      "label_food_ids": [
+        "F056",
+        "F014"
+      ],
+      "all_food_ids": [
+        "F006",
+        "F056",
+        "F023",
+        "F014",
+        "F018"
+      ],
+      "vegetarian_requires_microbial_rennet": false,
+      "diet": "vegetarisch",
+      "release_status": "draft",
+      "cross_contact": "unknown",
+      "recipeId": "R024",
+      "revision": "3.8.14-reference"
+    },
+    "R025": {
+      "declared": [
+        "Gluten",
+        "Milch"
+      ],
+      "groups": {
+        "Gluten": "present",
+        "Krebstiere": "not_intrinsic_label_crosscontact_unverified",
+        "Ei": "not_intrinsic_label_crosscontact_unverified",
+        "Fisch": "not_intrinsic_label_crosscontact_unverified",
+        "Erdnüsse": "not_intrinsic_label_crosscontact_unverified",
+        "Soja": "not_intrinsic_label_crosscontact_unverified",
+        "Milch": "present",
+        "Schalenfrüchte": "not_intrinsic_label_crosscontact_unverified",
+        "Sellerie": "not_intrinsic_label_crosscontact_unverified",
+        "Senf": "not_intrinsic_label_crosscontact_unverified",
+        "Sesam": "not_intrinsic_label_crosscontact_unverified",
+        "Sulfite": "not_intrinsic_label_crosscontact_unverified",
+        "Lupinen": "not_intrinsic_label_crosscontact_unverified",
+        "Weichtiere": "not_intrinsic_label_crosscontact_unverified"
+      },
+      "label_food_ids": [
+        "F002",
+        "F001"
+      ],
+      "all_food_ids": [
+        "F002",
+        "F057",
+        "F001"
+      ],
+      "vegetarian_requires_microbial_rennet": false,
+      "diet": "vegetarisch",
+      "release_status": "draft",
+      "cross_contact": "unknown",
+      "recipeId": "R025",
+      "revision": "3.8.14-reference"
+    },
+    "R026": {
+      "declared": [
+        "Milch"
+      ],
+      "groups": {
+        "Gluten": "not_intrinsic_label_crosscontact_unverified",
+        "Krebstiere": "not_intrinsic_label_crosscontact_unverified",
+        "Ei": "not_intrinsic_label_crosscontact_unverified",
+        "Fisch": "not_intrinsic_label_crosscontact_unverified",
+        "Erdnüsse": "not_intrinsic_label_crosscontact_unverified",
+        "Soja": "not_intrinsic_label_crosscontact_unverified",
+        "Milch": "present",
+        "Schalenfrüchte": "not_intrinsic_label_crosscontact_unverified",
+        "Sellerie": "not_intrinsic_label_crosscontact_unverified",
+        "Senf": "not_intrinsic_label_crosscontact_unverified",
+        "Sesam": "not_intrinsic_label_crosscontact_unverified",
+        "Sulfite": "not_intrinsic_label_crosscontact_unverified",
+        "Lupinen": "not_intrinsic_label_crosscontact_unverified",
+        "Weichtiere": "not_intrinsic_label_crosscontact_unverified"
+      },
+      "label_food_ids": [
+        "F014",
+        "F058"
+      ],
+      "all_food_ids": [
+        "F014",
+        "F012",
+        "F058"
+      ],
+      "vegetarian_requires_microbial_rennet": false,
+      "diet": "vegetarisch",
+      "release_status": "draft",
+      "cross_contact": "unknown",
+      "recipeId": "R026",
+      "revision": "3.8.14-reference"
+    },
+    "R027": {
+      "declared": [
+        "Sesam"
+      ],
+      "groups": {
+        "Gluten": "not_intrinsic_label_crosscontact_unverified",
+        "Krebstiere": "not_intrinsic_label_crosscontact_unverified",
+        "Ei": "not_intrinsic_label_crosscontact_unverified",
+        "Fisch": "not_intrinsic_label_crosscontact_unverified",
+        "Erdnüsse": "not_intrinsic_label_crosscontact_unverified",
+        "Soja": "not_intrinsic_label_crosscontact_unverified",
+        "Milch": "not_intrinsic_label_crosscontact_unverified",
+        "Schalenfrüchte": "not_intrinsic_label_crosscontact_unverified",
+        "Sellerie": "not_intrinsic_label_crosscontact_unverified",
+        "Senf": "not_intrinsic_label_crosscontact_unverified",
+        "Sesam": "present",
+        "Sulfite": "not_intrinsic_label_crosscontact_unverified",
+        "Lupinen": "not_intrinsic_label_crosscontact_unverified",
+        "Weichtiere": "not_intrinsic_label_crosscontact_unverified"
+      },
+      "label_food_ids": [
+        "F053",
+        "F059",
+        "F060"
+      ],
+      "all_food_ids": [
+        "F053",
+        "F059",
+        "F060",
+        "F025",
+        "F015"
+      ],
+      "vegetarian_requires_microbial_rennet": false,
+      "diet": "vegan",
+      "release_status": "draft",
+      "cross_contact": "unknown",
+      "recipeId": "R027",
+      "revision": "3.8.14-reference"
+    },
+    "R028": {
+      "declared": [
+        "Ei",
+        "Gluten"
+      ],
+      "groups": {
+        "Gluten": "present",
+        "Krebstiere": "not_intrinsic_label_crosscontact_unverified",
+        "Ei": "present",
+        "Fisch": "not_intrinsic_label_crosscontact_unverified",
+        "Erdnüsse": "not_intrinsic_label_crosscontact_unverified",
+        "Soja": "not_intrinsic_label_crosscontact_unverified",
+        "Milch": "not_intrinsic_label_crosscontact_unverified",
+        "Schalenfrüchte": "not_intrinsic_label_crosscontact_unverified",
+        "Sellerie": "not_intrinsic_label_crosscontact_unverified",
+        "Senf": "not_intrinsic_label_crosscontact_unverified",
+        "Sesam": "not_intrinsic_label_crosscontact_unverified",
+        "Sulfite": "not_intrinsic_label_crosscontact_unverified",
+        "Lupinen": "not_intrinsic_label_crosscontact_unverified",
+        "Weichtiere": "not_intrinsic_label_crosscontact_unverified"
+      },
+      "label_food_ids": [
+        "F062"
+      ],
+      "all_food_ids": [
+        "F006",
+        "F061",
+        "F062"
+      ],
+      "vegetarian_requires_microbial_rennet": false,
+      "diet": "vegetarisch",
+      "release_status": "draft",
+      "cross_contact": "unknown",
+      "recipeId": "R028",
+      "revision": "3.8.14-reference"
+    },
+    "R029": {
+      "declared": [
+        "Milch"
+      ],
+      "groups": {
+        "Gluten": "not_intrinsic_label_crosscontact_unverified",
+        "Krebstiere": "not_intrinsic_label_crosscontact_unverified",
+        "Ei": "not_intrinsic_label_crosscontact_unverified",
+        "Fisch": "not_intrinsic_label_crosscontact_unverified",
+        "Erdnüsse": "not_intrinsic_label_crosscontact_unverified",
+        "Soja": "not_intrinsic_label_crosscontact_unverified",
+        "Milch": "present",
+        "Schalenfrüchte": "not_intrinsic_label_crosscontact_unverified",
+        "Sellerie": "not_intrinsic_label_crosscontact_unverified",
+        "Senf": "not_intrinsic_label_crosscontact_unverified",
+        "Sesam": "not_intrinsic_label_crosscontact_unverified",
+        "Sulfite": "not_intrinsic_label_crosscontact_unverified",
+        "Lupinen": "not_intrinsic_label_crosscontact_unverified",
+        "Weichtiere": "not_intrinsic_label_crosscontact_unverified"
+      },
+      "label_food_ids": [
+        "F002",
+        "F063",
+        "F004"
+      ],
+      "all_food_ids": [
+        "F002",
+        "F017",
+        "F063",
+        "F004"
+      ],
+      "vegetarian_requires_microbial_rennet": false,
+      "diet": "vegetarisch",
+      "release_status": "draft",
+      "cross_contact": "unknown",
+      "recipeId": "R029",
+      "revision": "3.8.14-reference"
+    },
+    "R030": {
+      "declared": [
+        "Sesam",
+        "Soja"
+      ],
+      "groups": {
+        "Gluten": "not_intrinsic_label_crosscontact_unverified",
+        "Krebstiere": "not_intrinsic_label_crosscontact_unverified",
+        "Ei": "not_intrinsic_label_crosscontact_unverified",
+        "Fisch": "not_intrinsic_label_crosscontact_unverified",
+        "Erdnüsse": "not_intrinsic_label_crosscontact_unverified",
+        "Soja": "present",
+        "Milch": "not_intrinsic_label_crosscontact_unverified",
+        "Schalenfrüchte": "not_intrinsic_label_crosscontact_unverified",
+        "Sellerie": "not_intrinsic_label_crosscontact_unverified",
+        "Senf": "not_intrinsic_label_crosscontact_unverified",
+        "Sesam": "present",
+        "Sulfite": "not_intrinsic_label_crosscontact_unverified",
+        "Lupinen": "not_intrinsic_label_crosscontact_unverified",
+        "Weichtiere": "not_intrinsic_label_crosscontact_unverified"
+      },
+      "label_food_ids": [
+        "F024",
+        "F060",
+        "F026"
+      ],
+      "all_food_ids": [
+        "F024",
+        "F060",
+        "F026"
+      ],
+      "vegetarian_requires_microbial_rennet": false,
+      "diet": "vegan",
+      "release_status": "draft",
+      "cross_contact": "unknown",
+      "recipeId": "R030",
+      "revision": "3.8.14-reference"
+    }
+  }
+}
