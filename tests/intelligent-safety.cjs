@@ -13,7 +13,13 @@ assert.equal(Object.keys(hashes).length,30);
 for(const recipe of actual){
  assert.equal(createHash('sha256').update(fs.readFileSync('nutrition/recipes/'+recipe.id+'.webp')).digest('hex'),hashes[recipe.id+'.webp']);
  assert.equal(Object.keys(recipe.safety.groups).length,14);
- assert.equal(recipe.release_status,'draft');
+ const expected=recipe.id==='R003'?'draft':'reviewed';
+ assert.equal(recipe.release_status,expected);
+ assert.equal(recipe.safety.release_status,expected);
+ assert.equal(recipe.safety.revision,recipe.safety_revision);
+ assert.equal(recipe.safety.diet,recipe.diet);
+ assert.equal(recipe.safety.vegetarian_requires_microbial_rennet,Boolean(recipe.diet_condition));
+ assert.equal(recipe.safety.product_evidence,undefined);
  for(const key of engine.nutrients){
   const stored=recipe.nutrition_per_serving[key],computed=recipe.values[key];
   if(computed===null)assert.equal(stored,null);

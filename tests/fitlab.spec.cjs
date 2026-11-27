@@ -185,7 +185,7 @@ test('real QA5 application automatically migrates into current IndexedDB', async
   expect(legacy).toEqual(saved);
   await page.unroute(root,oldRoute);
   await page.reload();
-  await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3.8.14 INTELLIGENT SAFETY');
+  await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3.8.15 RECIPE RELEASE');
   await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0,{timeout:20000});
   const migrated=await canonical(page);
   expect(migrated.p.age).toBe(41);
@@ -1214,15 +1214,15 @@ test(`Atlas V2 real service worker update from ${previousVersion} keeps data and
     await page.waitForFunction(()=>window.testControllerChanged);
     await page.waitForFunction(async previous=>{
       const keys=await caches.keys();
-      return keys.some(key=>key.endsWith('evolution-3-8-14-intelligent-safety'))&&!keys.some(key=>key.endsWith('evolution-'+previous.toLowerCase().replace(/[. ]/g,'-')));
+      return keys.some(key=>key.endsWith('evolution-3-8-15-recipe-release'))&&!keys.some(key=>key.endsWith('evolution-'+previous.toLowerCase().replace(/[. ]/g,'-')));
     },previousVersion);
     await page.reload();
-    await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3.8.14 INTELLIGENT SAFETY');
+    await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3.8.15 RECIPE RELEASE');
     await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
     expect(await canonical(page)).toEqual(prior);
     await context.setOffline(true);
     await page.reload();
-    await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3.8.14 INTELLIGENT SAFETY');
+    await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3.8.15 RECIPE RELEASE');
     await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
     if(previousVersion.startsWith('3.5')){
       await page.getByRole('button',{name:/Erlebnis entdecken/}).click();
@@ -2194,7 +2194,7 @@ test('Intelligent Safety serializes competing profile updates as whole revisions
  await other.close();
 });
 
-test('Intelligent Safety holds unknown exclusions and every production draft while distinguishing product checks',async({page})=>{
+test('Intelligent Safety holds unknown exclusions and the remaining production draft while distinguishing product checks',async({page})=>{
  await ready(page,'m',false);
  await confirmNutrition(page,{allergy:['Milch']});
  await page.locator('fitlab-personal-dashboard .nutrition .action').click();
@@ -2207,7 +2207,8 @@ test('Intelligent Safety holds unknown exclusions and every production draft whi
  await page.locator('fitlab-personal-dashboard .nutrition .action').click();
  await n.getByRole('button',{name:'Alle Rezepte'}).click();
  await expect(n.locator('#catalog-list summary')).toHaveCount(30);
- expect((await n.locator('#catalog-list summary').allTextContents()).every(text=>text.includes('Fachliche Rezeptfreigabe offen'))).toBe(true);
+ await expect(n.locator('[data-id=R003] summary')).toContainText('Fachliche Rezeptfreigabe offen');
+ await expect(n.locator('#catalog-list summary').filter({hasText:'Fachliche Rezeptfreigabe offen'})).toHaveCount(1);
  await page.evaluate(()=>xpNutritionStore({...xpNutritionProfile().selection,exclusions:['F999']},xpNutritionProfile().revision));
  expect(await page.evaluate(()=>xpNutritionProfile().status)).toBe('damaged');
 });
@@ -2295,4 +2296,75 @@ test('Intelligent Safety books every recipe and supported portion via the guarde
   return errors;
  });
  expect(failures).toEqual([]);
+});
+
+test('Recipe Release shows actual recommendations and refreshes the budget after a real booking',async({page})=>{
+ await ready(page,'m',false);
+ await page.evaluate(async()=>{state.p.goals=[0,2];await save();premiumDashboard()});
+ await confirmNutrition(page,{diet:'Vegan'});
+ await page.locator('fitlab-personal-dashboard .nutrition .action').click();
+ const n=page.locator('fitlab-nutrition');
+ await n.locator('#meal').selectOption('mittag');
+ await expect(n.locator('.slide img')).toBeVisible();
+ await expect(n.getByText('Muskelaufbau',{exact:true})).toBeVisible();
+ const initialBudget=await page.evaluate(()=>xpNutritionModel().budget);
+ const current=await n.locator('.slide img').getAttribute('src');
+ const id=current.match(/R\d{3}/)[0];
+ const selected=n.locator('.recipe [data-action=portion][data-value="1"]');
+ await selected.click();
+ page.once('dialog',d=>d.accept());
+ await n.locator('.recipe').getByRole('button',{name:'Ins Tagebuch übernehmen'}).click();
+ await expect(n.getByText('Zutaten im Tagebuch gespeichert.')).toBeVisible();
+ const model=await page.evaluate(()=>xpNutritionModel());
+ expect(model.budget).not.toBe(initialBudget);
+ expect(model.recent).toContain(id);
+ await expect(n.locator('.daystats')).toHaveText(model.budget);
+ expect((await canonical(page)).log[await page.evaluate(()=>dateKey())].every(row=>row.source.startsWith('FITLAB '+id))).toBe(true);
+ await n.getByRole('button',{name:'Alle Rezepte'}).click();
+ await expect(n.locator('#catalog-list > details')).toHaveCount(30);
+ const held=n.locator('[data-id=R003]');
+ await held.locator('summary').click();
+ await expect(held.getByRole('button',{name:'Ins Tagebuch übernehmen'})).toBeDisabled();
+});
+
+test('Recipe Release checks 174 real bookings and six holds with no release override',async({page})=>{
+ test.setTimeout(120000);
+ await ready(page,'m',false);
+ await confirmNutrition(page);
+ const result=await page.evaluate(async()=>{
+  const json=async name=>(await fetch('nutrition/'+name+'.json?v=3815')).json();
+  const [r,f,matrix]=await Promise.all(['recipes','foods','allergen-matrix'].map(json));
+  const engine=fitLabNutritionEngine,safety=fitLabNutritionSafety;
+  const recipes=safety.attachMatrix(engine.enrich(r.recipes,f.foods),matrix);
+  const revision=xpNutritionProfile().revision,date=dateKey();
+  const dietCounts=safety.diets.map(diet=>recipes.filter(recipe=>safety.recipeGate(recipe,safety.envelope('confirmed',revision,engine.defaults({diet}))).status==='checked').length);
+  const attributes={kcal:'k',protein_g:'p',available_carbs_g:'c',fat_g:'f',fiber_g:'fiber'};
+  const errors=[];let allowed=0,blocked=0;
+  for(const recipe of recipes)for(const portion of engine.portions){
+   const before=(state.log[date]||[]).length;
+   const booked=await xpNutritionBook(recipe,portion,'Mittagessen',revision,date);
+   const rows=(await xpIDBRead()).log[date]?.slice(before)||[];
+   if(booked)allowed++;else blocked++;
+   const correct=recipe.id==='R003'?!booked&&!rows.length:booked&&rows.length===recipe.rows.length&&engine.nutrients.every(key=>recipe.values[key]===null
+    ?rows.some(row=>row[attributes[key]]===null)
+    :Math.abs(rows.reduce((total,row)=>total+row[attributes[key]]*row.g/100,0)-recipe.values[key]*portion)<1e-7);
+   if(!correct)errors.push([recipe.id,portion,booked,rows.length]);
+  }
+  return {allowed,blocked,dietCounts,errors};
+ });
+ expect(result).toEqual({allowed:174,blocked:6,dietCounts:[29,20,16,7],errors:[]});
+});
+
+test('Recipe Release shows the R017 notice in the catalog and confirmation before any booking',async({page})=>{
+ await ready(page,'m',false);
+ await confirmNutrition(page);
+ await page.locator('fitlab-personal-dashboard .nutrition .action').click();
+ const n=page.locator('fitlab-nutrition');
+ await n.getByRole('button',{name:'Alle Rezepte'}).click();
+ const card=n.locator('[data-id=R017]');
+ await expect(card.locator('summary')).toContainText('Schwangerschaft und Stillzeit');
+ await card.locator('summary').click();
+ page.once('dialog',async d=>{expect(d.message()).toContain('Schwangerschaft und Stillzeit');await d.dismiss()});
+ await card.getByRole('button',{name:'Ins Tagebuch übernehmen'}).click();
+ expect(Object.values((await canonical(page)).log).flat()).toHaveLength(0);
 });

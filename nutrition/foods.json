@@ -2,7 +2,7 @@
   "foods": [
     {
       "id": "F001",
-      "name": "Haferflocken",
+      "name": "Haferflocken, natur",
       "state": "trocken",
       "source_record_id": "C133000",
       "source": "BLS",
@@ -46,7 +46,8 @@
           "reference": "-"
         }
       },
-      "gluten_grain": "Hafer"
+      "gluten_grain": "Hafer",
+      "recipe_standard": "Ungewürzt; Hafer ist eine glutenhaltige Getreidegruppe. Produktetikett und ggf. Kreuzkontakt beachten."
     },
     {
       "id": "F002",
@@ -93,7 +94,8 @@
           "origin": "Analyse",
           "reference": "-"
         }
-      }
+      },
+      "recipe_standard": "Aus pasteurisierter Milch; natur, ohne weitere Zutaten; bei vegetarischem Anspruch ggf. mikrobielle Enzyme/Lab prüfen."
     },
     {
       "id": "F003",
@@ -185,7 +187,8 @@
           "origin": "Analyse",
           "reference": "-"
         }
-      }
+      },
+      "recipe_standard": "Pasteurisierte Milch, ungesüßt."
     },
     {
       "id": "F005",
@@ -230,7 +233,8 @@
           "origin": "Analyse",
           "reference": "-"
         }
-      }
+      },
+      "recipe_standard": "Mit ausreichend Flüssigkeit quellen lassen; nicht trocken löffelweise schlucken."
     },
     {
       "id": "F006",
@@ -281,7 +285,7 @@
     },
     {
       "id": "F007",
-      "name": "Vollkornbrot Weizen",
+      "name": "Weizenvollkornbrot (vegane Rezeptur)",
       "state": "verzehrfertig",
       "source_record_id": "B111000",
       "source": "BLS",
@@ -325,7 +329,8 @@
           "reference": "-"
         }
       },
-      "gluten_grain": "Weizen"
+      "gluten_grain": "Weizen",
+      "recipe_standard": "Rezeptstandard: einfaches Weizenvollkornbrot mit pflanzlichen Zutaten, ohne zugesetzte Milch-, Ei-, Soja-, Nuss- oder Saatenbestandteile. Konkrete Zutatenliste prüfen; kein Allergiefreiheitsversprechen."
     },
     {
       "id": "F008",
@@ -507,7 +512,8 @@
           "origin": "Analyse",
           "reference": "-"
         }
-      }
+      },
+      "recipe_standard": "Natur, ungesüßt, keine Aroma- oder Getreidezusätze."
     },
     {
       "id": "F012",
@@ -597,7 +603,8 @@
           "origin": "Rezeptberechnung",
           "reference": "-"
         }
-      }
+      },
+      "recipe_standard": "Für Rohverzehr geeignetes Produkt, Packungshinweis beachten. Erwachsene: konservative Produktobergrenze 15 g geschroteter Leinsamen/Tag, zusätzlich alle anderen Leinsamenquellen berücksichtigen; nicht als medizinische Freigabe verstehen. R003 bleibt Entwurf."
     },
     {
       "id": "F014",
@@ -644,7 +651,8 @@
           "origin": "Logische Null",
           "reference": "-"
         }
-      }
+      },
+      "recipe_standard": "Natur, aus pasteurisierter Milch; bei vegetarischem Anspruch ggf. mikrobielle Enzyme/Lab prüfen."
     },
     {
       "id": "F015",
@@ -871,7 +879,8 @@
           "origin": "Analyse",
           "reference": "-"
         }
-      }
+      },
+      "recipe_standard": "Ungewürzter Tofu mit rein pflanzlicher Rezeptur, ohne Marinade."
     },
     {
       "id": "F020",
@@ -920,7 +929,7 @@
     },
     {
       "id": "F021",
-      "name": "Hähnchenbrust",
+      "name": "Hähnchenbrustfilet, natur",
       "state": "roh",
       "source_record_id": "V416100",
       "source": "BLS",
@@ -961,7 +970,8 @@
           "origin": "Logische Null",
           "reference": "-"
         }
-      }
+      },
+      "recipe_standard": "Roh, ungewürzt, ohne Haut, ohne Marinade, essbarer Anteil."
     },
     {
       "id": "F022",
@@ -1006,7 +1016,8 @@
           "origin": "Analyse",
           "reference": "-"
         }
-      }
+      },
+      "recipe_standard": "Gekocht abwiegen. Frisch gekocht verwenden oder nach dem Kochen rasch kühlen und gekühlt lagern; beim Wiedererwärmen vollständig durcherhitzen."
     },
     {
       "id": "F023",
@@ -1098,7 +1109,8 @@
           "origin": "Rezeptberechnung",
           "reference": "-"
         }
-      }
+      },
+      "recipe_standard": "Abgetropft wiegen; natur, nach Packungsangabe verzehrfertig machen. Keine TK-Substitution mit identischen Nährwerten."
     },
     {
       "id": "F025",
@@ -1194,7 +1206,7 @@
     },
     {
       "id": "F027",
-      "name": "Rinderhüftsteak",
+      "name": "Rinderhüftsteak, natur",
       "state": "roh",
       "source_record_id": "U284100",
       "source": "BLS",
@@ -1235,7 +1247,8 @@
           "origin": "Logische Null",
           "reference": "-"
         }
-      }
+      },
+      "recipe_standard": "Roh, ungewürzt, ohne Marinade."
     },
     {
       "id": "F028",
@@ -1284,7 +1297,7 @@
     },
     {
       "id": "F029",
-      "name": "Putenbrust",
+      "name": "Putenbrustfilet, natur",
       "state": "roh",
       "source_record_id": "V486100",
       "source": "BLS",
@@ -1325,7 +1338,8 @@
           "origin": "Logische Null",
           "reference": "-"
         }
-      }
+      },
+      "recipe_standard": "Roh, ohne Haut, ungewürzt, ohne Marinade."
     },
     {
       "id": "F030",
@@ -1415,11 +1429,12 @@
           "origin": "Logische Null",
           "reference": "-"
         }
-      }
+      },
+      "recipe_standard": "Reines Rinderhack, roh, ungewürzt; kein Mischhack oder gewürztes Fertigprodukt."
     },
     {
       "id": "F032",
-      "name": "Vollkornnudeln Weizen",
+      "name": "Vollkornnudeln Weizen (eifreie Rezeptur)",
       "state": "trocken",
       "source_record_id": "E510000",
       "source": "BLS",
@@ -1463,11 +1478,12 @@
           "reference": "National Food Institute; Food data (frida.fooddata.dk), version 4.2; 2022#US Department of Agriculture, Agricultural Research Service; USDA National Nutrient Database for Standard Reference, Legacy Release; 2019#Public Health England; McCance and Widdowson's The Composition of Foods Integrated Dataset; 2021"
         }
       },
-      "gluten_grain": "Weizen"
+      "gluten_grain": "Weizen",
+      "recipe_standard": "Trockene Vollkornteigwaren ohne zugesetztes Ei, passend zur BLS-Referenz. Bei veganem Anspruch pflanzliche Zutatenliste prüfen."
     },
     {
       "id": "F033",
-      "name": "Passierte Tomaten",
+      "name": "Passierte Tomaten, natur",
       "state": "verzehrfertig",
       "source_record_id": "R161200",
       "source": "BLS",
@@ -1508,7 +1524,8 @@
           "origin": "Übernommener Wert",
           "reference": "-"
         }
-      }
+      },
+      "recipe_standard": "Passierte Tomaten ohne Gewürzmischung oder andere zugesetzte Zutaten; kein Fertigsoßenersatz."
     },
     {
       "id": "F034",
@@ -1557,7 +1574,7 @@
     },
     {
       "id": "F035",
-      "name": "Kartoffeln",
+      "name": "Kartoffeln, geschält",
       "state": "roh",
       "source_record_id": "K110100",
       "source": "BLS",
@@ -1598,11 +1615,12 @@
           "origin": "Literatur",
           "reference": "Converted value from: Lee, Y., et al. ; Analytical dietary fiber database for the National Health and Nutrition Survey in Korea.; Journal of Food Composition and Analysis; 2008; 21"
         }
-      }
+      },
+      "recipe_standard": "Roh, geschält abwiegen; grüne Stellen und Keime großzügig entfernen."
     },
     {
       "id": "F036",
-      "name": "Schweinefilet",
+      "name": "Schweinefilet, natur",
       "state": "roh",
       "source_record_id": "U611100",
       "source": "BLS",
@@ -1643,11 +1661,12 @@
           "origin": "Logische Null",
           "reference": "-"
         }
-      }
+      },
+      "recipe_standard": "Roh, ungewürzt, ohne Marinade."
     },
     {
       "id": "F037",
-      "name": "Linsen",
+      "name": "Linsen, vollständig gegart",
       "state": "gekocht",
       "source_record_id": "H730132",
       "source": "BLS",
@@ -1688,11 +1707,12 @@
           "origin": "Literatur",
           "reference": "Converted value from: Aldwairji, M. A., et al. ; Analysis of dietary fibre of boiled and canned legumes commonly consumed in the United Kingdom.; Journal of Food Composition and Analysis; 2014; 36"
         }
-      }
+      },
+      "recipe_standard": "Gekocht wiegen; nach Packungsanleitung vollständig garen, keine trockenen Mengen verwenden."
     },
     {
       "id": "F038",
-      "name": "Kidneybohnen",
+      "name": "Kidneybohnen aus der Konserve",
       "state": "gekocht abgetropft",
       "source_record_id": "H742902",
       "source": "BLS",
@@ -1733,11 +1753,12 @@
           "origin": "Literatur",
           "reference": "Converted value from: Aldwairji, M. A., et al. ; Analysis of dietary fibre of boiled and canned legumes commonly consumed in the United Kingdom.; Journal of Food Composition and Analysis; 2014; 36"
         }
-      }
+      },
+      "recipe_standard": "Vollständig gegarte Konserve, abgetropft abwiegen. Keine ungekochten oder nur eingeweichten Bohnen einsetzen."
     },
     {
       "id": "F039",
-      "name": "Mais",
+      "name": "Mais aus der Konserve",
       "state": "abgetropft",
       "source_record_id": "G570902",
       "source": "BLS",
@@ -1778,7 +1799,8 @@
           "origin": "Analyse",
           "reference": "-"
         }
-      }
+      },
+      "recipe_standard": "Natur, abgetropft abwiegen."
     },
     {
       "id": "F040",
@@ -1826,7 +1848,8 @@
           "reference": "Public Health England; McCance and Widdowson's The Composition of Foods Integrated Dataset; 2021"
         }
       },
-      "gluten_grain": "Weizen"
+      "gluten_grain": "Weizen",
+      "recipe_standard": "Trockener Hartweizenbulgur ohne Gewürz- oder andere Zusätze."
     },
     {
       "id": "F041",
@@ -1873,11 +1896,12 @@
           "origin": "Analyse",
           "reference": "-"
         }
-      }
+      },
+      "recipe_standard": "Naturjoghurt aus pasteurisierter Milch, ohne Aromazusätze."
     },
     {
       "id": "F042",
-      "name": "Lachsfilet",
+      "name": "Lachsfilet, natur",
       "state": "roh",
       "source_record_id": "T410100",
       "source": "BLS",
@@ -1920,7 +1944,8 @@
           "origin": "Analyse",
           "reference": "-"
         }
-      }
+      },
+      "recipe_standard": "Roh, ungewürzt, essbarer Anteil, vollständig durchgaren."
     },
     {
       "id": "F043",
@@ -1965,7 +1990,8 @@
           "origin": "Analyse",
           "reference": "-"
         }
-      }
+      },
+      "recipe_standard": "Gekocht wiegen; hygienisch und rasch abkühlen, wenn kalt verzehrt."
     },
     {
       "id": "F044",
@@ -2104,7 +2130,7 @@
     },
     {
       "id": "F047",
-      "name": "Kabeljau",
+      "name": "Kabeljau, natur",
       "state": "roh",
       "source_record_id": "T204100",
       "source": "BLS",
@@ -2147,11 +2173,12 @@
           "origin": "Logische Null",
           "reference": "-"
         }
-      }
+      },
+      "recipe_standard": "Roh, ungewürzt, essbarer Anteil."
     },
     {
       "id": "F048",
-      "name": "Thunfisch in Wasser",
+      "name": "Thunfisch im eigenen Saft",
       "state": "abgetropft",
       "source_record_id": "T121902",
       "source": "BLS",
@@ -2194,7 +2221,8 @@
           "origin": "Analyse",
           "reference": "-"
         }
-      }
+      },
+      "recipe_standard": "Konserve im eigenen Saft, nicht in Öl; abgetropft abwiegen. Schwangerschaft/Stillzeit: Thunfisch meiden."
     },
     {
       "id": "F049",
@@ -2239,11 +2267,12 @@
           "origin": "Rezeptberechnung",
           "reference": "-"
         }
-      }
+      },
+      "recipe_standard": "Vollständig gegarte Konserve, abgetropft wiegen. Generische BLS-Gartenbohne bleibt dokumentierte Näherung."
     },
     {
       "id": "F050",
-      "name": "Garnelen geschält",
+      "name": "Garnelen geschält, natur",
       "state": "roh",
       "source_record_id": "T753100",
       "source": "BLS",
@@ -2286,11 +2315,12 @@
           "origin": "Logische Null",
           "reference": "-"
         }
-      }
+      },
+      "recipe_standard": "Roh, ungewürzt, ohne Marinade. Bei TK im Kühlschrank auftauen und nach dem Abtropfen ohne Eisglasur wiegen. Produktetikett insbesondere auf Sulfite prüfen; bekannte Krebstiere. BLS-Sammelreferenz für rohe Garnelen/Granat/Krabben, nicht artspezifisch."
     },
     {
       "id": "F051",
-      "name": "Zitrone",
+      "name": "Frisch gepresster Zitronensaft",
       "state": "Saft",
       "source_record_id": "F601600",
       "source": "BLS",
@@ -2331,7 +2361,8 @@
           "origin": "Rezeptberechnung",
           "reference": "-"
         }
-      }
+      },
+      "recipe_standard": "Saft abwiegen, keine ganze Zitrone."
     },
     {
       "id": "F052",
@@ -2376,11 +2407,12 @@
           "origin": "Aggregation",
           "reference": "US Department of Agriculture, Agricultural Research Service; USDA National Nutrient Database for Standard Reference, Legacy Release; 2019#National Food Institute; Food data (frida.fooddata.dk), version 4.2; 2022"
         }
-      }
+      },
+      "recipe_standard": "Trocken abwiegen und nach Packungsangabe vollständig weich kochen."
     },
     {
       "id": "F053",
-      "name": "Kichererbsen",
+      "name": "Kichererbsen aus der Konserve",
       "state": "gekocht abgetropft",
       "source_record_id": "H720902",
       "source": "BLS",
@@ -2421,11 +2453,12 @@
           "origin": "Rezeptberechnung",
           "reference": "-"
         }
-      }
+      },
+      "recipe_standard": "Vollständig gegarte Konserve, natur, abgetropft wiegen."
     },
     {
       "id": "F054",
-      "name": "Feta",
+      "name": "Feta, mindestens 45 % Fett i. Tr.",
       "state": "verzehrfertig",
       "source_record_id": "M012200",
       "source": "BLS",
@@ -2468,7 +2501,8 @@
           "origin": "Analyse",
           "reference": "-"
         }
-      }
+      },
+      "recipe_standard": "Aus pasteurisierter Milch; vegetarische/pescetarische Rezeptfreigabe bleibt vom belegten mikrobiellen Lab abhängig."
     },
     {
       "id": "F055",
@@ -2517,7 +2551,7 @@
     },
     {
       "id": "F056",
-      "name": "Kartoffeln",
+      "name": "Kartoffeln, geschält und gekocht",
       "state": "gekocht",
       "source_record_id": "K110132",
       "source": "BLS",
@@ -2558,7 +2592,8 @@
           "origin": "Literatur",
           "reference": "Converted value from: Li, B. W. and Andrews, K. W.; Individual sugars, soluble, and insoluble dietary fiber contents of 70 high consumption foods.; Journal of Food Composition and Analysis; 2002; 15"
         }
-      }
+      },
+      "recipe_standard": "Geschälten und gegarten essbaren Anteil abwiegen."
     },
     {
       "id": "F057",
@@ -2652,7 +2687,7 @@
     },
     {
       "id": "F059",
-      "name": "Tahini",
+      "name": "Tahini (reines Sesammus)",
       "state": "verzehrfertig",
       "source_record_id": "Q901000",
       "source": "BLS",
@@ -2695,11 +2730,12 @@
           "origin": "Nährstoffdatenbank",
           "reference": "US Department of Agriculture, Agricultural Research Service; USDA National Nutrient Database for Standard Reference, Legacy Release; 2019"
         }
-      }
+      },
+      "recipe_standard": "Reines Sesammus, keine Nuss- oder Gewürzzusätze; deklarierter Sesam."
     },
     {
       "id": "F060",
-      "name": "Zitronensaft",
+      "name": "Frisch gepresster Zitronensaft",
       "state": "verzehrfertig",
       "source_record_id": "F601600",
       "source": "BLS",
@@ -2740,7 +2776,8 @@
           "origin": "Rezeptberechnung",
           "reference": "-"
         }
-      }
+      },
+      "recipe_standard": "Frisch gepressten Saft wiegen; bei abgefülltem Saft abweichende Zusätze/Etikett prüfen."
     },
     {
       "id": "F061",
@@ -2789,7 +2826,7 @@
     },
     {
       "id": "F062",
-      "name": "Knäckebrot Roggen",
+      "name": "Roggenknäckebrot (einfache Rezeptur)",
       "state": "verzehrfertig",
       "source_record_id": "B6A2000",
       "source": "BLS",
@@ -2833,7 +2870,8 @@
           "reference": "-"
         }
       },
-      "gluten_grain": "Roggen"
+      "gluten_grain": "Roggen",
+      "recipe_standard": "Rezeptstandard einfaches Roggenknäckebrot ohne zugesetzte Milch, Ei, Saaten oder Gewürzmischung; konkrete Getreidesorten auf dem Etikett beachten."
     },
     {
       "id": "F063",
@@ -2878,7 +2916,8 @@
           "origin": "Reskalierung",
           "reference": "-"
         }
-      }
+      },
+      "recipe_standard": "Reiner Kakao, kein Trinkkakaopulver."
     },
     {
       "id": "F064",
@@ -2929,7 +2968,7 @@
     },
     {
       "id": "F065",
-      "name": "Zimt gemahlen",
+      "name": "Zimt Cassia, gemahlen",
       "state": "trocken",
       "source_record_id": "02010",
       "source": "USDA SR28",
@@ -2946,11 +2985,12 @@
       "source_note": "KH näherungsweise Gesamt-KH minus Ballaststoffe",
       "source_provenance": {
         "conversion": "USDA total carbohydrate minus fiber"
-      }
+      },
+      "recipe_standard": "USDA-Referenz Cassia; Cumaringehalt produktabhängig. Keine unkontrollierte Portionsskalierung; bevorzugt Ceylon bei häufigem Gebrauch, dann Nährwertzuordnung neu prüfen. R003 bleibt Entwurf."
     },
     {
       "id": "F066",
-      "name": "Chilipulver rein",
+      "name": "Reines Cayenne-Chilipulver",
       "state": "trocken",
       "source_record_id": "02031",
       "source": "USDA SR28",
@@ -2967,7 +3007,8 @@
       "source_note": "reiner Cayenne als Chili-Referenz; KH näherungsweise Gesamt-KH minus Ballaststoffe",
       "source_provenance": {
         "conversion": "USDA total carbohydrate minus fiber"
-      }
+      },
+      "recipe_standard": "Reiner Cayenne, keine Chili-Gewürzmischung; Menge bei Schärfeempfindlichkeit reduzieren und Rezeptwerte ggf. neu berechnen."
     }
   ]
 }

@@ -52,10 +52,10 @@
       ],
       "vegetarian_requires_microbial_rennet": false,
       "diet": "vegetarisch",
-      "release_status": "draft",
+      "release_status": "reviewed",
       "cross_contact": "unknown",
       "recipeId": "R001",
-      "revision": "3.8.14-reference"
+      "revision": "3.8.15-editorial-candidate"
     },
     "R002": {
       "declared": [
@@ -90,10 +90,10 @@
       ],
       "vegetarian_requires_microbial_rennet": false,
       "diet": "vegetarisch",
-      "release_status": "draft",
+      "release_status": "reviewed",
       "cross_contact": "unknown",
       "recipeId": "R002",
-      "revision": "3.8.14-reference"
+      "revision": "3.8.15-editorial-candidate"
     },
     "R003": {
       "declared": [
@@ -134,7 +134,7 @@
       "release_status": "draft",
       "cross_contact": "unknown",
       "recipeId": "R003",
-      "revision": "3.8.14-reference"
+      "revision": "3.8.15-editorial-candidate"
     },
     "R004": {
       "declared": [
@@ -169,10 +169,10 @@
       ],
       "vegetarian_requires_microbial_rennet": false,
       "diet": "vegetarisch",
-      "release_status": "draft",
+      "release_status": "reviewed",
       "cross_contact": "unknown",
       "recipeId": "R004",
-      "revision": "3.8.14-reference"
+      "revision": "3.8.15-editorial-candidate"
     },
     "R005": {
       "declared": [
@@ -209,10 +209,10 @@
       ],
       "vegetarian_requires_microbial_rennet": false,
       "diet": "vegetarisch",
-      "release_status": "draft",
+      "release_status": "reviewed",
       "cross_contact": "unknown",
       "recipeId": "R005",
-      "revision": "3.8.14-reference"
+      "revision": "3.8.15-editorial-candidate"
     },
     "R006": {
       "declared": [
@@ -248,10 +248,10 @@
       ],
       "vegetarian_requires_microbial_rennet": false,
       "diet": "vegan",
-      "release_status": "draft",
+      "release_status": "reviewed",
       "cross_contact": "unknown",
       "recipeId": "R006",
-      "revision": "3.8.14-reference"
+      "revision": "3.8.15-editorial-candidate"
     },
     "R007": {
       "declared": [
@@ -290,10 +290,10 @@
       ],
       "vegetarian_requires_microbial_rennet": false,
       "diet": "Mischkost",
-      "release_status": "draft",
+      "release_status": "reviewed",
       "cross_contact": "unknown",
       "recipeId": "R007",
-      "revision": "3.8.14-reference"
+      "revision": "3.8.15-editorial-candidate"
     },
     "R008": {
       "declared": [],
@@ -322,10 +322,10 @@
       ],
       "vegetarian_requires_microbial_rennet": false,
       "diet": "Mischkost",
-      "release_status": "draft",
+      "release_status": "reviewed",
       "cross_contact": "unknown",
       "recipeId": "R008",
-      "revision": "3.8.14-reference"
+      "revision": "3.8.15-editorial-candidate"
     },
     "R009": {
       "declared": [],
@@ -357,10 +357,10 @@
       ],
       "vegetarian_requires_microbial_rennet": false,
       "diet": "Mischkost",
-      "release_status": "draft",
+      "release_status": "reviewed",
       "cross_contact": "unknown",
       "recipeId": "R009",
-      "revision": "3.8.14-reference"
+      "revision": "3.8.15-editorial-candidate"
     },
     "R010": {
       "declared": [
@@ -396,10 +396,10 @@
       ],
       "vegetarian_requires_microbial_rennet": false,
       "diet": "Mischkost",
-      "release_status": "draft",
+      "release_status": "reviewed",
       "cross_contact": "unknown",
       "recipeId": "R010",
-      "revision": "3.8.14-reference"
+      "revision": "3.8.15-editorial-candidate"
     },
     "R011": {
       "declared": [],
@@ -429,10 +429,10 @@
       ],
       "vegetarian_requires_microbial_rennet": false,
       "diet": "Mischkost",
-      "release_status": "draft",
+      "release_status": "reviewed",
       "cross_contact": "unknown",
       "recipeId": "R011",
-      "revision": "3.8.14-reference"
+      "revision": "3.8.15-editorial-candidate"
     },
     "R012": {
       "declared": [],
@@ -464,10 +464,10 @@
       ],
       "vegetarian_requires_microbial_rennet": false,
       "diet": "Mischkost",
-      "release_status": "draft",
+      "release_status": "reviewed",
       "cross_contact": "unknown",
       "recipeId": "R012",
-      "revision": "3.8.14-reference"
+      "revision": "3.8.15-editorial-candidate"
     },
     "R013": {
       "declared": [],
@@ -505,10 +505,10 @@
       ],
       "vegetarian_requires_microbial_rennet": false,
       "diet": "Mischkost",
-      "release_status": "draft",
+      "release_status": "reviewed",
       "cross_contact": "unknown",
       "recipeId": "R013",
-      "revision": "3.8.14-reference"
+      "revision": "3.8.15-editorial-candidate"
     },
     "R014": {
       "declared": [
@@ -545,10 +545,10 @@
       ],
       "vegetarian_requires_microbial_rennet": false,
       "diet": "Mischkost",
-      "release_status": "draft",
+      "release_status": "reviewed",
       "cross_contact": "unknown",
       "recipeId": "R014",
-      "revision": "3.8.14-reference"
+      "revision": "3.8.15-editorial-candidate"
     },
     "R015": {
       "declared": [
@@ -584,10 +584,10 @@
       ],
       "vegetarian_requires_microbial_rennet": false,
       "diet": "pescetarisch",
-      "release_status": "draft",
+      "release_status": "reviewed",
       "cross_contact": "unknown",
       "recipeId": "R015",
-      "revision": "3.8.14-reference"
+      "revision": "3.8.15-editorial-candidate"
     },
     "R016": {
       "declared": [
@@ -618,10 +618,10 @@
       ],
       "vegetarian_requires_microbial_rennet": false,
       "diet": "pescetarisch",
-      "release_status": "draft",
+      "release_status": "reviewed",
       "cross_contact": "unknown",
       "recipeId": "R016",
-      "revision": "3.8.14-reference"
+      "revision": "3.8.15-editorial-candidate"
     },
     "R017": {
       "declared": [
@@ -656,10 +656,10 @@
       ],
       "vegetarian_requires_microbial_rennet": false,
       "diet": "pescetarisch",
-      "release_status": "draft",
+      "release_status": "reviewed",
       "cross_contact": "unknown",
       "recipeId": "R017",
-      "revision": "3.8.14-reference"
+      "revision": "3.8.15-editorial-candidate"
     },
     "R018": {
       "declared": [
@@ -694,10 +694,10 @@
       ],
       "vegetarian_requires_microbial_rennet": false,
       "diet": "pescetarisch",
-      "release_status": "draft",
+      "release_status": "reviewed",
       "cross_contact": "unknown",
       "recipeId": "R018",
-      "revision": "3.8.14-reference"
+      "revision": "3.8.15-editorial-candidate"
     },
     "R019": {
       "declared": [],
@@ -731,10 +731,10 @@
       ],
       "vegetarian_requires_microbial_rennet": false,
       "diet": "vegan",
-      "release_status": "draft",
+      "release_status": "reviewed",
       "cross_contact": "unknown",
       "recipeId": "R019",
-      "revision": "3.8.14-reference"
+      "revision": "3.8.15-editorial-candidate"
     },
     "R020": {
       "declared": [
@@ -773,10 +773,10 @@
       ],
       "vegetarian_requires_microbial_rennet": false,
       "diet": "vegan",
-      "release_status": "draft",
+      "release_status": "reviewed",
       "cross_contact": "unknown",
       "recipeId": "R020",
-      "revision": "3.8.14-reference"
+      "revision": "3.8.15-editorial-candidate"
     },
     "R021": {
       "declared": [],
@@ -808,10 +808,10 @@
       ],
       "vegetarian_requires_microbial_rennet": false,
       "diet": "vegan",
-      "release_status": "draft",
+      "release_status": "reviewed",
       "cross_contact": "unknown",
       "recipeId": "R021",
-      "revision": "3.8.14-reference"
+      "revision": "3.8.15-editorial-candidate"
     },
     "R022": {
       "declared": [
@@ -846,10 +846,10 @@
       ],
       "vegetarian_requires_microbial_rennet": true,
       "diet": "vegetarisch",
-      "release_status": "draft",
+      "release_status": "reviewed",
       "cross_contact": "unknown",
       "recipeId": "R022",
-      "revision": "3.8.14-reference"
+      "revision": "3.8.15-editorial-candidate"
     },
     "R023": {
       "declared": [
@@ -885,10 +885,10 @@
       ],
       "vegetarian_requires_microbial_rennet": false,
       "diet": "vegan",
-      "release_status": "draft",
+      "release_status": "reviewed",
       "cross_contact": "unknown",
       "recipeId": "R023",
-      "revision": "3.8.14-reference"
+      "revision": "3.8.15-editorial-candidate"
     },
     "R024": {
       "declared": [
@@ -924,10 +924,10 @@
       ],
       "vegetarian_requires_microbial_rennet": false,
       "diet": "vegetarisch",
-      "release_status": "draft",
+      "release_status": "reviewed",
       "cross_contact": "unknown",
       "recipeId": "R024",
-      "revision": "3.8.14-reference"
+      "revision": "3.8.15-editorial-candidate"
     },
     "R025": {
       "declared": [
@@ -961,10 +961,10 @@
       ],
       "vegetarian_requires_microbial_rennet": false,
       "diet": "vegetarisch",
-      "release_status": "draft",
+      "release_status": "reviewed",
       "cross_contact": "unknown",
       "recipeId": "R025",
-      "revision": "3.8.14-reference"
+      "revision": "3.8.15-editorial-candidate"
     },
     "R026": {
       "declared": [
@@ -997,10 +997,10 @@
       ],
       "vegetarian_requires_microbial_rennet": false,
       "diet": "vegetarisch",
-      "release_status": "draft",
+      "release_status": "reviewed",
       "cross_contact": "unknown",
       "recipeId": "R026",
-      "revision": "3.8.14-reference"
+      "revision": "3.8.15-editorial-candidate"
     },
     "R027": {
       "declared": [
@@ -1036,10 +1036,10 @@
       ],
       "vegetarian_requires_microbial_rennet": false,
       "diet": "vegan",
-      "release_status": "draft",
+      "release_status": "reviewed",
       "cross_contact": "unknown",
       "recipeId": "R027",
-      "revision": "3.8.14-reference"
+      "revision": "3.8.15-editorial-candidate"
     },
     "R028": {
       "declared": [
@@ -1072,10 +1072,10 @@
       ],
       "vegetarian_requires_microbial_rennet": false,
       "diet": "vegetarisch",
-      "release_status": "draft",
+      "release_status": "reviewed",
       "cross_contact": "unknown",
       "recipeId": "R028",
-      "revision": "3.8.14-reference"
+      "revision": "3.8.15-editorial-candidate"
     },
     "R029": {
       "declared": [
@@ -1110,10 +1110,10 @@
       ],
       "vegetarian_requires_microbial_rennet": false,
       "diet": "vegetarisch",
-      "release_status": "draft",
+      "release_status": "reviewed",
       "cross_contact": "unknown",
       "recipeId": "R029",
-      "revision": "3.8.14-reference"
+      "revision": "3.8.15-editorial-candidate"
     },
     "R030": {
       "declared": [
@@ -1148,10 +1148,10 @@
       ],
       "vegetarian_requires_microbial_rennet": false,
       "diet": "vegan",
-      "release_status": "draft",
+      "release_status": "reviewed",
       "cross_contact": "unknown",
       "recipeId": "R030",
-      "revision": "3.8.14-reference"
+      "revision": "3.8.15-editorial-candidate"
     }
   }
 }

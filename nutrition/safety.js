@@ -71,6 +71,8 @@
   return recipes.map(recipe=>{
    const record=matrix.recipes?.[recipe.id];
    if(!record||!Array.isArray(record.all_food_ids)||!Array.isArray(record.declared)||!record.groups||typeof record.diet!=='string'||record.recipeId!==recipe.id||record.revision!==recipe.safety_revision||record.release_status!==recipe.release_status
+    ||record.diet.toLowerCase()!==String(recipe.diet).toLowerCase()
+    ||record.vegetarian_requires_microbial_rennet!==Boolean(recipe.diet_condition)
     ||JSON.stringify([...record.all_food_ids].sort())!==JSON.stringify(recipe.rows.map(({food})=>food.id).sort())
     ||JSON.stringify([...record.declared].sort())!==JSON.stringify([...recipe.declared].sort())
     ||groups.some(group=>record.groups[group]!== (recipe.declared.includes(group)?'present':'not_intrinsic_label_crosscontact_unverified'))){

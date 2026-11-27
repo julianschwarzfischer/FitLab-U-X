@@ -34,8 +34,8 @@
         }
       ],
       "steps": [
-        "Haferflocken mit Milch und Quark verrühren.",
-        "Beeren waschen und mit Chiasamen darauf anrichten."
+        "Haferflocken und Chiasamen mit Milch und Quark verrühren, mit ausreichend Flüssigkeit quellen lassen.",
+        "Frische Heidelbeeren gründlich waschen und darauf anrichten."
       ],
       "allergens_declared": [
         "Gluten",
@@ -52,12 +52,44 @@
       "cooked_weight_g": null,
       "image": "assets/R001.webp",
       "image_brief": "Beeren-Hafer-Bowl, exakt die angegebenen Zutaten, matte dunkle Keramik, gedecktes Olivgrün, natürliches Seitenlicht, fotorealistische Editorial-Fotografie, keine Schrift",
-      "release_status": "draft",
+      "release_status": "reviewed",
       "image_review": "draft_contact_sheet_crop",
       "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
       "nutrition_status": "source_based_estimate",
       "nutrition_per_100g": null,
-      "safety_revision": "3.8.14-reference"
+      "safety_revision": "3.8.15-editorial-candidate",
+      "editorial_review": {
+        "scope": "general_adult_recipe_ingredient_based",
+        "decision": "candidate_reviewed_pending_integration_and_independent_acceptance",
+        "revision": "3.8.15-editorial-candidate",
+        "product_labels_verified": false,
+        "cross_contact_verified": false,
+        "note": "Hafer/Milch korrekt deklariert; Chiasamen in Flüssigkeit quellen lassen; frische Heidelbeeren."
+      },
+      "preparation_safety_notes": [
+        "Hände, Arbeitsflächen und Utensilien sauber halten; Obst und Gemüse waschen. Zutaten frisch bzw. korrekt gekühlt verwenden. Produktangaben, Zubereitung und mögliche Kreuzkontakte prüfen. Rezeptbilder sind Illustrationen; die Zutatenliste und Anleitung sind verbindlich.",
+        "Für die Standardrezeptur nur pasteurisierte Milchprodukte verwenden. Tiefgekühlte Beeren nicht ungeprüft roh statt frischer Beeren verwenden; besonders gefährdete Personen sollten diese vor Verzehr vollständig erhitzen.",
+        "Bei ungewohnt hoher Ballaststoffzufuhr Menge langsam steigern und ausreichend trinken."
+      ],
+      "product_standards": [
+        {
+          "food_id": "F001",
+          "note": "Ungewürzt; Hafer ist eine glutenhaltige Getreidegruppe. Produktetikett und ggf. Kreuzkontakt beachten."
+        },
+        {
+          "food_id": "F002",
+          "note": "Aus pasteurisierter Milch; natur, ohne weitere Zutaten; bei vegetarischem Anspruch ggf. mikrobielle Enzyme/Lab prüfen."
+        },
+        {
+          "food_id": "F004",
+          "note": "Pasteurisierte Milch, ungesüßt."
+        },
+        {
+          "food_id": "F005",
+          "note": "Mit ausreichend Flüssigkeit quellen lassen; nicht trocken löffelweise schlucken."
+        }
+      ],
+      "image_notice": "KI-generiertes illustratives Servierbeispiel. Mengen, Zutaten und Garzustand richten sich ausschließlich nach dem Rezept."
     },
     {
       "id": "R002",
@@ -92,9 +124,9 @@
         }
       ],
       "steps": [
-        "Spinat in Öl zusammenfallen lassen.",
-        "Eier verquirlen und vollständig stocken lassen.",
-        "Auf Brot mit Tomaten servieren."
+        "Spinat und Tomaten gründlich waschen.",
+        "Spinat in Öl dünsten; Eier dazugeben und vollständig stocken lassen.",
+        "Mit Brot und Tomaten servieren."
       ],
       "allergens_declared": [
         "Ei",
@@ -111,12 +143,31 @@
       "cooked_weight_g": null,
       "image": "assets/R002.webp",
       "image_brief": "Spinat-Rührei auf Vollkornbrot, exakt die angegebenen Zutaten, matte dunkle Keramik, gedecktes Olivgrün, natürliches Seitenlicht, fotorealistische Editorial-Fotografie, keine Schrift",
-      "release_status": "draft",
+      "release_status": "reviewed",
       "image_review": "draft_contact_sheet_crop",
       "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
       "nutrition_status": "source_based_estimate",
       "nutrition_per_100g": null,
-      "safety_revision": "3.8.14-reference"
+      "safety_revision": "3.8.15-editorial-candidate",
+      "editorial_review": {
+        "scope": "general_adult_recipe_ingredient_based",
+        "decision": "candidate_reviewed_pending_integration_and_independent_acceptance",
+        "revision": "3.8.15-editorial-candidate",
+        "product_labels_verified": false,
+        "cross_contact_verified": false,
+        "note": "Weizenvollkornbrot und Ei; Eier vollständig stocken; frischen Spinat und Tomaten waschen."
+      },
+      "preparation_safety_notes": [
+        "Hände, Arbeitsflächen und Utensilien sauber halten; Obst und Gemüse waschen. Zutaten frisch bzw. korrekt gekühlt verwenden. Produktangaben, Zubereitung und mögliche Kreuzkontakte prüfen. Rezeptbilder sind Illustrationen; die Zutatenliste und Anleitung sind verbindlich.",
+        "Rohe tierische Zutaten separat verarbeiten. Lebensmittel, die durchgegart werden müssen, und aufzuwärmende Speisen im gesamten Lebensmittel mindestens 70 °C für 2 Minuten erhitzen; bei Bedarf Thermometer verwenden."
+      ],
+      "product_standards": [
+        {
+          "food_id": "F007",
+          "note": "Rezeptstandard: einfaches Weizenvollkornbrot mit pflanzlichen Zutaten, ohne zugesetzte Milch-, Ei-, Soja-, Nuss- oder Saatenbestandteile. Konkrete Zutatenliste prüfen; kein Allergiefreiheitsversprechen."
+        }
+      ],
+      "image_notice": "KI-generiertes illustratives Servierbeispiel. Mengen, Zutaten und Garzustand richten sich ausschließlich nach dem Rezept."
     },
     {
       "id": "R003",
@@ -151,9 +202,11 @@
         }
       ],
       "steps": [
-        "Haferflocken mit Sojadrink und Leinsamen mischen.",
-        "Über Nacht gekühlt ziehen lassen.",
-        "Apfel würfeln und mit Zimt unterheben."
+        "Haferflocken und Sojadrink mischen.",
+        "Leinsamen nur verwenden, wenn das Produkt für Rohverzehr geeignet ist; Packungsangaben beachten.",
+        "Über Nacht abgedeckt im Kühlschrank ziehen lassen.",
+        "Gewaschenen Apfel würfeln und mit abgewogenem Zimt unterheben.",
+        "Dieses Rezept bleibt bis zur gesonderten Mengenprüfung ein Entwurf."
       ],
       "allergens_declared": [
         "Gluten",
@@ -176,7 +229,45 @@
       "nutrition_status": "source_based_estimate",
       "nutrition_per_100g": null,
       "passive_time": "über Nacht gekühlt",
-      "safety_revision": "3.8.14-reference"
+      "safety_revision": "3.8.15-editorial-candidate",
+      "editorial_review": {
+        "scope": "general_adult_recipe_ingredient_based",
+        "decision": "hold_portion_safety",
+        "revision": "3.8.15-editorial-candidate",
+        "product_labels_verified": false,
+        "cross_contact_verified": false,
+        "note": "10 g roher geschroteter Leinsamen + 1 g Cassia je Portion. Bei 3 Portionen 30 g/3 g. Eigene Mengen- und Produktregel erforderlich."
+      },
+      "preparation_safety_notes": [
+        "Hände, Arbeitsflächen und Utensilien sauber halten; Obst und Gemüse waschen. Zutaten frisch bzw. korrekt gekühlt verwenden. Produktangaben, Zubereitung und mögliche Kreuzkontakte prüfen. Rezeptbilder sind Illustrationen; die Zutatenliste und Anleitung sind verbindlich.",
+        "Rohverzehr von entsprechend gekennzeichnetem Koch-/Back-Leinsamen vermeiden. Bis zur sicheren Portionsregel und Zimtprüfung keine Empfehlung oder Rezeptbuchung.",
+        "Bei ungewohnt hoher Ballaststoffzufuhr Menge langsam steigern und ausreichend trinken."
+      ],
+      "product_standards": [
+        {
+          "food_id": "F001",
+          "note": "Ungewürzt; Hafer ist eine glutenhaltige Getreidegruppe. Produktetikett und ggf. Kreuzkontakt beachten."
+        },
+        {
+          "food_id": "F011",
+          "note": "Natur, ungesüßt, keine Aroma- oder Getreidezusätze."
+        },
+        {
+          "food_id": "F013",
+          "note": "Für Rohverzehr geeignetes Produkt, Packungshinweis beachten. Erwachsene: konservative Produktobergrenze 15 g geschroteter Leinsamen/Tag, zusätzlich alle anderen Leinsamenquellen berücksichtigen; nicht als medizinische Freigabe verstehen. R003 bleibt Entwurf."
+        },
+        {
+          "food_id": "F065",
+          "note": "USDA-Referenz Cassia; Cumaringehalt produktabhängig. Keine unkontrollierte Portionsskalierung; bevorzugt Ceylon bei häufigem Gebrauch, dann Nährwertzuordnung neu prüfen. R003 bleibt Entwurf."
+        }
+      ],
+      "image_notice": "KI-generiertes illustratives Servierbeispiel. Mengen, Zutaten und Garzustand richten sich ausschließlich nach dem Rezept.",
+      "release_blockers": [
+        "portion cap and combined daily flaxseed intake control",
+        "raw-consumption suitability of flaxseed product",
+        "cassia coumarin risk review / appropriate alternative and source",
+        "re-test recommendation and booking path"
+      ]
     },
     {
       "id": "R004",
@@ -208,7 +299,7 @@
       ],
       "steps": [
         "Brot mit Hüttenkäse bestreichen.",
-        "Gurke und Radieschen schneiden und darauflegen."
+        "Gurke und Radieschen waschen, schneiden und darauflegen."
       ],
       "allergens_declared": [
         "Gluten",
@@ -225,12 +316,35 @@
       "cooked_weight_g": null,
       "image": "assets/R004.webp",
       "image_brief": "Herzhafte Hüttenkäse-Stulle, exakt die angegebenen Zutaten, matte dunkle Keramik, gedecktes Olivgrün, natürliches Seitenlicht, fotorealistische Editorial-Fotografie, keine Schrift",
-      "release_status": "draft",
+      "release_status": "reviewed",
       "image_review": "draft_contact_sheet_crop",
       "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
       "nutrition_status": "source_based_estimate",
       "nutrition_per_100g": null,
-      "safety_revision": "3.8.14-reference"
+      "safety_revision": "3.8.15-editorial-candidate",
+      "editorial_review": {
+        "scope": "general_adult_recipe_ingredient_based",
+        "decision": "candidate_reviewed_pending_integration_and_independent_acceptance",
+        "revision": "3.8.15-editorial-candidate",
+        "product_labels_verified": false,
+        "cross_contact_verified": false,
+        "note": "Milch und Weizen; einfaches Brot und pasteurisierter Natur-Hüttenkäse; Gemüse waschen."
+      },
+      "preparation_safety_notes": [
+        "Hände, Arbeitsflächen und Utensilien sauber halten; Obst und Gemüse waschen. Zutaten frisch bzw. korrekt gekühlt verwenden. Produktangaben, Zubereitung und mögliche Kreuzkontakte prüfen. Rezeptbilder sind Illustrationen; die Zutatenliste und Anleitung sind verbindlich.",
+        "Pasteurisierte Milchprodukte wählen; konkrete Zutatenliste und ggf. verwendete Enzyme/Lab beachten."
+      ],
+      "product_standards": [
+        {
+          "food_id": "F007",
+          "note": "Rezeptstandard: einfaches Weizenvollkornbrot mit pflanzlichen Zutaten, ohne zugesetzte Milch-, Ei-, Soja-, Nuss- oder Saatenbestandteile. Konkrete Zutatenliste prüfen; kein Allergiefreiheitsversprechen."
+        },
+        {
+          "food_id": "F014",
+          "note": "Natur, aus pasteurisierter Milch; bei vegetarischem Anspruch ggf. mikrobielle Enzyme/Lab prüfen."
+        }
+      ],
+      "image_notice": "KI-generiertes illustratives Servierbeispiel. Mengen, Zutaten und Garzustand richten sich ausschließlich nach dem Rezept."
     },
     {
       "id": "R005",
@@ -266,7 +380,7 @@
       ],
       "steps": [
         "Banane zerdrücken und mit Ei, Quark und Hafer verrühren.",
-        "Kleine Pancakes in Öl beidseitig durchbacken."
+        "Kleine Pancakes in Öl beidseitig vollständig durchbacken; rohen Teig nicht probieren."
       ],
       "allergens_declared": [
         "Ei",
@@ -284,12 +398,36 @@
       "cooked_weight_g": null,
       "image": "assets/R005.webp",
       "image_brief": "Bananen-Quark-Pancakes, exakt die angegebenen Zutaten, matte dunkle Keramik, gedecktes Olivgrün, natürliches Seitenlicht, fotorealistische Editorial-Fotografie, keine Schrift",
-      "release_status": "draft",
+      "release_status": "reviewed",
       "image_review": "draft_contact_sheet_crop",
       "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
       "nutrition_status": "source_based_estimate",
       "nutrition_per_100g": null,
-      "safety_revision": "3.8.14-reference"
+      "safety_revision": "3.8.15-editorial-candidate",
+      "editorial_review": {
+        "scope": "general_adult_recipe_ingredient_based",
+        "decision": "candidate_reviewed_pending_integration_and_independent_acceptance",
+        "revision": "3.8.15-editorial-candidate",
+        "product_labels_verified": false,
+        "cross_contact_verified": false,
+        "note": "Ei, Milch und Hafer; rohen Teig nicht probieren, Pancakes vollständig durchbacken."
+      },
+      "preparation_safety_notes": [
+        "Hände, Arbeitsflächen und Utensilien sauber halten; Obst und Gemüse waschen. Zutaten frisch bzw. korrekt gekühlt verwenden. Produktangaben, Zubereitung und mögliche Kreuzkontakte prüfen. Rezeptbilder sind Illustrationen; die Zutatenliste und Anleitung sind verbindlich.",
+        "Rohe tierische Zutaten separat verarbeiten. Lebensmittel, die durchgegart werden müssen, und aufzuwärmende Speisen im gesamten Lebensmittel mindestens 70 °C für 2 Minuten erhitzen; bei Bedarf Thermometer verwenden.",
+        "Pasteurisierte Milchprodukte wählen; konkrete Zutatenliste und ggf. verwendete Enzyme/Lab beachten."
+      ],
+      "product_standards": [
+        {
+          "food_id": "F001",
+          "note": "Ungewürzt; Hafer ist eine glutenhaltige Getreidegruppe. Produktetikett und ggf. Kreuzkontakt beachten."
+        },
+        {
+          "food_id": "F002",
+          "note": "Aus pasteurisierter Milch; natur, ohne weitere Zutaten; bei vegetarischem Anspruch ggf. mikrobielle Enzyme/Lab prüfen."
+        }
+      ],
+      "image_notice": "KI-generiertes illustratives Servierbeispiel. Mengen, Zutaten und Garzustand richten sich ausschließlich nach dem Rezept."
     },
     {
       "id": "R006",
@@ -324,9 +462,9 @@
         }
       ],
       "steps": [
-        "Tofu in kleine Würfel schneiden und in Öl anbraten.",
-        "Paprika und Spinat zugeben und garen.",
-        "Mit Brot servieren."
+        "Tofu würfeln und in Öl anbraten.",
+        "Gewaschene Paprika und Spinat zugeben und garen.",
+        "Mit Weizenvollkornbrot nach pflanzlichem Rezeptstandard servieren."
       ],
       "allergens_declared": [
         "Gluten",
@@ -343,12 +481,34 @@
       "cooked_weight_g": null,
       "image": "assets/R006.webp",
       "image_brief": "Tofu-Frühstückspfanne, exakt die angegebenen Zutaten, matte dunkle Keramik, gedecktes Olivgrün, natürliches Seitenlicht, fotorealistische Editorial-Fotografie, keine Schrift",
-      "release_status": "draft",
+      "release_status": "reviewed",
       "image_review": "draft_contact_sheet_crop",
       "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
       "nutrition_status": "source_based_estimate",
       "nutrition_per_100g": null,
-      "safety_revision": "3.8.14-reference"
+      "safety_revision": "3.8.15-editorial-candidate",
+      "editorial_review": {
+        "scope": "general_adult_recipe_ingredient_based",
+        "decision": "candidate_reviewed_pending_integration_and_independent_acceptance",
+        "revision": "3.8.15-editorial-candidate",
+        "product_labels_verified": false,
+        "cross_contact_verified": false,
+        "note": "Vegan unter festgelegter pflanzlicher Brotrezeptur und ungewürztem Tofu; Weizen und Soja."
+      },
+      "preparation_safety_notes": [
+        "Hände, Arbeitsflächen und Utensilien sauber halten; Obst und Gemüse waschen. Zutaten frisch bzw. korrekt gekühlt verwenden. Produktangaben, Zubereitung und mögliche Kreuzkontakte prüfen. Rezeptbilder sind Illustrationen; die Zutatenliste und Anleitung sind verbindlich."
+      ],
+      "product_standards": [
+        {
+          "food_id": "F007",
+          "note": "Rezeptstandard: einfaches Weizenvollkornbrot mit pflanzlichen Zutaten, ohne zugesetzte Milch-, Ei-, Soja-, Nuss- oder Saatenbestandteile. Konkrete Zutatenliste prüfen; kein Allergiefreiheitsversprechen."
+        },
+        {
+          "food_id": "F019",
+          "note": "Ungewürzter Tofu mit rein pflanzlicher Rezeptur, ohne Marinade."
+        }
+      ],
+      "image_notice": "KI-generiertes illustratives Servierbeispiel. Mengen, Zutaten und Garzustand richten sich ausschließlich nach dem Rezept."
     },
     {
       "id": "R007",
@@ -392,10 +552,10 @@
         }
       ],
       "steps": [
-        "180 g bereits gekochten Reis je Basisportion bereitstellen und erhitzen.",
-        "Brokkoli garen. Edamame aus der Konserve abtropfen, nach Packungsangabe verzehrfertig machen und bei Bedarf erhitzen. Karotten schneiden.",
-        "Hähnchen in Öl vollständig durchgaren.",
-        "In einer Schale anrichten und mit Sesam bestreuen."
+        "Gekochten Reis nach angegebenem Wiegezustand bereitstellen und durcherhitzen.",
+        "Brokkoli garen; Edamame aus der Konserve abtropfen und nach Packungsangabe verzehrfertig machen.",
+        "Karotten waschen und schneiden.",
+        "Hähnchen in Öl vollständig durchgaren und mit den übrigen Zutaten und Sesam anrichten."
       ],
       "allergens_declared": [
         "Sesam",
@@ -412,12 +572,40 @@
       "cooked_weight_g": null,
       "image": "assets/R007.webp",
       "image_brief": "Chicken Power Bowl, exakt die angegebenen Zutaten, matte dunkle Keramik, gedecktes Olivgrün, natürliches Seitenlicht, fotorealistische Editorial-Fotografie, keine Schrift",
-      "release_status": "draft",
+      "release_status": "reviewed",
       "image_review": "previously_approved_original",
       "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
       "nutrition_status": "source_based_estimate",
       "nutrition_per_100g": null,
-      "safety_revision": "3.8.14-reference"
+      "safety_revision": "3.8.15-editorial-candidate",
+      "editorial_review": {
+        "scope": "general_adult_recipe_ingredient_based",
+        "decision": "candidate_reviewed_pending_integration_and_independent_acceptance",
+        "revision": "3.8.15-editorial-candidate",
+        "product_labels_verified": false,
+        "cross_contact_verified": false,
+        "note": "Soja und Sesam; Konserven-Edamame abgetropft, Reis gekocht; Geflügel vollständig erhitzen."
+      },
+      "preparation_safety_notes": [
+        "Hände, Arbeitsflächen und Utensilien sauber halten; Obst und Gemüse waschen. Zutaten frisch bzw. korrekt gekühlt verwenden. Produktangaben, Zubereitung und mögliche Kreuzkontakte prüfen. Rezeptbilder sind Illustrationen; die Zutatenliste und Anleitung sind verbindlich.",
+        "Rohe tierische Zutaten separat verarbeiten. Lebensmittel, die durchgegart werden müssen, und aufzuwärmende Speisen im gesamten Lebensmittel mindestens 70 °C für 2 Minuten erhitzen; bei Bedarf Thermometer verwenden.",
+        "Vorgegarte Lebensmittel frisch verwenden oder nach dem Garen schnell auf unter 7 °C kühlen und abgedeckt kalt lagern; nicht ungekühlt stehen lassen."
+      ],
+      "product_standards": [
+        {
+          "food_id": "F021",
+          "note": "Roh, ungewürzt, ohne Haut, ohne Marinade, essbarer Anteil."
+        },
+        {
+          "food_id": "F022",
+          "note": "Gekocht abwiegen. Frisch gekocht verwenden oder nach dem Kochen rasch kühlen und gekühlt lagern; beim Wiedererwärmen vollständig durcherhitzen."
+        },
+        {
+          "food_id": "F024",
+          "note": "Abgetropft wiegen; natur, nach Packungsangabe verzehrfertig machen. Keine TK-Substitution mit identischen Nährwerten."
+        }
+      ],
+      "image_notice": "KI-generiertes illustratives Servierbeispiel. Mengen, Zutaten und Garzustand richten sich ausschließlich nach dem Rezept."
     },
     {
       "id": "R008",
@@ -449,9 +637,9 @@
         }
       ],
       "steps": [
-        "Süßkartoffel würfeln und mit Öl bei 200 °C weich rösten.",
-        "Brokkoli dämpfen.",
-        "Steak anbraten und nach gewünschtem Gargrad servieren; für Risikogruppen vollständig durchgaren."
+        "Süßkartoffel waschen und in Würfel schneiden und mit Öl bei 200 °C weich rösten; Brokkoli dämpfen.",
+        "Steak separat vollständig durchgaren.",
+        "Das illustrative Foto bestimmt nicht den Gargrad."
       ],
       "allergens_declared": [],
       "allergen_review": "ingredient_matrix_reviewed_labels_pending",
@@ -465,12 +653,31 @@
       "cooked_weight_g": null,
       "image": "assets/R008.webp",
       "image_brief": "Rind & Süßkartoffel, exakt die angegebenen Zutaten, matte dunkle Keramik, gedecktes Olivgrün, natürliches Seitenlicht, fotorealistische Editorial-Fotografie, keine Schrift",
-      "release_status": "draft",
+      "release_status": "reviewed",
       "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
       "image_review": "draft_contact_sheet_crop_pending_approval",
       "nutrition_status": "source_based_estimate",
       "nutrition_per_100g": null,
-      "safety_revision": "3.8.14-reference"
+      "safety_revision": "3.8.15-editorial-candidate",
+      "editorial_review": {
+        "scope": "general_adult_recipe_ingredient_based",
+        "decision": "candidate_reviewed_pending_integration_and_independent_acceptance",
+        "revision": "3.8.15-editorial-candidate",
+        "product_labels_verified": false,
+        "cross_contact_verified": false,
+        "note": "Keine inhärente EU-Hauptallergengruppe in Standardzutaten; Steak natur, Bild kein Gargradnachweis."
+      },
+      "preparation_safety_notes": [
+        "Hände, Arbeitsflächen und Utensilien sauber halten; Obst und Gemüse waschen. Zutaten frisch bzw. korrekt gekühlt verwenden. Produktangaben, Zubereitung und mögliche Kreuzkontakte prüfen. Rezeptbilder sind Illustrationen; die Zutatenliste und Anleitung sind verbindlich.",
+        "Rohe tierische Zutaten separat verarbeiten. Lebensmittel, die durchgegart werden müssen, und aufzuwärmende Speisen im gesamten Lebensmittel mindestens 70 °C für 2 Minuten erhitzen; bei Bedarf Thermometer verwenden."
+      ],
+      "product_standards": [
+        {
+          "food_id": "F027",
+          "note": "Roh, ungewürzt, ohne Marinade."
+        }
+      ],
+      "image_notice": "KI-generiertes illustratives Servierbeispiel. Mengen, Zutaten und Garzustand richten sich ausschließlich nach dem Rezept."
     },
     {
       "id": "R009",
@@ -507,8 +714,8 @@
       ],
       "steps": [
         "Pute würfeln und in Rapsöl vollständig durchgaren.",
-        "Paprika und Zwiebel dazugeben und weich dünsten.",
-        "Reis unterheben und erhitzen."
+        "Gewaschene Paprika und Zwiebel dazugeben und weich dünsten.",
+        "Bereits gegarten Reis unterheben und vollständig durcherhitzen."
       ],
       "allergens_declared": [],
       "allergen_review": "ingredient_matrix_reviewed_labels_pending",
@@ -522,12 +729,36 @@
       "cooked_weight_g": null,
       "image": "assets/R009.webp",
       "image_brief": "Puten-Paprika-Reis, exakt die angegebenen Zutaten, matte dunkle Keramik, gedecktes Olivgrün, natürliches Seitenlicht, fotorealistische Editorial-Fotografie, keine Schrift",
-      "release_status": "draft",
+      "release_status": "reviewed",
       "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
       "image_review": "draft_contact_sheet_crop_pending_approval",
       "nutrition_status": "source_based_estimate",
       "nutrition_per_100g": null,
-      "safety_revision": "3.8.14-reference"
+      "safety_revision": "3.8.15-editorial-candidate",
+      "editorial_review": {
+        "scope": "general_adult_recipe_ingredient_based",
+        "decision": "candidate_reviewed_pending_integration_and_independent_acceptance",
+        "revision": "3.8.15-editorial-candidate",
+        "product_labels_verified": false,
+        "cross_contact_verified": false,
+        "note": "Natur-Putenbrust, gekochter Reis, rotes Gemüse; vollständige Erhitzung."
+      },
+      "preparation_safety_notes": [
+        "Hände, Arbeitsflächen und Utensilien sauber halten; Obst und Gemüse waschen. Zutaten frisch bzw. korrekt gekühlt verwenden. Produktangaben, Zubereitung und mögliche Kreuzkontakte prüfen. Rezeptbilder sind Illustrationen; die Zutatenliste und Anleitung sind verbindlich.",
+        "Rohe tierische Zutaten separat verarbeiten. Lebensmittel, die durchgegart werden müssen, und aufzuwärmende Speisen im gesamten Lebensmittel mindestens 70 °C für 2 Minuten erhitzen; bei Bedarf Thermometer verwenden.",
+        "Vorgegarte Lebensmittel frisch verwenden oder nach dem Garen schnell auf unter 7 °C kühlen und abgedeckt kalt lagern; nicht ungekühlt stehen lassen."
+      ],
+      "product_standards": [
+        {
+          "food_id": "F022",
+          "note": "Gekocht abwiegen. Frisch gekocht verwenden oder nach dem Kochen rasch kühlen und gekühlt lagern; beim Wiedererwärmen vollständig durcherhitzen."
+        },
+        {
+          "food_id": "F029",
+          "note": "Roh, ohne Haut, ungewürzt, ohne Marinade."
+        }
+      ],
+      "image_notice": "KI-generiertes illustratives Servierbeispiel. Mengen, Zutaten und Garzustand richten sich ausschließlich nach dem Rezept."
     },
     {
       "id": "R010",
@@ -563,10 +794,10 @@
         }
       ],
       "steps": [
-        "Pasta garen.",
-        "Hack in Öl krümelig vollständig durchbraten.",
-        "Zucchini und Tomaten zugeben und köcheln.",
-        "Mit Pasta vermengen."
+        "Eifreie Vollkornpasta nach Packungsangabe garen.",
+        "Rinderhack in Öl vollständig durchbraten.",
+        "Gewaschene Zucchini und passierte Tomaten zugeben und köcheln.",
+        "Mit der Pasta vermengen."
       ],
       "allergens_declared": [
         "Gluten"
@@ -582,12 +813,39 @@
       "cooked_weight_g": null,
       "image": "assets/R010.webp",
       "image_brief": "Rinderhack-Tomaten-Pasta, exakt die angegebenen Zutaten, matte dunkle Keramik, gedecktes Olivgrün, natürliches Seitenlicht, fotorealistische Editorial-Fotografie, keine Schrift",
-      "release_status": "draft",
+      "release_status": "reviewed",
       "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
       "image_review": "draft_contact_sheet_crop_pending_approval",
       "nutrition_status": "source_based_estimate",
       "nutrition_per_100g": null,
-      "safety_revision": "3.8.14-reference"
+      "safety_revision": "3.8.15-editorial-candidate",
+      "editorial_review": {
+        "scope": "general_adult_recipe_ingredient_based",
+        "decision": "candidate_reviewed_pending_integration_and_independent_acceptance",
+        "revision": "3.8.15-editorial-candidate",
+        "product_labels_verified": false,
+        "cross_contact_verified": false,
+        "note": "Weizen; BLS-Wert für reines Rinderhack ca. 16 % Fett und eifreie Vollkornpasta, keine Fertigsoße."
+      },
+      "preparation_safety_notes": [
+        "Hände, Arbeitsflächen und Utensilien sauber halten; Obst und Gemüse waschen. Zutaten frisch bzw. korrekt gekühlt verwenden. Produktangaben, Zubereitung und mögliche Kreuzkontakte prüfen. Rezeptbilder sind Illustrationen; die Zutatenliste und Anleitung sind verbindlich.",
+        "Rohe tierische Zutaten separat verarbeiten. Lebensmittel, die durchgegart werden müssen, und aufzuwärmende Speisen im gesamten Lebensmittel mindestens 70 °C für 2 Minuten erhitzen; bei Bedarf Thermometer verwenden."
+      ],
+      "product_standards": [
+        {
+          "food_id": "F031",
+          "note": "Reines Rinderhack, roh, ungewürzt; kein Mischhack oder gewürztes Fertigprodukt."
+        },
+        {
+          "food_id": "F032",
+          "note": "Trockene Vollkornteigwaren ohne zugesetztes Ei, passend zur BLS-Referenz. Bei veganem Anspruch pflanzliche Zutatenliste prüfen."
+        },
+        {
+          "food_id": "F033",
+          "note": "Passierte Tomaten ohne Gewürzmischung oder andere zugesetzte Zutaten; kein Fertigsoßenersatz."
+        }
+      ],
+      "image_notice": "KI-generiertes illustratives Servierbeispiel. Mengen, Zutaten und Garzustand richten sich ausschließlich nach dem Rezept."
     },
     {
       "id": "R011",
@@ -623,8 +881,8 @@
         }
       ],
       "steps": [
-        "Kartoffeln klein schneiden und mit Öl bei 200 °C vorgaren.",
-        "Gemüse und Hähnchen ergänzen und alles vollständig durchgaren."
+        "Geschälte Kartoffeln klein schneiden und mit Öl bei 200 °C vorgaren.",
+        "Gewaschenes Gemüse und Hähnchen ergänzen und alles vollständig durchgaren; die Kerntemperatur des Hähnchens prüfen."
       ],
       "allergens_declared": [],
       "allergen_review": "ingredient_matrix_reviewed_labels_pending",
@@ -638,12 +896,35 @@
       "cooked_weight_g": null,
       "image": "assets/R011.webp",
       "image_brief": "Mediterranes Hähnchenblech, exakt die angegebenen Zutaten, matte dunkle Keramik, gedecktes Olivgrün, natürliches Seitenlicht, fotorealistische Editorial-Fotografie, keine Schrift",
-      "release_status": "draft",
+      "release_status": "reviewed",
       "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
       "image_review": "draft_contact_sheet_crop_pending_approval",
       "nutrition_status": "source_based_estimate",
       "nutrition_per_100g": null,
-      "safety_revision": "3.8.14-reference"
+      "safety_revision": "3.8.15-editorial-candidate",
+      "editorial_review": {
+        "scope": "general_adult_recipe_ingredient_based",
+        "decision": "candidate_reviewed_pending_integration_and_independent_acceptance",
+        "revision": "3.8.15-editorial-candidate",
+        "product_labels_verified": false,
+        "cross_contact_verified": false,
+        "note": "Hähnchen natur und geschälte rohe Kartoffeln; Gemüse und Geflügel sicher garen."
+      },
+      "preparation_safety_notes": [
+        "Hände, Arbeitsflächen und Utensilien sauber halten; Obst und Gemüse waschen. Zutaten frisch bzw. korrekt gekühlt verwenden. Produktangaben, Zubereitung und mögliche Kreuzkontakte prüfen. Rezeptbilder sind Illustrationen; die Zutatenliste und Anleitung sind verbindlich.",
+        "Rohe tierische Zutaten separat verarbeiten. Lebensmittel, die durchgegart werden müssen, und aufzuwärmende Speisen im gesamten Lebensmittel mindestens 70 °C für 2 Minuten erhitzen; bei Bedarf Thermometer verwenden."
+      ],
+      "product_standards": [
+        {
+          "food_id": "F021",
+          "note": "Roh, ungewürzt, ohne Haut, ohne Marinade, essbarer Anteil."
+        },
+        {
+          "food_id": "F035",
+          "note": "Roh, geschält abwiegen; grüne Stellen und Keime großzügig entfernen."
+        }
+      ],
+      "image_notice": "KI-generiertes illustratives Servierbeispiel. Mengen, Zutaten und Garzustand richten sich ausschließlich nach dem Rezept."
     },
     {
       "id": "R012",
@@ -679,9 +960,9 @@
         }
       ],
       "steps": [
-        "Karotten und Spinat in Öl dünsten.",
-        "Linsen unterheben und erhitzen.",
-        "Filet separat vollständig garen und auf Linsen servieren."
+        "Gewaschene Karotten und Spinat in Öl dünsten.",
+        "Bereits vollständig gegarte Linsen unterheben und durcherhitzen.",
+        "Schweinefilet separat vollständig garen und auf den Linsen servieren."
       ],
       "allergens_declared": [],
       "allergen_review": "ingredient_matrix_reviewed_labels_pending",
@@ -695,12 +976,37 @@
       "cooked_weight_g": null,
       "image": "assets/R012.webp",
       "image_brief": "Schweinefilet mit Linsen, exakt die angegebenen Zutaten, matte dunkle Keramik, gedecktes Olivgrün, natürliches Seitenlicht, fotorealistische Editorial-Fotografie, keine Schrift",
-      "release_status": "draft",
+      "release_status": "reviewed",
       "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
       "image_review": "draft_contact_sheet_crop_pending_approval",
       "nutrition_status": "source_based_estimate",
       "nutrition_per_100g": null,
-      "safety_revision": "3.8.14-reference"
+      "safety_revision": "3.8.15-editorial-candidate",
+      "editorial_review": {
+        "scope": "general_adult_recipe_ingredient_based",
+        "decision": "candidate_reviewed_pending_integration_and_independent_acceptance",
+        "revision": "3.8.15-editorial-candidate",
+        "product_labels_verified": false,
+        "cross_contact_verified": false,
+        "note": "Schweinefilet natur, bereits gegarte Linsen; kein roher Filetkern aus Bild ableiten."
+      },
+      "preparation_safety_notes": [
+        "Hände, Arbeitsflächen und Utensilien sauber halten; Obst und Gemüse waschen. Zutaten frisch bzw. korrekt gekühlt verwenden. Produktangaben, Zubereitung und mögliche Kreuzkontakte prüfen. Rezeptbilder sind Illustrationen; die Zutatenliste und Anleitung sind verbindlich.",
+        "Rohe tierische Zutaten separat verarbeiten. Lebensmittel, die durchgegart werden müssen, und aufzuwärmende Speisen im gesamten Lebensmittel mindestens 70 °C für 2 Minuten erhitzen; bei Bedarf Thermometer verwenden.",
+        "Vorgegarte Lebensmittel frisch verwenden oder nach dem Garen schnell auf unter 7 °C kühlen und abgedeckt kalt lagern; nicht ungekühlt stehen lassen.",
+        "Bei ungewohnt hoher Ballaststoffzufuhr Menge langsam steigern und ausreichend trinken."
+      ],
+      "product_standards": [
+        {
+          "food_id": "F036",
+          "note": "Roh, ungewürzt, ohne Marinade."
+        },
+        {
+          "food_id": "F037",
+          "note": "Gekocht wiegen; nach Packungsanleitung vollständig garen, keine trockenen Mengen verwenden."
+        }
+      ],
+      "image_notice": "KI-generiertes illustratives Servierbeispiel. Mengen, Zutaten und Garzustand richten sich ausschließlich nach dem Rezept."
     },
     {
       "id": "R013",
@@ -745,8 +1051,8 @@
       ],
       "steps": [
         "Hack und Zwiebel in Rapsöl vollständig durchbraten.",
-        "Tomaten, Bohnen und Mais zugeben.",
-        "Mit Chili würzen und 15 Minuten köcheln."
+        "Abgetropfte gegarte Kidneybohnen, Mais und passierte Tomaten zugeben.",
+        "Mit abgewogenem Cayenne würzen und etwa 15 Minuten köcheln."
       ],
       "allergens_declared": [],
       "allergen_review": "ingredient_matrix_reviewed_labels_pending",
@@ -760,12 +1066,49 @@
       "cooked_weight_g": null,
       "image": "assets/R013.webp",
       "image_brief": "Beef-Bohnen-Chili, exakt die angegebenen Zutaten, matte dunkle Keramik, gedecktes Olivgrün, natürliches Seitenlicht, fotorealistische Editorial-Fotografie, keine Schrift",
-      "release_status": "draft",
+      "release_status": "reviewed",
       "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
       "image_review": "draft_contact_sheet_crop_pending_approval",
       "nutrition_status": "source_based_estimate",
       "nutrition_per_100g": null,
-      "safety_revision": "3.8.14-reference"
+      "safety_revision": "3.8.15-editorial-candidate",
+      "editorial_review": {
+        "scope": "general_adult_recipe_ingredient_based",
+        "decision": "candidate_reviewed_pending_integration_and_independent_acceptance",
+        "revision": "3.8.15-editorial-candidate",
+        "product_labels_verified": false,
+        "cross_contact_verified": false,
+        "note": "Reines Rinderhack, bereits gegarte Kidneybohnen und Mais aus Konserve, reiner Cayenne statt Gewürzmix."
+      },
+      "preparation_safety_notes": [
+        "Hände, Arbeitsflächen und Utensilien sauber halten; Obst und Gemüse waschen. Zutaten frisch bzw. korrekt gekühlt verwenden. Produktangaben, Zubereitung und mögliche Kreuzkontakte prüfen. Rezeptbilder sind Illustrationen; die Zutatenliste und Anleitung sind verbindlich.",
+        "Rohe tierische Zutaten separat verarbeiten. Lebensmittel, die durchgegart werden müssen, und aufzuwärmende Speisen im gesamten Lebensmittel mindestens 70 °C für 2 Minuten erhitzen; bei Bedarf Thermometer verwenden.",
+        "Vorgegarte Lebensmittel frisch verwenden oder nach dem Garen schnell auf unter 7 °C kühlen und abgedeckt kalt lagern; nicht ungekühlt stehen lassen.",
+        "Bei ungewohnt hoher Ballaststoffzufuhr Menge langsam steigern und ausreichend trinken."
+      ],
+      "product_standards": [
+        {
+          "food_id": "F031",
+          "note": "Reines Rinderhack, roh, ungewürzt; kein Mischhack oder gewürztes Fertigprodukt."
+        },
+        {
+          "food_id": "F033",
+          "note": "Passierte Tomaten ohne Gewürzmischung oder andere zugesetzte Zutaten; kein Fertigsoßenersatz."
+        },
+        {
+          "food_id": "F038",
+          "note": "Vollständig gegarte Konserve, abgetropft abwiegen. Keine ungekochten oder nur eingeweichten Bohnen einsetzen."
+        },
+        {
+          "food_id": "F039",
+          "note": "Natur, abgetropft abwiegen."
+        },
+        {
+          "food_id": "F066",
+          "note": "Reiner Cayenne, keine Chili-Gewürzmischung; Menge bei Schärfeempfindlichkeit reduzieren und Rezeptwerte ggf. neu berechnen."
+        }
+      ],
+      "image_notice": "KI-generiertes illustratives Servierbeispiel. Mengen, Zutaten und Garzustand richten sich ausschließlich nach dem Rezept."
     },
     {
       "id": "R014",
@@ -805,9 +1148,9 @@
         }
       ],
       "steps": [
-        "Bulgur nach Packungsangabe garen.",
+        "Bulgur trocken abwiegen und nach Packungsangabe garen.",
         "Pute in Öl vollständig durchgaren.",
-        "Gemüse schneiden und mit Joghurt auf Bulgur anrichten."
+        "Gurke und Tomate waschen, schneiden und mit dem Naturjoghurt auf dem Bulgur anrichten."
       ],
       "allergens_declared": [
         "Gluten",
@@ -824,12 +1167,40 @@
       "cooked_weight_g": null,
       "image": "assets/R014.webp",
       "image_brief": "Puten-Bulgur-Bowl, exakt die angegebenen Zutaten, matte dunkle Keramik, gedecktes Olivgrün, natürliches Seitenlicht, fotorealistische Editorial-Fotografie, keine Schrift",
-      "release_status": "draft",
+      "release_status": "reviewed",
       "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
       "image_review": "draft_contact_sheet_crop_pending_approval",
       "nutrition_status": "source_based_estimate",
       "nutrition_per_100g": null,
-      "safety_revision": "3.8.14-reference"
+      "safety_revision": "3.8.15-editorial-candidate",
+      "editorial_review": {
+        "scope": "general_adult_recipe_ingredient_based",
+        "decision": "candidate_reviewed_pending_integration_and_independent_acceptance",
+        "revision": "3.8.15-editorial-candidate",
+        "product_labels_verified": false,
+        "cross_contact_verified": false,
+        "note": "Weizen und Milch; Bulgur trocken, Naturjoghurt 3,5 %, vollständig gegarte Pute."
+      },
+      "preparation_safety_notes": [
+        "Hände, Arbeitsflächen und Utensilien sauber halten; Obst und Gemüse waschen. Zutaten frisch bzw. korrekt gekühlt verwenden. Produktangaben, Zubereitung und mögliche Kreuzkontakte prüfen. Rezeptbilder sind Illustrationen; die Zutatenliste und Anleitung sind verbindlich.",
+        "Rohe tierische Zutaten separat verarbeiten. Lebensmittel, die durchgegart werden müssen, und aufzuwärmende Speisen im gesamten Lebensmittel mindestens 70 °C für 2 Minuten erhitzen; bei Bedarf Thermometer verwenden.",
+        "Pasteurisierte Milchprodukte wählen; konkrete Zutatenliste und ggf. verwendete Enzyme/Lab beachten."
+      ],
+      "product_standards": [
+        {
+          "food_id": "F029",
+          "note": "Roh, ohne Haut, ungewürzt, ohne Marinade."
+        },
+        {
+          "food_id": "F040",
+          "note": "Trockener Hartweizenbulgur ohne Gewürz- oder andere Zusätze."
+        },
+        {
+          "food_id": "F041",
+          "note": "Naturjoghurt aus pasteurisierter Milch, ohne Aromazusätze."
+        }
+      ],
+      "image_notice": "KI-generiertes illustratives Servierbeispiel. Mengen, Zutaten und Garzustand richten sich ausschließlich nach dem Rezept."
     },
     {
       "id": "R015",
@@ -875,7 +1246,7 @@
       "steps": [
         "Süßkartoffel, Rosenkohl und Zwiebel mit Öl bei 200 °C rösten.",
         "Spargel in den letzten 10–12 Minuten ergänzen.",
-        "130 g bereits gekochte Quinoa je Basisportion bereitstellen und Lachs separat vollständig durchgaren.",
+        "Angegebene Menge bereits gekochter Quinoa bereitstellen und Lachs separat vollständig durchgaren.",
         "Alles anrichten."
       ],
       "allergens_declared": [
@@ -892,12 +1263,36 @@
       "cooked_weight_g": null,
       "image": "assets/R015.webp",
       "image_brief": "Lachs & grüne Vielfalt, exakt die angegebenen Zutaten, matte dunkle Keramik, gedecktes Olivgrün, natürliches Seitenlicht, fotorealistische Editorial-Fotografie, keine Schrift",
-      "release_status": "draft",
+      "release_status": "reviewed",
       "image_review": "previously_approved_original",
       "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
       "nutrition_status": "source_based_estimate",
       "nutrition_per_100g": null,
-      "safety_revision": "3.8.14-reference"
+      "safety_revision": "3.8.15-editorial-candidate",
+      "editorial_review": {
+        "scope": "general_adult_recipe_ingredient_based",
+        "decision": "candidate_reviewed_pending_integration_and_independent_acceptance",
+        "revision": "3.8.15-editorial-candidate",
+        "product_labels_verified": false,
+        "cross_contact_verified": false,
+        "note": "Fisch; Quinoa gekocht, Spargel-/Zwiebelnäherungen und Ballaststoff-LOD sichtbar; Lachs vollständig garen."
+      },
+      "preparation_safety_notes": [
+        "Hände, Arbeitsflächen und Utensilien sauber halten; Obst und Gemüse waschen. Zutaten frisch bzw. korrekt gekühlt verwenden. Produktangaben, Zubereitung und mögliche Kreuzkontakte prüfen. Rezeptbilder sind Illustrationen; die Zutatenliste und Anleitung sind verbindlich.",
+        "Rohe tierische Zutaten separat verarbeiten. Lebensmittel, die durchgegart werden müssen, und aufzuwärmende Speisen im gesamten Lebensmittel mindestens 70 °C für 2 Minuten erhitzen; bei Bedarf Thermometer verwenden.",
+        "Vorgegarte Lebensmittel frisch verwenden oder nach dem Garen schnell auf unter 7 °C kühlen und abgedeckt kalt lagern; nicht ungekühlt stehen lassen."
+      ],
+      "product_standards": [
+        {
+          "food_id": "F042",
+          "note": "Roh, ungewürzt, essbarer Anteil, vollständig durchgaren."
+        },
+        {
+          "food_id": "F043",
+          "note": "Gekocht wiegen; hygienisch und rasch abkühlen, wenn kalt verzehrt."
+        }
+      ],
+      "image_notice": "KI-generiertes illustratives Servierbeispiel. Mengen, Zutaten und Garzustand richten sich ausschließlich nach dem Rezept."
     },
     {
       "id": "R016",
@@ -929,9 +1324,9 @@
         }
       ],
       "steps": [
-        "Kartoffeln kochen.",
-        "Spinat in Öl dünsten.",
-        "Kabeljau vollständig garen und mit Kartoffeln anrichten."
+        "Geschälte Kartoffeln in Wasser weich kochen.",
+        "Gewaschenen Spinat in Öl dünsten.",
+        "Kabeljau vollständig durchgaren und mit Kartoffeln anrichten."
       ],
       "allergens_declared": [
         "Fisch"
@@ -947,12 +1342,35 @@
       "cooked_weight_g": null,
       "image": "assets/R016.webp",
       "image_brief": "Kabeljau auf Kartoffel-Spinat, exakt die angegebenen Zutaten, matte dunkle Keramik, gedecktes Olivgrün, natürliches Seitenlicht, fotorealistische Editorial-Fotografie, keine Schrift",
-      "release_status": "draft",
+      "release_status": "reviewed",
       "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
       "image_review": "draft_contact_sheet_crop",
       "nutrition_status": "source_based_estimate",
       "nutrition_per_100g": null,
-      "safety_revision": "3.8.14-reference"
+      "safety_revision": "3.8.15-editorial-candidate",
+      "editorial_review": {
+        "scope": "general_adult_recipe_ingredient_based",
+        "decision": "candidate_reviewed_pending_integration_and_independent_acceptance",
+        "revision": "3.8.15-editorial-candidate",
+        "product_labels_verified": false,
+        "cross_contact_verified": false,
+        "note": "Fisch; geschälte Kartoffeln roh wiegen und kochen; Kabeljau vollständig garen."
+      },
+      "preparation_safety_notes": [
+        "Hände, Arbeitsflächen und Utensilien sauber halten; Obst und Gemüse waschen. Zutaten frisch bzw. korrekt gekühlt verwenden. Produktangaben, Zubereitung und mögliche Kreuzkontakte prüfen. Rezeptbilder sind Illustrationen; die Zutatenliste und Anleitung sind verbindlich.",
+        "Rohe tierische Zutaten separat verarbeiten. Lebensmittel, die durchgegart werden müssen, und aufzuwärmende Speisen im gesamten Lebensmittel mindestens 70 °C für 2 Minuten erhitzen; bei Bedarf Thermometer verwenden."
+      ],
+      "product_standards": [
+        {
+          "food_id": "F035",
+          "note": "Roh, geschält abwiegen; grüne Stellen und Keime großzügig entfernen."
+        },
+        {
+          "food_id": "F047",
+          "note": "Roh, ungewürzt, essbarer Anteil."
+        }
+      ],
+      "image_notice": "KI-generiertes illustratives Servierbeispiel. Mengen, Zutaten und Garzustand richten sich ausschließlich nach dem Rezept."
     },
     {
       "id": "R017",
@@ -988,8 +1406,9 @@
         }
       ],
       "steps": [
-        "Bohnen und Thunfisch abtropfen.",
-        "Gemüse schneiden und alles mit Öl mischen."
+        "Gegarte Bohnen und Thunfisch im eigenen Saft abtropfen und abwiegen.",
+        "Tomate und Gurke gründlich waschen, schneiden und mit Öl mischen.",
+        "In Schwangerschaft und Stillzeit Thunfisch meiden; stattdessen ein geeignetes anderes Rezept wählen."
       ],
       "allergens_declared": [
         "Fisch"
@@ -1005,12 +1424,37 @@
       "cooked_weight_g": null,
       "image": "assets/R017.webp",
       "image_brief": "Thunfisch-Bohnen-Salat, exakt die angegebenen Zutaten, matte dunkle Keramik, gedecktes Olivgrün, natürliches Seitenlicht, fotorealistische Editorial-Fotografie, keine Schrift",
-      "release_status": "draft",
+      "release_status": "reviewed",
       "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
       "image_review": "draft_contact_sheet_crop",
       "nutrition_status": "source_based_estimate",
       "nutrition_per_100g": null,
-      "safety_revision": "3.8.14-reference"
+      "safety_revision": "3.8.15-editorial-candidate",
+      "editorial_review": {
+        "scope": "general_adult_recipe_ingredient_based",
+        "decision": "candidate_reviewed_pending_integration_and_independent_acceptance",
+        "revision": "3.8.15-editorial-candidate",
+        "product_labels_verified": false,
+        "cross_contact_verified": false,
+        "note": "Fisch; Konserven abgetropft; weiße Bohnen als generische Näherung. Besonderer Hinweis zu Thunfisch in Schwangerschaft/Stillzeit."
+      },
+      "preparation_safety_notes": [
+        "Hände, Arbeitsflächen und Utensilien sauber halten; Obst und Gemüse waschen. Zutaten frisch bzw. korrekt gekühlt verwenden. Produktangaben, Zubereitung und mögliche Kreuzkontakte prüfen. Rezeptbilder sind Illustrationen; die Zutatenliste und Anleitung sind verbindlich.",
+        "Vorgegarte Lebensmittel frisch verwenden oder nach dem Garen schnell auf unter 7 °C kühlen und abgedeckt kalt lagern; nicht ungekühlt stehen lassen.",
+        "Schwangerschaft und Stillzeit: Thunfisch meiden. Keine automatische Empfehlung an bekannte betroffene Profile; bei nicht unterstützten speziellen Ernährungsbedürfnissen allgemeine Rezeptauswahl mit sichtbarem Hinweis, keine persönliche Eignungszusage."
+      ],
+      "product_standards": [
+        {
+          "food_id": "F048",
+          "note": "Konserve im eigenen Saft, nicht in Öl; abgetropft abwiegen. Schwangerschaft/Stillzeit: Thunfisch meiden."
+        },
+        {
+          "food_id": "F049",
+          "note": "Vollständig gegarte Konserve, abgetropft wiegen. Generische BLS-Gartenbohne bleibt dokumentierte Näherung."
+        }
+      ],
+      "image_notice": "KI-generiertes illustratives Servierbeispiel. Mengen, Zutaten und Garzustand richten sich ausschließlich nach dem Rezept.",
+      "special_population_notice": "Schwangerschaft und Stillzeit: Thunfisch meiden."
     },
     {
       "id": "R018",
@@ -1050,9 +1494,9 @@
         }
       ],
       "steps": [
-        "Gemüse in Öl braten.",
-        "Garnelen vollständig garen.",
-        "Reis unterheben und mit Zitrone abschmecken."
+        "Gewaschenes Gemüse in Öl braten.",
+        "Garnelen nach Abtropfen abwiegen und vollständig durchgaren.",
+        "Bereits gegarten Reis unterheben, durcherhitzen und mit abgewogenem frisch gepresstem Zitronensaft abschmecken."
       ],
       "allergens_declared": [
         "Krebstiere"
@@ -1068,12 +1512,41 @@
       "cooked_weight_g": null,
       "image": "assets/R018.webp",
       "image_brief": "Garnelen-Zitronen-Reis, exakt die angegebenen Zutaten, matte dunkle Keramik, gedecktes Olivgrün, natürliches Seitenlicht, fotorealistische Editorial-Fotografie, keine Schrift",
-      "release_status": "draft",
+      "release_status": "reviewed",
       "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
       "image_review": "draft_contact_sheet_crop_pending_approval",
       "nutrition_status": "source_based_estimate",
       "nutrition_per_100g": null,
-      "safety_revision": "3.8.14-reference"
+      "safety_revision": "3.8.15-editorial-candidate",
+      "editorial_review": {
+        "scope": "general_adult_recipe_ingredient_based",
+        "decision": "candidate_reviewed_pending_integration_and_independent_acceptance",
+        "revision": "3.8.15-editorial-candidate",
+        "product_labels_verified": false,
+        "cross_contact_verified": false,
+        "note": "Krebstiere; Garnelen natur, mögliche Sulfite produktbezogen offen. Reis gekocht, Zitronensaft statt ganze Frucht."
+      },
+      "preparation_safety_notes": [
+        "Hände, Arbeitsflächen und Utensilien sauber halten; Obst und Gemüse waschen. Zutaten frisch bzw. korrekt gekühlt verwenden. Produktangaben, Zubereitung und mögliche Kreuzkontakte prüfen. Rezeptbilder sind Illustrationen; die Zutatenliste und Anleitung sind verbindlich.",
+        "Rohe tierische Zutaten separat verarbeiten. Lebensmittel, die durchgegart werden müssen, und aufzuwärmende Speisen im gesamten Lebensmittel mindestens 70 °C für 2 Minuten erhitzen; bei Bedarf Thermometer verwenden.",
+        "Vorgegarte Lebensmittel frisch verwenden oder nach dem Garen schnell auf unter 7 °C kühlen und abgedeckt kalt lagern; nicht ungekühlt stehen lassen.",
+        "Garnelenetikett auf Sulfite und weitere Zutaten prüfen. Keine Vermutung einer sulfitfreien Ware."
+      ],
+      "product_standards": [
+        {
+          "food_id": "F022",
+          "note": "Gekocht abwiegen. Frisch gekocht verwenden oder nach dem Kochen rasch kühlen und gekühlt lagern; beim Wiedererwärmen vollständig durcherhitzen."
+        },
+        {
+          "food_id": "F050",
+          "note": "Roh, ungewürzt, ohne Marinade. Bei TK im Kühlschrank auftauen und nach dem Abtropfen ohne Eisglasur wiegen. Produktetikett insbesondere auf Sulfite prüfen; bekannte Krebstiere. BLS-Sammelreferenz für rohe Garnelen/Granat/Krabben, nicht artspezifisch."
+        },
+        {
+          "food_id": "F051",
+          "note": "Saft abwiegen, keine ganze Zitrone."
+        }
+      ],
+      "image_notice": "KI-generiertes illustratives Servierbeispiel. Mengen, Zutaten und Garzustand richten sich ausschließlich nach dem Rezept."
     },
     {
       "id": "R019",
@@ -1109,9 +1582,9 @@
         }
       ],
       "steps": [
-        "Linsen waschen und mit Tomaten und Wasser weich kochen.",
-        "Spinat und Öl unterheben.",
-        "Mit der angegebenen Menge bereits gekochtem Reis servieren."
+        "Rote Linsen nach Packungsangabe in Wasser vollständig weich kochen.",
+        "Passierte Tomaten und gewaschenen Spinat zugeben, erhitzen und Öl unterheben.",
+        "Mit der angegebenen Menge bereits gegartem Reis servieren."
       ],
       "allergens_declared": [],
       "allergen_review": "ingredient_matrix_reviewed_labels_pending",
@@ -1125,12 +1598,39 @@
       "cooked_weight_g": null,
       "image": "assets/R019.webp",
       "image_brief": "Linsen-Spinat-Dal, exakt die angegebenen Zutaten, matte dunkle Keramik, gedecktes Olivgrün, natürliches Seitenlicht, fotorealistische Editorial-Fotografie, keine Schrift",
-      "release_status": "draft",
+      "release_status": "reviewed",
       "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
       "image_review": "draft_contact_sheet_crop",
       "nutrition_status": "source_based_estimate",
       "nutrition_per_100g": null,
-      "safety_revision": "3.8.14-reference"
+      "safety_revision": "3.8.15-editorial-candidate",
+      "editorial_review": {
+        "scope": "general_adult_recipe_ingredient_based",
+        "decision": "candidate_reviewed_pending_integration_and_independent_acceptance",
+        "revision": "3.8.15-editorial-candidate",
+        "product_labels_verified": false,
+        "cross_contact_verified": false,
+        "note": "Vegan; trockene rote Linsen vollständig kochen, gekochten Reis getrennt wiegen."
+      },
+      "preparation_safety_notes": [
+        "Hände, Arbeitsflächen und Utensilien sauber halten; Obst und Gemüse waschen. Zutaten frisch bzw. korrekt gekühlt verwenden. Produktangaben, Zubereitung und mögliche Kreuzkontakte prüfen. Rezeptbilder sind Illustrationen; die Zutatenliste und Anleitung sind verbindlich.",
+        "Vorgegarte Lebensmittel frisch verwenden oder nach dem Garen schnell auf unter 7 °C kühlen und abgedeckt kalt lagern; nicht ungekühlt stehen lassen."
+      ],
+      "product_standards": [
+        {
+          "food_id": "F022",
+          "note": "Gekocht abwiegen. Frisch gekocht verwenden oder nach dem Kochen rasch kühlen und gekühlt lagern; beim Wiedererwärmen vollständig durcherhitzen."
+        },
+        {
+          "food_id": "F033",
+          "note": "Passierte Tomaten ohne Gewürzmischung oder andere zugesetzte Zutaten; kein Fertigsoßenersatz."
+        },
+        {
+          "food_id": "F052",
+          "note": "Trocken abwiegen und nach Packungsangabe vollständig weich kochen."
+        }
+      ],
+      "image_notice": "KI-generiertes illustratives Servierbeispiel. Mengen, Zutaten und Garzustand richten sich ausschließlich nach dem Rezept."
     },
     {
       "id": "R020",
@@ -1171,8 +1671,8 @@
       ],
       "steps": [
         "Tofu würfeln und in Öl anbraten.",
-        "Brokkoli garen. Edamame aus der Konserve abtropfen und nach Packungsangabe verzehrfertig machen; bei Bedarf erhitzen.",
-        "Auf Reis anrichten und mit Sesam bestreuen."
+        "Brokkoli garen; Edamame aus der Konserve abtropfen und nach Packungsangabe verzehrfertig machen.",
+        "Auf bereits gegartem und durcherhitztem Reis anrichten und Sesam ergänzen."
       ],
       "allergens_declared": [
         "Sesam",
@@ -1189,12 +1689,39 @@
       "cooked_weight_g": null,
       "image": "assets/R020.webp",
       "image_brief": "Tofu-Edamame-Bowl, exakt die angegebenen Zutaten, matte dunkle Keramik, gedecktes Olivgrün, natürliches Seitenlicht, fotorealistische Editorial-Fotografie, keine Schrift",
-      "release_status": "draft",
+      "release_status": "reviewed",
       "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
       "image_review": "draft_contact_sheet_crop",
       "nutrition_status": "source_based_estimate",
       "nutrition_per_100g": null,
-      "safety_revision": "3.8.14-reference"
+      "safety_revision": "3.8.15-editorial-candidate",
+      "editorial_review": {
+        "scope": "general_adult_recipe_ingredient_based",
+        "decision": "candidate_reviewed_pending_integration_and_independent_acceptance",
+        "revision": "3.8.15-editorial-candidate",
+        "product_labels_verified": false,
+        "cross_contact_verified": false,
+        "note": "Soja, Sesam; vegane Naturprodukte, abgetropfte Konserven-Edamame und gegarter Reis."
+      },
+      "preparation_safety_notes": [
+        "Hände, Arbeitsflächen und Utensilien sauber halten; Obst und Gemüse waschen. Zutaten frisch bzw. korrekt gekühlt verwenden. Produktangaben, Zubereitung und mögliche Kreuzkontakte prüfen. Rezeptbilder sind Illustrationen; die Zutatenliste und Anleitung sind verbindlich.",
+        "Vorgegarte Lebensmittel frisch verwenden oder nach dem Garen schnell auf unter 7 °C kühlen und abgedeckt kalt lagern; nicht ungekühlt stehen lassen."
+      ],
+      "product_standards": [
+        {
+          "food_id": "F019",
+          "note": "Ungewürzter Tofu mit rein pflanzlicher Rezeptur, ohne Marinade."
+        },
+        {
+          "food_id": "F022",
+          "note": "Gekocht abwiegen. Frisch gekocht verwenden oder nach dem Kochen rasch kühlen und gekühlt lagern; beim Wiedererwärmen vollständig durcherhitzen."
+        },
+        {
+          "food_id": "F024",
+          "note": "Abgetropft wiegen; natur, nach Packungsangabe verzehrfertig machen. Keine TK-Substitution mit identischen Nährwerten."
+        }
+      ],
+      "image_notice": "KI-generiertes illustratives Servierbeispiel. Mengen, Zutaten und Garzustand richten sich ausschließlich nach dem Rezept."
     },
     {
       "id": "R021",
@@ -1230,7 +1757,7 @@
         }
       ],
       "steps": [
-        "Gemüse schneiden und mit Kichererbsen und Öl mischen.",
+        "Gemüse waschen, schneiden und mit den abgetropften, vollständig gegarten Kichererbsen und Öl mischen.",
         "Bei 200 °C weich rösten."
       ],
       "allergens_declared": [],
@@ -1245,13 +1772,33 @@
       "cooked_weight_g": null,
       "image": "assets/R021.webp",
       "image_brief": "Kichererbsen-Ofengemüse, exakt die angegebenen Zutaten, matte dunkle Keramik, gedecktes Olivgrün, natürliches Seitenlicht, fotorealistische Editorial-Fotografie, keine Schrift",
-      "release_status": "draft",
+      "release_status": "reviewed",
       "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
       "image_review": "draft_contact_sheet_crop",
       "nutrition_status": "source_based_estimate",
       "nutrition_per_100g": null,
       "image_source": "Generated editorial illustration; visual approval pending",
-      "safety_revision": "3.8.14-reference"
+      "safety_revision": "3.8.15-editorial-candidate",
+      "editorial_review": {
+        "scope": "general_adult_recipe_ingredient_based",
+        "decision": "candidate_reviewed_pending_integration_and_independent_acceptance",
+        "revision": "3.8.15-editorial-candidate",
+        "product_labels_verified": false,
+        "cross_contact_verified": false,
+        "note": "Vegan; abgetropfte und bereits gegarte Kichererbsen, gewaschene Gemüsezutaten."
+      },
+      "preparation_safety_notes": [
+        "Hände, Arbeitsflächen und Utensilien sauber halten; Obst und Gemüse waschen. Zutaten frisch bzw. korrekt gekühlt verwenden. Produktangaben, Zubereitung und mögliche Kreuzkontakte prüfen. Rezeptbilder sind Illustrationen; die Zutatenliste und Anleitung sind verbindlich.",
+        "Vorgegarte Lebensmittel frisch verwenden oder nach dem Garen schnell auf unter 7 °C kühlen und abgedeckt kalt lagern; nicht ungekühlt stehen lassen.",
+        "Bei ungewohnt hoher Ballaststoffzufuhr Menge langsam steigern und ausreichend trinken."
+      ],
+      "product_standards": [
+        {
+          "food_id": "F053",
+          "note": "Vollständig gegarte Konserve, natur, abgetropft wiegen."
+        }
+      ],
+      "image_notice": "KI-generiertes illustratives Servierbeispiel. Mengen, Zutaten und Garzustand richten sich ausschließlich nach dem Rezept."
     },
     {
       "id": "R022",
@@ -1287,8 +1834,9 @@
         }
       ],
       "steps": [
-        "Die angegebene Menge bereits gekochte Quinoa abkühlen lassen.",
-        "Gemüse schneiden, Feta zerbröseln und alles mit Öl mischen. Für vegetarische Ernährung ausschließlich Feta mit nachweislich mikrobiellem Lab verwenden."
+        "Gekochte Quinoa zügig abkühlen und bis zur Verwendung gekühlt aufbewahren.",
+        "Gemüse waschen und schneiden, Feta zerbröseln und alles mit Öl mischen.",
+        "Bei vegetarischer oder pescetarischer Ernährung muss die konkrete Lab-Variante als passend geprüft werden."
       ],
       "allergens_declared": [
         "Milch"
@@ -1304,14 +1852,39 @@
       "cooked_weight_g": null,
       "image": "assets/R022.webp",
       "image_brief": "Feta-Quinoa-Salat, exakt die angegebenen Zutaten, matte dunkle Keramik, gedecktes Olivgrün, natürliches Seitenlicht, fotorealistische Editorial-Fotografie, keine Schrift",
-      "release_status": "draft",
+      "release_status": "reviewed",
       "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
       "image_review": "draft_contact_sheet_crop",
       "nutrition_status": "source_based_estimate",
       "nutrition_per_100g": null,
       "image_source": "Generated editorial illustration; visual approval pending",
       "diet_condition": "Feta mit mikrobiellem Lab verwenden; andernfalls nicht als vegetarisch empfehlen.",
-      "safety_revision": "3.8.14-reference"
+      "safety_revision": "3.8.15-editorial-candidate",
+      "editorial_review": {
+        "scope": "general_adult_recipe_ingredient_based",
+        "decision": "candidate_reviewed_pending_integration_and_independent_acceptance",
+        "revision": "3.8.15-editorial-candidate",
+        "product_labels_verified": false,
+        "cross_contact_verified": false,
+        "note": "Milch; Feta 45 % i. Tr.; nicht quantifizierte Ballaststoffe und verpflichtende Labprüfung bleiben."
+      },
+      "preparation_safety_notes": [
+        "Hände, Arbeitsflächen und Utensilien sauber halten; Obst und Gemüse waschen. Zutaten frisch bzw. korrekt gekühlt verwenden. Produktangaben, Zubereitung und mögliche Kreuzkontakte prüfen. Rezeptbilder sind Illustrationen; die Zutatenliste und Anleitung sind verbindlich.",
+        "Vorgegarte Lebensmittel frisch verwenden oder nach dem Garen schnell auf unter 7 °C kühlen und abgedeckt kalt lagern; nicht ungekühlt stehen lassen.",
+        "Pasteurisierte Milchprodukte wählen; konkrete Zutatenliste und ggf. verwendete Enzyme/Lab beachten.",
+        "Die konkret nachgewiesene Lab-Variante bleibt Voraussetzung für die entsprechende vegetarische/pescetarische Eignung; bisherige Produktsperre nicht aufheben."
+      ],
+      "product_standards": [
+        {
+          "food_id": "F043",
+          "note": "Gekocht wiegen; hygienisch und rasch abkühlen, wenn kalt verzehrt."
+        },
+        {
+          "food_id": "F054",
+          "note": "Aus pasteurisierter Milch; vegetarische/pescetarische Rezeptfreigabe bleibt vom belegten mikrobiellen Lab abhängig."
+        }
+      ],
+      "image_notice": "KI-generiertes illustratives Servierbeispiel. Mengen, Zutaten und Garzustand richten sich ausschließlich nach dem Rezept."
     },
     {
       "id": "R023",
@@ -1347,9 +1920,9 @@
         }
       ],
       "steps": [
-        "Pasta kochen.",
-        "Pilze in Öl anbraten.",
-        "Linsen und Tomaten zugeben, köcheln und mit Pasta servieren."
+        "Eifreie Vollkornnudeln nach Packungsangabe kochen.",
+        "Geputzte Champignons in Öl anbraten.",
+        "Bereits vollständig gegarte Linsen und passierte Tomaten zugeben, durcherhitzen und mit der Pasta servieren."
       ],
       "allergens_declared": [
         "Gluten"
@@ -1365,13 +1938,41 @@
       "cooked_weight_g": null,
       "image": "assets/R023.webp",
       "image_brief": "Pilz-Linsen-Pasta, exakt die angegebenen Zutaten, matte dunkle Keramik, gedecktes Olivgrün, natürliches Seitenlicht, fotorealistische Editorial-Fotografie, keine Schrift",
-      "release_status": "draft",
+      "release_status": "reviewed",
       "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
       "image_review": "draft_contact_sheet_crop",
       "nutrition_status": "source_based_estimate",
       "nutrition_per_100g": null,
       "image_source": "Generated editorial illustration; visual approval pending",
-      "safety_revision": "3.8.14-reference"
+      "safety_revision": "3.8.15-editorial-candidate",
+      "editorial_review": {
+        "scope": "general_adult_recipe_ingredient_based",
+        "decision": "candidate_reviewed_pending_integration_and_independent_acceptance",
+        "revision": "3.8.15-editorial-candidate",
+        "product_labels_verified": false,
+        "cross_contact_verified": false,
+        "note": "Vegan nur mit eifreier pflanzlicher Vollkornpasta; Weizen, Linsen vollständig gegart."
+      },
+      "preparation_safety_notes": [
+        "Hände, Arbeitsflächen und Utensilien sauber halten; Obst und Gemüse waschen. Zutaten frisch bzw. korrekt gekühlt verwenden. Produktangaben, Zubereitung und mögliche Kreuzkontakte prüfen. Rezeptbilder sind Illustrationen; die Zutatenliste und Anleitung sind verbindlich.",
+        "Vorgegarte Lebensmittel frisch verwenden oder nach dem Garen schnell auf unter 7 °C kühlen und abgedeckt kalt lagern; nicht ungekühlt stehen lassen.",
+        "Bei ungewohnt hoher Ballaststoffzufuhr Menge langsam steigern und ausreichend trinken."
+      ],
+      "product_standards": [
+        {
+          "food_id": "F032",
+          "note": "Trockene Vollkornteigwaren ohne zugesetztes Ei, passend zur BLS-Referenz. Bei veganem Anspruch pflanzliche Zutatenliste prüfen."
+        },
+        {
+          "food_id": "F033",
+          "note": "Passierte Tomaten ohne Gewürzmischung oder andere zugesetzte Zutaten; kein Fertigsoßenersatz."
+        },
+        {
+          "food_id": "F037",
+          "note": "Gekocht wiegen; nach Packungsanleitung vollständig garen, keine trockenen Mengen verwenden."
+        }
+      ],
+      "image_notice": "KI-generiertes illustratives Servierbeispiel. Mengen, Zutaten und Garzustand richten sich ausschließlich nach dem Rezept."
     },
     {
       "id": "R024",
@@ -1407,9 +2008,9 @@
         }
       ],
       "steps": [
-        "Brokkoli vorgaren und Kartoffeln schneiden.",
+        "Brokkoli vorgaren und gegarte Kartoffeln schneiden.",
         "Mit Öl in eine ofenfeste Form geben.",
-        "Eier und Hüttenkäse vermengen, darübergeben und vollständig stocken lassen."
+        "Eier und Hüttenkäse vermengen, darübergeben und im Ofen bei etwa 180 °C vollständig stocken lassen; Temperatur in der Mitte prüfen."
       ],
       "allergens_declared": [
         "Ei",
@@ -1426,13 +2027,38 @@
       "cooked_weight_g": null,
       "image": "assets/R024.webp",
       "image_brief": "Kartoffel-Brokkoli-Frittata, exakt die angegebenen Zutaten, matte dunkle Keramik, gedecktes Olivgrün, natürliches Seitenlicht, fotorealistische Editorial-Fotografie, keine Schrift",
-      "release_status": "draft",
+      "release_status": "reviewed",
       "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
       "image_review": "draft_contact_sheet_crop",
       "nutrition_status": "source_based_estimate",
       "nutrition_per_100g": null,
       "image_source": "Generated editorial illustration; visual approval pending",
-      "safety_revision": "3.8.14-reference"
+      "safety_revision": "3.8.15-editorial-candidate",
+      "editorial_review": {
+        "scope": "general_adult_recipe_ingredient_based",
+        "decision": "candidate_reviewed_pending_integration_and_independent_acceptance",
+        "revision": "3.8.15-editorial-candidate",
+        "product_labels_verified": false,
+        "cross_contact_verified": false,
+        "note": "Ei und Milch; geschälte gegarte Kartoffeln; Eimasse vollständig stocken lassen."
+      },
+      "preparation_safety_notes": [
+        "Hände, Arbeitsflächen und Utensilien sauber halten; Obst und Gemüse waschen. Zutaten frisch bzw. korrekt gekühlt verwenden. Produktangaben, Zubereitung und mögliche Kreuzkontakte prüfen. Rezeptbilder sind Illustrationen; die Zutatenliste und Anleitung sind verbindlich.",
+        "Rohe tierische Zutaten separat verarbeiten. Lebensmittel, die durchgegart werden müssen, und aufzuwärmende Speisen im gesamten Lebensmittel mindestens 70 °C für 2 Minuten erhitzen; bei Bedarf Thermometer verwenden.",
+        "Vorgegarte Lebensmittel frisch verwenden oder nach dem Garen schnell auf unter 7 °C kühlen und abgedeckt kalt lagern; nicht ungekühlt stehen lassen.",
+        "Pasteurisierte Milchprodukte wählen; konkrete Zutatenliste und ggf. verwendete Enzyme/Lab beachten."
+      ],
+      "product_standards": [
+        {
+          "food_id": "F014",
+          "note": "Natur, aus pasteurisierter Milch; bei vegetarischem Anspruch ggf. mikrobielle Enzyme/Lab prüfen."
+        },
+        {
+          "food_id": "F056",
+          "note": "Geschälten und gegarten essbaren Anteil abwiegen."
+        }
+      ],
+      "image_notice": "KI-generiertes illustratives Servierbeispiel. Mengen, Zutaten und Garzustand richten sich ausschließlich nach dem Rezept."
     },
     {
       "id": "R025",
@@ -1460,7 +2086,7 @@
       ],
       "steps": [
         "Quark glatt rühren.",
-        "Beeren und Hafer daraufgeben."
+        "Frische Himbeeren waschen und mit Haferflocken daraufgeben."
       ],
       "allergens_declared": [
         "Gluten",
@@ -1477,12 +2103,35 @@
       "cooked_weight_g": null,
       "image": "assets/R025.webp",
       "image_brief": "Beeren-Quark, exakt die angegebenen Zutaten, matte dunkle Keramik, gedecktes Olivgrün, natürliches Seitenlicht, fotorealistische Editorial-Fotografie, keine Schrift",
-      "release_status": "draft",
+      "release_status": "reviewed",
       "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
       "image_review": "draft_visual_match_pending_owner_review",
       "nutrition_status": "source_based_estimate",
       "nutrition_per_100g": null,
-      "safety_revision": "3.8.14-reference"
+      "safety_revision": "3.8.15-editorial-candidate",
+      "editorial_review": {
+        "scope": "general_adult_recipe_ingredient_based",
+        "decision": "candidate_reviewed_pending_integration_and_independent_acceptance",
+        "revision": "3.8.15-editorial-candidate",
+        "product_labels_verified": false,
+        "cross_contact_verified": false,
+        "note": "Milch und Hafer; pasteurisierter Magerquark und frische, gewaschene Himbeeren."
+      },
+      "preparation_safety_notes": [
+        "Hände, Arbeitsflächen und Utensilien sauber halten; Obst und Gemüse waschen. Zutaten frisch bzw. korrekt gekühlt verwenden. Produktangaben, Zubereitung und mögliche Kreuzkontakte prüfen. Rezeptbilder sind Illustrationen; die Zutatenliste und Anleitung sind verbindlich.",
+        "Für die Standardrezeptur nur pasteurisierte Milchprodukte verwenden. Tiefgekühlte Beeren nicht ungeprüft roh statt frischer Beeren verwenden; besonders gefährdete Personen sollten diese vor Verzehr vollständig erhitzen."
+      ],
+      "product_standards": [
+        {
+          "food_id": "F001",
+          "note": "Ungewürzt; Hafer ist eine glutenhaltige Getreidegruppe. Produktetikett und ggf. Kreuzkontakt beachten."
+        },
+        {
+          "food_id": "F002",
+          "note": "Aus pasteurisierter Milch; natur, ohne weitere Zutaten; bei vegetarischem Anspruch ggf. mikrobielle Enzyme/Lab prüfen."
+        }
+      ],
+      "image_notice": "KI-generiertes illustratives Servierbeispiel. Mengen, Zutaten und Garzustand richten sich ausschließlich nach dem Rezept."
     },
     {
       "id": "R026",
@@ -1509,7 +2158,7 @@
         }
       ],
       "steps": [
-        "Apfel würfeln.",
+        "Apfel gründlich waschen und würfeln.",
         "Mit Hüttenkäse und Kürbiskernen anrichten."
       ],
       "allergens_declared": [
@@ -1526,12 +2175,31 @@
       "cooked_weight_g": null,
       "image": "assets/R026.webp",
       "image_brief": "Apfel-Hüttenkäse-Crunch, exakt die angegebenen Zutaten, matte dunkle Keramik, gedecktes Olivgrün, natürliches Seitenlicht, fotorealistische Editorial-Fotografie, keine Schrift",
-      "release_status": "draft",
+      "release_status": "reviewed",
       "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
       "image_review": "draft_visual_match_pending_owner_review",
       "nutrition_status": "source_based_estimate",
       "nutrition_per_100g": null,
-      "safety_revision": "3.8.14-reference"
+      "safety_revision": "3.8.15-editorial-candidate",
+      "editorial_review": {
+        "scope": "general_adult_recipe_ingredient_based",
+        "decision": "candidate_reviewed_pending_integration_and_independent_acceptance",
+        "revision": "3.8.15-editorial-candidate",
+        "product_labels_verified": false,
+        "cross_contact_verified": false,
+        "note": "Milch; Hüttenkäse natur, Apfel gewaschen und Kürbiskerne natur."
+      },
+      "preparation_safety_notes": [
+        "Hände, Arbeitsflächen und Utensilien sauber halten; Obst und Gemüse waschen. Zutaten frisch bzw. korrekt gekühlt verwenden. Produktangaben, Zubereitung und mögliche Kreuzkontakte prüfen. Rezeptbilder sind Illustrationen; die Zutatenliste und Anleitung sind verbindlich.",
+        "Pasteurisierte Milchprodukte wählen; konkrete Zutatenliste und ggf. verwendete Enzyme/Lab beachten."
+      ],
+      "product_standards": [
+        {
+          "food_id": "F014",
+          "note": "Natur, aus pasteurisierter Milch; bei vegetarischem Anspruch ggf. mikrobielle Enzyme/Lab prüfen."
+        }
+      ],
+      "image_notice": "KI-generiertes illustratives Servierbeispiel. Mengen, Zutaten und Garzustand richten sich ausschließlich nach dem Rezept."
     },
     {
       "id": "R027",
@@ -1566,8 +2234,8 @@
         }
       ],
       "steps": [
-        "Kichererbsen, Tahini und Zitrone mit etwas Wasser pürieren.",
-        "Gemüse in Stifte schneiden und dazu servieren."
+        "Abgetropfte, vollständig gegarte Kichererbsen, reines Tahini und Zitronensaft mit etwas Wasser pürieren.",
+        "Gurke und Karotten waschen, in Stifte schneiden und dazu servieren."
       ],
       "allergens_declared": [
         "Sesam"
@@ -1583,12 +2251,40 @@
       "cooked_weight_g": null,
       "image": "assets/R027.webp",
       "image_brief": "Hummus-Gemüse-Box, exakt die angegebenen Zutaten, matte dunkle Keramik, gedecktes Olivgrün, natürliches Seitenlicht, fotorealistische Editorial-Fotografie, keine Schrift",
-      "release_status": "draft",
+      "release_status": "reviewed",
       "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
       "image_review": "draft_visual_match_pending_owner_review",
       "nutrition_status": "source_based_estimate",
       "nutrition_per_100g": null,
-      "safety_revision": "3.8.14-reference"
+      "safety_revision": "3.8.15-editorial-candidate",
+      "editorial_review": {
+        "scope": "general_adult_recipe_ingredient_based",
+        "decision": "candidate_reviewed_pending_integration_and_independent_acceptance",
+        "revision": "3.8.15-editorial-candidate",
+        "product_labels_verified": false,
+        "cross_contact_verified": false,
+        "note": "Sesam; gegarte Kichererbsen aus Konserve und reines Tahini; keine erfundene Nussfreiheit."
+      },
+      "preparation_safety_notes": [
+        "Hände, Arbeitsflächen und Utensilien sauber halten; Obst und Gemüse waschen. Zutaten frisch bzw. korrekt gekühlt verwenden. Produktangaben, Zubereitung und mögliche Kreuzkontakte prüfen. Rezeptbilder sind Illustrationen; die Zutatenliste und Anleitung sind verbindlich.",
+        "Vorgegarte Lebensmittel frisch verwenden oder nach dem Garen schnell auf unter 7 °C kühlen und abgedeckt kalt lagern; nicht ungekühlt stehen lassen.",
+        "Bei ungewohnt hoher Ballaststoffzufuhr Menge langsam steigern und ausreichend trinken."
+      ],
+      "product_standards": [
+        {
+          "food_id": "F053",
+          "note": "Vollständig gegarte Konserve, natur, abgetropft wiegen."
+        },
+        {
+          "food_id": "F059",
+          "note": "Reines Sesammus, keine Nuss- oder Gewürzzusätze; deklarierter Sesam."
+        },
+        {
+          "food_id": "F060",
+          "note": "Frisch gepressten Saft wiegen; bei abgefülltem Saft abweichende Zusätze/Etikett prüfen."
+        }
+      ],
+      "image_notice": "KI-generiertes illustratives Servierbeispiel. Mengen, Zutaten und Garzustand richten sich ausschließlich nach dem Rezept."
     },
     {
       "id": "R028",
@@ -1615,8 +2311,8 @@
         }
       ],
       "steps": [
-        "Ein Ei in der Schale hart kochen, abschrecken und schälen; 60 g essbarer Anteil sind die Rechengrundlage.",
-        "Avocado zerdrücken und auf Brot streichen.",
+        "Ei in der Schale hart kochen, abschrecken und schälen; 60 g essbarer Anteil je Basisportion sind die Rechengrundlage.",
+        "Avocado schälen, entkernen, zerdrücken und auf Knäckebrot streichen.",
         "Mit Ei belegen."
       ],
       "allergens_declared": [
@@ -1634,12 +2330,31 @@
       "cooked_weight_g": null,
       "image": "assets/R028.webp",
       "image_brief": "Ei & Avocado auf Knäckebrot, exakt die angegebenen Zutaten, matte dunkle Keramik, gedecktes Olivgrün, natürliches Seitenlicht, fotorealistische Editorial-Fotografie, keine Schrift",
-      "release_status": "draft",
+      "release_status": "reviewed",
       "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
       "image_review": "draft_visual_match_pending_owner_review",
       "nutrition_status": "source_based_estimate",
       "nutrition_per_100g": null,
-      "safety_revision": "3.8.14-reference"
+      "safety_revision": "3.8.15-editorial-candidate",
+      "editorial_review": {
+        "scope": "general_adult_recipe_ingredient_based",
+        "decision": "candidate_reviewed_pending_integration_and_independent_acceptance",
+        "revision": "3.8.15-editorial-candidate",
+        "product_labels_verified": false,
+        "cross_contact_verified": false,
+        "note": "Ei und Roggen; Ei hart kochen, Schale nicht mitwiegen, Knäckebrot nach Standard."
+      },
+      "preparation_safety_notes": [
+        "Hände, Arbeitsflächen und Utensilien sauber halten; Obst und Gemüse waschen. Zutaten frisch bzw. korrekt gekühlt verwenden. Produktangaben, Zubereitung und mögliche Kreuzkontakte prüfen. Rezeptbilder sind Illustrationen; die Zutatenliste und Anleitung sind verbindlich.",
+        "Rohe tierische Zutaten separat verarbeiten. Lebensmittel, die durchgegart werden müssen, und aufzuwärmende Speisen im gesamten Lebensmittel mindestens 70 °C für 2 Minuten erhitzen; bei Bedarf Thermometer verwenden."
+      ],
+      "product_standards": [
+        {
+          "food_id": "F062",
+          "note": "Rezeptstandard einfaches Roggenknäckebrot ohne zugesetzte Milch, Ei, Saaten oder Gewürzmischung; konkrete Getreidesorten auf dem Etikett beachten."
+        }
+      ],
+      "image_notice": "KI-generiertes illustratives Servierbeispiel. Mengen, Zutaten und Garzustand richten sich ausschließlich nach dem Rezept."
     },
     {
       "id": "R029",
@@ -1671,7 +2386,7 @@
       ],
       "steps": [
         "Banane zerdrücken.",
-        "Quark, Kakao und Milch unterrühren."
+        "Quark, reinen stark entölten Kakao und pasteurisierte Milch unterrühren."
       ],
       "allergens_declared": [
         "Milch"
@@ -1687,12 +2402,39 @@
       "cooked_weight_g": null,
       "image": "assets/R029.webp",
       "image_brief": "Kakao-Bananen-Quark, exakt die angegebenen Zutaten, matte dunkle Keramik, gedecktes Olivgrün, natürliches Seitenlicht, fotorealistische Editorial-Fotografie, keine Schrift",
-      "release_status": "draft",
+      "release_status": "reviewed",
       "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
       "image_review": "draft_visual_match_pending_owner_review",
       "nutrition_status": "source_based_estimate",
       "nutrition_per_100g": null,
-      "safety_revision": "3.8.14-reference"
+      "safety_revision": "3.8.15-editorial-candidate",
+      "editorial_review": {
+        "scope": "general_adult_recipe_ingredient_based",
+        "decision": "candidate_reviewed_pending_integration_and_independent_acceptance",
+        "revision": "3.8.15-editorial-candidate",
+        "product_labels_verified": false,
+        "cross_contact_verified": false,
+        "note": "Milch; stark entölter ungesüßter Kakao, Banane ohne Schale."
+      },
+      "preparation_safety_notes": [
+        "Hände, Arbeitsflächen und Utensilien sauber halten; Obst und Gemüse waschen. Zutaten frisch bzw. korrekt gekühlt verwenden. Produktangaben, Zubereitung und mögliche Kreuzkontakte prüfen. Rezeptbilder sind Illustrationen; die Zutatenliste und Anleitung sind verbindlich.",
+        "Pasteurisierte Milchprodukte wählen; konkrete Zutatenliste und ggf. verwendete Enzyme/Lab beachten."
+      ],
+      "product_standards": [
+        {
+          "food_id": "F002",
+          "note": "Aus pasteurisierter Milch; natur, ohne weitere Zutaten; bei vegetarischem Anspruch ggf. mikrobielle Enzyme/Lab prüfen."
+        },
+        {
+          "food_id": "F004",
+          "note": "Pasteurisierte Milch, ungesüßt."
+        },
+        {
+          "food_id": "F063",
+          "note": "Reiner Kakao, kein Trinkkakaopulver."
+        }
+      ],
+      "image_notice": "KI-generiertes illustratives Servierbeispiel. Mengen, Zutaten und Garzustand richten sich ausschließlich nach dem Rezept."
     },
     {
       "id": "R030",
@@ -1720,7 +2462,7 @@
       ],
       "steps": [
         "Edamame aus der Konserve abtropfen, 150 g je Basisportion abwiegen und nach Packungsangabe verzehrfertig machen.",
-        "Mit Zitrone und Sesam mischen."
+        "Mit frisch gepresstem Zitronensaft und Sesam mischen."
       ],
       "allergens_declared": [
         "Sesam",
@@ -1737,12 +2479,35 @@
       "cooked_weight_g": null,
       "image": "assets/R030.webp",
       "image_brief": "Edamame mit Zitrone, exakt die angegebenen Zutaten, matte dunkle Keramik, gedecktes Olivgrün, natürliches Seitenlicht, fotorealistische Editorial-Fotografie, keine Schrift",
-      "release_status": "draft",
+      "release_status": "reviewed",
       "allergen_crosscheck": "ingredient_level_checked; product_labels_and_cross_contact_not_verified",
       "image_review": "draft_visual_match_pending_owner_review",
       "nutrition_status": "source_based_estimate",
       "nutrition_per_100g": null,
-      "safety_revision": "3.8.14-reference"
+      "safety_revision": "3.8.15-editorial-candidate",
+      "editorial_review": {
+        "scope": "general_adult_recipe_ingredient_based",
+        "decision": "candidate_reviewed_pending_integration_and_independent_acceptance",
+        "revision": "3.8.15-editorial-candidate",
+        "product_labels_verified": false,
+        "cross_contact_verified": false,
+        "note": "Soja, Sesam; Edamame aus Konserve abgetropft und frisch gepresster Zitronensaft."
+      },
+      "preparation_safety_notes": [
+        "Hände, Arbeitsflächen und Utensilien sauber halten; Obst und Gemüse waschen. Zutaten frisch bzw. korrekt gekühlt verwenden. Produktangaben, Zubereitung und mögliche Kreuzkontakte prüfen. Rezeptbilder sind Illustrationen; die Zutatenliste und Anleitung sind verbindlich.",
+        "Vorgegarte Lebensmittel frisch verwenden oder nach dem Garen schnell auf unter 7 °C kühlen und abgedeckt kalt lagern; nicht ungekühlt stehen lassen."
+      ],
+      "product_standards": [
+        {
+          "food_id": "F024",
+          "note": "Abgetropft wiegen; natur, nach Packungsangabe verzehrfertig machen. Keine TK-Substitution mit identischen Nährwerten."
+        },
+        {
+          "food_id": "F060",
+          "note": "Frisch gepressten Saft wiegen; bei abgefülltem Saft abweichende Zusätze/Etikett prüfen."
+        }
+      ],
+      "image_notice": "KI-generiertes illustratives Servierbeispiel. Mengen, Zutaten und Garzustand richten sich ausschließlich nach dem Rezept."
     }
   ]
 }

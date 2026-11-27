@@ -7,7 +7,7 @@
   host.setAttribute('role','dialog');
   host.setAttribute('aria-label','Persönliches Ziel prüfen');
   host.setAttribute('aria-modal','true');
-  view.innerHTML=`<link rel="stylesheet" href="nutrition/goal.css?v=3814"><main>
+  view.innerHTML=`<link rel="stylesheet" href="nutrition/goal.css?v=3815"><main>
    <small>FITNESS LAB · GOAL INTELLIGENCE</small><h1>Dein Ziel.<br>Dein Weg.</h1>
    <p id="context"></p><div class="grid"><div><label for="weight">Aktuelles Gewicht (kg)</label><input id="weight" type="number" readonly></div>
    <div><label for="target">Zielgewicht (kg)</label><input id="target" type="number" step="0.1"></div></div>

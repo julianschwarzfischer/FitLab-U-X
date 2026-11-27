@@ -10,7 +10,7 @@
  const facts=(recipe,portion,tag='b')=>`<div class="facts">${engine.nutrients.map((key,i)=>`<div><${tag}>${format(key,recipe.values[key]===null?null:recipe.values[key]*portion)}</${tag}><span>${labels[i]}</span></div>`).join('')}</div>`;
  let collectionPromise;
  function load(){
-  return collectionPromise??=Promise.all(['recipes','foods','allergen-matrix'].map(name=>fetch('nutrition/'+name+'.json?v=3814').then(response=>{
+  return collectionPromise??=Promise.all(['recipes','foods','allergen-matrix'].map(name=>fetch('nutrition/'+name+'.json?v=3815').then(response=>{
    if(!response.ok)throw Error('Rezeptdaten fehlen');
    return response.json();
   }))).then(([r,f,matrix])=>safety.attachMatrix(engine.enrich(r.recipes,f.foods),matrix)).catch(error=>{collectionPromise=null;throw error});
@@ -33,7 +33,7 @@
  }
  function show(api){
   const host=document.createElement('fitlab-nutrition'),root=host.attachShadow({mode:'open'});
-  root.innerHTML=`<link rel="stylesheet" href="nutrition/reference.css?v=3814"><div class="shell"><header><span class="brand"><b>╫</b> FITNESS LAB</span><a href="#tagebuch" data-action="diary">Tagebuch ↗</a></header>
+  root.innerHTML=`<link rel="stylesheet" href="nutrition/reference.css?v=3815"><div class="shell"><header><span class="brand"><b>╫</b> FITNESS LAB</span><a href="#tagebuch" data-action="diary">Tagebuch ↗</a></header>
    <main><div class="wrap intro"><div class="eyebrow">FITNESS LAB · PERSONAL NUTRITION</div><h1>Deine Rezeptwelt.</h1><div class="tabs"><button data-action="personal">Für mich</button><button data-action="all">Alle Rezepte</button></div><div id="context"></div></div>
    <div id="protection-status" class="wrap" hidden><p></p><button class="primary" data-action="profile">Meine Ernährung prüfen</button></div><div id="hero"></div><div id="recommendation"></div><div id="catalog" class="collection" hidden></div><div class="wrap"><label>Mahlzeit <select class="goal" id="meal">${Object.entries(meals).map(([id,name])=>`<option value="${id}">${name}</option>`).join('')}</select></label>
    <details id="preferences"><summary>Meine Ernährung</summary><div></div></details></div></main>
@@ -60,7 +60,7 @@
    const extra=recipe.rows.some(({food})=>['F006','F021','F027','F029','F031','F036','F042','F047','F050'].includes(food.id))?'Rohe tierische Zutaten durchgaren. Im Zweifel mindestens 70 °C für zwei Minuten an allen Stellen. Rohware getrennt verarbeiten.':'';
    const legumes=recipe.rows.some(({food})=>['F024','F037','F038','F049','F052','F053','F064'].includes(food.id))?'Hülsenfrüchte vollständig garen. Bei TK-Ware Packungsanleitung beachten und Konserven im angegebenen Zustand abwiegen.':'';
    const conditional=recipe.diet_condition||'';
-   return [...new Set([gate(recipe).reason,conditional,extra,legumes])].filter(Boolean);
+   return [...new Set([gate(recipe).reason,conditional,...(recipe.preparation_safety_notes||[]),extra,legumes])].filter(Boolean);
   };
   function detail(recipe,multiplier){
    const blocked=gate(recipe).status!=='checked';
@@ -68,11 +68,12 @@
     <div class="portion-options" aria-label="Portionsgröße">${engine.portions.map(value=>`<button data-action="portion" data-id="${recipe.id}" data-value="${value}" aria-pressed="${value===multiplier}">${number(value,1)}</button>`).join('')}</div>${facts(recipe,multiplier,'strong')}<small>Berechnete Richtwerte je gewählte Portion.</small>
     <h3>Zutaten</h3><ul class="ingredients">${recipe.rows.map(({food,grams})=>`<li><span>${escape(food.name)} <small>(${escape(food.state)})</small></span><strong>${number(grams*multiplier/recipe.base_servings,2)} g</strong></li>`).join('')}</ul>
     <h3 class="line">Zubereitung</h3>${recipe.passive_time?`<p>${escape(recipe.passive_time)}</p>`:''}<ol class="steps">${recipe.steps.map(step=>`<li>${escape(step)}</li>`).join('')}</ol>
-    <p>Allergene laut Zutatenliste: ${escape(recipe.declared.join(', ')||'keine deklariert')}. Etiketten und Kreuzkontakte prüfen.</p>
+    <p>Allergene nach Standardzutaten: ${escape(recipe.declared.join(', ')||'keine der 14 Gruppen als enthalten ermittelt')}. Konkrete Etiketten und Kreuzkontakte sind nicht bestätigt.</p>
+    <small>${escape(recipe.image_notice||'')}</small>
     ${warnings(recipe).map(warning=>`<p class="warning">${escape(warning)}</p>`).join('')}
     <details class="data-note"><summary>Daten- und Berechnungshinweise</summary><div class="data-copy">
     <p>Max Rubner-Institut (2025), BLS 4.0 · CC BY 4.0. Ergänzend USDA SR28 (2015). Zutatenbasierte Richtwerte ohne gemessenes Fertiggewicht. Ein Gedankenstrich steht für einen nicht quantifizierten Wert.</p>
-    <ul>${recipe.rows.map(({food})=>`<li>${escape(food.name)} · ${escape(food.source)} ${escape(food.source_record_id)} ${escape(food.source_note)}</li>`).join('')}</ul></div></details>
+    <ul>${recipe.rows.map(({food})=>`<li>${escape(food.name)} · ${escape(food.source)} ${escape(food.source_record_id)} ${escape(food.source_note)} ${escape(food.recipe_standard||'')}</li>`).join('')}</ul></div></details>
     <button class="primary" data-action="book" data-id="${recipe.id}" ${blocked||busy?'disabled':''}>Ins Tagebuch übernehmen</button><div class="message" role="status"></div>`;
   }
   function displayPersonal(){
@@ -87,7 +88,7 @@
     return;
    }
    const {recipe,reason}=current;
-   $('hero').innerHTML=`<div class="slider" aria-label="Rezeptauswahl"><section class="slide">${image(recipe)}<div class="wrap"><div class="eyebrow">Empfehlung ${active+1} / ${recommendations.length}</div><h2>${escape(recipe.name)}</h2><p>${number(recipe.values.kcal*current.portion)} kcal · ${number(recipe.values.protein_g*current.portion,1)} g Protein · ${recipe.minutes} Min.</p><p><small>Vorschlag: ${number(current.portion,1)} Portion(en). ${escape(reason)}</small></p><button class="primary" data-action="detail">Rezept entdecken ↓</button></div></section></div>
+   $('hero').innerHTML=`<div class="slider" aria-label="Rezeptauswahl"><section class="slide">${image(recipe)}<div class="wrap"><div class="eyebrow">Empfehlung ${active+1} / ${recommendations.length}</div><h2>${escape(recipe.name)}</h2><p>${number(recipe.values.kcal*current.portion)} kcal · ${number(recipe.values.protein_g*current.portion,1)} g Protein · ${recipe.minutes} Min.</p><p><small>Vorschlag: ${number(current.portion,1)} Portion(en). ${escape(reason)}</small></p>${recipe.special_population_notice?`<p class="warning">${escape(recipe.special_population_notice)}</p>`:''}<button class="primary" data-action="detail">Rezept entdecken ↓</button></div></section></div>
     <div class="dots">${recommendations.map(({recipe},i)=>`<button data-action="slide" data-value="${i}" aria-label="${escape(recipe.name)}" aria-current="${i===active}">${i===active?'●':'○'}</button>`).join('')}<br><small>Weitere Gerichte durch Wischen entdecken</small></div>`;
    $('recommendation').innerHTML=`<section class="budgetbox"><div class="wrap"><div class="eyebrow">Heute noch verfügbar</div><div class="daystats">${escape(model.budget)}</div></div></section>
     <div class="wrap selector" id="recipe-detail"><div class="eyebrow">Dein Rezept</div><div class="tabs">${recommendations.map(({recipe},i)=>`<button class="${active===i?'active':''}" data-action="slide" data-value="${i}">${escape(recipe.name)}</button>`).join('')}</div></div>
@@ -102,7 +103,7 @@
    results.sort((a,b)=>(sort==='fit'?(rank.get(a.id)??Infinity)-(rank.get(b.id)??Infinity):sort==='time'?a.minutes-b.minutes:sort==='original'?0:numeric(a,b,sort,sort==='kcal'?1:-1))||a.index-b.index);
    $('catalog-status').textContent=results.length+' Rezepte · Nährwerte pro Portion sind berechnete Richtwerte.'
     +(rank&&!rank.size?' Keine persönliche Sortierung verfügbar. Katalogreihenfolge wird angezeigt.':'');
-   $('catalog-list').innerHTML=results.map(recipe=>`<details data-id="${recipe.id}"><summary><div class="entryhead">${image(recipe,'thumb')}<div class="entrytext"><small>${escape(recipe.category)} · ${recipe.minutes} Min.</small><strong>${escape(recipe.name)}</strong></div><span class="chev" aria-hidden="true">⌄</span></div>${facts(recipe,1)}<div class="basis">Pro Portion · berechnete Richtwerte</div><small class="warning">${escape(gate(recipe).reason)}</small></summary><div class="recipe-tools"></div></details>`).join('');
+   $('catalog-list').innerHTML=results.map(recipe=>`<details data-id="${recipe.id}"><summary><div class="entryhead">${image(recipe,'thumb')}<div class="entrytext"><small>${escape(recipe.category)} · ${recipe.minutes} Min.</small><strong>${escape(recipe.name)}</strong></div><span class="chev" aria-hidden="true">⌄</span></div>${facts(recipe,1)}<div class="basis">Pro Portion · berechnete Richtwerte</div><small class="warning">${escape(gate(recipe).reason)}</small>${recipe.special_population_notice?`<small class="warning">${escape(recipe.special_population_notice)}</small>`:''}</summary><div class="recipe-tools"></div></details>`).join('');
   }
   function render(){
    root.querySelectorAll('.intro .tabs button').forEach(button=>{
@@ -152,12 +153,13 @@
     return;
    }
    if(action!=='book'||busy||booked||gate(recipe).status!=='checked')return;
-   const revision=protection.revision,confirmedDate=api.date();
-   if(!confirm(`${recipe.name} · ${number(portion(recipe),1)} Portion(en) als einzelne Zutaten in „${meals[meal]}“ erfassen?`))return;
+   const revision=protection.revision,confirmedDate=api.date(),quantity=portion(recipe),bookingMeal=meals[meal];
+   const notice=recipe.special_population_notice?'\n\n'+recipe.special_population_notice:'';
+   if(!confirm(`${recipe.name} · ${number(quantity,1)} Portion(en) als einzelne Zutaten in „${bookingMeal}“ erfassen?${notice}`))return;
    busy=true;control.disabled=true;
    const message=control.nextElementSibling;
    try{
-    booked=await api.book(recipe,portion(recipe),meals[meal],revision,confirmedDate);
+    booked=await api.book(recipe,quantity,bookingMeal,revision,confirmedDate);
     if(booked){
      render();
      const notice=document.createElement('p');notice.className='wrap message';notice.textContent='Zutaten im Tagebuch gespeichert.';notice.setAttribute('role','status');
