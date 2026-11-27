@@ -76,3 +76,9 @@ const storyImages=[...story.matchAll(/src="(media\/design-first\/[a-z-]+\.webp)"
 assert.equal(new Set(storyImages).size,6,'Each reference image must be unique');
 for(const path of storyImages)assert(fs.statSync(path).isFile()&&sw.includes(`'./${path}'`),`Missing offline asset: ${path}`);
 console.log('PASS isolated Design First script and six original local images');
+
+const personal=fs.readFileSync('personal-dashboard.js','utf8');
+new vm.Script(personal,{filename:'personal-dashboard.js'});
+assert(html.includes('src="personal-dashboard.js"')&&sw.includes("'./personal-dashboard.js'"),'Personal Dashboard must load offline');
+for(const asset of storyImages)assert(personal.includes('src="'+asset+'"'),'Missing approved dashboard image: '+asset);
+console.log('PASS Personal Dashboard shares the six byte-identical reference images and caches its runtime');

@@ -231,7 +231,7 @@ button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid 
 .xpHero>*{position:relative}
 .xpEvoFocus .xpSafetyContext{margin:5px 0 0;font-size:.9rem;line-height:1.35;color:var(--text)}
 @media(max-width:480px){.xp23Coverage span{display:block}.xp22Focus button{min-height:44px;margin-top:6px}}
-</style><style>@media(prefers-reduced-motion:reduce){.visual64 .play64{display:none}}.xpAvatarStage:has(.xpBody){background:#202020}.xpBody .xpMuscle.selected path{stroke:white;stroke-width:.8}.xpBody .xpMuscle:focus-visible path{stroke:#fff;stroke-width:2}.visual64 svg[data-pose]{background:#202020;border-radius:12px;overflow:hidden}</style><link rel="stylesheet" href="premium-ux.css"><link rel="stylesheet" href="cinematic.css"><link rel="stylesheet" href="first-impression.css"><style>html:has(fitlab-design-story),body:has(> fitlab-design-story){background:#141b13;scroll-behavior:auto;overflow-anchor:none}body:has(> fitlab-design-story)>:not(fitlab-design-story){display:none!important}</style></head><body><header><div><h1><img id="brandLogo" hidden alt=""><span id="brandName">FITNESS LAB</span><small id="appVersion">EXP 1.6.2 EVOLUTION 3.6 DESIGN FIRST</small></h1><small id="brandTag">Dein Körper. Dein Ziel. Dein Plan.</small></div></header><main><div id="today"></div><div id="nutrition" class="hidden"><h2>Ernährungstagebuch</h2><label>Datum</label><input type="date" id="date"><div id="daily"></div><section><h3>Lebensmittel hinzufügen</h3><label for="query">Name des Lebensmittels</label><input id="query" type="search" placeholder="z. B. Haferflocken" autocomplete="off"><div id="results"></div><hr><label>Verpackte Lebensmittel · Barcode oder Online-Suche</label><input id="barcode" inputmode="numeric" placeholder="EAN / Barcode"><div class="actions" style="margin-top:9px"><button id="lookup">Barcode suchen</button><button class="secondary" id="scan">Kamera</button><button class="secondary" id="online">Online-Suche</button></div><video id="video" class="hidden" playsinline muted></video><button id="stop" class="hidden secondary">Kamera schließen</button><p id="status" role="status" class="muted"></p><label>Barcode-Foto (alternativ zur Live-Kamera)</label><input id="barcodePhoto" type="file" accept="image/*" capture="environment"><small>Barcode waagerecht und scharf fotografieren. Fotos werden lokal verarbeitet. Die Erkennung fertiger Gerichte ist nicht enthalten.</small><small>Online-Abfrage: Open Food Facts. Produktdaten können fehlen oder fehlerhaft sein. Bitte Etikett prüfen. <a href="https://world.openfoodfacts.org/">Quelle / ODbL</a></small></section><section id="foodform"><h3>Lebensmittel / eigene Mahlzeit</h3><div id="productmeta" class="productmeta"></div><label>Name</label><input id="foodname"><div class="grid"><div><label>kcal je 100 g</label><input id="fk" type="number" min="0" step="any"></div><div><label>Protein je 100 g</label><input id="fp" type="number" min="0" step="any"></div><div><label>Kohlenhydrate je 100 g</label><input id="fc" type="number" min="0" step="any"></div><div><label>Fett je 100 g</label><input id="ff" type="number" min="0" step="any"></div><div><label for="fiber14">Ballaststoffe je 100 g (optional)</label><input id="fiber14" type="number" min="0" max="100" step="any" placeholder="Unbekannt"></div><div><label>Menge (g)</label><input id="grams" type="number" min="1" max="10000" value="100"></div><div><label>Mahlzeit</label><select id="meal"><option>Frühstück</option><option>Mittagessen</option><option>Abendessen</option><option>Snacks</option></select></div></div><div id="portionbuttons" class="actions"></div><div id="preview" class="portion" aria-live="polite"></div><label><input id="favorite" type="checkbox"> Als eigenes Lebensmittel speichern</label><button id="add">Eintragen</button><p id="fooderror" role="status"></p></section><section><h3>Rezepte & gespeicherte Mahlzeiten</h3><p class="muted">Zutaten aus dem Eingabefeld übernehmen. Bei gekochten Gerichten das tatsächliche Gesamtgewicht nach dem Garen angeben.</p><button class="secondary" id="ingredient">Aktuelles Lebensmittel als Zutat übernehmen</button><div id="ingredients"></div><label>Rezeptname</label><input id="recipeName"><label>Gesamtgewicht des fertigen Rezepts (g)</label><input id="recipeWeight" type="number" min="1" step="any"><button id="saveRecipe" style="margin-top:10px">Rezept speichern</button><p id="recipeStatus" role="status"></p><div id="recipes"></div></section><section><h3>Meine Favoriten</h3><div id="favlist"></div></section><div id="entries"></div><section id="waterpanel"></section><button class="secondary" id="copyday">Mahlzeiten vom Vortag übernehmen</button></div><div id="profile" class="hidden"><h2>Dein Profil</h2><section><h3>01 · Ziele</h3><div id="goals" class="chips"></div><label>Priorität</label><select id="priority"><option value="auto">Automatisch</option><option value="loss">Fettabbau</option><option value="gain">Aufbau</option><option value="maintain">Gewicht halten</option></select></section><section><h3>02 · Körperdaten</h3><div class="grid" id="bodyfields"></div><label for="sex">Geschlecht für die Kalorienberechnung</label><select id="sex" aria-describedby="xpCalculationSexHint"><option value="">Bitte auswählen</option><option value="m">Männlich</option><option value="f">Weiblich</option></select><small id="xpCalculationSexHint">Diese Angabe fließt in dein Kalorienziel ein. Deine Avatarfigur stellst du separat ein.</small><label><input type="checkbox" id="restricted"> Schwangerschaft, Stillzeit oder Erkrankung / Essstörung mit individuellem Ernährungsbedarf</label></section><section><h3>03 · Alltag und Training</h3><div id="selectfields"></div><div class="grid"><div><label>Einheiten pro Woche</label><input id="days" type="number" min="0" max="7"></div><div><label>Minuten pro Einheit</label><input id="minutes" type="number" min="15" max="180"></div></div><div id="equipmentSettings66"><h3>Trainingsgeräte</h3><div id="equipment" class="chips"></div><label>Sonstige Geräte</label><input id="extra"></div><label>Einschränkungen (optional)</label><textarea id="limits"></textarea></section><section id="calorieSettings66"><h3>04 · Kalorienziel</h3><label for="adjust">Kalorienziel anpassen (kcal pro Tag)</label><input type="range" id="adjust" min="-300" max="500" step="50"><div id="adjustlabel"></div><button class="secondary" id="resetadjust">Empfehlung wiederherstellen</button><div id="profileout"></div></section><section id="brandPanel" class="brandsettings"></section><section><h3>Datensicherung</h3><p class="muted">Deine Daten bleiben lokal in dieser App. Safari und die installierte App können getrennte Speicher verwenden. Exportiere regelmäßig eine Sicherung; beim Löschen von Websitedaten können Einträge verloren gehen. Sicherungen enthalten persönliche Daten.</p><button id="export">JSON exportieren</button><button id="xpDiagExport" class="secondary" type="button">Speicherdiagnose exportieren (QA)</button><small>QA-Diagnose: enthält technische IDs und Zeitpunkte der Speichervorgänge, keine Mahlzeitnamen. Nur mit künstlichen Testdaten verwenden.</small><label>Sicherung wiederherstellen (ersetzt lokale Daten)</label><input id="import" type="file" accept="application/json,.json"><p id="importstatus" role="status"></p></section></div><div id="training" class="hidden"><h2>Training</h2><section id="trainingout"></section></div></main><nav class="nav"><button data-tab="today" class="active">Heute</button><button data-tab="nutrition">Ernährung</button><button data-tab="training">Training</button><button data-tab="profile">Profil</button></nav><script>
+</style><style>@media(prefers-reduced-motion:reduce){.visual64 .play64{display:none}}.xpAvatarStage:has(.xpBody){background:#202020}.xpBody .xpMuscle.selected path{stroke:white;stroke-width:.8}.xpBody .xpMuscle:focus-visible path{stroke:#fff;stroke-width:2}.visual64 svg[data-pose]{background:#202020;border-radius:12px;overflow:hidden}</style><link rel="stylesheet" href="premium-ux.css"><link rel="stylesheet" href="cinematic.css"><link rel="stylesheet" href="first-impression.css"><style>html:has(fitlab-design-story),body:has(> fitlab-design-story){background:#141b13;scroll-behavior:auto;overflow-anchor:none}body:has(> fitlab-design-story)>:not(fitlab-design-story){display:none!important}</style><style>html:has(fitlab-personal-dashboard),body:has(> fitlab-personal-dashboard){background:#141b13;scroll-behavior:auto;overflow-anchor:none}body:has(> fitlab-personal-dashboard)>:not(fitlab-personal-dashboard,#xp131Update){display:none!important}</style></head><body><header><div><h1><img id="brandLogo" hidden alt=""><span id="brandName">FITNESS LAB</span><small id="appVersion">EXP 1.6.2 EVOLUTION 3.7 PERSONAL DASHBOARD</small></h1><small id="brandTag">Dein Körper. Dein Ziel. Dein Plan.</small></div></header><main><div id="today"></div><div id="nutrition" class="hidden"><h2>Ernährungstagebuch</h2><label>Datum</label><input type="date" id="date"><div id="daily"></div><section><h3>Lebensmittel hinzufügen</h3><label for="query">Name des Lebensmittels</label><input id="query" type="search" placeholder="z. B. Haferflocken" autocomplete="off"><div id="results"></div><hr><label>Verpackte Lebensmittel · Barcode oder Online-Suche</label><input id="barcode" inputmode="numeric" placeholder="EAN / Barcode"><div class="actions" style="margin-top:9px"><button id="lookup">Barcode suchen</button><button class="secondary" id="scan">Kamera</button><button class="secondary" id="online">Online-Suche</button></div><video id="video" class="hidden" playsinline muted></video><button id="stop" class="hidden secondary">Kamera schließen</button><p id="status" role="status" class="muted"></p><label>Barcode-Foto (alternativ zur Live-Kamera)</label><input id="barcodePhoto" type="file" accept="image/*" capture="environment"><small>Barcode waagerecht und scharf fotografieren. Fotos werden lokal verarbeitet. Die Erkennung fertiger Gerichte ist nicht enthalten.</small><small>Online-Abfrage: Open Food Facts. Produktdaten können fehlen oder fehlerhaft sein. Bitte Etikett prüfen. <a href="https://world.openfoodfacts.org/">Quelle / ODbL</a></small></section><section id="foodform"><h3>Lebensmittel / eigene Mahlzeit</h3><div id="productmeta" class="productmeta"></div><label>Name</label><input id="foodname"><div class="grid"><div><label>kcal je 100 g</label><input id="fk" type="number" min="0" step="any"></div><div><label>Protein je 100 g</label><input id="fp" type="number" min="0" step="any"></div><div><label>Kohlenhydrate je 100 g</label><input id="fc" type="number" min="0" step="any"></div><div><label>Fett je 100 g</label><input id="ff" type="number" min="0" step="any"></div><div><label for="fiber14">Ballaststoffe je 100 g (optional)</label><input id="fiber14" type="number" min="0" max="100" step="any" placeholder="Unbekannt"></div><div><label>Menge (g)</label><input id="grams" type="number" min="1" max="10000" value="100"></div><div><label>Mahlzeit</label><select id="meal"><option>Frühstück</option><option>Mittagessen</option><option>Abendessen</option><option>Snacks</option></select></div></div><div id="portionbuttons" class="actions"></div><div id="preview" class="portion" aria-live="polite"></div><label><input id="favorite" type="checkbox"> Als eigenes Lebensmittel speichern</label><button id="add">Eintragen</button><p id="fooderror" role="status"></p></section><section><h3>Rezepte & gespeicherte Mahlzeiten</h3><p class="muted">Zutaten aus dem Eingabefeld übernehmen. Bei gekochten Gerichten das tatsächliche Gesamtgewicht nach dem Garen angeben.</p><button class="secondary" id="ingredient">Aktuelles Lebensmittel als Zutat übernehmen</button><div id="ingredients"></div><label>Rezeptname</label><input id="recipeName"><label>Gesamtgewicht des fertigen Rezepts (g)</label><input id="recipeWeight" type="number" min="1" step="any"><button id="saveRecipe" style="margin-top:10px">Rezept speichern</button><p id="recipeStatus" role="status"></p><div id="recipes"></div></section><section><h3>Meine Favoriten</h3><div id="favlist"></div></section><div id="entries"></div><section id="waterpanel"></section><button class="secondary" id="copyday">Mahlzeiten vom Vortag übernehmen</button></div><div id="profile" class="hidden"><h2>Dein Profil</h2><section><h3>01 · Ziele</h3><div id="goals" class="chips"></div><label>Priorität</label><select id="priority"><option value="auto">Automatisch</option><option value="loss">Fettabbau</option><option value="gain">Aufbau</option><option value="maintain">Gewicht halten</option></select></section><section><h3>02 · Körperdaten</h3><div class="grid" id="bodyfields"></div><label for="sex">Geschlecht für die Kalorienberechnung</label><select id="sex" aria-describedby="xpCalculationSexHint"><option value="">Bitte auswählen</option><option value="m">Männlich</option><option value="f">Weiblich</option></select><small id="xpCalculationSexHint">Diese Angabe fließt in dein Kalorienziel ein. Deine Avatarfigur stellst du separat ein.</small><label><input type="checkbox" id="restricted"> Schwangerschaft, Stillzeit oder Erkrankung / Essstörung mit individuellem Ernährungsbedarf</label></section><section><h3>03 · Alltag und Training</h3><div id="selectfields"></div><div class="grid"><div><label>Einheiten pro Woche</label><input id="days" type="number" min="0" max="7"></div><div><label>Minuten pro Einheit</label><input id="minutes" type="number" min="15" max="180"></div></div><div id="equipmentSettings66"><h3>Trainingsgeräte</h3><div id="equipment" class="chips"></div><label>Sonstige Geräte</label><input id="extra"></div><label>Einschränkungen (optional)</label><textarea id="limits"></textarea></section><section id="calorieSettings66"><h3>04 · Kalorienziel</h3><label for="adjust">Kalorienziel anpassen (kcal pro Tag)</label><input type="range" id="adjust" min="-300" max="500" step="50"><div id="adjustlabel"></div><button class="secondary" id="resetadjust">Empfehlung wiederherstellen</button><div id="profileout"></div></section><section id="brandPanel" class="brandsettings"></section><section><h3>Datensicherung</h3><p class="muted">Deine Daten bleiben lokal in dieser App. Safari und die installierte App können getrennte Speicher verwenden. Exportiere regelmäßig eine Sicherung; beim Löschen von Websitedaten können Einträge verloren gehen. Sicherungen enthalten persönliche Daten.</p><button id="export">JSON exportieren</button><button id="xpDiagExport" class="secondary" type="button">Speicherdiagnose exportieren (QA)</button><small>QA-Diagnose: enthält technische IDs und Zeitpunkte der Speichervorgänge, keine Mahlzeitnamen. Nur mit künstlichen Testdaten verwenden.</small><label>Sicherung wiederherstellen (ersetzt lokale Daten)</label><input id="import" type="file" accept="application/json,.json"><p id="importstatus" role="status"></p></section></div><div id="training" class="hidden"><h2>Training</h2><section id="trainingout"></section></div></main><nav class="nav"><button data-tab="today" class="active">Heute</button><button data-tab="nutrition">Ernährung</button><button data-tab="training">Training</button><button data-tab="profile">Profil</button></nav><script>
 const fmt=(v,d=1)=>Number(v).toLocaleString("de-DE",{maximumFractionDigits:d,minimumFractionDigits:d});const $=id=>document.getElementById(id), esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])), num=(v)=>Number(v), rnd=v=>Math.round(v), dateKey=(d=new Date())=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
 const goals=['Fett reduzieren','Bauchfett verlieren','Muskelaufbau','Fitter werden','Cardio / Ausdauer','Kraft steigern','Gewicht halten','Gewicht zunehmen','Beweglichkeit verbessern'], equipment=['Keine Geräte','Kurzhanteln','Langhantel','Hantelbank','Klimmzugstange','Kettlebells','Widerstandsbänder','Trainingsmatte','Kabelzug','Kraftstation','Fitnessgeräte im Studio','Laufband','Walkingpad','Fahrrad / Ergometer','Crosstrainer','Rudergerät','Springseil','TRX / Schlingentrainer','Dip-Barren','Faszienrolle','Sonstige'];
 // 1.6.1 – Data isolation. Each deployment path uses its own key namespace; the original Experience path retains its existing data.
@@ -2552,5 +2552,124 @@ xpHomeMarkup=function(){
  return container.innerHTML;
 };
 
-void xpIDBBoot();if('serviceWorker'in navigator&&location.protocol.startsWith('http')){let hadController=!!navigator.serviceWorker.controller;navigator.serviceWorker.addEventListener('controllerchange',()=>{if(hadController)xp131UpdateNotice();hadController=true;});navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(reg=>{reg.update().catch(()=>{});document.addEventListener('visibilitychange',()=>{if(!document.hidden)reg.update().catch(()=>{})});}).catch(()=>{});}
-</script><script src="exercise-atlas.js"></script><script src="cinematic.js" defer></script><script src="design-story.js" defer></script></body></html>
+// Regular home routing retains the classic view and all of its original handlers.
+const xpPersonalQuery=new URLSearchParams(location.search);
+let xpPersonalClassic=false,xpPersonalScroll=0,xpPersonalScreen=null,xpPersonalQueued=false;
+function xpPersonalPreference(){
+ const variant=state.p.sex==='f'?'female':'male';
+ const key='fitlab-design-story-choice-'+variant;
+ try{
+  const saved=fitStore161.getItem(key);
+  if(saved==='female'||saved==='male')return {key,choice:saved};
+ }catch{}
+ return {key,choice:variant};
+}
+function xpPersonalData(){
+ const date=dateKey(),check=xpToday(), day=xp22Day(date), target=xp22Target(date);
+ const kcal=day.valid&&day.rows?day.sum.k:null, protein=kcal===null?null:day.sum.p;
+ // An empty diary has an unknown intake, while its full unlogged budget is available.
+ const budget=target&&(!day.rows||kcal!==null)?target.k-(kcal??0):null;
+ const en=brand.modules.nutrition,tr=brand.modules.training;
+ const slot=tr?planToday131():null,gate=xpBTrainingState(), advice=xp15Advice();
+ const hasPlan=tr&&(slot||makePlan(state.p).length);
+ const planTitle=!tr?'Deaktiviert':gate.locked?'Pausiert':gate.hasDraft?'Offene Einheit':slot?titles[slot.type]:hasPlan?'Ruhetag':'Kein Plan';
+ const slotDetail=slot?`${titles[slot.type]} · ${fmt(slot.duration,0)} Minuten · ${slot.items.length} Übungen`:'';
+ const planDetail=!tr?'Das Trainingsmodul ist deaktiviert.':gate.locked?gate.reason:gate.hasDraft?'Deine offene Einheit ist im Trainingsbereich verfügbar.':slot?slotDetail:hasPlan?'Heute ist keine Einheit vorgesehen.':'Aus deinen aktuellen Profilangaben liegt kein Trainingsplan vor.';
+ const planStatus=gate.locked&&tr?'Trainingsstart pausiert':gate.hasDraft&&tr?'Fortsetzen oder prüfen':slot?xp13Done()?'Heute bereits absolviert':'Heute geplant':'Trainingsplan';
+ const form=Number.isFinite(check.energy)?fmt(check.energy,0)+' / 5':'–';
+ const tiles=xpDesignStoryTiles();
+ if(!en)tiles[2]={value:'–',note:'Modul deaktiviert'};
+ if(!tr)tiles[1]={value:'–',note:'Modul deaktiviert'};
+ if(Number.isFinite(check.energy)){
+  tiles[0]={value:form,note:'Heutige Angabe',ratio:check.energy/5};
+ }
+ return {
+  choice:xpPersonalPreference().choice,disabled:[...(!en?['nutrition']:[]),...(!tr?['training']:[])],tiles,
+  greeting:`${new Date().getHours()<11?'Guten Morgen':new Date().getHours()<18?'Hallo':'Guten Abend'}${xpPrefs.name?', '+xpPrefs.name:''}! Hier beginnt dein Tag mit FITNESS LAB.`,
+  today:'Heute · '+dateDE(date),form,formNote:form==='–'?'Noch nicht erfasst':'Heutige Angabe',
+  planTitle,planStatus,planDetail,planDuration:slot&&!gate.locked&&!gate.hasDraft?fmt(slot.duration,0)+' Min.':'',
+  calories:en&&kcal!==null?fmt(kcal,0):'–',calorieGoal:!en?'Modul deaktiviert':target?'von '+fmt(target.k,0)+' kcal':'Kein Tagesziel',
+  protein:en&&protein!==null?fmt(protein,0)+' g':'–',proteinGoal:en&&target?'von '+fmt(target.protein,0)+' g':'Kein Proteinziel',
+  budget:en&&budget!==null?fmt(Math.abs(budget),0):'–',budgetLabel:en&&budget!==null&&budget<0?'Über Ziel':'Übrig',
+  ratio:en&&kcal!==null&&target?.k>0?kcal/target.k:0,
+  coachTitle:advice.title,coachDetail:advice.body
+ };
+}
+function xpPersonalHide(){
+ if(!xpPersonalScreen?.host.isConnected)return;
+ xpPersonalScroll=window.scrollY;
+ xpPersonalScreen.host.remove();
+}
+function xpPersonalNavigate(destination){
+ xpPersonalHide();
+ if(destination==='legacy'){
+  xpPersonalClassic=true;
+  window.scrollTo(0,0);
+  return;
+ }
+ if(destination==='check'||destination==='coach'){
+  xpOpen(destination);
+  return;
+ }
+ if(destination==='advice'){
+  const action=xp15Advice().action;
+  // Route through the same app functions as the original coach action.
+  const match=/^(tab|xpOpen|coachDestination)\('([a-z]+)'(?:,'([0-9-]+)')?\)$/.exec(action);
+  if(match?.[1]==='tab')tab(match[2]);
+  else if(match?.[1]==='xpOpen')xpOpen(match[2]);
+  else if(match?.[1]==='coachDestination')coachDestination(match[2],match[3]);
+  else if(action==='xpTrainingGo()')xpTrainingGo();
+  else xpOpen('coach');
+  return;
+ }
+ tab(destination);
+}
+function xpPersonalSync(){
+ xpPersonalQueued=false;
+ const eligible=xpIDBReady&&!xpABlocked&&xpProfileReady()&&xpView==='home'&&!$('today').classList.contains('hidden')&&!xpPersonalClassic&&xpPersonalQuery.get('ansicht')!=='klassisch';
+ if(!eligible||!window.fitLabPersonalDashboard||document.querySelector('fitlab-design-story')){
+  xpPersonalHide();
+  return;
+ }
+ xpPersonalScreen??=window.fitLabPersonalDashboard.create({
+  navigate:xpPersonalNavigate,
+  select(value){try{fitStore161.setItem(xpPersonalPreference().key,value)}catch{}}
+ });
+ xpPersonalScreen.fill(xpPersonalData());
+ if(!xpPersonalScreen.host.isConnected){
+  document.body.append(xpPersonalScreen.host);
+  window.scrollTo({top:xpPersonalScroll,behavior:'instant'});
+ }
+}
+function xpPersonalSchedule(){
+ if(xpPersonalQueued)return;
+ xpPersonalQueued=true;
+ queueMicrotask(xpPersonalSync);
+}
+const xpPersonalTabBase=tab,xpPersonalOpenBase=xpOpen,xpPersonalDashboardBase=premiumDashboard;
+tab=function(id){
+ if(id!=='today')xpPersonalHide();
+ if(id==='today')xpPersonalClassic=false;
+ const result=xpPersonalTabBase(id);
+ xpPersonalSchedule();
+ return result;
+};
+xpOpen=function(view,target){
+ if(view!=='home')xpPersonalHide();
+ const result=xpPersonalOpenBase(view,target);
+ xpPersonalSchedule();
+ return result;
+};
+premiumDashboard=function(){
+ const result=xpPersonalDashboardBase();
+ xpPersonalSchedule();
+ return result;
+};
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)xpPersonalSchedule()});
+
+void xpIDBBoot().then(()=>{
+ const destination=xpPersonalQuery.get('bereich');
+ if(xpProfileReady()&&['nutrition','training','check','progress','coach'].includes(destination))xpPersonalNavigate(destination);
+ else xpPersonalSchedule();
+});if('serviceWorker'in navigator&&location.protocol.startsWith('http')){let hadController=!!navigator.serviceWorker.controller;navigator.serviceWorker.addEventListener('controllerchange',()=>{if(hadController)xp131UpdateNotice();hadController=true;});navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(reg=>{reg.update().catch(()=>{});document.addEventListener('visibilitychange',()=>{if(!document.hidden)reg.update().catch(()=>{})});}).catch(()=>{});}
+</script><script src="exercise-atlas.js"></script><script src="cinematic.js" defer></script><script src="design-story.js" defer></script><script src="personal-dashboard.js" defer onload="xpPersonalSchedule()"></script></body></html>

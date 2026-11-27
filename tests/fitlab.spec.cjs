@@ -3,7 +3,13 @@ const { test, expect } = require('@playwright/test');
 // All tests use a fresh browser context and entirely synthetic fitness records.
 // Give returning-user scenarios an isolated, valid synthetic profile. Keep the
 // genuinely empty browser scenario independent so a boot regression stays visible.
-async function ready(page,sex='m') {
+async function ready(page,sex='m',classic=true) {
+  if(classic)await page.addInitScript(()=>{
+    if(location.pathname!=='/')return;
+    const url=new URL(location.href);
+    url.searchParams.set('ansicht','klassisch');
+    window.history.replaceState(null,'',url);
+  });
   await page.route('**/__test_setup__', route => route.fulfill({contentType:'text/html', body:'<!doctype html>'}));
   await page.goto('/__test_setup__');
   await page.evaluate(sex => {
@@ -178,7 +184,7 @@ test('real QA5 application automatically migrates into current IndexedDB', async
   expect(legacy).toEqual(saved);
   await page.unroute(root,oldRoute);
   await page.reload();
-  await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3.6 DESIGN FIRST');
+  await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3.7 PERSONAL DASHBOARD');
   await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0,{timeout:20000});
   const migrated=await canonical(page);
   expect(migrated.p.age).toBe(41);
@@ -1136,7 +1142,7 @@ test('Evolution 2.2 normal text and selected controls contrast across all main s
   }
 });
 
-for(const [previousVersion,old] of [['3.5 HERO VISUAL STABILITY','658428695ccfc7d21114fe8506006bc593fcd58e'],['3.4 NATURAL FLOW','009a9454edd1e1bf578e0bd21f5ee5d8effb4ed6'],['3.3 STORY ACCESS','0e30e98b34092b5d7018ce78f98393288456fcc6'],['2.1','b4604bb056feee3c074e123186baba88bc2cfe25'],['2.2','20a78aaba9fcf9713292fa4b45d43e5fc534da30']])
+for(const [previousVersion,old] of [['3.6 DESIGN FIRST','c43b25a30ab85a672073d4b89b14880b083c335e'],['3.5 HERO VISUAL STABILITY','658428695ccfc7d21114fe8506006bc593fcd58e'],['3.4 NATURAL FLOW','009a9454edd1e1bf578e0bd21f5ee5d8effb4ed6'],['3.3 STORY ACCESS','0e30e98b34092b5d7018ce78f98393288456fcc6'],['2.1','b4604bb056feee3c074e123186baba88bc2cfe25'],['2.2','20a78aaba9fcf9713292fa4b45d43e5fc534da30']])
 test(`Atlas V2 real service worker update from ${previousVersion} keeps data and an offline write survives reload`,async({browser})=>{
   const {createServer}=require('node:http');
   const {execFileSync}=require('node:child_process');
@@ -1149,7 +1155,7 @@ test(`Atlas V2 real service worker update from ${previousVersion} keeps data and
   for(const id of ['sq','bp','row','oh','lu'])assets['/media/poses/'+id+'.webp']='image/webp';
   for(const name of ['path','strength'])assets['/media/scenes/'+name+'.webp']='image/webp';
   for(const name of ['head-to-toe','food','training','recovery','cockpit','head-to-toe-male','training-male','head-to-toe-neutral','training-neutral'])assets['/media/hero/'+name+'.webp']='image/webp';
-  assets['/design-story.js']='text/javascript';
+  assets['/design-story.js']=assets['/personal-dashboard.js']='text/javascript';
   for(const name of fs.readdirSync('media/design-first'))assets['/media/design-first/'+name]='image/webp';
   if(previousVersion.startsWith('3.5')){
     for(const route of ['/first-impression.css','/premium-ux.css','/cinematic.css','/cinematic.js']){
@@ -1169,7 +1175,7 @@ test(`Atlas V2 real service worker update from ${previousVersion} keeps data and
   try{
     context=await browser.newContext({baseURL:`http://127.0.0.1:${server.address().port}`,serviceWorkers:'allow'});
     const page=await context.newPage();
-    await ready(page);
+    await ready(page,'m',!previousVersion.startsWith('3.6'));
     await expect(page.locator('#appVersion')).toContainText('EVOLUTION '+previousVersion);
     await page.waitForFunction(()=>navigator.serviceWorker.controller!==null);
     if(previousVersion==='2.2'){
@@ -1203,15 +1209,15 @@ test(`Atlas V2 real service worker update from ${previousVersion} keeps data and
     await page.waitForFunction(()=>window.testControllerChanged);
     await page.waitForFunction(async previous=>{
       const keys=await caches.keys();
-      return keys.some(key=>key.endsWith('evolution-3-6-design-first'))&&!keys.some(key=>key.endsWith('evolution-'+previous.toLowerCase().replace(/[. ]/g,'-')));
+      return keys.some(key=>key.endsWith('evolution-3-7-personal-dashboard'))&&!keys.some(key=>key.endsWith('evolution-'+previous.toLowerCase().replace(/[. ]/g,'-')));
     },previousVersion);
     await page.reload();
-    await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3.6 DESIGN FIRST');
+    await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3.7 PERSONAL DASHBOARD');
     await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
     expect(await canonical(page)).toEqual(prior);
     await context.setOffline(true);
     await page.reload();
-    await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3.6 DESIGN FIRST');
+    await expect(page.locator('#appVersion')).toHaveText('EXP 1.6.2 EVOLUTION 3.7 PERSONAL DASHBOARD');
     await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
     if(previousVersion.startsWith('3.5')){
       await page.getByRole('button',{name:/Erlebnis entdecken/}).click();
@@ -1219,6 +1225,11 @@ test(`Atlas V2 real service worker update from ${previousVersion} keeps data and
       await expect(story.locator('main section')).toHaveCount(5);
       await story.locator('img.male-photo').first().evaluate(img=>img.decode());
       await story.getByRole('button',{name:/Zurück zur Startseite/}).click();
+    }
+    if(previousVersion.startsWith('3.6')){
+      const dashboard=page.locator('fitlab-personal-dashboard');
+      await expect(dashboard.locator('main section')).toHaveCount(5);
+      await dashboard.locator('img.male-photo').first().evaluate(img=>img.decode());
     }
     await addMeal(page,'Post-update offline 2.2',116);
     await page.reload();
@@ -1869,4 +1880,104 @@ test('Design First cockpit renders real recorded values and leaves missing data 
  await page.evaluate(()=>{tab('today');xpStoryToggle()});
  await expect(story.locator('.tile').nth(2)).toContainText('212 kcal');
  await expect(story.locator('.tile').nth(3)).toContainText('Kein Gewichtsverlauf');
+});
+
+test('Personal Dashboard opens at boot, retains original home access and restores scroll',async({page})=>{
+ await page.setViewportSize({width:390,height:844});
+ await ready(page,'m',false);
+ const dash=page.locator('fitlab-personal-dashboard');
+ await expect(dash.locator('main section')).toHaveCount(5);
+ await expect(page.locator('body > nav')).toBeHidden();
+ await expect(dash.locator('#male')).toBeChecked();
+ const before=await canonical(page);
+ await dash.locator('label[for=female]').click();
+ await expect(dash.locator('.identity .female-photo')).toBeVisible();
+ await page.reload();
+ await expect(dash.locator('#female')).toBeChecked();
+ await dash.locator('.quick a[href="#ernaehrung"]').click();
+ let checkpoint=await page.evaluate(()=>scrollY);
+ expect(checkpoint).toBeGreaterThan(0);
+ await dash.locator('section.nutrition .photo').click();
+ await expect(page.locator('#nutrition')).toBeVisible();
+ await page.locator('.nav [data-tab=today]').click();
+ await expect(dash).toBeVisible();
+ expect(await page.evaluate(()=>scrollY)).toBeCloseTo(checkpoint,0);
+ await dash.locator('.brand').click();
+ await expect(page.locator('#xpHome .xpTiles')).toBeVisible();
+ await page.locator('.nav [data-tab=today]').click();
+ await expect(dash).toBeVisible();
+ expect(await canonical(page)).toEqual(before);
+});
+
+test('Personal Dashboard routes every hero, action and cockpit tile to existing views',async({page})=>{
+ await ready(page,'f',false);
+ const dash=page.locator('fitlab-personal-dashboard');
+ for(const [selector,target] of [
+  ['.nutrition .photo','#nutrition'],['.nutrition .action','#nutrition'],
+  ['.training .photo','#training'],['.training .action','#training'],
+  ['.recovery .photo','#xpCheck'],['.recovery .action','#xpCheck'],
+  ['.cockpit .action','#xp15Progress'],['.tile:nth-child(1)','#xpCheck'],
+  ['.tile:nth-child(2)','#training'],['.tile:nth-child(3)','#nutrition'],['.tile:nth-child(4)','#xp15Progress']
+ ]){
+  await dash.locator(selector).click();
+  await expect(page.locator(target)).toBeVisible();
+  await expect(dash).toHaveCount(0);
+  await page.locator('.nav [data-tab=today]').click();
+ }
+});
+
+test('Personal Dashboard reads diary, plan, check-in and safety without changing app calculation',async({page})=>{
+ await ready(page,'m',false);
+ const dash=page.locator('fitlab-personal-dashboard');
+ await expect(dash.locator('[data-value=calories]')).toHaveText('–');
+ const target=await page.evaluate(()=>xp22Target(dateKey()));
+ await expect(dash.locator('[data-value=calorieGoal]')).toContainText(target.k.toLocaleString('de-DE'));
+ await addMeal(page,'Dashboard QA',123);
+ await page.locator('.nav [data-tab=today]').click();
+ await expect(dash.locator('[data-value=calories]')).toHaveText('212');
+ await expect(dash.locator('[data-value=protein]')).toHaveText('12 g');
+ const captured=await canonical(page);
+ for(const [time,planned] of [['2026-11-23T12:00:00',true],['2026-11-29T12:00:00',false]]){
+  await page.clock.setFixedTime(new Date(time));
+  await page.evaluate(()=>premiumDashboard());
+  expect(await page.evaluate(()=>!!planToday131())).toBe(planned);
+  await expect(dash.locator('[data-value=planStatus]')).toHaveText(planned?'Heute geplant':'Trainingsplan');
+ }
+ await dash.locator('.recovery .action').click();
+ await page.locator('#xpSleep').fill('4');
+ await page.locator('[data-xp-choice=energy][data-v="1"]').click();
+ await page.locator('[data-xp-choice=soreness][data-v="4"]').click();
+ await page.getByRole('button',{name:'Check-in speichern'}).click();
+ await expect(dash.locator('[data-value=form]')).toHaveText('1 / 5');
+ await expect(dash.locator('[data-value=planTitle]')).toHaveText('Pausiert');
+ await expect(dash.locator('[data-value=coachTitle]')).toHaveText('Erholung hat Vorrang');
+ await expect.poll(async()=>Object.values((await canonical(page)).coach.days).some(day=>day.energy===1&&day.sleep===4&&day.soreness===4)).toBe(true);
+ expect((await canonical(page)).log).toEqual(captured.log);
+});
+
+test('Personal Dashboard leaves first-time onboarding available',async({page})=>{
+ await page.goto('/');
+ await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
+ await expect(page.locator('fitlab-personal-dashboard')).toHaveCount(0);
+ await page.getByRole('button',{name:/Meinen Weg starten/}).click();
+ await expect(page.locator('#xp12Intro')).toContainText('SCHRITT 1 VON 4');
+});
+
+test('Personal Dashboard preserves its approved styling against outer rules',async({page})=>{
+ await ready(page,'f',false);
+ await page.addStyleTag({content:'section, header, .copy, .photo, a {background:magenta!important;padding:90px!important;border-radius:90px!important}'});
+ const dash=page.locator('fitlab-personal-dashboard');
+ await expect(dash.locator('header')).toHaveCSS('background-color','rgb(20, 27, 19)');
+ const order=await dash.locator('section.training').evaluate(el=>[...el.children].map(child=>child.className));
+ expect(order).toEqual(['copy','photo chapter-link','chapter-info']);
+ for(const width of [320,375,390,430]){
+  await page.setViewportSize({width,height:844});
+  const image=dash.locator('section.training img:visible');
+  const box=await image.boundingBox();
+  expect(box.x).toBe(0);
+  expect(box.width).toBe(width);
+  await expect(image).toHaveCSS('object-fit','contain');
+  await expect(image).toHaveCSS('animation-name','none');
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBe(width);
+ }
 });

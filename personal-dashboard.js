@@ -1,0 +1,80 @@
+// Dashboard markup and styles come from the approved 3.7.1 Variant A.
+(() => {
+ const template=document.createElement('template');
+ template.innerHTML=`<style>
+
+*{box-sizing:border-box}:host{all:initial;display:block;min-height:100svh;background:#141b13;color:#f5f4ed;scroll-behavior:auto}.dashboard-shell{margin:0;font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;overflow-wrap:break-word}button{font:inherit;color:inherit;cursor:pointer}header{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:calc(18px + env(safe-area-inset-top)) max(20px,env(safe-area-inset-right)) 18px max(20px,env(safe-area-inset-left));background:#141b13}.brand{display:flex;align-items:center;gap:9px;font-weight:800;letter-spacing:.07em;font-size:15px}.brand svg{color:#74c6a0;width:30px}.switch{display:flex;border:1px solid #536050;border-radius:30px;padding:3px;gap:2px}.switch button{border:0;background:transparent;font-size:12px;padding:7px 12px;border-radius:24px}.switch button[aria-pressed=true]{background:#dce7d7;color:#182318;font-weight:700}section{--bg:#141b13;position:relative;background:var(--bg);display:grid;grid-template-columns:1fr;isolation:isolate}.copy{padding:32px max(24px,env(safe-area-inset-right)) 18px max(24px,env(safe-area-inset-left));position:relative;z-index:1}.eyebrow{display:flex;align-items:center;gap:9px;color:#a6cdb1;font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase}.eyebrow:before{content:"";width:25px;height:2px;background:#74c6a0}h1,h2{font-size:clamp(34px,7vw,72px);line-height:1.04;letter-spacing:-.045em;margin:15px 0 12px;font-weight:800}p{margin:0;max-width:29em;color:#e0e4d8;font-size:clamp(15px,2vw,20px);line-height:1.5}.photo{position:relative;min-width:0;background:var(--bg)}.photo img{display:block;width:100%;height:auto;object-fit:contain}.photo:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(to bottom,var(--bg),transparent 13%,transparent 90%,var(--next,#141b13))}.identity{--bg:#141b13;--next:#25291c}.nutrition{--bg:#25291c;--next:#161a16}.training{--bg:#161a16;--next:#202820}.recovery{--bg:#202820;--next:#162119}.cockpit{--bg:#162119;--next:#162119}.dashboard{padding:16px 24px 36px;background:radial-gradient(ellipse at 70% 80%,#394b32,#162119 72%)}.demo{font-size:11px;color:#bdcbb9;letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px}.tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.tile{background:#243728;border:1px solid #425642;border-radius:14px;min-height:132px;padding:14px 12px;display:flex;flex-direction:column;justify-content:space-between;gap:8px}.tile span{font-size:13px;color:#d4dfd1}.tile strong{font-size:23px;line-height:1.1;letter-spacing:-.04em}.tile small{color:#b4c6b1;font-size:11px}.track{height:5px;border-radius:8px;background:#465844;overflow:hidden}.track i{display:block;height:100%;background:#83caa0}.check{color:#8ed4a7;font-size:27px}.chart{width:100%;height:28px}.foot{padding:20px 24px calc(28px + env(safe-area-inset-bottom));background:#162119;text-align:center}.foot button{border:1px solid #79917a;background:transparent;border-radius:30px;padding:12px 25px}.foot p{font-size:12px;margin:12px auto;color:#b5c3b0}
+@media(min-width:650px){section{grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);align-items:center;min-height:460px}.copy{padding:45px 5vw}.photo img{width:100%;max-height:680px;object-fit:contain}.photo:after{background:linear-gradient(to right,var(--bg),transparent 10%),linear-gradient(to bottom,var(--bg),transparent 9%,transparent 90%,var(--next))}.dashboard{padding:40px 5vw 40px 10px}.tile{min-height:150px}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+.profile-radio{position:absolute;width:1px;height:1px;opacity:0;clip-path:inset(50%)}.switch label{cursor:pointer;font-size:12px;padding:7px 12px;border-radius:24px;display:block;touch-action:manipulation}.switch label:active{background:#536050}#female:checked~header label[for=female],#male:checked~header label[for=male]{background:#dce7d7;color:#182318;font-weight:700}#female:focus-visible~header label[for=female],#male:focus-visible~header label[for=male]{outline:2px solid #74c6a0}.photo img.male-photo{display:none}#male:checked~main .photo img.female-photo{display:none}#male:checked~main .photo img.male-photo{display:block}.foot .back{display:inline-block;color:inherit;text-decoration:none;border:1px solid #79917a;background:transparent;border-radius:30px;padding:12px 25px}
+
+header{padding-bottom:12px}.todayline{font-size:11px;letter-spacing:.13em;color:#a6cdb1;text-transform:uppercase;margin-bottom:12px}.intro{font-size:15px;color:#d4dfd1;margin-top:8px}.quick{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 0}.quick a{font-size:12px;color:#e5eee0;text-decoration:none;border:1px solid #536050;border-radius:30px;padding:8px 13px}.chapter-link{display:block;color:inherit;text-decoration:none}.chapter-link:focus-visible,.action:focus-visible,.quick a:focus-visible{outline:2px solid #83caa0;outline-offset:-3px}.chapter-link h2{color:#f5f4ed}.action{display:inline-flex;align-items:center;gap:16px;margin-top:20px;border:1px solid #7d9d80;border-radius:30px;padding:11px 17px;color:#f5f4ed;text-decoration:none;font-size:14px;font-weight:650;background:#ffffff06}.action b{font-size:20px;line-height:1}.metrics{display:flex;gap:0;margin-top:24px;flex-wrap:wrap}.metric{flex:1;min-width:76px;padding:0 12px;border-left:1px solid #ffffff24}.metric:first-child{padding-left:0;border-left:0}.metric small{display:block;color:#b8c8b3;font-size:11px}.metric strong{display:block;font-size:23px;letter-spacing:-.04em;line-height:1.2;margin:5px 0}.metric em{font-size:11px;font-style:normal;color:#cbd6c7}.status{border-top:1px solid #ffffff25;margin-top:22px;padding-top:14px;color:#d9e3d5;font-size:14px}.status span{color:#a6cdb1;font-size:11px;display:block;text-transform:uppercase;letter-spacing:.09em;margin-bottom:5px}.summary{padding:0 24px 24px;max-width:760px;margin:auto}.summary a{color:inherit}.backlink{display:inline-block;margin-bottom:22px;color:#c4e0c6;text-decoration:none;font-size:14px}.demo-strip{padding:9px 24px;color:#b8c8b3;font-size:11px;background:#141b13;text-align:center;letter-spacing:.03em}.photo.chapter-link{display:block}.tile{text-decoration:none;color:inherit}.foot .back{margin-top:8px}.identity .copy{padding-top:26px}
+/* Variante A: Jede Überschrift gehört unmittelbar zum folgenden Motiv. */
+main > section {display:grid;grid-template-columns:minmax(0,1fr);align-items:stretch;min-height:0;--next:var(--bg)}
+main > section + section {border-top:1px solid #71816b;}
+main > section > .copy {padding:30px max(24px,env(safe-area-inset-right)) 22px max(24px,env(safe-area-inset-left));}
+main > section > .photo {width:100%;}
+main > section > .photo:after {background:linear-gradient(to bottom,var(--bg),transparent 7%,transparent 93%,var(--bg));}
+main > section > .chapter-info {padding:18px max(24px,env(safe-area-inset-right)) 32px max(24px,env(safe-area-inset-left));background:var(--bg);}
+main > section > .chapter-info .metrics {margin-top:0;}
+main > section > .chapter-info .todayline {margin-top:0!important;}
+main > section > .chapter-info .status {border-top:0;margin-top:0;padding-top:0;}
+main > section > .chapter-info > .action:first-child {margin-top:0;}
+main > section > .dashboard {padding:16px 24px 18px;}
+@media(min-width:650px){main > section > .copy,main > section > .chapter-info{width:100%;max-width:760px;margin:auto;padding-left:24px;padding-right:24px;}main > section > .photo,main > section > .dashboard{width:100%;max-width:760px;margin:auto;}main > section > .photo img{max-height:none;} }
+.brand,.coach-link{color:inherit;text-decoration:none}
+</style><div class="dashboard-shell" lang="de"><input class="profile-radio" id="female" name="profile" type="radio"/><input class="profile-radio" id="male" name="profile" type="radio"/><header id="anfang"><a class="brand" href="?ansicht=klassisch" data-destination="legacy" aria-label="FITNESS LAB · Bisherige Startseite öffnen" title="Bisherige Startseite öffnen"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2.5" viewbox="0 0 32 22"><path d="M2 8v6m4-10v14m4-7h12m4-7v14m4-10v6"></path></svg> FITNESS LAB</a><div aria-label="Bilddarstellung" class="switch" role="group"><label for="female">Weiblich</label><label for="male">Männlich</label></div></header><main>
+<section class="identity" id="start"><div class="copy"><div class="eyebrow">Dein persönlicher Fitnesscoach</div><h1>Dein Körper.<br/>Dein Weg.</h1><p><span data-value="greeting"></span></p></div><div class="photo"><img alt="Athletin auf einem Waldweg" class="female-photo" id="hero" src="media/design-first/identity-female.webp" width="344" height="429"/><img alt="Athlet auf einem Waldweg" class="male-photo" src="media/design-first/identity-male.webp" width="344" height="429"/></div><div class="chapter-info"><div class="todayline" style="margin-top:22px"><span data-value="today"></span></div><div class="metrics"><div class="metric"><small>Tagesform</small><strong data-value="form">–</strong><em data-value="formNote"></em></div><div class="metric"><small>Training</small><strong data-value="planTitle">–</strong><em data-value="planDuration"></em></div></div><div class="quick"><a href="#ernaehrung">Ernährung ↓</a><a href="#training">Training ↓</a><a href="#regeneration">Erholung ↓</a><a href="#cockpit">Fortschritt ↓</a></div><p style="font-size:11px;margin-top:15px;color:#b8c8b3">Persönliche Daten und Hinweise aus FITNESS LAB</p></div></section>
+<section class="nutrition" id="ernaehrung"><div class="copy"><div class="eyebrow">02 · Ernährung</div><h2>Ernährung,<br/>die zu dir passt.</h2><p>Nährstoffreich, alltagstauglich und genussvoll – für Energie, Leistung und Balance.</p></div><a aria-label="Deine Ernährung öffnen" class="photo chapter-link" href="?bereich=nutrition" data-destination="nutrition"><img alt="Lachs, Gemüse und Getreide in einer Keramikschale" src="media/design-first/nutrition.webp" width="724" height="543"/></a><div class="chapter-info"><div class="metrics"><div class="metric"><small>Kalorien</small><strong data-value="calories">–</strong><em data-value="calorieGoal"></em></div><div class="metric"><small>Protein</small><strong data-value="protein">–</strong><em data-value="proteinGoal"></em></div><div class="metric"><small data-value="budgetLabel">Übrig</small><strong data-value="budget">–</strong><em>kcal</em></div></div><div class="track" style="margin-top:16px"><i style="width:0%"></i></div><a class="action" href="?bereich=nutrition" data-destination="nutrition">Ernährung öffnen <b aria-hidden="true">↗</b></a></div></section>
+<section class="training" id="training"><div class="copy"><div class="eyebrow">03 · Training</div><h2>Training<br/>mit Plan.</h2><p>Gezielte Workouts, die dich stärken, fordern und messbar voranbringen.</p></div><a aria-label="Dein Training öffnen" class="photo chapter-link" href="?bereich=training" data-destination="training"><img alt="Athletin beim Goblet Squat" class="female-photo" id="train" src="media/design-first/training-female.webp" width="444" height="402"/><img alt="Athlet beim Goblet Squat" class="male-photo" src="media/design-first/training-male.webp" width="444" height="402"/></a><div class="chapter-info"><div class="status"><span data-value="planStatus"></span><div data-value="planDetail"></div></div><a class="action" href="?bereich=training" data-destination="training">Zum Training <b aria-hidden="true">↗</b></a></div></section>
+<section class="recovery" id="regeneration"><div class="copy"><div class="eyebrow">04 · Regeneration</div><h2>Erholung ist Teil<br/>des Erfolgs.</h2><p>Regeneriere bewusst, reduziere Stress und fülle deine Energiereserven auf.</p></div><a aria-label="Deine Regeneration öffnen" class="photo chapter-link" href="?bereich=check" data-destination="check"><img alt="Ruhige Fensterszene mit Wasser, Notizbuch und Decke" src="media/design-first/recovery.webp" width="724" height="543"/></a><div class="chapter-info"><div class="status"><span data-value="coachTitle"></span><a class="coach-link" href="?bereich=coach" data-destination="advice" data-value="coachDetail"></a></div><a class="action" href="?bereich=check" data-destination="check">Zur Regeneration <b aria-hidden="true">↗</b></a></div></section>
+<section class="cockpit" id="cockpit"><div class="copy"><div class="eyebrow">05 · Cockpit</div><h2>Alles im Cockpit.</h2><p>Deine Ziele, dein Plan, dein Fortschritt – übersichtlich an einem Ort.</p></div><div class="dashboard"><div class="demo">Deine Daten</div><div class="tiles"><a class="tile" href="?bereich=check" data-destination="check"><span>Tagesform</span><strong>–</strong><div class="track"><i style="width:0%"></i></div><small>Kein Check-in</small></a><a class="tile" href="?bereich=training" data-destination="training"><span>Training</span><strong class="check">–</strong><small>Einheiten diese Woche</small></a><a class="tile" href="?bereich=nutrition" data-destination="nutrition"><span>Ernährung</span><strong>–</strong><div class="track"><i style="width:0%"></i></div><small>Nicht erfasst</small></a><a class="tile" href="?bereich=progress" data-destination="progress"><span>Fortschritt</span><strong>–</strong><svg aria-hidden="true" class="chart" fill="none" viewbox="0 0 110 28"><path d="" stroke="#83caa0" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path></svg><small>Kein Gewichtsverlauf</small></a></div></div><div class="chapter-info"><a class="action" href="?bereich=progress" data-destination="progress">Fortschritt ansehen <b aria-hidden="true">↗</b></a></div></section></main><footer class="foot"><a class="back" href="#anfang">Zurück zum Anfang ↑</a><p>FITNESS LAB · EVOLUTION 3.7 PERSONAL DASHBOARD</p></footer></div>`;
+
+ function create({navigate,select}){
+  const host=document.createElement('fitlab-personal-dashboard');
+  const root=host.attachShadow({mode:'open'});
+  root.append(template.content.cloneNode(true));
+  const fields=[...root.querySelectorAll('[data-value]')];
+  const tiles=[...root.querySelectorAll('.tile')];
+  const bar=root.querySelector('.chapter-info .track i');
+  function fill(model){
+   root.getElementById('female').checked=model.choice==='female';
+   root.getElementById('male').checked=model.choice==='male';
+   for(const field of fields)field.textContent=model[field.dataset.value];
+   for(const link of root.querySelectorAll('[data-destination]')){
+    if(model.disabled.includes(link.dataset.destination)){
+     link.removeAttribute('href');
+     link.setAttribute('aria-disabled','true');
+    }else{
+     link.href=link.dataset.destination==='legacy'?'?ansicht=klassisch':'?bereich='+link.dataset.destination;
+     link.removeAttribute('aria-disabled');
+    }
+   }
+   function meter(node,ratio){
+    if(node)node.style.width=Math.min(100,Math.max(0,(ratio??0)*100))+'%';
+   }
+   meter(bar,model.ratio);
+   model.tiles.forEach(({value,note,ratio,chart,check},i)=>{
+    const headline=tiles[i].querySelector('strong');
+    headline.textContent=value;
+    headline.classList.toggle('check',Boolean(check));
+    tiles[i].querySelector('small').textContent=note;
+    meter(tiles[i].querySelector('.track i'),ratio);
+    tiles[i].querySelector('.chart path')?.setAttribute('d',chart||'');
+   });
+  }
+  root.addEventListener('change',event=>{
+   if(event.target.matches('.profile-radio'))select(event.target.id);
+  });
+  root.addEventListener('click',event=>{
+   const link=event.target.closest('a');
+   if(!link||event.defaultPrevented||event.button!==0||event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return;
+   const href=link.getAttribute('href');
+   if(!href)return;
+   event.preventDefault();
+   if(link.dataset.destination)navigate(link.dataset.destination);
+   else if(href.startsWith('#'))root.getElementById(href.slice(1))?.scrollIntoView({behavior:'instant'});
+  });
+  return {host,fill};
+ }
+ window.fitLabPersonalDashboard={create};
+})();
