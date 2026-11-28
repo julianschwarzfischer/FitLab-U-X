@@ -2521,7 +2521,14 @@ test('Unified Premium recipe rail responds to a native touch swipe and keeps the
   }
   await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});
   await expect(title).not.toHaveText(before);
-  await expect(n.locator('.recipe h2')).toHaveText(await title.textContent());
+  await expect.poll(async()=>n.evaluate(host=>{
+   const root=host.shadowRoot, rail=root.querySelector('.slider');
+   const active=root.querySelector('#slide-copy'), detail=root.querySelector('.recipe h2');
+   const slide=active?.closest('.slide');
+   if(!slide||!detail)return false;
+   const distance=slide.offsetLeft-rail.firstElementChild.offsetLeft-rail.scrollLeft;
+   return Math.abs(distance)<=1&&active.querySelector('h2')?.textContent===detail.textContent;
+  })).toBe(true);
   await expect(track).toHaveCSS('scroll-snap-type','x mandatory');
  }finally{await context.close()}
 });
