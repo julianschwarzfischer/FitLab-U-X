@@ -427,9 +427,9 @@ test('avatar appearance stays separate from profile calculations and brand contr
   expect(await page.evaluate(async () => ({canonical:await xpIDBRead(),targets:calc(state.p)}))).toEqual(before);
   await profile.locator('summary').filter({hasText:'Körperdaten'}).click();
   await expect(profile.getByLabel('Geschlecht für die Kalorienberechnung')).toHaveValue('m');
-  await expect(profile.locator('.xpEvoBrandGroup')).not.toHaveAttribute('open');
-  await profile.locator('.xpEvoBrandGroup summary').first().click();
-  await expect(profile.locator('#brandPanel')).toBeVisible();
+  await expect(profile.locator('.xpEvoBrandGroup')).toBeHidden();
+  await expect(profile.locator('#brandPanel')).toBeHidden();
+  await expect(profile.locator('#brandPanel button')).toHaveCount(0);
   await page.reload();
   await expect(page.locator('#xpIDBBootOverlay')).toHaveCount(0);
   await mobileNav(page, 'Profil').click();
@@ -1161,6 +1161,9 @@ test(`Atlas V2 real service worker update from ${previousVersion} keeps data and
   assets['/premium/diary-port.js']=assets['/premium/food-studio.js']='text/javascript';
   assets['/premium/food-studio.css']='text/css';
   assets['/premium/food-studio.html']='text/html';
+  assets['/premium/studios.js']='text/javascript';
+  for(const route of ['settings','identity','vault','progress','recovery'])assets['/premium/'+route+'.html']='text/html';
+  for(const file of fs.readdirSync('premium/assets'))assets['/premium/assets/'+file]='image/webp';
   for(const name of fs.readdirSync('media/premium'))assets['/media/premium/'+name]='image/webp';
   for(const name of ['safety.js','goal.js','goal-view.js','goal.css','allergen-matrix.json','engine.js','experience.js','reference.css','foods.json','recipes.json']){
     assets['/nutrition/'+name]=name.endsWith('.js')?'text/javascript':name.endsWith('.css')?'text/css':'application/json';
@@ -1825,7 +1828,7 @@ for(const [label,sex,selected] of [['female','f','female'],['male','m','male'],[
    await expect(story.locator('.identity img:visible')).toHaveCount(0);
   }
   const shared=story.locator('section.nutrition img, section.recovery img');
-  const initial=await shared.evaluateAll(images=>images.map(img=>img.currentSrc));
+  const initial=await shared.evaluateAll(async images=>{await Promise.all(images.map(img=>img.decode()));return images.map(img=>img.currentSrc);});
   for(const variant of ['female','male']){
    await story.locator(`label[for=${variant}]`).click();
    await expect(chosen).toHaveAttribute('id',variant);
